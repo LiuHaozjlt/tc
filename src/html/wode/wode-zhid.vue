@@ -1,0 +1,140 @@
+<template>
+    <div>
+        <div class="wode-zhid-head">置顶</div>
+        <tujian :typeId="type" :showNum='showNum'></tujian>
+        <div class="zhid-chang">置顶时长</div>
+        <div  @click="change(item.id)" class="wode-zhid" v-for="(item,index) in five" :key="index">
+            <div>1天</div>
+            <div>{{item.score}}积分</div>
+             <div class="zhid-yuan" >
+                <div class="zhid-yuan-in" v-if="item.id !== checkId"></div>
+                <img src="../../image/a.png" alt=""  v-else>
+            </div>
+        </div>
+        <div class="dang-fen">当前积分：<div class="dang-cout">50</div></div>
+        <div class="zhid-qued">
+          确定
+        </div>
+    </div>
+</template>
+
+<script>
+import tujian from '../../components/tuijian-cont'
+export default {
+  data () {
+    return {
+      type: 1,
+      showNum: 2,
+      five: [
+        {
+          score: 10,
+          id: 1
+        },
+        {
+          score: 20,
+          id: 2
+        }, {
+          score: 30,
+          id: 3
+        }
+      ],
+      checkId: 0,
+      yuan: true,
+      circ: false
+    }
+  },
+  methods: {
+    yuanin () {
+      this.yuan = false
+      this.circ = true
+    },
+    circl () {
+      this.circ = false
+      this.yuan = true
+    },
+    change (id) {
+      this.checkId = id
+    }
+
+  },
+  components: {
+    tujian
+  }
+}
+</script>
+
+<style>
+    .zhid-qued{
+      font-size:.9375rem /* 15/16 */;
+      font-family:PingFang-SC-Medium;
+      font-weight:500;
+      color:rgba(255,255,255,1);
+      border-radius: 1.125rem /* 18/16 */;
+      background-color: #FFB31E;
+      height: 2.25rem /* 36/16 */;
+      text-align: center;
+      line-height: 2.25rem /* 36/16 */;
+      position:fixed;
+      bottom: .4375rem /* 7/16 */;
+      width:100%;
+    }
+    .dang-fen{
+        display:flex;
+        font-size:1rem /* 16/16 */;
+        font-family:PingFang-SC-Medium;
+        font-weight:500;
+        color:rgba(235,94,94,1);
+    }
+    .zhid-chang{
+      font-size:1rem /* 16/16 */;
+      font-family:PingFang-SC-Medium;
+      font-weight:500;
+      color:rgba(33,33,33,1);
+      padding-bottom: 8%;
+    }
+    .shouYe-cent-rigt div:nth-child(2){
+
+    }
+    .wode-zhid-head{
+      font-size:1.125rem /* 18/16 */;
+      font-family:PingFang-SC-Medium;
+      font-weight:500;
+      color:rgba(33,33,33,1);
+      text-align: center;
+    }
+    .shouYe-rigt-top{
+      font-size:.8125rem /* 13/16 */;
+      font-family:PingFang-SC-Medium;
+      font-weight:500;
+      color:rgba(51,51,51,1);
+    }
+    .shouYe-cent-left div img{
+      height: 3.9375rem /* 63/16 */;
+    }
+    .shouYe-cent{
+      display: flex;
+      justify-content: space-between;
+    }
+    .zhid-yuan-in{
+
+        border-radius: 50%;
+        border:1px solid red;
+        width:1.5rem /* 24/16 */;
+        height: 1.5rem /* 24/16 */;
+    }
+    .zhid-yuan{
+
+    }
+    .zhid-yuan img{
+
+       width:1.5rem /* 24/16 */;
+       height: 1.5rem /* 24/16 */;
+    }
+    .wode-zhid{
+        justify-content: space-between;
+        display:flex;
+        border:1px solid red;
+        height:1.5rem /* 24/16 */;
+        margin-bottom: 1rem;
+    }
+</style>

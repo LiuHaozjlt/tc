@@ -1,0 +1,10 @@
+<template>
+    <div>
+        <div>
+            <div>
+                <div>公司简介</div>
+                <textarea></textarea>
+            </div>
+        </div>
+    </div>
+</template>
