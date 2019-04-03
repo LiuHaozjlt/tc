@@ -29,16 +29,16 @@
             <jiaoyujiage></jiaoyujiage>
 
             <!--房源价格-->
-            <yueting></yueting>
+            <!-- <yueting></yueting> -->
 
             <!--上车-->
-            <shoushang></shoushang>
+            <!-- <shoushang></shoushang> -->
 
             <!--金额合作-->
-            <jinhe></jinhe>
+            <!-- <jinhe></jinhe> -->
 
             <!--岗位地址-->
-            <gangzhi></gangzhi>
+            <!-- <gangzhi></gangzhi> -->
 
             <div class="biaoti-cent">
                 <div class="shiwu-bl">
@@ -97,10 +97,10 @@
             </div>
 
             <!--公司企业-->
-            <qiyehangye></qiyehangye>
+            <!-- <qiyehangye></qiyehangye> -->
 
             <!--公司简介-->
-            <gongsjianjie></gongsjianjie>
+            <!-- <gongsjianjie></gongsjianjie> -->
 
             <div class="youxiang wo-fen">
                 <div>
@@ -169,6 +169,11 @@ export default {
     qiyehangye,
     gongsjianjie
   },
+  created () {
+    this.getruzhushengq()
+    // this.getstatus()
+    // this.getruzhushengq()
+  },
   methods: {
     // addPic () {
     //   this.addList.push('img')
@@ -214,35 +219,75 @@ export default {
       })
     },
     postquedfab () {
-      this.$router.push({path: '/wodefabu'})
+      console.log('dx')
       let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
       this.axius({
         methods: 'post',
-        url: 'apis/v1/user/releases',
+        url: 'apis/v1/seller/my-release-create',
         data: {
-          release_type_id: 444444,
-          title: 999999,
-          describe: 555,
-          mobile: 3333,
-          code: 4,
-          address: '长沙',
-          img: 3,
-          is_trans: 1,
-          xh: 86,
-          user_address_id: 0
+          title: '小米',
+          introduce: '费大幅度发',
+          mobile: '11111111111',
+          user_address_id: 2
         },
         headers: {
           'Authorization': 'Bearer ' + token
         }
       }).then(p => {
-        console.log('确定发布', p.data.data)
+        debugger
+        console.log('lx', p)
       })
     },
-
-    handleImageClick (img) {
-      this.$store.commit('cacheImage', img)
-      this.$router.push('/shouyexq')
+    getstatus () {
+      console.log('getqinqiu')
+      let me = this
+      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+      me.axius({
+        methods: 'get',
+        url: 'apis/v1/user/seller-status',
+        data: {
+        },
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      }).then(p => {
+        // if (p.data.data.status === 1) {
+        //   me.postquedfab()
+        // } else {
+        // }
+      })
+    },
+    getruzhushengq () {
+      console.log('ruzhushengq')
+      let me = this
+      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+      me.axius({
+        methods: 'post',
+        url: 'apis/v1/seller',
+        data: {
+          release_type_id: 44,
+          name: '小米',
+          logo: 'tupian',
+          img: 'icon',
+          info: '小米小米'
+        },
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      }).then(p => {
+        debugger
+        console.log('入驻商家', p)
+        // if (p.data.data.status === 1) {
+        //   me.postquedfab()
+        // } else {
+        // }
+      })
     }
+
+    // handleImageClick (img) {
+    //   this.$store.commit('cacheImage', img)
+    //   this.$router.push('/shouyexq')
+    // }
 
   }
 

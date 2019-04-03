@@ -10,25 +10,28 @@
                     <div><img src="" alt=""></div>
                 </div>
             </div>
+            <!--房源产品信息-->
+            <div class="shangjiafangyuan">
+                <div class="yuan-zhang">
+                    {{data.title}}
+                </div>
+                <div class="di-lou">
+                    <div class="di-z">
+                        <img src="../../image/dizhi.png" alt="">
+                    </div>
+                    <div class="hu-lou">
+                        湖南长沙雨花区金鸿宇大厦14楼
+                    </div>
+                </div>
+                <div class="kip-yue">
+                        {{data.prices}}KIP/月
+                </div>
+                <div class="fang-xiu">
+                    <div >房屋：{{data.rent_hall.name}}</div>
+                    <div>装修：{{data.rent_decotion}}</div>
+                </div>
+            </div>
 
-            <div class="yuan-zhang">
-                原创手绘插画版权转让，整套森女系风格15张
-            </div>
-            <div class="di-lou">
-                <div class="di-z">
-                    <img src="../../image/dizhi.png" alt="">
-                </div>
-                <div class="hu-lou">
-                    湖南长沙雨花区金鸿宇大厦14楼
-                </div>
-            </div>
-            <div class="kip-yue">
-                            1.400.000.000KIP/月
-            </div>
-            <div class="fang-xiu">
-                <div >房屋：一室一厅</div>
-                <div>装修：豪华装修</div>
-            </div>
             <div class="miao-shu">
                 <div class="miao-shu-lef">房屋描述:</div>
                 本人是一位职业插画师,常年在国外发展,
@@ -39,13 +42,13 @@
             </div>
 
             <!--职位招聘-->
-            <div class="gongdasuan">
+            <!-- <div class="gongdasuan">
                 <div class="gong-zhi">工作地址:</div>
                 <div class="chang-suan">长沙是芙蓉八一路喝奶粉打算</div>
-            </div>
+            </div> -->
 
             <!--公司信息-->
-            <div>
+            <!-- <div>
                 <div>
                     <div class="gong-xi">公司信息</div>
                     <div class="gong-ye">
@@ -69,10 +72,10 @@
                         ：<div class="cfu">长沙芙蓉八一路鸿飞大厦1505</div>
                     </div>
                 </div>
-            </div>
-            <div class="liulan-guo">浏览过该信息的人还看过</div>
+            </div> -->
+            <!-- <div class="liulan-guo">浏览过该信息的人还看过</div> -->
             <!--房源信息-->
-            <div class="liu-guo-cent">
+            <!-- <div class="liu-guo-cent">
                 <div class="changxqleft">
                     <img src="" alt="">
                 </div>
@@ -93,10 +96,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!--招聘信息-->
-            <div class="zhaop-cont">
+            <!-- <div class="zhaop-cont">
                 <div>
                     <div class="zhao-shu">招聘销售待遇从有中暑</div>
                     <div class="ba-yue">8.0000-120000KIP/月</div>
@@ -104,9 +107,9 @@
                 <div class="chakan">
                     查看
                 </div>
-            </div>
+            </div> -->
             <!--土地交易-->
-            <div>
+            <!-- <div>
                 <div class="nian-rang">
                     <div class="nian-mian">
                         <div class="nian">
@@ -126,7 +129,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- <div class="dian-shi">
                 <div class="dian-pu">
                       <img src="../../image/店铺精选.png" alt="">
@@ -139,11 +142,16 @@
         </div>
     </div>
 </template>
-
 <script>
 export default {
   data () {
-    return {}
+    return {
+    }
+  },
+  computed: {
+    data () {
+      return JSON.parse(this.$route.query.data) || {}
+    }
   }
 }
 </script>

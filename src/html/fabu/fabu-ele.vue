@@ -23,7 +23,6 @@ export default {
 
 <style>
   .fabuyuand{
-    /* flex布局 差不多就行吧，有底部还要选择类型完全居中很怪嗯*/
     width: 100%;
     display: flex;
     justify-content: flex-start;
@@ -34,6 +33,7 @@ export default {
   .routerItem{
     width: 50%;
     text-align: center;
+    height: 15%;
   }
   .xuan-bie{
     font-size:.875rem /* 14/16 */;

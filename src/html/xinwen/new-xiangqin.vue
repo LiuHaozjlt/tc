@@ -171,7 +171,7 @@ color:rgba(255,255,255,1);
 .pinglun img {
   width: 0.9375rem /* 15/16 */;
   height: 1.0625rem /* 17/16 */;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 .pinlun-cent-top {
   font-size: 0.875rem /* 14/16 */;
@@ -214,7 +214,7 @@ color:rgba(255,255,255,1);
 .pinlun-lf img {
   width: 2.25rem /* 36/16 */;
   height: 2.25rem /* 36/16 */;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 .wu-henxian {
   height: 0.3125rem /* 5/16 */;

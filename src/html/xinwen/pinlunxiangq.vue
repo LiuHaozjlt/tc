@@ -27,7 +27,7 @@ export default {
 .pinlunxiangq-botm input{
     width:100%;
     height: 1.875rem /* 30/16 */;
-    border:1px solid red;
+    /* border:1px solid red; */
     position: fixed;
     bottom: .4375rem /* 7/16 */;
 }

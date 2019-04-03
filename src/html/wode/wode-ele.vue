@@ -202,6 +202,7 @@ export default {
     }
     .wode-in{
         width: 25%;
+        flex:2;
     }
     .wode-in-in img{
         width:2.3125rem /* 37/16 */;

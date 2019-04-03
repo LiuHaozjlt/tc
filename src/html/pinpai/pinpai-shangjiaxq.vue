@@ -1,8 +1,21 @@
 <template>
   <div>
     <div>
+      <!--房源分享-->
+      <div>
+        <div class="shangjiafanhui">
+          <div>
+            <img src="" alt="">
+          </div>
+          <div class="shangjiafengx" @click="fengxiang">
+            <img src="../../image/fx.png" alt="">
+          </div>
+        </div>
+      </div>
       <div class="dianpu-logo-cont">
-        <div class="dianpu-logo">logo</div>
+        <div class="dianpu-logo">
+          <img src="" alt="">
+        </div>
       </div>
       <div class="gsmchen">公司名字</div>
       <gsjianjie></gsjianjie>
@@ -16,7 +29,7 @@
 
     <!--房源-->
     <div>
-      <div v-for="(item,index) in myrelease" :key="index" @click="getchanpxq">
+      <div v-for="(item,index) in myrelease" :key="index" @click="getchanpxq(index)">
         <div class="liu-guo-cent">
           <div class="changxqleft">
             <img :src="item.img" alt>
@@ -28,9 +41,9 @@
             <div>
               <div class="changxqcent">
                 <div class="changxq-bot-lef">
-                  <div class="changxq-bot-rit-cent">{{item.title}}</div>
-                  <div class="changxq-bot-rit-cent">{{item.title}}</div>
-                  <div class="changxq-bot-rit-cented">{{item.title}}</div>
+                  <div class="changxq-bot-rit-cent">{{item.rent_hall.name}}</div>
+                  <div class="changxq-bot-rit-cent"></div>
+                  <div class="changxq-bot-rit-cented">{{item.rent_decoration}}</div>
                 </div>
                 <div class="shier">{{item.prices}}KIP</div>
               </div>
@@ -39,12 +52,12 @@
         </div>
       </div>
     </div>
-
     <!--教育-->
-    <div>
+    <!-- <div> -->
+
       <!-- <div v-for="(item,index) in jiaoyu" :key="index">
       -->
-      <div class="liu-guo-cent" @click="getchanpxq">
+      <!-- <div class="liu-guo-cent" @click="getchanpxq">
         <div class="changxqleft">
           <img :src="jiaoyu.img" alt>
         </div>
@@ -55,23 +68,23 @@
           <div>
             <div class="changxqcent jiaoyu-a">
               <div class="changxq-bot-lef">
-                <div class="changxq-bot-rit-cent">{{jiaoyu.name}}</div>
+                <div class="changxq-bot-rit-cent">{{jiaoyu.name}}</div> -->
                 <!-- <div class="changxq-bot-rit-cent"> {{jiaoyu.name}}</div> -->
                 <!-- <div class="changxq-bot-rit-cented"> </div> -->
-              </div>
+              <!-- </div>
               <div class="shier">{{jiaoyu.name}}KIP</div>
             </div>
           </div>
         </div>
       </div>
-      <!-- </div> -->
-    </div>
+      </div>
+    </div>-->
   </div>
 </template>
 
 <script>
-import gsjianjie from '../../components/gsjianjie';
-import gangzhi from '../../components/gang-zhi';
+import gsjianjie from '../../components/gsjianjie'
+import gangzhi from '../../components/gang-zhi'
 export default {
   data () {
     return {
@@ -84,11 +97,19 @@ export default {
     gangzhi
   },
   methods: {
-    getchanpxq () {
-      this.$router.push({ path: '/pinpaichanpxq' })
+    fengxiang () {
+      console.log('分享')
+    },
+    getchanpxq (index) {
+      this.$router.push({
+        path: '/pinpaichanpxq',
+        query: {
+          data: JSON.stringify(this.myrelease[index])
+        }
+      })
     },
     getdianpu () {
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113';
+      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
       this.axius({
         methods: 'get',
         url: 'apis/v1/seller/my-release',
@@ -110,10 +131,10 @@ export default {
         }
       }).then(p => {
         // debugger
-        // console.log('店铺', this.myrelease = p.data.data.SellerReleaseInfo)
+        // console.log('店铺', this.myrelease = p.data.data.SellerInfo)
         this.myrelease = p.data.data.SellerReleaseInfo
         // console.log('教育', p.data.data.SellerInfo)
-        this.jiaoyu = p.data.data.SellerInfo
+        // this.jiaoyu = p.data.data.SellerInfo
         // console.log('教育', this.myrelease)
         // console.log('招聘店铺', p.data.data)
       })
@@ -126,6 +147,24 @@ export default {
 </script>
 
 <style>
+.shangjiafanhui{
+  display:flex;
+  justify-content: space-between;
+}
+.shangjiafengx{
+  width:1.9375rem /* 31/16 */;
+  height: 1.9375rem /* 31/16 */;
+  /* background-color: #000000; */
+}
+.shangjiafengx img{
+  width:.9375rem /* 15/16 */;
+  height: .9375rem /* 15/16 */;
+}
+.dianpu-logo img{
+  width:100%;
+  height: 5.375rem /* 86/16 */;
+  border:1px solid red;
+}
 .sangeliand {
   background-color: #ffb31e;
 }
