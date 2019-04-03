@@ -1,27 +1,37 @@
 <template>
     <div>
-      <!-- <div class="element"    @click="getqinqiu"></div> -->
+      <van-tabs v-model="active">
+        <van-tab >
+          <div slot="title">
+            {{tab.area.default}}&nbsp;<van-icon :name="active==0?'arrow-up':'arrow-down'" />
+          </div>
+          <van-tree-select
+            :items="items"
+            :main-active-index="mainActiveIndex"
+            :active-id="activeId"
+            @navclick="onNavClick"
+            @itemclick="onItemClick"
+          />
+        </van-tab>
+        <van-tab   >
+          <div slot="title">
+            {{tab.money.default}}&nbsp;<van-icon :name="active==1?'arrow-up':'arrow-down'"  />
+          </div>
+          <van-picker :default-index="0" :columns="tab.money.list" @change="onChangeMoney" />
+        </van-tab>
+        <van-tab    >
+          <div slot="title">
+            {{tab.shape.default}}&nbsp;<van-icon :name="active==2?'arrow-up':'arrow-down'"  />
+          </div>
+          <van-picker :default-index="0" :columns="tab.shape.list" @change="onChangeShape" />
+        </van-tab>
+      </van-tabs>
 
-      <div   class="el" @click="duanxing"></div>
-      <!-- <van-uploader :after-read="onRead">
-        <van-icon name="photograph" />
-      </van-uploader> -->
-        <!-- {{shouyevalue}} -->
     </div>
 </template>
 
 <style>
-  .el{
-    width:200px;
-    height: 200px;
-    background-color: black;
-  }
-  .element{
-  width:200px;
-   height: 60px;
-  background-color: aqua;
-  margin-bottom: 40px;
-}
+
 </style>
 
 <script>
@@ -32,121 +42,92 @@ Vue.use(Uploader)
 export default {
   data () {
     return {
-      // shouyevalue: []
-      //       type	是	int	登录方式 (1账号密码登录)
-      // mobile	是	string	手机号
-      // password	是	string	密码
+      /******start******/
+      items:[
+        {
+          // 导航名称
+          text: '全长沙',
+          // 该导航下所有的可选项
+          children: [
+            {
+              text: '岳麓区',
+              id: 1,
+
+            },
+            {
+              text: '湘江区',
+              id: 2
+            }
+          ]
+        },
+        {
+          // 导航名称
+          text: '湘潭',
+          // 该导航下所有的可选项
+          children: [
+            {
+              text: '湘潭1',
+              id: 3,
+
+            },
+            {
+              text: '湘潭2',
+              id: 4
+            }
+          ]
+        }
+      ],
+      // 左侧高亮元素的index
+      mainActiveIndex: 0,
+      // 被选中元素的id
+      activeId: 1,
+      /****end*********/
+      active: 0,
+      abc:'',
+      tab:{
+        area:{
+          default:'长沙'
+        },
+        money:{
+          default:'租金',
+          list:[
+            '租金',
+            '不限',
+            '1k',
+            '2k',
+            '20645.0kip以上'
+          ]
+        },
+        shape:{
+          default:'户型',
+          list:[
+            '户型',
+            '不限',
+            '一室',
+            '两室',
+            '三室'
+          ]
+        }
+
+      }
     }
   },
   methods: {
-    // onRead (file) {
-    //   console.log(file)
-    // },
-
-    duanxing () {
-      console.log('dx')
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
-      this.axius({
-        methods: 'post',
-        url: 'apis/v1/seller/my-release-create',
-        data: {
-          // recommend: 1
-
-          // upimage:
-          // release_type_id: 444444,
-          // name: '小米',
-          // img: 3,
-          // info: '我是刘德华'
-
-          title: '小米',
-          introduce: '费大幅度发',
-          mobile: '11111111111',
-          user_address_id: 2
-
-          // describe: 555,
-          // mobile: 3333,
-          // code: 4,
-          // address: '长沙',
-
-          // is_trans: 1,
-
-          // xh: 86,
-          // user_address_id: 0
-        },
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
-      }).then(p => {
-        debugger
-        console.log('lx', p)
-        // debugger
-        // console.log('申请成功', p)
-      })
-    // this.axius.post('/apis/v1/logistic', {
-    //   goods_type_id: 444444,
-    //   weight: 99,
-    //   send_address_id: 555,
-    //   receive_address_id: 3333,
-    //   receive_time: 4,
-    //   headers: {
-    //     //         'Authorization': 'Bearer ' + token
-    //   }}
-    // ).then(p => {
-    // // debugger
-    //   console.log(p.data)
-    // })
+    onChangeShape(picker, value, index) {
+       console.log(picker, value, index)
+      this.tab.shape.default=value
     },
-    getqinqiu () {
-      console.log('getqinqiu')
-      let me = this
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
-      me.axius({
-        methods: 'get',
-        url: 'apis/v1/user/seller-status',
-        data: {
-
-          // address: '长沙',
-
-          // is_trans: 1,
-
-          // xh: 86,
-          // user_address_id: 0
-        },
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
-      }).then(p => {
-        // debugger
-        // console.log('请求', p.data)
-
-        if (p.data.data.status === 1) {
-          me.duanxing()
-        } else {
-
-        }
-        // debugger
-        // console.log('申请成功', p)
-      })
-    // this.axius.post('/apis/v1/logistic', {
-    //   goods_type_id: 444444,
-    //   weight: 99,
-    //   send_address_id: 555,
-    //   receive_address_id: 3333,
-    //   receive_time: 4,
-    //   headers: {
-    //     //         'Authorization': 'Bearer ' + token
-    //   }}
-    // ).then(p => {
-    // // debugger
-    //   console.log(p.data)
-    // })
+    onChangeMoney(picker, value, index) {
+      console.log(picker, value, index)
+      this.tab.money.default=value
+    },
+    onNavClick(index) {
+      this.mainActiveIndex = index;
+    },
+    onItemClick(data) {
+      this.activeId = data.id;
     }
-
   }
 
-  // mounted(){
-  //     this.axius
-  //     console.log(this.axius)
-  // }
 }
 </script>
