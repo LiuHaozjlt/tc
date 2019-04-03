@@ -1,5 +1,10 @@
 <template>
     <div>
+      <div @click="event">切換vant的國際化</div>
+      <van-datetime-picker
+        v-model="currentDate"
+        type="date"
+      />
       <van-tabs v-model="active">
         <van-tab >
           <div slot="title">
@@ -39,9 +44,19 @@ import { Uploader } from 'vant'
 import Vue from 'vue'
 
 Vue.use(Uploader)
+
+
+import { Locale } from 'vant';
+import enUS from 'vant/lib/locale/lang/en-US';
+
+
 export default {
+  mounted(){
+    console.log(this)
+  },
   data () {
     return {
+      currentDate: new Date(),
       /******start******/
       items:[
         {
@@ -95,7 +110,7 @@ export default {
             '不限',
             '1k',
             '2k',
-            '20645.0kip以上'
+            '20111645.0kip以上'
           ]
         },
         shape:{
@@ -126,7 +141,10 @@ export default {
     },
     onItemClick(data) {
       this.activeId = data.id;
-    }
+    },
+event(){
+  Locale.use('en-US', enUS);
+}
   }
 
 }
