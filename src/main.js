@@ -32,10 +32,24 @@ import '../src/css/new-cent.css'
 import 'mint-ui/lib/style.css'
 import '../src/css/publ-styl.css'
 import {api} from '../src/api/api'
+// 公共方法
+import uploadFileFn from '../src/js/icon-file'
+Vue.prototype.$uploadFileFn = uploadFileFn
+// console.log(Vuex)
+// console.log(api)
 
-import i18nVant from './test.js'
+// for (const key in Vue) {
+//   console.log(key)
+// }
 
+// let bus = new Vue()
+// Vue.prototype.bus = bus
 
+// console.log(axius)
+// console.log(mock)
+// let amapManager = new AMapManager();
+// console.log(amapManager)
+// Vue.use(uploader)
 Vue.use(api)
 Vue.use(vant)
 Vue.use(VueAMap)
@@ -46,7 +60,8 @@ Vue.use(eleui)
 Vue.use(mint)
 
 Vue.use(VueI18n)
-const i18n= new VueI18n({
+
+const i18n = new VueI18n({
   locale: 'zh', // set locale
   messages: {
     zh: i18nZh,
@@ -101,6 +116,7 @@ VueAMap.initAMapApiLoader({
 // Vue.use(Confirm, ConfirmOptions)
 // Vue.use(Toast, duration)
 Vue.config.productionTip = false
+
 new Vue({
   el: '#app',
   router,

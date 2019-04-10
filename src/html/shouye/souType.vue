@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="shouye-sech-head">
-        <img src="@/image/zuojiantou.png" alt="">
+        <img src="@/image/zuojiantou.png" alt="" @click="getsou">
         <div class="shouye-sech">选择搜索类别</div>
     </div>
     <div class="sou-cent">
@@ -40,6 +40,11 @@ export default {
   },
   computed: {
     ...mapGetters(['menuData'])
+  },
+  methods: {
+    getsou () {
+      this.$router.back(-1)
+    }
   },
   mounted () {
     // var data = this.mock.mock({
@@ -84,7 +89,9 @@ export default {
     .shouye-sech-head{
         display:flex;
         align-items: center;
-        padding:1rem /* 16/16 */  0 1rem /* 16/16 */ 0;
+        height: 2.75rem /* 44/16 */;
+        line-height: 2.75rem /* 44/16 */;
+        background-color: #F8F8F8;
     }
     .shouye-sech-head img{
         width:.5rem /* 8/16 */;

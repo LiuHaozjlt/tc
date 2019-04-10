@@ -6,8 +6,8 @@
                   <img :src="item" alt="">
                 </mt-swipe-item>
             </mt-swipe>
-            <div v-show="list.length > 0" style="position: absolute;right: 10px;bottom: 10px;border-radius: 10rem;background: rgba(0,0,0,.5);">
-                {{curSwiper}}/{{list.length}}
+            <div v-show="list.length > 0" class="slidejishu">
+                {{curSwiper}} / {{list.length}}
             </div>
         </div>
     </div>
@@ -40,3 +40,17 @@ export default {
 
 }
 </script>
+
+<style>
+.slidejishu{
+  font-size: .625rem /* 10/16 */;
+  color:white;
+  width:15%;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  border-radius: 10rem;
+  background: rgba(0,0,0,.5);
+  text-align: center;
+}
+</style>

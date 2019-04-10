@@ -2,22 +2,12 @@
     <div>
         <div class="jubao-warp">
             <div class="jubao-head-top">
-                <img src="" alt="">
+                <img src="../../image/Path .png" alt="" @click="towodeele">
                 我的举报
                 <div></div>
             </div>
-
-            <div class="wode-jubao-head">
-                {{}}
-            </div>
-            <div class="jubao-liyou">
-                举报理由
-            </div>
-            <div class="qin-hecha">
-                <input type="text" placeholder="请简要描述举报理由,我们会详细核查">
-            </div>
-            <div class="lin-bai">
-                <div>0</div>/<div>100</div>
+            <div class="wodejubao-warp">
+                <div class="wodejubao-conte" @click="towodejubxq"></div>
             </div>
         </div>
     </div>
@@ -25,11 +15,34 @@
 
 <script>
 export default {
+  data () {
+    return {}
+  },
+  methods: {
+    towodejubxq () {
+      this.$router.push({path: '/wodejubxq'})
+    },
+    towodeele () {
+      this.$router.back(-1)
+    }
 
+  }
 }
 </script>
 
 <style>
+.wodejubao-conte{
+    background-color: #FFCF61;
+    height: 20%;
+    margin-top: 5%;
+}
+.jubao-head-top{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 2.75rem /* 44/16 */;
+    background-color: #FFCF61;
+}
 .lin-bai{
     display:flex;
     font-size:.8125rem /* 13/16 */;
@@ -83,6 +96,6 @@ export default {
 .jubao-head-top img{
     width:.6875rem /* 11/16 */;
     height: 1.25rem /* 20/16 */;
-    background-color: aqua
+
 }
 </style>

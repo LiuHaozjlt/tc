@@ -12,7 +12,7 @@
                     <div class="rigt-wenzi wanxiang" style="text-align:right">{{item.address}}</div>
                     <div class="shouYe-rigt-bot">
                         <div
-                        class="rigt-wenzi"
+                        class="  rigt-ft"
                         style="display:inline;background-color:#FFC74D;text-align:center"
                         >{{item.type.name}}</div>
                         <div class="rigt-wenzi" style="display:inline">
@@ -88,7 +88,14 @@ export default {
 }
 </script>
 <style>
+    .rigt-wenzi{
+      color:#333333;
+    }
     .red{
         color: red;
+    }
+    .rigt-ft{
+      font-size: .6875rem /* 11/16 */;
+      color:#B16800;
     }
 </style>

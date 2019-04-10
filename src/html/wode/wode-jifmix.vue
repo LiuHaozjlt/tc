@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="jifen-warp">
-            <div></div>
+            <div class="jifenleft"  @click="towodejifen"><img src="../../image/Path .png" alt=""></div>
             <div class="jifmix-head">我的积分</div>
-            <div class="jifmix">积分明细</div>
+            <div class="jifmix" @click="tojifenmingx">积分明细</div>
         </div>
         <div class="dangqian-xianz">
             <div class="dangqinjf">
@@ -22,7 +22,34 @@
     </div>
 </template>
 
+<script>
+export default {
+  data () {
+    return {}
+  },
+  methods: {
+    towodejifen () {
+      this.$router.back(-1)
+    },
+    tojifenmingx () {
+      this.$router.push({path: '/wodejfxq'})
+    }
+  }
+}
+</script>
+
 <style>
+    .jifen-warp{
+        height: 2.75rem /* 44/16 */;
+        background-color: #FFCF61;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .jifenleft img{
+        width:.625rem /* 10/16 */;
+        height: 1.0625rem /* 17/16 */;
+    }
     .jif-kan{
         font-size:.9375rem /* 15/16 */;
         font-family:PingFang-SC-Medium;

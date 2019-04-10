@@ -47,10 +47,8 @@
 
         <div class="wode-cent-bot-cont">
             <div class="wode-cent-bot">
-                <div class="wode-cent-bot-ic">
-                    <img src="../../image/tongzhi.png" alt="">
-                </div>
-                <div class="shiliu" @click="gettongzhi">通知</div>
+                <img src="../../image/tongzhi.png" alt=""  class="wode-cent-bot-ic">
+                <span class="shiliu" @click="gettongzhi">通知</span>
             </div>
             <div class="wode-cent-bot-rit">
                 <div class="wode-red">1</div>
@@ -61,20 +59,20 @@
         </div>
         <div class="wode-cent">
             <div class="wode-ct-ic">
-                <div class="wode-cent-bot-ic">
-                <img src="../../image/qiehuan.png" alt="">
+                <div class="wode-ct-ic-left">
+                    <img src="../../image/qiehuan.png" alt=""  class="wode-cent-bot-ic">
+                    <!-- <div class="ru-img"> -->
+                    <span @click="changeVersion" >{{ isPersonal ? "切换成商家" : "入驻品牌商家" }}</span>
+                    <!-- <div @click="changeVersion" v-if="false">{{ isPersonal ? "入驻品牌商家" : "切换成商家" }}</div> -->
+                    <!-- <div class="shiliu">入驻品牌商家</div> -->
                 </div>
-                <!-- <div class="ru-img"> -->
-                <div @click="changeVersion" >{{ isPersonal ? "切换成商家" : "入驻品牌商家" }}</div>
-                <!-- <div @click="changeVersion" v-if="false">{{ isPersonal ? "入驻品牌商家" : "切换成商家" }}</div> -->
-                <!-- <div class="shiliu">入驻品牌商家</div> -->
-                <div class="ruzhuimg"> <img src="../../image/jiantoutou.png" alt=""></div>
+                <img src="../../image/jiantoutou.png" alt="" class="ruzhuimg">
                 <!-- </div> -->
             </div>
-
+<!--
             <div class="wode-head-rit">
                 <img src="" alt="">
-            </div>
+            </div> -->
             <!-- <img src="../../image/ruzhu.png" alt="">   入住品牌商家 -->
         </div>
 
@@ -114,7 +112,7 @@ export default {
       this.$router.push({path: '/bianji'})
     },
     getfabu () {
-      this.$router.push({path: '/xuanzelei'})
+      this.$router.push({path: '/fabupeop'})
     },
     wodejubao () {
       this.$router.push({path: '/jubao'})
@@ -132,7 +130,16 @@ export default {
 </script>
 
 <style>
-    .ruzhuimg img{
+    .wode-cent-bot-cont{
+        height: 3.75rem /* 60/16 */;
+    }
+    .wode-ct-ic-left{
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 24px;
+    }
+    .ruzhuimg{
         width:.5625rem /* 9/16 */;
         height: 1rem /* 16/16 */;
     }
@@ -143,6 +150,10 @@ export default {
     }
     .wode-ct-ic{
         display:flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 3.75rem /* 60/16 */;
+        /* width:100%; */
     }
     .wode-cent div:nth-child(2){
         margin-left: .8125rem /* 13/16 */;
@@ -167,7 +178,7 @@ export default {
         display:flex;
         align-items: center;
         justify-content: space-between;
-        padding:1.25rem /* 20/16 */ 0 1.25rem /* 20/16 */ 0;
+
     }
     .wode-cent-bot{
         display: flex;
@@ -175,7 +186,7 @@ export default {
     .wode-cent-bot div:nth-child(2){
         margin-left: .8125rem /* 13/16 */;
     }
-    .wode-cent-bot-ic img{
+    .wode-cent-bot-ic{
         width:1.6875rem /* 27/16 */;
         height: 1.5rem /* 24/16 */;
     }
@@ -197,7 +208,7 @@ export default {
         text-align: center;
         /* border:1px solid red; */
         border-radius: .625rem /* 10/16 */;
-        padding:5% 0 5% 0;
+        /* padding:5% 0 5% 0; */
         margin-top:16%;
     }
     .wode-in{
@@ -253,10 +264,6 @@ export default {
     .wode-cent{
         border-top: 1px solid #E1E1E1;
         border-bottom:1px solid #E1E1E1;
-        justify-content: space-between;
-        padding:1.25rem /* 20/16 */ 0 1.25rem /* 20/16 */ 0;
-        display: flex;
-        align-items: center;
     }
     .wode-head-rit img{
         width:.5625rem /* 9/16 */;

@@ -7,26 +7,39 @@
       </div>
       <zhaoipt @focus="inipt"></zhaoipt>
 
-      <div class>
+      <div>
         <div class="index-menu-warp">
-          <div class="index-menu" v-for="(item,i) in menudata" :key="i">
-            <div>
-              <img :src="item.icon" alt style="width:20px;height:20px">
+            <!--跳转到jishou页面-->
+            <div class="index-menu" v-for="(item,i) in menudata" :key="i" @click="tapAction(i)">
+              <div>
+                <img :src="item.icon" alt style="width:20px;height:20px">
+              </div>
+              <div>{{item.name}}</div>
             </div>
-            <div>{{item.name}}</div>
-          </div>
+
         </div>
       </div>
       <div class="tong-new-warp">
         <div class="tong-new">同城<br>新闻</div>
         <div class="gundong">
          <van-swipe :autoplay="3000" style="width:80%;height: 100%"  vertical>
-          <template v-for="(item,index) in indexData">
-            <van-swipe-item :key="index" v-if="index < 4">{{item.title}}</van-swipe-item>
-          </template>
+          <!-- <template v-for="(item,index) in indexData"> -->
+          <van-swipe-item >
+            <div>
+              <p style='height:25px;margin-bottom:0' v-if="indexData[0]">{{indexData[0].title|| ''}}</p>
+              <p style='height:25px;margin-bottom:0' v-if="indexData[1]">{{indexData[1].title || ''}}</p>
+            </div>
+          </van-swipe-item>
+          <van-swipe-item >
+            <div>
+              <p style='height:25px;margin-bottom:0' v-if="indexData[2]">{{indexData[2].title|| ''}}</p>
+              <p style='height:25px;margin-bottom:0' v-if="indexData[3]">{{indexData[3].title || ''}}</p>
+            </div>
+          </van-swipe-item>
+          <!-- </template> -->
         </van-swipe>
          </div>
-        <img src="" alt="">
+      <img src="../../image/ic-more.png" alt="" @click="getxinwen">
       </div>
       <div class="tuiJian">推荐</div>
       <tuijiancont></tuijiancont>
@@ -62,6 +75,25 @@ export default {
     tuijiancont
   },
   methods: {
+    tapAction (i) {
+      if (i == 0) {
+        // 点击第一个 都可以单独点呢 加if或者改成switch case根据点击的是第几个 你写过这种类似的 懂？？嗯
+        this.$router.push({
+          path: '/jishou'
+        })
+      }
+      // switch (i) {
+      //   case 0:
+      //     // someThing
+      //     break
+      //   case 1:
+      //     // someThing
+      //     break
+      // }
+    },
+    getxinwen () {
+      this.$router.push({path: '/xinwen'})
+    },
     // indexmenu () {
     //   let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
     //   this.axius({
@@ -218,12 +250,12 @@ export default {
 .tong-new-warp img {
   width: 0.375rem /* 6/16 */;
   height: 0.6875rem /* 11/16 */;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 .tong-new {
   font-size: 1.0625rem /* 17/16 */;
   font-family: FZCTHJW--GB1-0;
-  font-weight: 400;
+  font-weight:800;
   color: rgba(51, 51, 51, 1);
   flex: 0 0 auto;
   padding-right: .75rem /* 12/16 */;

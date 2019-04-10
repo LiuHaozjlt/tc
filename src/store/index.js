@@ -10,7 +10,7 @@ export default new Vuex.Store({
     showLoading: false,
     indexData: [],
     userInfo: JSON.parse(window.localStorage.getItem('userInfo') || null) || {},
-    menudata: '',
+    menudata: [],
     iptqingcheng: '',
     isPersonal: true,
     imgCache: ''
@@ -24,10 +24,12 @@ export default new Vuex.Store({
     },
     indexData (state) {
       //  debugger
-      return state.indexData
+      let data = JSON.parse(localStorage.getItem('indexData')) || []
+      return state.indexData.length === 0 ? data : state.indexData
     },
     menuData (state) {
-      return state.menudata
+      let data = JSON.parse(localStorage.getItem('menudata')) || []
+      return state.menudata.length === 0 ? data : state.menudata
     }
 
   },
@@ -40,6 +42,7 @@ export default new Vuex.Store({
       state.showLoading = false
     },
     saveIndexData (state, data) {
+      localStorage.setItem('indexData', JSON.stringify(data))
       state.indexData = data
     },
     saveUserInfo (state, data) {
@@ -58,27 +61,11 @@ export default new Vuex.Store({
 
   },
   actions: {
-    // getData () {
-    //   var mrdm = mock.Random
-    //   var data = mock.mock('/da', {
-    //     'name|3': [{ cname: () => mrdm.cname() }]
-    //   })
-    //   return axios
-    //     .get('/da')
-    //     .then(data => {
-    //       let dt = data.data.name
-    //       return dt
-    //     })
-    //     .catch(e => {
-    //       console.log('rp')
-    //     })
-    // },
-
     indexmenu ({ commit }) {
       let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
       axios({
         methods: 'get',
-        url: '/apis/v1/seller/releases/types',
+        url: 'apis/v1/tool/module',
         data: {
           // goods_type_id: 444444,
           // weight: 99,
@@ -90,7 +77,9 @@ export default new Vuex.Store({
           'Authorization': 'Bearer ' + token
         }
       }).then(p => {
+        // debugger
         let menudata = p.data.data
+        localStorage.setItem('menudata', JSON.stringify(menudata))
         commit('saveIndexsou', menudata)
         // console.log(p.data.data)
       })

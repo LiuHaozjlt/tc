@@ -7,9 +7,9 @@
         <div class="zhanghao-shouji">{{item.text}}</div>
         <div class="zhanghao-haoma">{{item.phone}}</div>
       </div>
-      <div class="huanb">
-        换帮
-        <img src alt>
+      <div class="huanb" @click="gohuanbang">
+        {{huanbang   }}
+        <img src='../../image/jiantoutou.png'>
       </div>
     </div>
     <!-- </template> -->
@@ -24,8 +24,15 @@ export default {
         { text: '手机  :', phone: '111111111111111' },
         { text: '微信' },
         { text: 'facebook' },
-        { text: '修改密码' }
-      ]
+        { text: '修改密码', url: '/wodexiugai'}
+      ],
+      huanbang: '换绑',
+      jiebang: '解绑'
+    }
+  },
+  methods: {
+    gohuanbang (url) {
+      this.huanbang = this.jiebang
     }
   }
 }
@@ -60,7 +67,7 @@ export default {
 .huanb img {
   width: 0.5625rem /* 9/16 */;
   height: 1rem /* 16/16 */;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   margin-left: 1.375rem /* 22/16 */;
 }
 .wode-zhanghao {

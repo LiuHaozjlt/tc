@@ -1,12 +1,12 @@
 <template>
   <div class="login">
-    <div @click="changeLang">{{$t('message.lang')}}</div>
+    <!-- <div @click="changeLang">{{$t('message.lang')}}</div> -->
     <div class="login-box">
     <!-- <div class="test">测试</div> -->
       <denluhead :is-login="isLogin" :is-forget="isForget" @change="changeLogin"></denluhead>
       <denlulogo></denlulogo>
-      <denlufrm :is-login="isLogin" @forget="isForget = true" @change="isLogin = $event"></denlufrm>
-      <denluxuanxiang v-if="isLogin"></denluxuanxiang>
+      <denlufrm :is-login="isLogin" :is-forget="isForget" @forget="isForget = true" @change="isLogin = $event"></denlufrm>
+      <denluxuanxiang v-if="isLogin && !isForget"></denluxuanxiang>
     </div>
   </div>
 </template>
@@ -16,7 +16,6 @@ import denlulogo from '@/components/denlu-logo'
 import denlufrm from '@/components/denlu-from'
 import denluxuanxiang from '@/components/denlu-xuanxiang'
 export default {
-
   data () {
     return {
       isLogin: true,
@@ -74,6 +73,13 @@ export default {
   height: auto;
   box-sizing: border-box;
   /* padding-top: 1.25rem; */
+}
+
+.mui-input-row span{
+  font-size: .8125rem /* 13/16 */;
+  width:100%;
+  color:#999999;
+  text-align: right;
 }
 
 .dlu a {

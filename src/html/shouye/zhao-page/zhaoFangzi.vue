@@ -1,6 +1,10 @@
 <template>
     <div>
+        <div class="zhao-left">
+          <img src="../../../image/zuojiantou.png" alt="" @click="gosousuo">
+        </div>
         <div class="shouye-souc-head">
+
             <img src="@/image/zufangzi.png" alt="">
         </div>
         <zhaoipt  :type="type"></zhaoipt>
@@ -12,7 +16,8 @@
                 <div>"两房一厅"</div>下共有<div>{{total}}</div>条搜索信息
             </div>
         </div>
-        <fubuType @select-type="onTypeChange"></fubuType>
+        {{fabuTypeData + '111111111111111111111'}}
+        <fubuType @select-type="onTypeChange" :list='fabuTypeData'></fubuType>
         <kongtishi v-if='fabuTypeData.length === 0'></kongtishi>
     </div>
 </template>
@@ -46,6 +51,9 @@ export default {
     ])
   },
   methods: {
+    gosousuo () {
+      this.$router.back(-1)
+    },
     onTypeChange (type) {
       // console.log(type)
     },
@@ -75,6 +83,15 @@ export default {
 </script>
 
 <style>
+.zhao-left{
+  position: absolute;
+    top: 3%;
+    z-index: 8888;
+}
+    .zhao-left img{
+      width:.5rem /* 8/16 */;
+      height: .9375rem /* 15/16 */;
+    }
     .shouye-cent-girl{
         text-align: center;
         padding-top:10%;

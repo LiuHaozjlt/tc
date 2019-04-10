@@ -1,27 +1,29 @@
 <template>
 
-<div>
+<div class="dizhi-warp">
   <div class="xinzhen-head">
+        <img src="../../image/zuojiantou.png" alt="">
           新增地址
+          <div></div>
   </div>
-  <div>
+  <div class="dizhi-cent-cont">
+      <div class="dizhi-cent">
+        <div class="dizhi-ziliao">姓名</div>
+        <input  class="dizhi-ipt" type="text" placeholder="请输入真实姓名">
+      </div>
     <div class="dizhi-cent">
-      <div class="dizhi-ziliao">姓名</div>
-      <input  class="dizhi-ipt" type="text" placeholder="请输入真实姓名">
-    </div>
-   <div class="dizhi-cent">
-      <div class="dizhi-ziliao">联系方式</div>
-      <input class="dizhi-ipt" type="text" placeholder="联系方式">
-    </div>
-     <div class="suozai dizhi-cent" @click="popup4">
-      <div class="dizhi-ziliao">所在地区</div>
-      <input class="dizhi-ipt" type="text" placeholder="所在地区" v-model="region">
-      <img src="" alt="">
-    </div>
-     <div class="dizhi-cent">
-      <div class="dizhi-ziliao">详细地址</div>
-      <input class="dizhi-ipt" type="text" placeholder="详细地址">
-    </div>
+        <div class="dizhi-ziliao">联系方式</div>
+        <input class="dizhi-ipt" type="text" placeholder="联系方式">
+      </div>
+      <div class="suozai dizhi-cent" @click="popup4">
+        <div class="dizhi-ziliao">所在地区</div>
+        <input class="dizhi-ipt" type="text" placeholder="所在地区" v-model="region">
+        <img src="../../image/jiantoutou.png" alt="">
+      </div>
+      <div class="dizhi-cent">
+        <div class="dizhi-ziliao">详细地址</div>
+        <input class="dizhi-ipt" type="text" placeholder="详细地址">
+      </div>
   </div>
   <!-- <mt-button size="large" @click="popup4">下侧弹出Popup</mt-button> -->
   <mt-popup
@@ -48,7 +50,7 @@
 
 </template>
 <script>
-import address from '../../js/areajson' // 这个文件里
+import address from '../../js/areajson'
 // import { constants } from 'http2'
 let slot1Values = address.map(p => p.label)
 let slot2Values = address[0].children.map(p => p.label)
@@ -218,6 +220,28 @@ export default {
 </script>
 
 <style>
+.dizhi-warp{
+  background-color: #F5F5F5;
+  height: 100vh;
+
+  /* width:auto; */
+}
+.dizhi-cent-cont{
+  margin-top: 5%;
+
+}
+.dizhi-cent input{
+  border:0;
+}
+.xinzhen-head{
+  display:flex;
+  justify-content:space-between;
+  align-items: center;
+}
+  .xinzhen-head img{
+    width:.6875rem /* 11/16 */;
+    height: 1.25rem /* 20/16 */;
+  }
   .que-qu{
     display: flex;
     height: 2.8125rem /* 45/16 */;
@@ -253,12 +277,18 @@ export default {
     color:rgba(240,25,25,1);
     line-height:20px;
   }
+  .xinzhen-head{
+    height: 2.75rem /* 44/16 */;
+    display:flex;
+    align-items: center;
+  }
   .dizhi-cent{
     display:flex;
     height: 3.4375rem /* 55/16 */;
-    border:1px solid red;
+    /* border:1px solid red; */
     align-items: center;
     height:3.4375rem ;
+    background-color: white;
   }
   .dizhi-ipt{
     margin-bottom: 0!important;
@@ -266,7 +296,7 @@ export default {
     font-size:15px;
     font-family:PingFang-SC-Medium;
     font-weight:500;
-    color:rgba(195,195,195,1);
+     color:#C3C3C3;
   }
   .dizhi-ziliao{
     width:25%;
@@ -284,6 +314,7 @@ export default {
     border:1px solid red;
   }
   .xinzhen-head{
+    background-color: white;
     text-align: center;
     font-size:1.0625rem /* 17/16 */;
     font-family:PingFang-SC-Medium;

@@ -12,7 +12,7 @@
                     <div class="rigt-wenzi wanxiang" style="text-align:right">{{item.describe}}</div>
                     <div class="shouYe-rigt-bot">
                         <div
-                        class="rigt-wenzi"
+                        class="rigt-wenzi "
                         style="display:inline;background-color:#FFC74D;text-align:center"
                         > </div>
                         <div class="rigt-wenzi" style="display:inline">
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  porps: {
+  props: {
     list: Array
   },
   data () {
@@ -49,6 +49,9 @@ export default {
 </script>
 
 <style>
+.rigt-ft{
+  font-size: .6875rem /* 11/16 */;
+}
 .wanxiang {
   padding-top: 0.5rem /* 8/16 */;
   padding-bottom: 0.5rem /* 8/16 */;
@@ -198,7 +201,7 @@ export default {
   justify-content: space-between;
 }
 .rigt-wenzi {
-  font-size: 0.8125rem /* 13/16 */ /* 13/16 */;
+  font-size: .6875rem /* 11/16 */;
   font-family: PingFang-SC-Regular;
   font-weight: 400;
   color: rgba(153, 153, 153, 1);

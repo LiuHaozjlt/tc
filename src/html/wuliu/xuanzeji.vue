@@ -2,26 +2,33 @@
     <div>
         <!-- {{logistic}} -->
         <div>
-            <div class="xuanzeren">选择寄件人</div>
-            <div v-for="(item,index) in logistic" :key="index" >
-                <div class="xuanze-top xuanze-top-ft">
-                    <div>{{item.send_consignee}}</div>
-                    <div>{{item.order_sn}}</div>
-                </div>
-                <div class="xuanze-top-ft">{{item.send_city}}</div>
-                <div class="xuanze-bot">
-                    <div class="xuanze-top-bot" @click="duigou(index)">
-                        <img  v-if='true' src="../../image/choose_N.png" alt="">
-                        <div class="xuanze-top-ft">{{shewei === index ? '设为默认' : '默认地址'}}</div>
+            <div class="xuanzeren">
+                <img src="../../image/zuojiantou.png" alt="" @click="gojishou">
+                选择寄件人
+                <div></div>
+            </div>
+            <div class="dizhilist" v-if='dizhilist'>
+                <div v-for="(item,index) in logistic" :key="index">
+                    <div class="xuanze-top xuanze-top-ft">
+                        <div>{{item.send_consignee}}</div>
+                        <div>{{item.order_sn}}</div>
                     </div>
-                    <div class="bj-sc">
-                        <div class="xuanze-bot-rit">
-                            <img src="../../image/bj.png" alt="">
-                            <div class="bianji-shanchu" @click="getxindizhi">编辑</div>
+                    <div class="xuanze-top-ft">{{item.send_city}}</div>
+                    <div class="xuanze-bot">
+                        <div class="xuanze-top-bot" @click="duigou(index)">
+                            <img  v-if='true' src="../../image/choose_N.png" alt="">
+                            <div class="xuanze-top-ft">{{shewei === index ? '设为默认' : '默认地址'}}</div>
                         </div>
-                        <div class="xuanze-bot-rit">
-                            <img src="../../image/ssscc.png" alt="">
-                            <div class="bianji-shanchu">删除</div>
+                        <div class="bj-sc">
+                            <div class="xuanze-bot-rit">
+                                <img src="../../image/bj.png" alt="">
+                                <div class="bianji-shanchu" @click="getxindizhi">编辑</div>
+                            </div>
+                            <div class="xuanze-bot-rit"   @click="deleteAddress(index)">
+                                <img src="../../image/ssscc.png" alt="">
+                                <!--接口传数据可以通过index拿得到，先请求后台，在做前端删除操作-->
+                                <div class="bianji-shanchu">删除</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -44,10 +51,17 @@ export default {
       logistic: [],
       shewei: 0, // 第一个为默认上
       //   dui: '../../image/choose.png',
-      moren: '默认地址'
+      moren: '默认地址',
+      dizhilist: true
     }
   },
   methods: {
+    getdleit (index) {
+      this.dizhilist[index] = false
+    },
+    gojishou () {
+      this.$router.back(-1)
+    },
     getxindizhi () {
       this.$router.push({path: '/dizhi'})
     },
@@ -56,6 +70,10 @@ export default {
     },
     getdizhi () {
       this.$router.push({path: '/dizhi'})
+    },
+    deleteAddress (i) {
+      this.logistic.splice(i, 1)
+      // 只是前端做了删除动作，这里需要请求接口告诉后台不然刷新之后，还是会有的
     }
   },
   mounted () {
@@ -87,6 +105,15 @@ export default {
     font-family:PingFang-SC-Medium;
     font-weight:500;
     color:rgba(255,255,255,1);
+}
+.xuanzeren{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.xuanzeren img{
+    width:.6875rem /* 11/16 */;
+    height: 1.25rem /* 20/16 */;
 }
 .xuanzeren{
     line-height:2.75rem /* 44/16 */;

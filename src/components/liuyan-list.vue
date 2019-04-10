@@ -77,7 +77,7 @@ export default {
 .pinglun img {
   width: 0.9375rem /* 15/16 */;
   height: 1.0625rem /* 17/16 */;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 .pinlun-cent-top {
   font-size: 0.875rem /* 14/16 */;
@@ -87,7 +87,7 @@ export default {
 }
 .pinlun-cent-cent {
   width:100%;
-    border:1px solid red;
+    /* border:1px solid red; */
     padding:.75rem /* 12/16 */  0     .75rem /* 12/16 */ 0;
   font-size: 0.9375rem /* 15/16 */;
   font-family: PingFang-SC-Medium;
@@ -151,14 +151,16 @@ export default {
   width: 100%;
   /* border:1px solid red; */
   align-items: center;
-  background-color: #fff4f4f4;
+  background-color: #F4F4F4;
 }
 .xiangqin-bot div input {
   margin-bottom: 0;
   border-radius: 1rem /* 16/16 */;
   margin-right: 1.3125rem /* 21/16 */;
   width: 90% !important;
-  border:1px solid red;
+  height: 2.0625rem /* 33/16 */;
+  margin-left:4%;
+  /* border:1px solid red; */
 }
 .xiangqin-bot-img {
   display: flex;

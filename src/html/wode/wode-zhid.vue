@@ -1,6 +1,10 @@
 <template>
     <div>
-        <div class="wode-zhid-head">置顶</div>
+        <div class="wode-zhid-head">
+          <img src="../../image/Path .png" alt="">
+          置顶
+          <div></div>
+        </div>
         <tujian :typeId="type" :showNum='showNum'></tujian>
         <div class="zhid-chang">置顶时长</div>
         <div  @click="change(item.id)" class="wode-zhid" v-for="(item,index) in five" :key="index">
@@ -64,6 +68,17 @@ export default {
 </script>
 
 <style>
+    .wode-zhid-head{
+      display:flex;
+      align-items: center;
+      height: 2.75rem /* 44/16 */;
+      background-color: #FFB31E;
+      justify-content: space-between;
+    }
+    .wode-zhid-head img{
+      width:.625rem /* 10/16 */;
+      height: 1.0625rem /* 17/16 */;
+    }
     .zhid-qued{
       font-size:.9375rem /* 15/16 */;
       font-family:PingFang-SC-Medium;
@@ -100,7 +115,7 @@ export default {
       font-family:PingFang-SC-Medium;
       font-weight:500;
       color:rgba(33,33,33,1);
-      text-align: center;
+       display:flex;
     }
     .shouYe-rigt-top{
       font-size:.8125rem /* 13/16 */;
@@ -118,7 +133,7 @@ export default {
     .zhid-yuan-in{
 
         border-radius: 50%;
-        border:1px solid red;
+        border:1px solid #999999;
         width:1.5rem /* 24/16 */;
         height: 1.5rem /* 24/16 */;
     }
@@ -133,7 +148,6 @@ export default {
     .wode-zhid{
         justify-content: space-between;
         display:flex;
-        border:1px solid red;
         height:1.5rem /* 24/16 */;
         margin-bottom: 1rem;
     }

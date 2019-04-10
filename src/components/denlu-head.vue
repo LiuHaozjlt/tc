@@ -1,11 +1,14 @@
 <template>
   <div class="mui-input-warp denluhead-box">
+    <!--这个箭头-->
+    <img class="mima-img" src="../image/zuojiantou.png" alt="" @click="godelyan"  v-if="isForget">
     <div class="denluhead" v-if="!isForget">
       <img src="../image/gb@2x.png">
       <a href class="denlu" @click.prevent="change">{{ isLogin ? $t('register') : $t('login') }}</a>
     </div>
     <!-- <div v-if="false"> -->
   <span v-if="isForget">找回密码</span>
+   <span  > </span>
     <!-- </div> -->
 
   </div>
@@ -34,6 +37,9 @@ export default {
     this.login = this.isLogin
   },
   methods: {
+    godelyan () {
+      this.$router.back(-1)
+    },
     change () {
       this.$emit('change', !this.isLogin)
       this.login = !this.login
@@ -56,8 +62,18 @@ export default {
 </script>
 
 <style>
+.mima-img{
+  width:.5625rem /* 9/16 */;
+  height: 1.0625rem /* 17/16 */;
+}
 .denluhead-box {
-  margin-top: 1.25rem;
+  /* margin-top: 1.25rem; */
+  height:2.75rem /* 44/16 */;
+  line-height: 2.75rem /* 44/16 */;
+  /* display:flex; */
+  /* align-items: center;
+  justify-content: space-between; */
+
 }
 .denluhead-box>span{
   display: flex;

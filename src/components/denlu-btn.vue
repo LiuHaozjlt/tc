@@ -1,15 +1,15 @@
 <template>
-    <div @click="actions">{{isLogin ? "登录" : "注册"}}</div>
+    <div><slot>登录</slot></div>
 </template>
 <script>
 import zujianvalue from '../html/zujian-value'
 import { Toast } from 'mint-ui'
 export default {
   props: {
-    isLogin: {
-      type: Boolean,
-      default: true
-    },
+    // isLogin: {
+    //   type: Boolean,
+    //   default: true
+    // },
     mobile: {
       type: String,
       default: ''
@@ -25,24 +25,24 @@ export default {
   },
   data () {
     return {
-      denled: '登录'
+      // denled: '登录'
     }
-  },
-  methods: {
-    actions () {
-      if (this.isLogin) {
-        this.$emit('submit')
-        console.log(12)
-        // debugger
-      }
-    }
-  },
-  mounted () {
-    zujianvalue.$on('on', (isLogin) => {
-      // this.isLogin
-      // console.log(this.isLogin)
-    })
   }
+  // methods: {
+  //   actions () {
+  //     if (this.isLogin) {
+  //       this.$emit('submit')
+  //       console.log(12)
+  //       // debugger
+  //     }
+  //   }
+  // },
+  // mounted () {
+  //   zujianvalue.$on('on', (isLogin) => {
+  //     // this.isLogin
+  //     // console.log(this.isLogin)
+  //   })
+  // }
 }
 </script>
 

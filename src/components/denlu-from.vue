@@ -9,8 +9,8 @@
           </div>
       </div>
       <div class="mui-input-warp">
-           <div class="mui-input-row" v-if="!isPasswordLogin || !isLogin">
-            <img src="../image/suo@2x.png" alt="">
+           <div class="mui-input-row" v-if="!isPasswordLogin || !isLogin || isForget">
+            <img src="../image/yzm.png" alt="">
             <input type="password" class="mui-input-password denlu" v-model='code' placeholder="请输入验证码">
             <span v-if="!isSending" @click="getmessage">获取验证码</span>
             <span v-else-if="timeCount > -1" class="timer">{{timeCount }} s</span>
@@ -23,9 +23,11 @@
       </div>
       <div class="mui-input-warp">
         <!-- 不能这么写事件 -->
-          <denlubtn :is-login="isLogin" :mobile='mobile' :code='code' @click.native="submit"></denlubtn>
+          <denlubtn @click.native="submit">
+            {{isForget ? "重置密码" : (isLogin ? "登录" : "注册")}}
+          </denlubtn>
       </div>
-      <div class="mui-input-warp" v-if="isLogin">
+      <div class="mui-input-warp" v-if="isLogin && !isForget">
       <div class="mui-button-row">
         <div>
            <div  class="dx-yanzhen" @click="changeLoginType">{{ isPasswordLogin ? "短信验证" : "账号登录"}}</div>
@@ -50,6 +52,10 @@ export default {
     isLogin: {
       type: Boolean,
       default: true
+    },
+    isForget: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -202,7 +208,7 @@ export default {
     submit () {
       console.log('submit')
       if (this.mobile === '') {
-        console.log('没输入')
+        Toast('没输入')
         return false
       }
 

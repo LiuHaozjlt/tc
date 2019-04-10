@@ -24,12 +24,14 @@
 }
 .jg-rit-cont{
     display:flex;
+    width:100%;
 }
 .jg-rit{
     display:flex;
 }
 .jg{
     display:flex;
+    width:100%;
 }
 .jg div:nth-child(1){
     color:brown;

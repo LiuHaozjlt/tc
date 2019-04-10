@@ -2,33 +2,34 @@
   <div>
     <div>
       <!--房源分享-->
-      <div>
-        <div class="shangjiafanhui">
-          <div>
+      <div class="pinpaishangjia-head">
+        <div>
+          <div class="shangjiafanhui">
+              <img src="../../image/zuojiantou.png" alt="" class="shangjiafanghui-zuo shangjiazuo" @click="gowodeele">
+              <img src="../../image/fx.png" alt="" class="shangjiafengx shangjiayou" @click="fengxiang">
+          </div>
+        </div>
+        <div class="dianpu-logo-cont">
+          <div class="dianpu-logo">
             <img src="" alt="">
           </div>
-          <div class="shangjiafengx" @click="fengxiang">
-            <img src="../../image/fx.png" alt="">
-          </div>
         </div>
+        <div class="gsmchen">公司名字</div>
       </div>
-      <div class="dianpu-logo-cont">
-        <div class="dianpu-logo">
-          <img src="" alt="">
-        </div>
-      </div>
-      <div class="gsmchen">公司名字</div>
       <gsjianjie></gsjianjie>
     </div>
 
     <div class="tao-wu">
-      <div>5</div>套房屋
+      <div>{{myrelease.length || 0}}</div>套房屋
     </div>
 
-    <div class="sangeliand">三个二级联动</div>
+    <!--三个二级联动-->
+    <div class="sangeliand">
+      <sgeerjiliandong></sgeerjiliandong>
+    </div>
 
     <!--房源-->
-    <div>
+    <!-- <div>
       <div v-for="(item,index) in myrelease" :key="index" @click="getchanpxq(index)">
         <div class="liu-guo-cent">
           <div class="changxqleft">
@@ -51,7 +52,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!--教育-->
     <!-- <div> -->
 
@@ -79,26 +80,100 @@
       </div>
       </div>
     </div>-->
+    <!-- <pinpaifenxiang></pinpaifenxiang> -->
+
+    <!--app下载地址-->
+    <a href="http://192.168.0.25:8080/tongcheng.apk" download="文件名称">
+      <pinpaifenxiang v-if="xiazai"></pinpaifenxiang>
+    </a>
   </div>
 </template>
 
 <script>
+import pinpaifenxiang from '../../components/pinpaifenxiang'
+// import pinpaifenxiang from '../../components/pinpaifenxiang'
 import gsjianjie from '../../components/gsjianjie'
 import gangzhi from '../../components/gang-zhi'
+import sgeerjiliandong from '../../components/sangeliandong'
 export default {
   data () {
     return {
       myrelease: '',
-      jiaoyu: ''
+      jiaoyu: '',
+      taoshu: '',
+      queryParams: {
+        rent_hall_id: '',
+        prices: '',
+        region_lv2: '',
+        region_lv3: '',
+        page: 1
+      },
+      xiazai: false
     }
   },
   components: {
     gsjianjie,
-    gangzhi
+    gangzhi,
+    sgeerjiliandong,
+    pinpaifenxiang
+
   },
   methods: {
+    beforeRouteEnter: (to, from, next) => {
+      next(vm => {
+        vm.getData(vm.$route.query.type)
+      })
+    },
+    getData (type) {
+      console.log('type')
+      switch (type) {
+        case '土地交易':
+          console.log(1)
+          // somtghing 在这里调用接口。获取数据
+          let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+          this.axius({
+            methods: 'get',
+            url: 'apis/v1/seller/my-release',
+            data: {},
+            headers: {
+              Authorization: 'Bearer ' + token
+            }
+          }).then(p => {
+            console.log('土地数据', p)
+            // console.log('lx', p)
+          })
+          break
+        case '教育机构':
+          // somtghing 在这里调用接口。获取数据
+          // eslint-disable-next-line no-redeclare
+
+          break
+        case '品牌房源':
+
+          break
+        case '二手车商家':
+
+          break
+        case '企业招聘':
+          // somtghing 在这里调用接口。获取数据
+
+          break
+      }
+    },
+    // 房源套数
+
+    gowodeele () {
+      this.$router.back(-1)
+    },
+    // fangyuantaoshu (index) {
+    //   this.taoshu = this.myrelease[index]
+    //   // eslint-disable-next-line no-undef
+    //   // this.taoshu = fangyuangeshu
+    // },
     fengxiang () {
-      console.log('分享')
+      this.xiazai = true
+      // this.$router.push({path: '/pinpaichanpxq'})
+      // console.log('分享')
     },
     getchanpxq (index) {
       this.$router.push({
@@ -107,50 +182,86 @@ export default {
           data: JSON.stringify(this.myrelease[index])
         }
       })
-    },
-    getdianpu () {
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
-      this.axius({
-        methods: 'get',
-        url: 'apis/v1/seller/my-release',
-        data: {
-          // upimage:
-          // release_type_id: 444444,
-          // title: 99,
-          // describe: 555,
-          // mobile: 3333,
-          // code: 4,
-          // address: '长沙',
-          // img: 3,
-          // is_trans: 1,
-          // xh: 86,
-          // user_address_id: 0
-        },
-        headers: {
-          Authorization: 'Bearer ' + token
-        }
-      }).then(p => {
-        // debugger
-        // console.log('店铺', this.myrelease = p.data.data.SellerInfo)
-        this.myrelease = p.data.data.SellerReleaseInfo
-        // console.log('教育', p.data.data.SellerInfo)
-        // this.jiaoyu = p.data.data.SellerInfo
-        // console.log('教育', this.myrelease)
-        // console.log('招聘店铺', p.data.data)
-      })
     }
+    // getdianpu () {
+    //   let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+    //   this.axius({
+    //     methods: 'get',
+    //     url: 'apis/v1/seller/my-release',
+    //     params: this.queryParams,
+    //     headers: {
+    //       Authorization: 'Bearer ' + token
+    //     }
+    //   }).then(p => {
+    //     // debugger
+    //     // console.log('店铺', this.myrelease = p.data.data.SellerInfo)
+    //     this.myrelease = p.data.data.SellerReleaseInfo
+    //     // eslint-disable-next-line no-unused-vars
+    //     // console.log('教育', p.data.data.SellerInfo)
+    //     // this.jiaoyu = p.data.data.SellerInfo
+    //     // console.log('教育', this.myrelease)
+    //     // console.log('招聘店铺', p.data.data)
+    //   })
+    // },
+    // updateParam (params) {
+    //   this.queryParams = {...this.queryParams, ...params}
+    //   this.getdianpu()
+    // }
   },
   mounted () {
-    this.getdianpu()
+    this.getData()
+    // this.getdianpu()
   }
 }
 </script>
 
 <style>
+.pinpaishangjia-head{
+  background-color:#B2BBCF
+}
+.shangjiazuo{
+  width:.5625rem /* 9/16 */;
+  height: .9375rem /* 15/16 */;
+}
+.shangjiayou{
+  width:.9375rem !important/* 15/16 */;
+  height: .9375rem !important/* 15/16 */;
+}
+/* .van-tab div div{
+  color:#EE5C34;
+} */
+.van-tree-select__nav{
+  width:100%!important;
+}
+.van-picker-column__item{
+  /* color:#EE5C34; */
+}
+.van-picker-column__item--selected{
+  background-color: #FFF3D8;
+}
+.van-tree-select__item {
+  background-color: #FFF3D8;
+}
+.van-tree-select__nitem--active{
+  background-color: #FFF3D8;
+  color:#EE5C34;
+}
+.van-tabs__line{
+  display:none;
+}
+.van-tree-select__nitem--active::after{
+  display:none;
+}
+.van-icon-checked:before{
+  display:none;
+}
 .shangjiafanhui{
   display:flex;
   justify-content: space-between;
+  height: 2.75rem /* 44/16 */;
+  align-items: center;
 }
+
 .shangjiafengx{
   width:1.9375rem /* 31/16 */;
   height: 1.9375rem /* 31/16 */;
@@ -174,6 +285,7 @@ export default {
   font-weight: 500;
   color: rgba(153, 153, 153, 1);
   display: flex;
+  padding: 2% 0;
 }
 .gsmchen {
   font-size: 1.125rem /* 18/16 */;
@@ -182,6 +294,7 @@ export default {
   /* color:rgba(255,255,255,1); */
   text-align: center;
   padding-top: 4%;
+  padding-bottom: 5%;
 }
 .jiaoyu-a {
 }
@@ -465,9 +578,5 @@ export default {
   height: 1.875rem /* 30/16 */;
   background-color: red;
 }
-.pinpaixq-head div img {
-  width: 1.875rem /* 30/16 */;
-  height: 1.875rem /* 30/16 */;
-  background-color: brown;
-}
+
 </style>

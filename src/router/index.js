@@ -67,7 +67,6 @@ import wodejfxq from '../html/wode/wode-jfxq'
 import wodeqiye from '../html/wode/wode-qiye'
 import wodefabu from '../html/wode/wode-fabu'
 import apitest from './../../demo/api-test'
-import test123 from './../../demo/test123'
 import wodetongzhi from '../html/wode/wode-tongzhi'
 import pinlunxiangq from '../html/xinwen/pinlunxiangq'
 import xuanzelei from '../html/wode/wode-xuanzelei'
@@ -132,11 +131,6 @@ export default new Router({
       path: '/apitest',
       name: 'apitest',
       component: apitest
-    },
-    {
-      path: '/test',
-      name: 'test',
-      component: test
     },
     {
       path: '/wodeqiye',
@@ -321,6 +315,7 @@ export default new Router({
           name: 'wodeele',
           component: wodeele
         },
+
         {
           path: 'xinwen',
           name: 'xinwen',
@@ -352,11 +347,12 @@ export default new Router({
       name: 'zhaofangzi',
       component: zhaofangzi
     },
-    // {
-    //   path: '/xinwen',
-    //   name: 'xinwen',
-    //   component: xinwen
-    // },
+    {
+      path: '/xinwen',
+      // name: 'xinwen',
+      // component: xinwen
+      redirect: '/index/xinwen'
+    },
     // {
     //   path: '/zhaotype',
     //   name: 'zhaotype',
@@ -368,9 +364,9 @@ export default new Router({
       component: souType
     },
     {
-      path: '/test123',
-      name: 'test123',
-      component: test123
+      path: '/test',
+      name: 'test',
+      component: test
     },
     {
       path: '/xiugaidizhi',

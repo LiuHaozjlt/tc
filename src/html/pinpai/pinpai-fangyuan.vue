@@ -61,7 +61,7 @@ export default {
         'Authorization': 'Bearer ' + token
       }
     }).then(p => {
-      debugger
+      // debugger
       console.log('图片上传', p.data.data)
     })
   }

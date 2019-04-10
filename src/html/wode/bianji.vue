@@ -10,7 +10,7 @@
                         <img src="" alt="">
                     </div>
                     <div class="bianji-you">
-                        <img src="" alt="">
+                         <img src="../../image/jiantoutou.png" alt="">
                     </div>
                 </div>
             </div>
@@ -18,22 +18,22 @@
         </div>
          <router-link :to="{name: 'nicheng'}" tag="div">
             <div class="bianji-nc-warp">
-                <div class="shiliu nic">昵称</div>
+                <div class="shiliu nic">昵称 :</div>
                 <div class="bianji-rit-warp">
                     <div class="tiannic shiliu">
                         <input type="text" v-model="iptqingchengsss">
                     </div>
                     <div class="bianji-you">
-                        <img src="" alt="">
+                        <img src="../../image/jiantoutou.png" alt="">
                     </div>
                 </div>
             </div>
          </router-link>
         <div class="bianji-head-botm" @click="popupVisible=true">
-            <div class="shiliu">性别</div>
+            <div class="shiliu">性别 :</div>
             <div class="shiliu">{{sex}}</div>
             <div class="bianji-you">
-                <img src="" alt="">
+                <img src="../../image/jiantoutou.png" alt="">
             </div>
         </div>
         <fabupop :popupVisible='popupVisible' @closepop="closepop">
@@ -132,9 +132,8 @@ export default {
     justify-content: space-between;
 }
 .bianji-you img{
-    width:.375rem /* 6/16 */;
-    height: 1.1875rem /* 19/16 */;
-    border:1px solid red;
+    width:.5625rem /* 9/16 */;
+    height: 1rem /* 16/16 */;
 }
 .bianji-cet img{
     width:3rem /* 48/16 */;

@@ -70,5 +70,6 @@ color:rgba(153,153,153,1);
     display:flex;
     justify-content: center;
      align-items: center;
+     padding-top:2%;
 }
 </style>

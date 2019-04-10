@@ -1,7 +1,9 @@
 <template>
     <div class="wode-shangjia-warp">
       <div class="wode-shangjia">
+          <img src="../../image/zuojiantou.png" alt="" @click="goxuanzeshangjia">
           商家信息
+          <div></div>
       </div>
       <div class="wode-shangjia-warp-cent">
 
@@ -56,9 +58,10 @@
                   </div>
               </div>
           </div>
-
-          <div class="chuangjian-dian" @click="towodeshangjiamc">
-              创建店铺
+          <div @click="getruzhushengq">
+            <div class="chuangjian-dian"  >
+                创建店铺
+            </div>
           </div>
       </div>
     </div>
@@ -88,6 +91,9 @@ export default {
     }
   },
   methods: {
+    goxuanzeshangjia () {
+      this.$router.back(-1)
+    },
     qiyerenzhen () {
       this.$router.push({path: '/wodeqiye'})
     },
@@ -98,28 +104,27 @@ export default {
       this.$router.push({path: '/index/wodeele'})
     },
     // 提取上传步骤
-    uploadFileFn (file) {
-      let data = new FormData()
-      data.append('upimage', file.file)
-      //   console.log(data)
-      // Toast('正在上传...')
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
-      return this.axius({
-        method: 'post',
-        url: 'apis/v1/upload/image',
-        data: data,
-        headers: {
-          'Authorization': 'Bearer ' + token,
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-    },
+    // uploadFileFn (file) {
+    //   let data = new FormData()
+    //   data.append('upimage', file.file)
+    //   //   console.log(data)
+    //   // Toast('正在上传...')
+    //   let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+    //   return this.axius({
+    //     method: 'post',
+    //     url: 'apis/v1/upload/image',
+    //     data: data,
+    //     headers: {
+    //       'Authorization': 'Bearer ' + token,
+    //       'Content-Type': 'multipart/form-data'
+    //     }
+    //   })
+    // },
     onReadStore (file) {
       this.notimg = true
       //   this.$refs.goodImg.src = file.content
       //   console.log(file)
-
-      this.uploadFileFn(file).then(p => {
+      this.$uploadFileFn(file).then(p => {
         // console.log('图片上传', p.data.data)
         if (p.data.error_code === 0) {
           Toast('上传成功')
@@ -129,13 +134,23 @@ export default {
           Toast(p.data.message)
         }
       })
+      // this.uploadFileFn(file).then(p => {
+      //   // console.log('图片上传', p.data.data)
+      //   if (p.data.error_code === 0) {
+      //     Toast('上传成功')
+      //     this.shopImageLocal = file.content
+      //     this.shopImage = p.data.data.uploadFilePath
+      //   } else {
+      //     Toast(p.data.message)
+      //   }
+      // })
     },
     onReadLogo (file) {
       this.notimg = true
       //   this.$refs.goodImg.src = file.content
       //   console.log(file) 把logo这边shopImageLocal || shopImage || shopImagePlaceholder这几个变量用另外的变量保存，不要两者用同一个地址就不会有影响了，这后面你弄吧，这几个变量，我不知道是啥，已经吧上传写成两个不用的函数了
 
-      this.uploadFileFn(file).then(p => {
+      this.$uploadFileFn(file).then(p => {
         // console.log('图片上传', p.data.data) 没刷新代码
         if (p.data.error_code === 0) {
           Toast('上传成功')
@@ -146,12 +161,48 @@ export default {
           Toast(p.data.message)
         }
       })
+    },
+    getruzhushengq () {
+      //   console.log('ruzhushengq')
+      let me = this
+      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+      me.axius({
+        method: 'post',
+        url: 'apis/v1/seller',
+        data: {
+          release_type_id: 44,
+          name: '小米',
+          logo: 'tupian',
+          img: 'icon',
+          info: '小米小米'
+        },
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      }).then(p => {
+        // debugger
+        // console.log('入驻商家入驻商家', p)
+        if (p.data.data.status === 1) {
+          me.postquedfab()
+        } else {
+        }
+      })
     }
   }
 }
 </script>
 
 <style>
+.wode-shangjia{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 2.75rem /* 44/16 */;
+}
+.wode-shangjia img{
+  width: .6875rem /* 11/16 */;
+  height: 1.25rem /* 20/16 */;
+}
 .logo-mingc{
   background-color: #FFFFFF;
   border-radius: .5rem /* 8/16 */;
@@ -203,6 +254,7 @@ export default {
 }
 .wode-shangjia-warp{
   padding-bottom: 100%;
+  background-color: #f5f5f5;
 }
 .shangjiajianjie textarea{
   height: 30%!important;
@@ -232,6 +284,7 @@ color:rgba(51,51,51,1);
         height: .8125rem /* 13/16 */;
     }
     .shangjie{
+      padding: 2% 0 2% 0;
         text-align: center;
         font-size:.875rem /* 14/16 */;
 font-family:PingFang-SC-Medium;
@@ -239,6 +292,7 @@ font-weight:500;
 color:rgba(153,153,153,1);
     }
     .shang-chen{
+      padding-bottom: 2%;
         text-align: center;
         font-size:1.125rem /* 18/16 */;
         font-family:PingFang-SC-Medium;
@@ -276,6 +330,8 @@ color:rgba(153,153,153,1);
         font-family:PingFang-SC-Medium;
         font-weight:500;
         color:rgba(51,51,51,1);
+        background-color: white;
+        margin-bottom: 3%;
     }
     .chuangjian-dian{
         background:linear-gradient(72deg,rgba(255,179,30,1),rgba(255,146,30,1));

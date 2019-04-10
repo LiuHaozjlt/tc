@@ -1,13 +1,14 @@
 <template>
     <div class="wode-shezhi">
-        <div class="wode-shezhi-head">
-            <img src="" alt="">
+        <div class="wode-shezhi-head" @click="towodeele">
+            <img src="../../image/Path .png" alt="">
             设置
+            <div></div>
         </div>
         <div  v-for="(item,index) in four" :key="index">
             <div  class="shezhi-cent" @click="gopage(item.url)">
                 <div>{{item.text}}</div>
-                <img src="" alt="">
+                <img src="../../image/jiantoutou.png" alt="">
             </div>
         </div>
 
@@ -25,6 +26,9 @@ export default {
     }
   },
   methods: {
+    towodeele () {
+      this.$router.back(-1)
+    },
     tuichudl () {
       this.$router.push({path: '/dlu'})
     },
@@ -36,10 +40,16 @@ export default {
 </script>
 
 <style>
+    .wode-shezhi-head{
+        height: 2.75rem /* 44/16 */;
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+    }
     .wode-shezhi-head img{
         width:.625rem /* 10/16 */;
         height: 1.0625rem /* 17/16 */;
-        text-align: left;
+
     }
     .wode-shezhi div:nth-child(2){
         border-top-left-radius: 1.125rem /* 18/16 */;
@@ -75,15 +85,14 @@ export default {
     .shezhi-cent img{
         width:.5625rem /* 9/16 */;
         height: 1rem /* 16/16 */;
-        border:1px solid red;
     }
     .wode-shezhi-head{
-        text-align: center;
+
         font-size:1.125rem /* 18/16 */;
         font-family:PingFang-SC-Medium;
         font-weight:500;
         color:rgba(33,33,33,1);
-        padding:1.25rem /* 20/16 */  0  1.25rem /* 20/16 */ 0;
+
         background-color: #FFCF61;
         margin-bottom:.9375rem /* 15/16 */;
     }

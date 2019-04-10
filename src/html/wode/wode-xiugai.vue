@@ -1,6 +1,10 @@
 <template>
     <div>
-        <div class="wode-xiugai">修改密码</div>
+        <div class="wode-xiugai">
+            <img src="../../image/zuojiantou.png" alt="">
+            修改密码
+            <div></div>
+        </div>
         <div class="jiu">旧密码</div>
         <div class="xin">新密码</div>
 
@@ -12,6 +16,10 @@
 
 <style>
     .wode-xiugai{
+        display:flex;
+        height: 2.75rem /* 44/16 */;
+        align-items: center;
+        justify-content: space-between;
         font-size:1.0625rem /* 17/16 */;
         font-family:PingFang-SC-Bold;
         font-weight:bold;
@@ -34,4 +42,3 @@
         line-height: 2.25rem /* 36/16 */;
     }
 </style>
-

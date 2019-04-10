@@ -1,5 +1,8 @@
 <template>
 <div>
+    <div class="new-xiangqinhead" @click="goNew">
+      <img src="../../image/zuojiantou.png" alt="">
+    </div>
     <div class="new-xiangqin">
       <div class="yinni">{{articlenew.title}}</div>
       <div class="xiao-guan">
@@ -56,6 +59,9 @@ export default {
     })
   },
   methods: {
+    goNew () {
+      this.$router.back(-1)
+    },
     toplxq () {
       this.$router.push({path: '/pinlunxiangq'})
     },
@@ -86,9 +92,21 @@ export default {
 </script>
 
 <style>
+.new-xiangqinhead{
+  height: 2.75rem /* 44/16 */;
+  line-height: 2.75rem /* 44/16 */;
+  display:flex;
+  align-items: center;
+}
+.new-xiangqinhead img{
+  width:.6875rem /* 11/16 */;
+  height: 1.25rem /* 20/16 */;
+
+}
 .xiangqi-cont h1 img{
   width:100%;
   height: 12rem /* 192/16 */;
+  margin-bottom: 5%;
 }
 .xiangqi-cont h1{
   border-bottom: none!important;
@@ -180,12 +198,15 @@ color:rgba(255,255,255,1);
   color: rgba(153, 153, 153, 1);
 }
 .pinlun-cent-cent {
-  border:1px solid red;
+  /* border:1px solid red; */
   padding:.75rem /* 12/16 */  0     .75rem /* 12/16 */ 0;
   font-size: 0.9375rem /* 15/16 */;
   font-family: PingFang-SC-Medium;
   font-weight: 500;
   color: rgba(34, 34, 34, 1);
+}
+.pinlun-lf{
+  margin-right: 5%;
 }
 .pinglun {
 

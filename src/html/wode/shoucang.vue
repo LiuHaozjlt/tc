@@ -1,11 +1,10 @@
 <template>
     <div>
         <div class="shoucang-head">
-            <div class="wode-shoucang"><img src="" alt=""></div>
+            <div class="wode-shoucang"><img src="../../image/Path .png" alt=""></div>
             <div class="wode-shoucang">我的收藏</div>
             <div class="shoucang-head-quxiao">编辑</div>
         </div>
-
         <div class="shoucang-del">删除</div>
     </div>
 </template>
@@ -25,6 +24,22 @@ export default {
 </script>
 
 <style>
+    .shoucang-head{
+        display:flex;
+        align-items: center;
+        background-color: #FFB31E;
+    }
+    .wode-shoucang {
+        height: 2.75rem /* 44/16 */;
+
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .wode-shoucang  img{
+        width:.625rem /* 10/16 */;
+        height: 1.0625rem /* 17/16 */;
+    }
     .shoucang-head-quxiao{
         font-size:.9375rem /* 15/16 */;
         font-family:PingFang-SC-Medium;

@@ -1,8 +1,9 @@
 <template>
     <div>
-        <div class="wode-tongzhi">
+        {{tongzhi}}
+        <!-- <div class="wode-tongzhi">
             <div class="wode-tongzhi-top">
-                <div class="wode-tongzhi-headimg"><img src="" alt=""></div>
+                <div class="wode-tongzhi-headimg"><img src="../../image/zuojiantou.png" alt=""></div>
                 <div class="wode-tongzhi-head">通知</div>
                 <div class="wode-tongzhi-head"></div>
             </div>
@@ -18,11 +19,52 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
+<script>
+export default {
+  data () {
+    return {
+      tongzhi: ''
+    }
+  },
+  created () {
+    this.gettongzhi()
+  },
+  methods: {
+    gettongzhi () {
+      let me = this
+      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+      me.axius({
+        methods: 'get',
+        url: 'apis/v1/user/notice',
+        data: {
+        },
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      }).then(p => {
+        this.tongzhi = p.data.data
+        console.log(this.tongzhi)
+      })
+    }
+  }
+}
+</script>
+
 <style>
+    .wode-tongzhi-headimg img{
+        width:.625rem /* 10/16 */;
+        height: 1.0625rem /* 17/16 */;
+    }
+    .wode-tongzhi-top{
+        height: 2.75rem /* 44/16 */;
+        line-height: 2.75rem /* 44/16 */;
+        display:flex;
+        align-items: center;
+    }
     .ning-ba{
         background-color: #FFFFFF;
     }
@@ -46,12 +88,13 @@
     }
     .wode-tongzhi-top{
         display: flex;
-        justify-content: space-between
+        justify-content: space-between;
+        background-color: #FFCF61;
     }
     .wode-tongzhi-headimg{
         width:.625rem /* 10/16 */;
         height: 1.0625rem /* 17/16 */;
-        border:1px solid red;
+        /* border:1px solid red; */
     }
     .wode-tongzhi-head{
         font-size:1.125rem /* 18/16 */;

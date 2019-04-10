@@ -121,7 +121,6 @@ export default {
         display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
     padding-bottom: .9375rem /* 15/16 */;
     justify-content: space-between;
 
@@ -130,7 +129,7 @@ export default {
       width: 30%;
     height: 5.375rem /* 86/16 */;
     display: inline-block;
-    -webkit-box-flex: 1;
+    /* -webkit-box-flex: 1; */
     /* -ms-flex: 1;
     flex: 1 /* flex:1 1 auto;;; */
 
