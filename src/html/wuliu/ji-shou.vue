@@ -128,7 +128,6 @@ export default {
             send_address_id: 555,
             receive_address_id: 3333,
             code: 4,
-
             receive_time: 3
           },
           headers: {

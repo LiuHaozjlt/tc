@@ -2,7 +2,7 @@
   <div>
     <div>
       <!-- <div>品牌产品详情</div> -->
-      <div class="pinpaixq-head">
+      <!-- <div class="pinpaixq-head">
         <div>
           <img class="pinpaixq-head-left" src="../../image/zuojiantou.png" alt>
         </div>
@@ -17,8 +17,11 @@
             <img src alt>
           </div>
         </div>
-      </div>
+      </div> -->
       <!--房源产品信息-->
+      <div class="pinpaichanp-head-img" @click="goshangjiacp">
+        <img src="../../image/zuojiantou.png" alt="">
+      </div>
       <div class="shangjiafangyuan">
         <div class="yuan-zhang">{{data.title}}</div>
         <div class="di-lou">
@@ -152,11 +155,20 @@ export default {
     data () {
       return JSON.parse(this.$route.query.data) || {}
     }
+  },
+  methods: {
+    goshangjiacp () {
+      this.$router.back(-1)
+    }
   }
 }
 </script>
 
 <style>
+.pinpaichanp-head-img img{
+  width:.5rem /* 8/16 */;
+  height: .9375rem /* 15/16 */;
+}
 .pinpaixq-head-left {
   width: 0.5625rem /* 9/16 */;
   height: 1rem /* 16/16 */;

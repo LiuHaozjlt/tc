@@ -5,13 +5,18 @@
       <div class="pinpaishangjia-head">
         <div>
           <div class="shangjiafanhui">
-              <img src="../../image/zuojiantou.png" alt="" class="shangjiafanghui-zuo shangjiazuo" @click="gowodeele">
-              <img src="../../image/fx.png" alt="" class="shangjiafengx shangjiayou" @click="fengxiang">
+            <img
+              src="../../image/zuojiantou.png"
+              alt
+              class="shangjiafanghui-zuo shangjiazuo"
+              @click="gowodeele"
+            >
+            <img src="../../image/fx.png" alt class="shangjiafengx shangjiayou" @click="fengxiang">
           </div>
         </div>
         <div class="dianpu-logo-cont">
           <div class="dianpu-logo">
-            <img src="" alt="">
+            <img src alt>
           </div>
         </div>
         <div class="gsmchen">公司名字</div>
@@ -20,17 +25,17 @@
     </div>
 
     <div class="tao-wu">
-      <div>{{myrelease.length || 0}}</div>套房屋
+      <div>{{releaseList.length || 0}}</div>套房屋
     </div>
 
     <!--三个二级联动-->
     <div class="sangeliand">
-      <sgeerjiliandong></sgeerjiliandong>
+      <sgeerjiliandong :search-options="searchOptions" @update="getSellInfo"></sgeerjiliandong>
     </div>
 
     <!--房源-->
-    <!-- <div>
-      <div v-for="(item,index) in myrelease" :key="index" @click="getchanpxq(index)">
+    <div>
+      <div v-for="(item,index) in releaseList" :key="index" @click="getchanpxq(index)">
         <div class="liu-guo-cent">
           <div class="changxqleft">
             <img :src="item.img" alt>
@@ -52,13 +57,13 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
     <!--教育-->
     <!-- <div> -->
 
-      <!-- <div v-for="(item,index) in jiaoyu" :key="index">
-      -->
-      <!-- <div class="liu-guo-cent" @click="getchanpxq">
+    <!-- <div v-for="(item,index) in jiaoyu" :key="index">
+    -->
+    <!-- <div class="liu-guo-cent" @click="getchanpxq">
         <div class="changxqleft">
           <img :src="jiaoyu.img" alt>
         </div>
@@ -69,10 +74,10 @@
           <div>
             <div class="changxqcent jiaoyu-a">
               <div class="changxq-bot-lef">
-                <div class="changxq-bot-rit-cent">{{jiaoyu.name}}</div> -->
-                <!-- <div class="changxq-bot-rit-cent"> {{jiaoyu.name}}</div> -->
-                <!-- <div class="changxq-bot-rit-cented"> </div> -->
-              <!-- </div>
+    <div class="changxq-bot-rit-cent">{{jiaoyu.name}}</div>-->
+    <!-- <div class="changxq-bot-rit-cent"> {{jiaoyu.name}}</div> -->
+    <!-- <div class="changxq-bot-rit-cented"> </div> -->
+    <!-- </div>
               <div class="shier">{{jiaoyu.name}}KIP</div>
             </div>
           </div>
@@ -95,6 +100,8 @@ import pinpaifenxiang from '../../components/pinpaifenxiang'
 import gsjianjie from '../../components/gsjianjie'
 import gangzhi from '../../components/gang-zhi'
 import sgeerjiliandong from '../../components/sangeliandong'
+import { Toast } from 'vant'
+
 export default {
   data () {
     return {
@@ -108,7 +115,11 @@ export default {
         region_lv3: '',
         page: 1
       },
-      xiazai: false
+      xiazai: false,
+      searchOptions: [],
+      sellerType: '',
+      releaseList: [],
+      sellerInfo: {}
     }
   },
   components: {
@@ -116,7 +127,6 @@ export default {
     gangzhi,
     sgeerjiliandong,
     pinpaifenxiang
-
   },
   methods: {
     beforeRouteEnter: (to, from, next) => {
@@ -149,10 +159,8 @@ export default {
 
           break
         case '品牌房源':
-
           break
         case '二手车商家':
-
           break
         case '企业招聘':
           // somtghing 在这里调用接口。获取数据
@@ -179,10 +187,10 @@ export default {
       this.$router.push({
         path: '/pinpaichanpxq',
         query: {
-          data: JSON.stringify(this.myrelease[index])
+          data: JSON.stringify(this.releaseList[index])
         }
       })
-    }
+    },
     // getdianpu () {
     //   let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
     //   this.axius({
@@ -206,75 +214,121 @@ export default {
     // updateParam (params) {
     //   this.queryParams = {...this.queryParams, ...params}
     //   this.getdianpu()
-    // }
+    // },
+
+    getSellInfo (filters = {}) {
+      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+      this.axius({
+        methods: 'get',
+        url: 'apis/v1/seller/my-release',
+        params: filters,
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      }).then(({ data }) => {
+        if (data.error_code !== 0) {
+          Toast(data.message)
+          return
+        }
+
+        let { SellerReleaseInfo, SellerInfo, SellerSearchInfo } = data.data
+
+        this.releaseList = SellerReleaseInfo
+        console.log('releaseList', this.releaseList)
+
+        if (!this.sellerInfo.seller_id) {
+          this.sellerInfo = SellerInfo
+
+          let priceUnits = SellerSearchInfo.prices_unit
+
+          delete SellerSearchInfo.prices_unit
+
+          this.searchOptions = Object.keys(SellerSearchInfo).map(key => {
+            let options = SellerSearchInfo[key] || []
+            options.unshift({
+              id: undefined,
+              name: this.$t('unLimited'),
+              name_la: this.$t('unLimited')
+            })
+            return {
+              name: key,
+              options,
+              selected: '',
+              ...(key === 'prices' ? {units: priceUnits} : {})
+            }
+          })
+        }
+      })
+    }
   },
-  mounted () {
-    this.getData()
+  created () {
+    // this.getData();
     // this.getdianpu()
+    this.getSellInfo()
   }
 }
 </script>
 
 <style>
-.pinpaishangjia-head{
-  background-color:#B2BBCF
+.pinpaishangjia-head {
+  background-color: #b2bbcf;
 }
-.shangjiazuo{
-  width:.5625rem /* 9/16 */;
-  height: .9375rem /* 15/16 */;
+.shangjiazuo {
+  width: 0.5625rem /* 9/16 */;
+  height: 0.9375rem /* 15/16 */;
 }
-.shangjiayou{
-  width:.9375rem !important/* 15/16 */;
-  height: .9375rem !important/* 15/16 */;
+.shangjiayou {
+  width: 0.9375rem !important/* 15/16 */;
+  height: 0.9375rem !important/* 15/16 */;
 }
 /* .van-tab div div{
   color:#EE5C34;
 } */
-.van-tree-select__nav{
-  width:100%!important;
+.van-tree-select__nav {
+  width: 100% !important;
 }
-.van-picker-column__item{
+.van-picker-column__item {
   /* color:#EE5C34; */
 }
-.van-picker-column__item--selected{
-  background-color: #FFF3D8;
+.van-picker-column__item--selected {
+  background-color: #fff3d8;
 }
 .van-tree-select__item {
-  background-color: #FFF3D8;
+  background-color: #fff3d8;
 }
-.van-tree-select__nitem--active{
-  background-color: #FFF3D8;
-  color:#EE5C34;
+.van-tree-select__nitem--active {
+  background-color: #fff3d8;
+  color: #ee5c34;
 }
-.van-tabs__line{
-  display:none;
+.van-tabs__line {
+  display: none;
 }
-.van-tree-select__nitem--active::after{
-  display:none;
+.van-tree-select__nitem--active::after {
+  display: none;
 }
-.van-icon-checked:before{
-  display:none;
+.van-icon-checked:before {
+  display: none;
 }
-.shangjiafanhui{
-  display:flex;
+.shangjiafanhui {
+  display: flex;
   justify-content: space-between;
   height: 2.75rem /* 44/16 */;
   align-items: center;
 }
 
-.shangjiafengx{
-  width:1.9375rem /* 31/16 */;
+.shangjiafengx {
+  width: 1.9375rem /* 31/16 */;
   height: 1.9375rem /* 31/16 */;
   /* background-color: #000000; */
 }
-.shangjiafengx img{
-  width:.9375rem /* 15/16 */;
-  height: .9375rem /* 15/16 */;
+.shangjiafengx img {
+  width: 0.9375rem /* 15/16 */;
+  height: 0.9375rem /* 15/16 */;
 }
-.dianpu-logo img{
-  width:100%;
+.dianpu-logo img {
+  width: 100%;
   height: 5.375rem /* 86/16 */;
-  border:1px solid red;
+  border: 1px solid red;
 }
 .sangeliand {
   background-color: #ffb31e;
@@ -578,5 +632,4 @@ export default {
   height: 1.875rem /* 30/16 */;
   background-color: red;
 }
-
 </style>

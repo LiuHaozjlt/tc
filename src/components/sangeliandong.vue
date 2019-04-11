@@ -7,15 +7,16 @@
           <div class="vant-tab">
             <!-- <div @click="event">切換vant的國際化</div> -->
             <!-- <van-datetime-picker v-model="currentDate" type="date"/> -->
-            <van-tabs v-model="active">
+            <van-tabs v-model="active" :swipe-threshold="5">
+              <!-- 地区 -->
               <van-tab>
                 <div slot="title"  @click="changeTab(0)" class="tab-unselected">
                   {{tab.area.default}}&nbsp;
-                  <img src='../../src/image/jtt@2x.png' :class="['arrowImg',isShow && active==0 ? 'arrowUp' : '']"/>
+                  <img src='../../src/image/jtt@2x.png' :class="['arrowImg',isShow && active==='area' ? 'arrowUp' : '']"/>
                   <!-- <van-icon :name="active==0?'arrow-up':'arrow-down'"/> -->
                 </div>
                 <van-tree-select
-                  v-show="isShow && active == 0"
+                  v-show="isShow && active == 'area'"
                   :items="items"
                   :main-active-index="mainActiveIndex"
                   :active-id="activeId"
@@ -23,42 +24,16 @@
                   @itemclick="onItemClick"
                 />
               </van-tab>
-              <van-tab>
-                <div slot="title"  @click="changeTab(1)"
-                    :class="tab.money.default !== '租金' ? 'tab-seleted' : 'tab-unselected'">
-                  {{tab.money.default}}&nbsp;
-                  <img src='../../src/image/jtt@2x.png' :class="['arrowImg',isShow && active==1 ? 'arrowUp' : '']"/>
-                  <!-- <van-icon :name="active==1?'arrow-up':'arrow-down'"/> -->
-                </div>
-                <van-picker class="goHead" v-show="isShow && active == 1" :default-index="0"
-                  :columns="tab.money.list" value-key="name" @change="onChangeMoney"/>
-              </van-tab>
-              <van-tab>
-                <div slot="title" @click="changeTab(2)"
-                    :class="tab.shape.default !== '户型' ? 'tab-seleted' : 'tab-unselected'">
-                  {{tab.shape.default}}&nbsp;
-                  <img src='../../src/image/jtt@2x.png' :class="['arrowImg',isShow && active==2 ? 'arrowUp' : '']"/>
+
+              <van-tab v-for="(item, index) in searchOptions" :key="item.name">
+                <div slot="title" @click="changeTab(index+1)"
+                    :class="active === index+1 ? 'tab-seleted' : 'tab-unselected'">
+                  {{item.selected ? (isLaos ? item.selected.name_la : item.selected.name) : $t(item.name)}}&nbsp;
+                  <img src='../../src/image/jtt@2x.png' :class="['arrowImg',isShow && active === index+1 ? 'arrowUp' : '']"/>
                   <!-- <van-icon :name="active==2?'arrow-up':'arrow-down'"/> -->
                 </div>
-                <van-picker class="goHead" v-show="isShow && active == 2" :default-index="0" :columns="tab.shape.list" @change="onChangeShape"/>
-              </van-tab>
-                  <van-tab>
-                <div slot="title" @click="changeTab(2)"
-                    :class="tab.shape.default !== '户型' ? 'tab-seleted' : 'tab-unselected'">
-                  {{tab.shape.default}}&nbsp;
-                  <img src='../../src/image/jtt@2x.png' :class="['arrowImg',isShow && active==2 ? 'arrowUp' : '']"/>
-                  <!-- <van-icon :name="active==2?'arrow-up':'arrow-down'"/> -->
-                </div>
-                <van-picker class="goHead" v-show="isShow && active == 2" :default-index="0" :columns="tab.shape.list" @change="onChangeShape"/>
-              </van-tab>
-              <van-tab>
-                <div slot="title" @click="changeTab(2)"
-                    :class="tab.shape.default !== '户型' ? 'tab-seleted' : 'tab-unselected'">
-                  {{tab.shape.default}}&nbsp;
-                  <img src='../../src/image/jtt@2x.png' :class="['arrowImg',isShow && active==2 ? 'arrowUp' : '']"/>
-                  <!-- <van-icon :name="active==2?'arrow-up':'arrow-down'"/> -->
-                </div>
-                <van-picker class="goHead" v-show="isShow && active == 2" :default-index="0" :columns="tab.shape.list" @change="onChangeShape"/>
+                <van-picker class="goHead" v-show="isShow && active === index+1" :default-index="0"
+                    :columns="item.options"  :value-key="isLaos ? 'name_la' : 'name'" @change="onChange"/>
               </van-tab>
             </van-tabs>
           </div>
@@ -77,6 +52,21 @@ Vue.use(Uploader)
 export default {
   mounted () {
     // console.log(this)
+  },
+  props: {
+    searchOptions: {
+      type: Array,
+      default: () => [
+        // {
+        //   name: 'prices',
+        //   options: [{
+        //     id: 1,
+        //     name: '1k',
+        //     name_la: '1k'
+        //   }]
+        // }
+      ]
+    }
   },
   data () {
     return {
@@ -119,7 +109,7 @@ export default {
       // 被选中元素的id
       activeId: 1,
       /** **end*********/
-      active: 4,
+      active: '',
       abc: '',
       tab: {
         area: {
@@ -156,18 +146,28 @@ export default {
       }
     }
   },
+  computed: {
+    isLaos () {
+      return this.$i18n.locale === 'laos'
+    }
+  },
   methods: {
     changeTab (index) {
       if (index === this.active && this.isShow) {
         this.isShow = false
       } else {
+        this.active = index
         this.isShow = true
       }
     },
-    onChangeShape (picker, value, index) {
+    onChange (picker, value, index) {
       // console.log(picker, value, index)
-      this.tab.shape.default = value
-      this.params.rent_hall_id = value // id
+
+      if (this.active == 0) {
+        this.area = value
+      } else {
+        this.searchOptions[this.active - 1].selected = value
+      }
       this.emitUpdate()
     },
     onChangeMoney (picker, value, index) {
@@ -184,8 +184,15 @@ export default {
     },
     emitUpdate () {
       clearTimeout(this.timer)
+      let params = {}
+
+      this.searchOptions.forEach(item => {
+        if (item.selected) {
+          params[item.name] = item.selected.id
+        }
+      })
       this.timer = setTimeout(() => {
-        this.$emit('update', {...this.params})
+        this.$emit('update', params)
       }, 1000) // 1秒后触发更新
     },
     event () {

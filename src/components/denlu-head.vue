@@ -7,17 +7,15 @@
       <a href class="denlu" @click.prevent="change">{{ isLogin ? $t('register') : $t('login') }}</a>
     </div>
     <!-- <div v-if="false"> -->
-  <span v-if="isForget">找回密码</span>
-   <span  > </span>
+    <span v-if="isForget">找回密码</span>
+    <span></span>
     <!-- </div> -->
-
   </div>
 </template>
 <script>
 // import zujianvalue from "../html/zujian-value";
 
 export default {
-
   props: {
     isLogin: {
       type: Boolean,

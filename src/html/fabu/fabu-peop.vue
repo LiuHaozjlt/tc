@@ -83,7 +83,7 @@
           <div class="xuanze-di">
             <div class="shiwu">选择地址</div>
             <div>
-              <img src alt>
+              <img src="../../image/jiantoutou.png" alt="">
             </div>
           </div>
         </div>
@@ -293,7 +293,7 @@ export default {
 
 <style>
 .mint-switch-core::before{
-  background-color: red;
+  background-color: #E7E7E7;
 }
 .biaox{
     color:red;
@@ -482,7 +482,7 @@ export default {
   margin-left: 1rem /* 16/16 */;
   width: 0.5625rem /* 9/16 */;
   height: 1rem /* 16/16 */;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 .jia {
   position: relative;
