@@ -62,7 +62,8 @@ export default {
       })
     },
     xiayibu () {
-      // this.$router.push({path: '/pinpaishangjiaxq?type=' + this.xuanzelei[this.active].release_type_id})
+      // this.$router.push({path: '/pinpaishangjiaxq'})
+      this.$router.push({path: '/pinpaishangjiaxq?type=' + this.xuanzelei[this.active].release_type_id})
     }
 
   },

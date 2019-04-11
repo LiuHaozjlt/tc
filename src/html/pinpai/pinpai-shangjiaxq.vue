@@ -35,7 +35,12 @@
 
     <!--房源-->
     <div>
-      <div v-for="(item,index) in releaseList" :key="index" @click="getchanpxq(index)">
+      <div
+        class="fangyuan-warp"
+        v-for="(item,index) in releaseList"
+        :key="index"
+        @click="getchanpxq(index)"
+      >
         <div class="liu-guo-cent">
           <div class="changxqleft">
             <img :src="item.img" alt>
@@ -91,10 +96,14 @@
     <a href="http://192.168.0.25:8080/tongcheng.apk" download="文件名称">
       <pinpaifenxiang v-if="xiazai"></pinpaifenxiang>
     </a>
+
+    <!--未发布提示-->
+    <dianne class v-if="fangyuantishi"></dianne>
   </div>
 </template>
 
 <script>
+import dianne from '../../components/dianjiatishi'
 import pinpaifenxiang from '../../components/pinpaifenxiang'
 // import pinpaifenxiang from '../../components/pinpaifenxiang'
 import gsjianjie from '../../components/gsjianjie'
@@ -105,7 +114,7 @@ import { Toast } from 'vant'
 export default {
   data () {
     return {
-      myrelease: '',
+      fangyuantishi: false,
       jiaoyu: '',
       taoshu: '',
       queryParams: {
@@ -119,10 +128,12 @@ export default {
       searchOptions: [],
       sellerType: '',
       releaseList: [],
-      sellerInfo: {}
+      sellerInfo: {},
+      priceUnit: []
     }
   },
   components: {
+    dianne,
     gsjianjie,
     gangzhi,
     sgeerjiliandong,
@@ -134,50 +145,12 @@ export default {
         vm.getData(vm.$route.query.type)
       })
     },
-    getData (type) {
-      console.log('type')
-      switch (type) {
-        case '土地交易':
-          console.log(1)
-          // somtghing 在这里调用接口。获取数据
-          let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
-          this.axius({
-            methods: 'get',
-            url: 'apis/v1/seller/my-release',
-            data: {},
-            headers: {
-              Authorization: 'Bearer ' + token
-            }
-          }).then(p => {
-            console.log('土地数据', p)
-            // console.log('lx', p)
-          })
-          break
-        case '教育机构':
-          // somtghing 在这里调用接口。获取数据
-          // eslint-disable-next-line no-redeclare
 
-          break
-        case '品牌房源':
-          break
-        case '二手车商家':
-          break
-        case '企业招聘':
-          // somtghing 在这里调用接口。获取数据
-
-          break
-      }
-    },
     // 房源套数
-
     gowodeele () {
       this.$router.back(-1)
     },
-    // fangyuantaoshu (index) {
-    //   this.taoshu = this.myrelease[index]
-    //   // eslint-disable-next-line no-undef
-    //   // this.taoshu = fangyuangeshu
-    // },
+
     fengxiang () {
       this.xiazai = true
       // this.$router.push({path: '/pinpaichanpxq'})
@@ -191,30 +164,6 @@ export default {
         }
       })
     },
-    // getdianpu () {
-    //   let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
-    //   this.axius({
-    //     methods: 'get',
-    //     url: 'apis/v1/seller/my-release',
-    //     params: this.queryParams,
-    //     headers: {
-    //       Authorization: 'Bearer ' + token
-    //     }
-    //   }).then(p => {
-    //     // debugger
-    //     // console.log('店铺', this.myrelease = p.data.data.SellerInfo)
-    //     this.myrelease = p.data.data.SellerReleaseInfo
-    //     // eslint-disable-next-line no-unused-vars
-    //     // console.log('教育', p.data.data.SellerInfo)
-    //     // this.jiaoyu = p.data.data.SellerInfo
-    //     // console.log('教育', this.myrelease)
-    //     // console.log('招聘店铺', p.data.data)
-    //   })
-    // },
-    // updateParam (params) {
-    //   this.queryParams = {...this.queryParams, ...params}
-    //   this.getdianpu()
-    // },
 
     getSellInfo (filters = {}) {
       let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
@@ -234,7 +183,6 @@ export default {
         let { SellerReleaseInfo, SellerInfo, SellerSearchInfo } = data.data
 
         this.releaseList = SellerReleaseInfo
-        console.log('releaseList', this.releaseList)
 
         if (!this.sellerInfo.seller_id) {
           this.sellerInfo = SellerInfo
@@ -254,7 +202,7 @@ export default {
               name: key,
               options,
               selected: '',
-              ...(key === 'prices' ? {units: priceUnits} : {})
+              ...(key === 'prices' ? { units: priceUnits } : {})
             }
           })
         }
@@ -270,6 +218,9 @@ export default {
 </script>
 
 <style>
+.dianpu-logo img{
+
+}
 .pinpaishangjia-head {
   background-color: #b2bbcf;
 }
@@ -328,7 +279,7 @@ export default {
 .dianpu-logo img {
   width: 100%;
   height: 5.375rem /* 86/16 */;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 .sangeliand {
   background-color: #ffb31e;

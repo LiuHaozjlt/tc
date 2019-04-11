@@ -87,8 +87,6 @@ export default new Vuex.Store({
 
     getRecommendList ({ commit }) {
       axios.get(`${api.shouyeshangp}`).then(p => {
-        // debugger
-        // console.log('首页数据', p)
         commit('saveIndexData', p.data.data)
       })
     }

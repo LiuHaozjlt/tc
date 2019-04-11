@@ -68,9 +68,6 @@ export default {
   /* margin-top: 1.25rem; */
   height:2.75rem /* 44/16 */;
   line-height: 2.75rem /* 44/16 */;
-  /* display:flex; */
-  /* align-items: center;
-  justify-content: space-between; */
 
 }
 .denluhead-box>span{

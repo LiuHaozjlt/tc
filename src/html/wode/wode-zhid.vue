@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="wode-zhid-head">
-          <img src="../../image/Path .png" alt="">
+          <img src="../../image/Path .png" alt="" @click="gozhidqian">
           置顶
           <div></div>
         </div>
@@ -48,6 +48,9 @@ export default {
     }
   },
   methods: {
+    gozhidqian () {
+      this.$router.back(-1)
+    },
     yuanin () {
       this.yuan = false
       this.circ = true

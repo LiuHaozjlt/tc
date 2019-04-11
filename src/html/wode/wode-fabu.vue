@@ -1,13 +1,15 @@
 <template>
   <div>
     <div class="wode-fabu-head">
-      <div></div>
+      <div>
+        <img src="../../image/zuojiantou.png" alt @click="gowodefabuqian">
+      </div>
       <div class="wo-bu">我的发布</div>
       <div class="pi-chu">批量删除</div>
     </div>
     <div>
       <div class="wode-fabu-box">
-        {{me}}
+        <!-- {{me}} -->
         发布内容
       </div>
     </div>
@@ -60,6 +62,9 @@ export default {
         // console.log('me', p.data)
       })
     },
+    gowodefabuqian () {
+      this.$router.back(-1)
+    },
     getzhid (url) {
       this.$router.push({ path: url })
     }
@@ -71,20 +76,23 @@ export default {
 </script>
 
 <style>
-.wode-fabu-head{
-  display:flex;
+.wode-fabu-head img {
+  width: 0.625rem /* 10/16 */;
+  height: 1.0625rem /* 17/16 */;
+}
+.wode-fabu-head {
+  display: flex;
   justify-content: space-between;
 }
-.pi-chu{
-  font-size:.9375rem /* 15/16 */;
-font-family:PingFang-SC-Medium;
-font-weight:500;
-color:rgba(51,51,51,1);
+.pi-chu {
+  font-size: 0.9375rem /* 15/16 */;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: rgba(51, 51, 51, 1);
 }
 .wode-fabu-cent {
   display: flex;
   justify-content: space-between;
-
 }
 .wode-fabu-cent div {
   /* width:70%; */
@@ -97,7 +105,7 @@ color:rgba(51,51,51,1);
   height: 1.4375rem /* 23/16 */;
   line-height: 1.4375rem /* 7/16 */;
   text-align: center;
-  padding:0 .5rem; /*我随便设置的  OK  */
+  padding: 0 0.5rem; /*我随便设置的  OK  */
 }
 .wode-fabu-head {
   font-size: 1.125rem /* 18/16 */;

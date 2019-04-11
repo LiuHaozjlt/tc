@@ -61,13 +61,12 @@
             <div class="wode-ct-ic">
                 <div class="wode-ct-ic-left">
                     <img src="../../image/qiehuan.png" alt=""  class="wode-cent-bot-ic">
-                    <!-- <div class="ru-img"> -->
+
                     <span @click="changeVersion" >{{ isPersonal ? "切换成商家" : "入驻品牌商家" }}</span>
-                    <!-- <div @click="changeVersion" v-if="false">{{ isPersonal ? "入驻品牌商家" : "切换成商家" }}</div> -->
-                    <!-- <div class="shiliu">入驻品牌商家</div> -->
+
                 </div>
                 <img src="../../image/jiantoutou.png" alt="" class="ruzhuimg">
-                <!-- </div> -->
+
             </div>
 <!--
             <div class="wode-head-rit">
@@ -112,7 +111,7 @@ export default {
       this.$router.push({path: '/bianji'})
     },
     getfabu () {
-      this.$router.push({path: '/fabupeop'})
+      this.$router.push({path: '/wodefabu'})
     },
     wodejubao () {
       this.$router.push({path: '/jubao'})

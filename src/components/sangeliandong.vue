@@ -30,7 +30,6 @@
                     :class="active === index+1 ? 'tab-seleted' : 'tab-unselected'">
                   {{item.selected ? (isLaos ? item.selected.name_la : item.selected.name) : $t(item.name)}}&nbsp;
                   <img src='../../src/image/jtt@2x.png' :class="['arrowImg',isShow && active === index+1 ? 'arrowUp' : '']"/>
-                  <!-- <van-icon :name="active==2?'arrow-up':'arrow-down'"/> -->
                 </div>
                 <van-picker class="goHead" v-show="isShow && active === index+1" :default-index="0"
                     :columns="item.options"  :value-key="isLaos ? 'name_la' : 'name'" @change="onChange"/>
@@ -143,7 +142,8 @@ export default {
         prices: '',
         region_lv2: '',
         region_lv3: ''
-      }
+      },
+      priceUnit: []
     }
   },
   computed: {
@@ -161,8 +161,6 @@ export default {
       }
     },
     onChange (picker, value, index) {
-      // console.log(picker, value, index)
-
       if (this.active == 0) {
         this.area = value
       } else {
@@ -173,7 +171,7 @@ export default {
     onChangeMoney (picker, value, index) {
       // console.log(picker, value, index)
       this.tab.money.default = value.name
-      this.params.prices = value.id // id
+      this.params.prices = value.id
       this.emitUpdate()
     },
     onNavClick (index) {
@@ -202,6 +200,9 @@ export default {
 }
 </script>
 <style>
+.van-picker{
+  height: 100%;
+}
 .van-tab{
   flex: none;
   text-align: left;
