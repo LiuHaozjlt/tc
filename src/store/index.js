@@ -21,7 +21,6 @@ export default new Vuex.Store({
       img: '',
       info: '',
       info_la: ''
-
     }
   },
   getters: {
