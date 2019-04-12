@@ -139,7 +139,7 @@ export default {
     width:3rem /* 48/16 */;
     height: 3rem /* 48/16 */;
     border-radius: 50%;
-    border:2px solid red;
+    /* border:2px solid red; */
 }
 .nic{
     padding:1.25rem /* 20/16 */  0  1.25rem /* 20/16 */ 0;

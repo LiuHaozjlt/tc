@@ -13,8 +13,8 @@
              <div class="wode-head" @click="tobianji">
                     <div class="wode-head-in-warp">
                         <div class="wode-head-in">
-                        <img src="" alt="">
-                        <div>你好</div>
+                        <img :src="userInfo.headimgurl" alt="">
+                        <div>{{userInfo.nickname}}</div>
                         </div>
                     </div>
                     <div class="wode-head-rit">
@@ -58,11 +58,21 @@
             </div>
         </div>
         <div class="wode-cent">
-            <div class="wode-ct-ic">
+            <div class="wode-ct-ic" @click="changeVersion" v-if="isPersonal">
                 <div class="wode-ct-ic-left">
                     <img src="../../image/qiehuan.png" alt=""  class="wode-cent-bot-ic">
 
-                    <span @click="changeVersion" >{{ isPersonal ? "切换成商家" : "入驻品牌商家" }}</span>
+                    <span >切换成商家</span>
+
+                </div>
+                <img src="../../image/jiantoutou.png" alt="" class="ruzhuimg">
+
+            </div>
+            <div class="wode-ct-ic" @click="applyVip" v-else>
+                <div class="wode-ct-ic-left">
+                    <img src="../../image/qiehuan.png" alt=""  class="wode-cent-bot-ic">
+
+                    <span >入驻品牌商家</span>
 
                 </div>
                 <img src="../../image/jiantoutou.png" alt="" class="ruzhuimg">
@@ -79,6 +89,8 @@
 </template>
 
 <script>
+import { Toast } from 'vant'
+
 export default {
   data () {
     return {}
@@ -86,6 +98,9 @@ export default {
   computed: {
     isPersonal () {
       return this.$store.state.isPersonal
+    },
+    userInfo () {
+      return this.$store.state.userInfo
     }
   },
   created () {
@@ -118,11 +133,18 @@ export default {
     },
     changeVersion () {
       if (this.isPersonal) {
-        this.$store.commit('setPersonal', false)
+        if (this.userInfo.is_seller) {
+          this.$store.commit('setPersonal', false)
+          this.$store.dispatch('getSellerInfo')
+        } else {
+          this.$router.push({path: '/xuanzelei'})
+        }
         return false
       }
-      this.$store.commit('setPersonal', !this.isPersonal)
-      this.$router.push({path: '/pinpaishangjiaxq'})
+      //   this.$store.commit('setPersonal', !this.isPersonal)
+    },
+    applyVip () {
+      Toast('功能开发中')
     }
   }
 }

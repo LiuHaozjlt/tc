@@ -13,7 +13,16 @@ export default new Vuex.Store({
     menudata: [],
     iptqingcheng: '',
     isPersonal: true,
-    imgCache: ''
+    imgCache: '',
+    sellerInfo: {
+      release_type_id: '',
+      name: '',
+      logo: '',
+      img: '',
+      info: '',
+      info_la: ''
+
+    }
   },
   getters: {
     testa (state) {
@@ -57,6 +66,9 @@ export default new Vuex.Store({
     },
     cacheImage (state, data) {
       state.imgCache = data
+    },
+    updateSellerInfo (state, data = {}) {
+      state.sellerInfo = {...state.sellerInfo, ...data}
     }
 
   },
@@ -88,6 +100,11 @@ export default new Vuex.Store({
     getRecommendList ({ commit }) {
       axios.get(`${api.shouyeshangp}`).then(p => {
         commit('saveIndexData', p.data.data)
+      })
+    },
+    getSellerInfo ({commit}) {
+      axios.get('/apis/v1/seller/my-info').then(p => {
+        commit('updateSellerInfo', p.data.data)
       })
     }
   }

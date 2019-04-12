@@ -13,7 +13,7 @@
 
                 <van-uploader  class="logo-icon"  :after-read="onReadLogo">
                     <div class="logo-img-top">
-                      <img :src="shopImageLocals || shopImages  " alt="">
+                      <img :src="shopImageLocals || sellerInfo.logo  " alt="">
                     </div>
 
                     <div class="logo-img">   <img :src="shopImageadd" alt=""></div>
@@ -23,7 +23,7 @@
 
             <div>
                 <div class="shang-chen" @click="getshangjmc">
-                    {{title || '商家名称'}}
+                    {{sellerInfo.name || '商家名称'}}
                 </div>
                 <div><img src="" alt=""></div>
             </div>
@@ -34,7 +34,7 @@
               <div>
                   <div class="shefenmian">
                       <van-uploader :after-read="onReadStore" class="dianpushangchuan">
-                          <img :src="shopImageLocal || shopImage || shopImagePlaceholder" alt="">
+                          <img :src="shopImageLocal || sellerInfo.img || shopImagePlaceholder" alt="">
                           <!-- <img src="../../image/xjh.png" alt=""> -->
                       </van-uploader>
                   </div>
@@ -43,7 +43,7 @@
 
           <div class="shangjie">商家简介</div>
           <div class="shangjiajianjie">
-              <textarea></textarea>
+              <textarea :value="sellerInfo.info" @change="updateIntro($event.target.value)"></textarea>
           </div>
 
           <div>
@@ -81,13 +81,12 @@ export default {
     return {
       shopImage: '',
       shopImageLocal: '',
-      shopImages: '',
       shopImageLocals: ''
     }
   },
   computed: {
-    title () {
-      return this.$route.query.text
+    sellerInfo () {
+      return this.$store.state.sellerInfo
     }
   },
   methods: {
@@ -129,7 +128,7 @@ export default {
         if (p.data.error_code === 0) {
           Toast('上传成功')
           this.shopImageLocal = file.content
-          this.shopImage = p.data.data.uploadFilePath
+          this.$store.commit('updateSellerInfo', {img: p.data.data.uploadFilePath})
         } else {
           Toast(p.data.message)
         }
@@ -156,7 +155,7 @@ export default {
           Toast('上传成功')
           // 改这里
           this.shopImageLocals = file.content
-          this.shopImages = p.data.data.uploadFilePath
+          this.$store.commit('updateSellerInfo', {logo: p.data.data.uploadFilePath})
         } else {
           Toast(p.data.message)
         }
@@ -169,23 +168,26 @@ export default {
       me.axius({
         method: 'post',
         url: 'apis/v1/seller',
-        data: {
-          release_type_id: 44,
-          name: '小米',
-          logo: 'tupian',
-          img: 'icon',
-          info: '小米小米'
-        },
+        data: this.sellerInfo,
         headers: {
           Authorization: 'Bearer ' + token
         }
       }).then(p => {
         // debugger
         // console.log('入驻商家入驻商家', p)
-        if (p.data.data.status === 1) {
-          me.postquedfab()
+        if (p.data.error_code !== 0) {
+          Toast(p.data.message)
+          this.$store.commit('setPersonal', true)
+          this.$router.replace('/index/wodeele')
         } else {
+          Toast('商家申请成功')
+          this.$router.replace('/index/wodeele')
         }
+      })
+    },
+    updateIntro (value) {
+      this.$store.commit('updateSellerInfo', {
+        info: value
       })
     }
   }

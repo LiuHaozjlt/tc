@@ -20,12 +20,8 @@ export default {
   },
   methods: {
     mcbaocun () {
-      this.$router.push({
-        path: '/wodeshangjia',
-        query: {
-          text: this.mingzi
-        }
-      })
+      this.$store.commit('updateSellerInfo', {name: this.mingzi})
+      this.$router.back(-1)
     }
   }
 }
