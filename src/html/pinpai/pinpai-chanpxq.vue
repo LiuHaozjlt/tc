@@ -334,7 +334,7 @@ export default {
 }
 .liu-guo-cent img {
   width: 100%;
-  height: 30%;
+  height: 15%;
 }
 .changxqcent {
   display: flex;

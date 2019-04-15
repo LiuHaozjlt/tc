@@ -54,7 +54,7 @@
                 <div class="changxq-bot-lef">
                   <div class="changxq-bot-rit-cent">{{item.rent_hall.name}}</div>
                   <div class="changxq-bot-rit-cent"></div>
-                  <div class="changxq-bot-rit-cented">{{item.rent_decoration}}</div>
+                  <div class="changxq-bot-rit-cented">{{item.rent_decoration.name}}</div>
                 </div>
                 <div class="shier">{{item.prices}}KIP</div>
               </div>
@@ -96,7 +96,6 @@
     <a href="http://192.168.0.25:8080/tongcheng.apk" download="文件名称">
       <pinpaifenxiang v-if="xiazai"></pinpaifenxiang>
     </a>
-
     <!--未发布提示-->
     <dianne class v-if="fangyuantishi"></dianne>
   </div>
@@ -164,7 +163,6 @@ export default {
         }
       })
     },
-
     getSellInfo (filters = {}) {
       let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
       this.axius({
@@ -455,15 +453,22 @@ export default {
   color: rgba(51, 51, 51, 1);
 }
 .changxqleft {
-  margin-right: 5%;
+
+  width:30%;
+}
+.changxqrit{
+  width:70%;
 }
 .liu-guo-cent {
   display: flex;
   justify-content: space-between;
 }
+.changxq-bot-rigt-top{
+  width:100%;
+}
 .liu-guo-cent img {
-  width: 100%;
-  height: 30%;
+
+  height:15%;
 }
 .changxqcent {
   display: flex;

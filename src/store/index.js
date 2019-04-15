@@ -3,7 +3,8 @@ import Vuex from 'vuex'
 import mock from 'mockjs'
 import axios from 'axios'
 import { api } from '@/api/api'
-import router from '../../tc/src/router'
+// eslint-disable-next-line no-unused-vars
+import router from '@/router'
 Vue.use(Vuex)
 
 function updateRequst (token) {

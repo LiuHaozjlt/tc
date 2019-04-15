@@ -28,7 +28,7 @@
                             </div>
                             <div class="xuanze-bot-rit"   @click="deleteAddress(index)">
                                 <img src="../../image/ssscc.png" alt="">
-                                <!--接口传数据可以通过index拿得到，先请求后台，在做前端删除操作-->
+
                                 <div class="bianji-shanchu">删除</div>
                             </div>
                         </div>
@@ -75,7 +75,6 @@ export default {
     },
     deleteAddress (i) {
       this.logistic.splice(i, 1)
-      // 只是前端做了删除动作，这里需要请求接口告诉后台不然刷新之后，还是会有的
     },
     select (address) {
       if (this.$route.query.from === 'publish') {

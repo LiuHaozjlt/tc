@@ -156,7 +156,7 @@
               </div>
             </div>
           </div>
-          <van-switch v-model="publish.is_trans" :active-value="2" :inactive-value="0"></van-switch>
+          <van-switch  class="vantsw"  v-model="publish.is_trans" :active-value="2" :inactive-value="0"></van-switch>
         </div>
         <div class="shisan weixiang">*为必填项</div>
 
@@ -294,12 +294,8 @@ export default {
     gofabuele () {
       this.$router.back(-1)
     },
-    // addPic () {
-    //   this.addList.push('img')
-    // },
+
     remove (index) {
-      //   console.log('ok')
-      // this.addList.splice(index, 1)
       this.imageList.splice(index, 1)
     },
     tbox () {
@@ -394,6 +390,17 @@ export default {
 </script>
 
 <style>
+.van-switch--on{
+  background-color: #FFE9BF!important;
+}
+.van-switch__node{
+  width:1.625rem /* 26/16 */;
+  height: 1.625rem /* 26/16 */;
+}
+.vantsw{
+  width:2.8125rem /* 45/16 */;
+  height: 1.5625rem /* 25/16 */;
+}
 .mint-switch-core::before{
   background-color: #E7E7E7;
 }

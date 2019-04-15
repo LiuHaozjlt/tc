@@ -2,7 +2,7 @@
 
 <div class="dizhi-warp">
   <div class="xinzhen-head">
-        <img src="../../image/zuojiantou.png" alt="">
+        <img src="../../image/zuojiantou.png" alt="" @click="goxuanzedizhi">
           新增地址
           <div></div>
   </div>
@@ -133,19 +133,19 @@ export default {
     this.getRegion()
   },
   methods: {
+    goxuanzedizhi () {
+      this.$router.back(-1)
+    },
     adddizhi () {
       let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
       this.axius.get('/apis/v1/user-address', {
         data: {
-
           goods_type_id: 444444,
           weight: 99,
           send_address_id: 555,
           receive_address_id: 3333,
           code: 4,
-
           receive_time: 3
-
         },
         headers: {
           'Authorization': 'Bearer ' + token
@@ -220,11 +220,10 @@ export default {
 </script>
 
 <style>
+
 .dizhi-warp{
   background-color: #F5F5F5;
   height: 100vh;
-
-  /* width:auto; */
 }
 .dizhi-cent-cont{
   margin-top: 5%;
@@ -311,7 +310,7 @@ export default {
   .suozai img{
     width:.5625rem /* 9/16 */;
     height: 1rem /* 16/16 */;
-    border:1px solid red;
+    /* border:1px solid red; */
   }
   .xinzhen-head{
     background-color: white;
