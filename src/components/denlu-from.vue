@@ -22,7 +22,6 @@
           </div>
       </div>
       <div class="mui-input-warp">
-        <!-- 不能这么写事件 -->
           <denlubtn @click.native="submit">
             {{isForget ? "重置密码" : (isLogin ? "登录" : "注册")}}
           </denlubtn>
@@ -36,9 +35,6 @@
       </div>
       </div>
     </form>
-    <!-- <div class="mui-input-warp">
-     <qitafangshi></qitafangshi>
-    </div> -->
   </div>
 </template>
 
@@ -73,13 +69,7 @@ export default {
     dropdown,
     denlubtn
   },
-  // created(){
-  //     Toast({
-  //         message: '提示信息',
-  //         position: 'center'，
-  //     duration: -1
-  //         })
-  // }
+
   methods: {
     changeLoginType () {
       this.isPasswordLogin = !this.isPasswordLogin
@@ -103,13 +93,13 @@ export default {
     },
     getmessage () {
       let self = this
-      console.log('短信验证')
+      // console.log('短信验证')
       this.axius.post('/apis/v1/sms/send', {
         mobile: self.mobile,
         xh: 86,
         type: 0
       }).then(({ data }) => {
-        console.log(data)
+        // console.log(data)
         if (data.error_code === 0) {
           self.send()
         } else {
@@ -123,7 +113,7 @@ export default {
 
     loginByCode () {
       if (this.code === '') {
-        console.log('没输入验证码')
+        // console.log('没输入验证码')
         return false
       }
       this.axius.post('/apis/v1/user/login', {
@@ -132,14 +122,14 @@ export default {
         type: 2,
         mobile: this.mobile
       }).then(p => {
-        console.log('登录接口')
+        // console.log('登录接口')
         if (p.data.error_code === 0) {
           this.callAfterLogin(p.data.data)
         } else if (p.data.error_code === 400) {
-          console.log('未注册')
+          // console.log('未注册')
           this.$emit('change', false)
         } else {
-          console.log('其他错误')
+          // console.log('其他错误')
           Toast({
             message: p.data.message,
             position: 'center',
@@ -150,11 +140,10 @@ export default {
     },
     getregist () {
       if (this.code === '') {
-        console.log('没输入验证码')
+        // console.log('没输入验证码')
         return false
       }
 
-      let self = this
       this.axius.post('/apis/v1/user/register', {
         xh: 86,
         code: this.code,
@@ -184,17 +173,17 @@ export default {
         type: 1,
         mobile: this.mobile
       }).then(p => {
-        console.log('登录接口')
+        // console.log('登录接口')
         if (p.data.error_code === 0) {
           // 登录成功
           this.callAfterLogin(p.data.data)
         } else if (p.data.error_code === 400) {
-          console.log('未注册')
+          // console.log('未注册')
 
           // 切换注册页面
           this.$emit('change', false)
         } else {
-          console.log('其他错误')
+          // console.log('其他错误')
           // 其他错误
 
           Toast({
@@ -212,33 +201,8 @@ export default {
         return false
       }
 
-      // this.axius.post('/apis/v1/user/login', {
-      //   xh: 86,
-      //   code: this.code,
-      //   type: 2,
-      //   mobile: this.mobile
-      // }).then(p => {
-      //   console.log('登录接口')
-      //   if (p.data.error_code === 0) {
-      //     // 登录成功
-      //   } else if (p.data.error_code === 0) {
-      //     console.log(p.data.error_code)
-      //     // 未注册 你先注册调用一下这个接口 找到这个code  x
-      //     // 切换注册页面
-      //   } else {
-      //     console.log('其他错误')
-      //     // 其他错误
-      //     // 首先要知道登录没成功 需要注册是error—code
-      //     Toast({
-      //       message: p.data.message,
-      //       position: 'center'
-      //       // duration: -1
-      //     })
-      //   }
-      // })
       if (!this.isLogin) {
         this.getregist()
-        // debugger 注册成功
       } else {
         if (this.isPasswordLogin) {
           this.loginByPassword()
@@ -251,7 +215,6 @@ export default {
       Toast('登录成功')
       this.$store.commit('saveUserInfo', userInfo)
       this.$router.replace('/')
-      this.$router.back()
     }
   }
 }

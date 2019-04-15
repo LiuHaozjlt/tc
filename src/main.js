@@ -50,6 +50,7 @@ Vue.prototype.$uploadFileFn = uploadFileFn
 // let amapManager = new AMapManager();
 // console.log(amapManager)
 // Vue.use(uploader)
+Vue.use(router)
 Vue.use(api)
 Vue.use(vant)
 Vue.use(VueAMap)
@@ -73,6 +74,7 @@ Vue.prototype.mint = mint
 Vue.prototype.axius = axius
 Vue.prototype.VueAMap = VueAMap
 Vue.prototype.$api = api
+Vue.prototype.router = router
 // Vue.prototype.mock = mock
 
 VueAMap.initAMapApiLoader({

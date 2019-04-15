@@ -3,7 +3,24 @@ import Vuex from 'vuex'
 import mock from 'mockjs'
 import axios from 'axios'
 import { api } from '@/api/api'
+import router from '../../tc/src/router'
 Vue.use(Vuex)
+
+function updateRequst (token) {
+  return !token ? axios : axios.create({
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  })
+}
+
+if (window.localStorage.getItem('isPersonal') === null) {
+  window.localStorage.setItem('isPersonal', JSON.stringify(true))
+}
+
+let token = (JSON.parse(window.localStorage.getItem('userInfo') || null) || {}).access_token ||
+  'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+let $http = updateRequst(token)
 
 export default new Vuex.Store({
   state: {
@@ -12,7 +29,7 @@ export default new Vuex.Store({
     userInfo: JSON.parse(window.localStorage.getItem('userInfo') || null) || {},
     menudata: [],
     iptqingcheng: '',
-    isPersonal: true,
+    isPersonal: !!JSON.parse(window.localStorage.getItem('isPersonal') || null),
     imgCache: '',
     sellerInfo: {
       release_type_id: '',
@@ -21,7 +38,11 @@ export default new Vuex.Store({
       img: '',
       info: '',
       info_la: ''
-    }
+    },
+    publish: {},
+    publishReleaseValue: {},
+    userAddressList: [],
+    activeAddress: null
   },
   getters: {
     testa (state) {
@@ -31,7 +52,6 @@ export default new Vuex.Store({
       return state.showLoading
     },
     indexData (state) {
-      //  debugger
       let data = JSON.parse(localStorage.getItem('indexData')) || []
       return state.indexData.length === 0 ? data : state.indexData
     },
@@ -42,6 +62,16 @@ export default new Vuex.Store({
 
   },
   mutations: {
+    getlianjie (state) {
+      // router.beforeEach(){
+      //   this.routers =
+
+      // }
+    },
+    qingchulocalstore (state) {
+      state.userInfo = {}
+      window.localStorage.removeItem('userInfo')
+    },
     showLoading (state) {
       state.showLoading = true
       setTimeout(() => { state.showLoading = false }, 3000)
@@ -56,54 +86,69 @@ export default new Vuex.Store({
     saveUserInfo (state, data) {
       state.userInfo = data
       window.localStorage.setItem('userInfo', JSON.stringify(data))
+      updateRequst(data.access_token)
     },
     saveIndexsou (state, data) {
       state.menudata = data || []
     },
     setPersonal (state, data) {
-      state.isPersonal = data
+      state.isPersonal = !!data
+      window.localStorage.setItem('isPersonal', JSON.stringify(state.isPersonal))
     },
     cacheImage (state, data) {
       state.imgCache = data
     },
     updateSellerInfo (state, data = {}) {
       state.sellerInfo = {...state.sellerInfo, ...data}
+    },
+    updatePublish (state, data = {}) {
+      state.publish = {...state.publish, ...data}
+    },
+    savePublishReleaseValue (state, data = {}) {
+      state.publishReleaseValue = data
+    },
+    saveUserAddressList (state, data) {
+      state.userAddressList = data
+    },
+    setActiveAddress (state, data) {
+      state.activeAddress = data
     }
-
   },
   actions: {
     indexmenu ({ commit }) {
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
-      axios({
+      $http({
         methods: 'get',
         url: 'apis/v1/tool/module',
         data: {
-          // goods_type_id: 444444,
-          // weight: 99,
-          // send_address_id: 555,
-          // receive_address_id: 3333,
-          // receive_time: 4
-        },
-        headers: {
-          'Authorization': 'Bearer ' + token
         }
       }).then(p => {
-        // debugger
         let menudata = p.data.data
         localStorage.setItem('menudata', JSON.stringify(menudata))
         commit('saveIndexsou', menudata)
-        // console.log(p.data.data)
       })
     },
-
     getRecommendList ({ commit }) {
-      axios.get(`${api.shouyeshangp}`).then(p => {
+      $http.get(`${api.shouyeshangp}`).then(p => {
         commit('saveIndexData', p.data.data)
       })
     },
     getSellerInfo ({commit}) {
-      axios.get('/apis/v1/seller/my-info').then(p => {
+      $http.get('/apis/v1/seller/my-info').then(p => {
         commit('updateSellerInfo', p.data.data)
+      })
+    },
+    getPublishReleaseValue ({commit}) {
+      $http.get('/apis/v1/seller/get-publish-release-value').then(p => {
+        commit('savePublishReleaseValue', p.data.data)
+      })
+    },
+    publish ({commit}, data) {
+      let path = data.id ? '/apis/v1/seller/my-release-update/' + data.id : '/apis/v1/seller/my-release-create'
+      return $http.post(path, data)
+    },
+    getUserAddressList ({commit}) {
+      return $http.get('/apis/v1/user-address').then(({data}) => {
+        commit('saveUserAddressList', data.data)
       })
     }
   }

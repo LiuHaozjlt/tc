@@ -102,29 +102,11 @@ export default {
     towodeshangjiamc () {
       this.$router.push({path: '/index/wodeele'})
     },
-    // 提取上传步骤
-    // uploadFileFn (file) {
-    //   let data = new FormData()
-    //   data.append('upimage', file.file)
-    //   //   console.log(data)
-    //   // Toast('正在上传...')
-    //   let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
-    //   return this.axius({
-    //     method: 'post',
-    //     url: 'apis/v1/upload/image',
-    //     data: data,
-    //     headers: {
-    //       'Authorization': 'Bearer ' + token,
-    //       'Content-Type': 'multipart/form-data'
-    //     }
-    //   })
-    // },
+
     onReadStore (file) {
       this.notimg = true
-      //   this.$refs.goodImg.src = file.content
-      //   console.log(file)
+
       this.$uploadFileFn(file).then(p => {
-        // console.log('图片上传', p.data.data)
         if (p.data.error_code === 0) {
           Toast('上传成功')
           this.shopImageLocal = file.content
@@ -133,27 +115,14 @@ export default {
           Toast(p.data.message)
         }
       })
-      // this.uploadFileFn(file).then(p => {
-      //   // console.log('图片上传', p.data.data)
-      //   if (p.data.error_code === 0) {
-      //     Toast('上传成功')
-      //     this.shopImageLocal = file.content
-      //     this.shopImage = p.data.data.uploadFilePath
-      //   } else {
-      //     Toast(p.data.message)
-      //   }
-      // })
     },
     onReadLogo (file) {
       this.notimg = true
-      //   this.$refs.goodImg.src = file.content
-      //   console.log(file) 把logo这边shopImageLocal || shopImage || shopImagePlaceholder这几个变量用另外的变量保存，不要两者用同一个地址就不会有影响了，这后面你弄吧，这几个变量，我不知道是啥，已经吧上传写成两个不用的函数了
 
       this.$uploadFileFn(file).then(p => {
-        // console.log('图片上传', p.data.data) 没刷新代码
         if (p.data.error_code === 0) {
           Toast('上传成功')
-          // 改这里
+
           this.shopImageLocals = file.content
           this.$store.commit('updateSellerInfo', {logo: p.data.data.uploadFilePath})
         } else {
@@ -162,7 +131,6 @@ export default {
       })
     },
     getruzhushengq () {
-      //   console.log('ruzhushengq')
       let me = this
       let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
       me.axius({
@@ -173,8 +141,6 @@ export default {
           Authorization: 'Bearer ' + token
         }
       }).then(p => {
-        // debugger
-        // console.log('入驻商家入驻商家', p)
         if (p.data.error_code !== 0) {
           Toast(p.data.message)
           this.$store.commit('setPersonal', true)

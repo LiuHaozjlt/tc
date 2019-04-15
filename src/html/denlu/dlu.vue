@@ -37,6 +37,7 @@ export default {
     //   this.$router.push({ path: "/yzsjhm" });
     // },
     changeLogin (val) {
+      // debugger
       this.isLogin = val
     },
     login () {

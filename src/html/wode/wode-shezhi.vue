@@ -19,6 +19,7 @@
 </template>
 
 <script>
+
 export default {
   data () {
     return {
@@ -31,6 +32,8 @@ export default {
     },
     tuichudl () {
       this.$router.push({path: '/dlu'})
+
+      this.$store.commit('qingchulocalstore')
     },
     gopage (url) {
       this.$router.push({path: url})

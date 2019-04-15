@@ -3,7 +3,7 @@
     <!--这个箭头-->
     <img class="mima-img" src="../image/zuojiantou.png" alt="" @click="godelyan"  v-if="isForget">
     <div class="denluhead" v-if="!isForget">
-      <img src="../image/gb@2x.png">
+      <img src="../image/gb@2x.png" @click="huifudenglu">
       <a href class="denlu" @click.prevent="change">{{ isLogin ? $t('register') : $t('login') }}</a>
     </div>
     <!-- <div v-if="false"> -->
@@ -35,26 +35,16 @@ export default {
     this.login = this.isLogin
   },
   methods: {
+    huifudenglu () {
+      console.log('hdl')
+    },
     godelyan () {
       this.$router.back(-1)
     },
     change () {
       this.$emit('change', !this.isLogin)
       this.login = !this.login
-
-      // this.denled = $emit.isLogin
-      // this.isLogin = denled
-      // if(isLogin == 注册)
-      // this.denl = denled
     }
-    // zhaoHao(isLogin){
-    //   console.log("ok")
-    //    this.isLogin = false
-    // }
-    // changes() {
-    //   console.log("触发");
-    //   zujianvalue.$emit("on", this.isLogin);
-    // }
   }
 }
 </script>

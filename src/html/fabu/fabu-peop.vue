@@ -18,6 +18,7 @@
               cols="5"
               placeholder="请输入不超过40个字的标题"
               class="shiwu"
+              v-model="publish.title"
             ></textarea>
           </div>
         </div>
@@ -33,15 +34,47 @@
               cols="5"
               placeholder="您可以对发布的内容进行详细的描述少时"
               class="shiwu"
+              v-model="publish.introduce"
             ></textarea>
           </div>
         </div>
 
         <!--教育价格-->
         <!-- <jiaoyujiage></jiaoyujiage> -->
-
+        <div v-if="releaseTypeId === 4">
+          价格
+          <input type="number" v-model="publish.prices">
+          <span @click="isPriceUnitShow = true">
+            {{publish.prices_unit}}
+            <van-icon name="arrow" />
+          </span>
+        </div>
         <!--房源价格-->
         <!-- <yueting></yueting> -->
+        <div v-if="releaseTypeId === 2">
+          <div>
+            月租金
+            <input type="number" v-model="publish.prices">
+            <span @click="isPriceUnitShow = true">
+              {{publish.prices_unit}}
+              <van-icon name="arrow" />
+            </span>
+          </div>
+          <div>
+            装修
+            <span @click="isRentDecorationShow = true">
+              {{rentDecoration.name}}
+              <van-icon name="arrow" />
+            </span>
+          </div>
+          <div>
+            厅室
+            <span @click="isRentHallShow = true">
+              {{rentHall.name}}
+              <van-icon name="arrow" />
+            </span>
+          </div>
+        </div>
 
         <!--上车-->
         <!-- <shoushang></shoushang> -->
@@ -55,13 +88,13 @@
         <div class="biaoti-cent deerse">
           <div class="shiwu-bl">
             默认第一张为封面图 (
-            <div class="zero">{{addList.length}}</div>/
+            <div class="zero">{{imageList.length}}</div>/
             <div class="fivetn">15</div>)
           </div>
           <div class="jia">
-            <div v-for="(item, index) of addList" :key="item.file.name">
+            <div v-for="(item, index) of imageList" :key="item">
               <div class="fenm-ico">
-                <img :src="item.content" alt @click="handleImageClick(item.content)">
+                <img :src="item" alt @click="handleImageClick(item)">
                 <div class="fs-ico" @click="remove(index)">x</div>
               </div>
             </div>
@@ -78,10 +111,10 @@
 
           <!-- </div> -->
         </div>
-        <div class="di-xuan">
+        <div class="di-xuan" @click="$router.push('/fabupeop/address?from=publish')">
           <div class="shiwu-bl">*地址</div>
           <div class="xuanze-di">
-            <div class="shiwu">选择地址</div>
+            <div class="shiwu">{{activeAddress ? activeAddress.address : "选择地址"}}</div>
             <div>
               <img src="../../image/jiantoutou.png" alt="">
             </div>
@@ -90,18 +123,21 @@
         <div class="shou-ma shuma-xiang">
           <div class="shou-ma-xing">*</div>
           <div class="shou-ma-shou">手机</div>
+          <div class="biaoti-ipt">
+            <input v-model="publish.mobile" type="text" placeholder="输入" class="shiwu">
+          </div>
         </div>
         <div class="weixin shuma-xiang">
           <div class="shiwu-bl">微信：</div>
           <div class="biaoti-ipt">
-            <input type="text" placeholder="输入你的微信好" class="shiwu">
+            <input v-model="publish.weixin" type="text" placeholder="输入你的微信好" class="shiwu">
           </div>
         </div>
 
         <div class="youxiang shuma-xiang">
           <div class="shiwu-bl">邮箱：</div>
           <div class="biaoti-ipt">
-            <input type="text" placeholder="输入你的邮箱" class="shiwu">
+            <input v-model="publish.email" type="text" placeholder="输入你的邮箱" class="shiwu">
           </div>
         </div>
 
@@ -120,7 +156,7 @@
               </div>
             </div>
           </div>
-          <mt-switch v-model="showPopWin" @click.native="tbox"></mt-switch>
+          <van-switch v-model="publish.is_trans" :active-value="2" :inactive-value="0"></van-switch>
         </div>
         <div class="shisan weixiang">*为必填项</div>
 
@@ -136,6 +172,15 @@
         <div class="fangqi">
           <div class="fang-bai">放弃翻译</div>
         </div>
+      </mt-popup>
+      <mt-popup v-model="isPriceUnitShow" popup-transition="popup-fade" class="mtpop-box">
+        <van-picker :columns="priceUnits"  @change="onPriceUnitChange" />
+      </mt-popup>
+      <mt-popup v-model="isRentDecorationShow" popup-transition="popup-fade" class="mtpop-box">
+        <van-picker :columns="rentDecorations" value-key="name" @change="onRentDecorationChange" />
+      </mt-popup>
+      <mt-popup v-model="isRentHallShow" popup-transition="popup-fade" class="mtpop-box">
+        <van-picker :columns="rentHalls" value-key="name" @change="onRentHallChange" />
       </mt-popup>
     </div>
   </div>
@@ -153,18 +198,55 @@ import jinhe from '../../components/jin-he'
 import gangzhi from '../../components/gang-zhi'
 import qiyehangye from '../../components/qiyehangye'
 import gongsjianjie from '../../components/gonsjianjie'
+import {mapState} from 'vuex'
 Vue.use(Uploader)
 Vue.component(Switch.name, Switch)
 Vue.component(Popup.name, Popup)
 export default {
   data () {
+    this.publishInitial = {
+      title: '',
+      introduce: '',
+      mobile: '',
+      weixin: '',
+      email: '',
+      is_trans: 2,
+      img: '',
+      user_address_id: 1,
+      prices: '',
+      prices_unit: '',
+      rent_decoration_id: '',
+      rent_hall_id: '',
+      xh: '86'
+    }
+
     return {
       notimg: true,
       popupVisible: false,
       addList: [],
       imageList: [], // 存后台返回的地址
       showPopWin: false, // switchde 状态
-      zhuangtai: ''
+      zhuangtai: '',
+      rentDecoration: '',
+      rentHall: '',
+      isPriceUnitShow: false,
+      isRentDecorationShow: false,
+      isRentHallShow: false
+    }
+  },
+  computed: {
+    ...mapState(['isPersonal', 'publish', 'publishReleaseValue', 'sellerInfo', 'activeAddress']),
+    releaseTypeId () {
+      return this.isPersonal ? this.$route.query.releaseTypeId : this.sellerInfo.release_type_id
+    },
+    priceUnits () {
+      return this.publishReleaseValue.prices_unit || []
+    },
+    rentDecorations () {
+      return this.publishReleaseValue.rent_decoration_id
+    },
+    rentHalls () {
+      return this.publishReleaseValue.rent_hall_id
     }
   },
   components: {
@@ -179,7 +261,34 @@ export default {
   created () {
     // this.getruzhushengq()
     this.getstatus()
+    this.$store.dispatch('getPublishReleaseValue').then(() => {
+      this.publishInitial.prices_unit = this.priceUnits[0]
+    })
+    if (!this.isPersonal && !this.releaseTypeId) {
+      this.$store.dispatch('getSellerInfo')
+    }
+    if (this.activeAddress) {
+      this.publishInitial.user_address_id = this.activeAddress.user_address_id
+    }
     // this.getruzhushengq()
+  },
+  mounted () {
+    if (Object.keys(this.publish).length === 0) {
+      this.$store.commit('updatePublish', this.publishInitial)
+    } else {
+      let rdId = this.publish.rent_decoration_id
+      let rhId = this.publish.rent_hall_id
+      let img = this.publish.img
+      if (rdId) {
+        this.rentDecoration = this.rentDecorations.find(item => item.id === rdId)
+      }
+      if (rhId) {
+        this.rentHall = this.rentHalls.find(item => item.id === rhId)
+      }
+      if (img) {
+        this.imageList = img.split(',')
+      }
+    }
   },
   methods: {
     gofabuele () {
@@ -190,7 +299,7 @@ export default {
     // },
     remove (index) {
       //   console.log('ok')
-      this.addList.splice(index, 1)
+      // this.addList.splice(index, 1)
       this.imageList.splice(index, 1)
     },
     tbox () {
@@ -223,42 +332,23 @@ export default {
         // console.log('图片上传', p.data.data)
         if (p.data.error_code === 0) {
           Toast('上传成功')
-          me.addList.push(file)
+          // me.addList.push(file)
           me.imageList.push(p.data.data.uploadFilePath)
+          this.publish.img = this.imageList.join(',')
         } else {
           Toast(p.data.message)
         }
       })
     },
     postquedfab () {
-      // console.log('dx')
-      let me = this
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
-      this.axius({
-        method: 'post',
-        url: 'apis/v1/user/releases',
-        data: {
-          release_type_id: 2,
-          title: '小米',
-          introduce: '费大幅度发',
-          mobile: '15074826496',
-          user_address_id: 5,
-          img: 'tupian',
-          is_trans: 2,
-          xh: '86',
-          describe: '少时诵诗书'
-          // code: '0000'
-
-        },
-        headers: {
-          Authorization: 'Bearer ' + token
+      this.$store.dispatch('publish', this.publish).then(({data}) => {
+        if (data.error_code === 0) {
+          Toast('发布成功')
+          this.$store.commit('updatePublish', {})
+          this.$router.replace('/') // 发布成功后跳到的地址
+        } else {
+          Toast(data.message)
         }
-      }).then(p => {
-        // debugger
-        // if (me.zhuangtai === 1) {
-        console.log('确定发布', p.data)
-        // } else {
-        // }
       })
     },
     getstatus () {
@@ -281,6 +371,18 @@ export default {
         // } else {
         // }
       })
+    },
+
+    onPriceUnitChange (picker, value, index) {
+      this.publish.prices_unit = value
+    },
+    onRentDecorationChange (picker, value, index) {
+      this.rentDecoration = value
+      this.publish.rent_decoration_id = value.id
+    },
+    onRentHallChange (picker, value, index) {
+      this.rentHall = value
+      this.publish.rent_hall_id = value.id
     }
 
     // handleImageClick (img) {

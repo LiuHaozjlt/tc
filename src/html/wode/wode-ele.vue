@@ -1,10 +1,8 @@
 <template>
     <div>
-
         <div class="wode-head-contn">
             <div class="wode-head-contn-lef">
                    <img src="../../image/图层 1.png" alt="">
-
             </div>
             <div class="wode-head-in-rit"  @click="shezhi">
                         <img src="../../image/shezhi.png" alt="">
@@ -44,7 +42,6 @@
             </div>
             </template>
         </div>
-
         <div class="wode-cent-bot-cont">
             <div class="wode-cent-bot">
                 <img src="../../image/tongzhi.png" alt=""  class="wode-cent-bot-ic">
@@ -63,28 +60,17 @@
                     <img src="../../image/qiehuan.png" alt=""  class="wode-cent-bot-ic">
 
                     <span >切换成商家</span>
-
                 </div>
                 <img src="../../image/jiantoutou.png" alt="" class="ruzhuimg">
-
             </div>
             <div class="wode-ct-ic" @click="applyVip" v-else>
                 <div class="wode-ct-ic-left">
                     <img src="../../image/qiehuan.png" alt=""  class="wode-cent-bot-ic">
-
                     <span >入驻品牌商家</span>
-
                 </div>
                 <img src="../../image/jiantoutou.png" alt="" class="ruzhuimg">
-
             </div>
-<!--
-            <div class="wode-head-rit">
-                <img src="" alt="">
-            </div> -->
-            <!-- <img src="../../image/ruzhu.png" alt="">   入住品牌商家 -->
         </div>
-
     </div>
 </template>
 
@@ -104,7 +90,7 @@ export default {
     }
   },
   created () {
-    // console.log('created')
+
   },
   beforeDestroy () {
     this.$store.commit('setPersonal', true)
@@ -141,7 +127,6 @@ export default {
         }
         return false
       }
-      //   this.$store.commit('setPersonal', !this.isPersonal)
     },
     applyVip () {
       Toast('功能开发中')
