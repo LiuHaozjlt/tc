@@ -51,6 +51,7 @@ import xiugaidizhi from '../html/xiugaidizhi'
 import xuanzeji from '../html/wuliu/xuanzeji'
 import newxiangqin from '../html/xinwen/new-xiangqin'
 import fabupeop from '../html/fabu/fabu-peop'
+import fabuxinzen from '../html/fabu/fabudizhixinzen'
 import fabuuser from '../html/fabu/fabu-user'
 import publishAddress from '../html/fabu/fabu-dizhi'
 import wodeshangjiamc from '../html/wode/wode-shangjmc'
@@ -77,6 +78,11 @@ import xuanzelei from '../html/wode/wode-xuanzelei'
 Vue.use(Router)
 export default new Router({
   routes: [
+    {
+      path: '/fabuxinzen',
+      name: 'fabuxinzen',
+      component: fabuxinzen
+    },
     {
       path: '/xuanzelei',
       name: 'xuanzelei',

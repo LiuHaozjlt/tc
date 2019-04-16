@@ -57,15 +57,15 @@
                     <div>月租金</div>
                 </div>
 
-                <div>
-                    <div class="yue-rit">
-                       <input type="number" v-model="publish.prices">
-                        <div class="yue-rit-rit" @click="isPriceUnitShow = true">
-                            <div> {{publish.prices_unit}}</div>
-                            <div>></div>
-                        </div>
-                    </div>
+              
+                <div class="yue-rit">
+                    <input type="number" v-model="publish.prices">
+                  
+                        <div > {{publish.prices_unit}}</div>
+                        <div @click="isPriceUnitShow = true">></div>
+                    
                 </div>
+                
             </div>
             <div class="yue">
                 <div class="yue-left">
@@ -89,11 +89,10 @@
                 </div>
 
                 <div>
-                    <div class="yue-rit">
-                       
-                        <div class="yue-rit-rit" @click="isRentHallShow = true">
+                    <div class="yue-rit">                      
+                        <div class="yue-rit-rit" >
                             <div class="qinze"> {{rentHall.name}}</div>
-                            <div>></div>
+                            <div @click="isRentHallShow = true">></div>
                         </div>
                     </div>
                 </div>
@@ -483,6 +482,9 @@ export default {
 </script>
 
 <style>
+.yue-rit input{
+  /* width:60%!important; */
+}
 .yue-rit-rit div:nth-child(1){
   color:#C3C3C3;
 }
@@ -500,13 +502,15 @@ color:#333333;
 }
 .yue{
     display:flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 .yue-left{
     display: flex;
+    width:17%;
 }
 .yue-rit{
     display:flex;
+    width:70%;
 }
 .yue-rit-rit{
     display:flex;
@@ -661,7 +665,7 @@ color:#333333;
   width: 4.0625rem /* 65/16 */;
   height: 4.0625rem /* 65/16 */;
   border-radius: 0.5rem /* 8/16 */;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 .qued-fab {
   margin-top: 2.8125rem /* 45/16 */;

@@ -67,7 +67,7 @@
 
           <!-- </div> -->
         </div>
-        <div class="di-xuan" @click="$router.push('/fabupeop/address?from=publish')">
+        <div class="di-xuan" @click="$router.push('/fabuxinzen')">
           <div class="shiwu-bl">*地址</div>
           <div class="xuanze-di">
             <div class="shiwu">{{activeAddress ? activeAddress.address : "选择地址"}}</div>
