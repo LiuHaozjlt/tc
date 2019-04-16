@@ -14,23 +14,33 @@ function updateRequst (token) {
     }
   })
 }
+const wls = {
+  get (key, defaultValue) {
+    let value = window.localStorage.getItem(key)
 
-if (window.localStorage.getItem('isPersonal') === null) {
-  window.localStorage.setItem('isPersonal', JSON.stringify(true))
+    if (value === null) return defaultValue
+    else return JSON.parse(value)
+  },
+  set (key, value) {
+    window.localStorage.setItem(key, JSON.stringify(value))
+  }
 }
 
-let token = (JSON.parse(window.localStorage.getItem('userInfo') || null) || {}).access_token ||
-  'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+if (wls.get('isPersonal')) {
+  wls.set('isPersonal', true)
+}
+
+let token = wls.get('userInfo').access_token || 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
 let $http = updateRequst(token)
 
 export default new Vuex.Store({
   state: {
     showLoading: false,
     indexData: [],
-    userInfo: JSON.parse(window.localStorage.getItem('userInfo') || null) || {},
+    userInfo: wls.get('userInfo', {}),
     menudata: [],
     iptqingcheng: '',
-    isPersonal: !!JSON.parse(window.localStorage.getItem('isPersonal') || null),
+    isPersonal: !!wls.get('isPersonal'),
     imgCache: '',
     sellerInfo: {
       release_type_id: '',
@@ -43,7 +53,8 @@ export default new Vuex.Store({
     publish: {},
     publishReleaseValue: {},
     userAddressList: [],
-    activeAddress: null
+    activeAddress: null,
+    isLaos: wls.get('isLaos') || false
   },
   getters: {
     testa (state) {
@@ -53,11 +64,11 @@ export default new Vuex.Store({
       return state.showLoading
     },
     indexData (state) {
-      let data = JSON.parse(localStorage.getItem('indexData')) || []
+      let data = wls.get('indexData') || []
       return state.indexData.length === 0 ? data : state.indexData
     },
     menuData (state) {
-      let data = JSON.parse(localStorage.getItem('menudata')) || []
+      let data = wls.get('menudata') || []
       return state.menudata.length === 0 ? data : state.menudata
     }
 
@@ -81,20 +92,21 @@ export default new Vuex.Store({
       state.showLoading = false
     },
     saveIndexData (state, data) {
-      localStorage.setItem('indexData', JSON.stringify(data))
+      wls.set('indexData', data)
       state.indexData = data
     },
     saveUserInfo (state, data) {
       state.userInfo = data
-      window.localStorage.setItem('userInfo', JSON.stringify(data))
+      wls.set('userInfo', data)
       updateRequst(data.access_token)
     },
     saveIndexsou (state, data) {
+      wls.set('menudata', data)
       state.menudata = data || []
     },
     setPersonal (state, data) {
       state.isPersonal = !!data
-      window.localStorage.setItem('isPersonal', JSON.stringify(state.isPersonal))
+      wls.set('isPersonal', state.isPersonal)
     },
     cacheImage (state, data) {
       state.imgCache = data
@@ -103,7 +115,13 @@ export default new Vuex.Store({
       state.sellerInfo = {...state.sellerInfo, ...data}
     },
     updatePublish (state, data = {}) {
-      state.publish = {...state.publish, ...data}
+      // 通过 _cover 参数表示是否覆盖操作
+      if (data._cover) {
+        delete data._cover
+        state.publish = data
+      } else {
+        state.publish = {...state.publish, ...data}
+      }
     },
     savePublishReleaseValue (state, data = {}) {
       state.publishReleaseValue = data
@@ -113,6 +131,10 @@ export default new Vuex.Store({
     },
     setActiveAddress (state, data) {
       state.activeAddress = data
+    },
+    setIsLaos (state, isLaos) {
+      state.isLaos = !!isLaos
+      wls.set('isLaos', state.isLaos)
     }
   },
   actions: {
@@ -124,7 +146,6 @@ export default new Vuex.Store({
         }
       }).then(p => {
         let menudata = p.data.data
-        localStorage.setItem('menudata', JSON.stringify(menudata))
         commit('saveIndexsou', menudata)
       })
     },
@@ -143,7 +164,7 @@ export default new Vuex.Store({
         commit('savePublishReleaseValue', p.data.data)
       })
     },
-    publish ({commit}, data) {
+    publishSeller ({commit}, data) {
       let path = data.id ? '/apis/v1/seller/my-release-update/' + data.id : '/apis/v1/seller/my-release-create'
       return $http.post(path, data)
     },
@@ -151,6 +172,30 @@ export default new Vuex.Store({
       return $http.get('/apis/v1/user-address').then(({data}) => {
         commit('saveUserAddressList', data.data)
       })
+    },
+    getUserRelease ({commit}, params = {}) {
+      return $http.get('/apis/v1/user/releases/me', { params })
+    },
+    getSellerRelease ({commit}, params = {}) {
+      return $http.get('/apis/v1/seller/my-publish', { params })
+    },
+    refreshUserRelease ({commit}, user_release_id) {
+      return $http.post('/apis/v1/user/refresh-releases', {user_release_id})
+    },
+    refreshSellerRelease ({commit}, seller_release_id) {
+      return $http.post('/apis/v1/seller/my-publish-refresh', {seller_release_id})
+    },
+    topUserRelease ({commit}, user_release_id) {
+      return $http.post('/apis/v1/user/top-releases', {user_release_id})
+    },
+    shelfSellerRelease ({commit}, seller_release_id) {
+      return $http.post('/apis/v1/seller/my-publish-shelf', {seller_release_id})
+    },
+    deleteUserRelease ({commeit}, id) {
+      return $http.post('/apis/v1/user/del-releases/' + id)
+    },
+    deleteSellerRelease ({commeit}, ids) {
+      return $http.post('/apis/v1/seller/my-publish-delete', {ids})
     }
   }
 })

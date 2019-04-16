@@ -8,69 +8,108 @@
       <div class="pi-chu">批量删除</div>
     </div>
     <div>
-      <div class="wode-fabu-box">
-        <!-- {{me}} -->
-        发布内容
-      </div>
-    </div>
-    <div class="wode-fabu-cent">
-      <div class="xiu-chu" v-for="(item,index) in fourmenu" :key="index">
-        <div @click="getzhid(item.url)" class="xiu-chu-in">{{item.text}}</div>
+      <div>
+        <div class="wode-fabu-box" v-for="(item, index) in releases" :key="item.id">
+          <img :src="item.img" alt="">
+          <p>{{isLaos ? item.title_la : item.title}}</p>
+          <div class="wode-fabu-cent">
+            <div class="xiu-chu">
+              <!-- 修改要跳到修改页面 -->
+              <div @click="modify(item)" class="xiu-chu-in">修改</div>
+              <div @click="refresh(item)" class="xiu-chu-in">刷新</div>
+              <div @click="top(item)" class="xiu-chu-in" v-if="isPersonal">置顶</div>
+              <div @click="shelf(item)" class="xiu-chu-in" v-else>{{item.is_shelf == 0 ? "上架" : "下架"}}</div>
+              <div @click="remove(item, index)" class="xiu-chu-in">删除</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import {mapState} from 'vuex'
+import {Toast} from 'vant'
 export default {
   data () {
     return {
-      me: '',
-      fourmenu: [
-        { text: '修改' },
-        { text: '刷新' },
-        { text: '置顶', url: 'wodezhid' },
-        { text: '删除' }
-      ]
+      releases: []
     }
   },
+  computed: {
+    ...mapState(['isPersonal', 'isLaos'])
+  },
   methods: {
-    getMe () {
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
-      this.axius({
-        methods: 'get',
-        url: '/apis/v1/user/releases/me',
-        data: {
-          // upimage:
-          // release_type_id: 444444,
-          // title: 99,
-          // describe: 555,
-          // mobile: 3333,
-          // code: 4,
-          // address: '长沙',
-          // img: 3,
-          // is_trans: 1,
-          // xh: 86,
-          // user_address_id: 0
-        },
-        headers: {
-          Authorization: 'Bearer ' + token
+    getReleases () {
+      let isPersonal = this.isPersonal
+      this.$store.dispatch(isPersonal ? 'getUserRelease' : 'getSellerRelease').then(({data}) => {
+        if (data.error_code === 0) {
+          this.releases = data.data.map(item => {
+            item.id = isPersonal ? item.user_release_id : item.seller_release_id
+            item.visitCount = isPersonal ? item.visit_count : item.visit_num
+            return item
+          })
+        } else {
+          Toast(data.message)
         }
-      }).then(p => {
-        // debugger
-        this.me = p.data.data
-        // console.log('me', p.data)
       })
     },
     gowodefabuqian () {
       this.$router.back(-1)
     },
-    getzhid (url) {
-      this.$router.push({ path: url })
+    modify (item) {
+      this.$router.push({
+        path: '/fabupeop',
+        query: {
+          releaseId: item.id,
+          releaseTypeId: item.release_type_id
+        }
+      })
+      this.$store.commit('updatePublish', item)
+    },
+    refresh (item) {
+      this.$store.dispatch(this.isPersonal ? 'refreshUserRelease' : 'refreshSellerRelease', item.id).then(({data}) => {
+        if (data.error_code === 0) {
+          Toast('刷新成功')
+        } else {
+          Toast(data.message)
+        }
+      })
+    },
+    top (item) {
+      this.$store.dispatch('topUserRelease', item.id).then(({data}) => {
+        if (data.error_code === 0) {
+          Toast('置顶成功')
+          this.getReleases()
+        } else {
+          Toast(data.message)
+        }
+      })
+    },
+    shelf (item) {
+      this.$store.dispatch('shelfhUserRelease', item.id).then(({data}) => {
+        if (data.error_code === 0) {
+          item.is_shelf = data.data.is_shelf
+          Toast(item.is_shelf == 0 ? '已下架' : '已上架')
+        } else {
+          Toast(data.message)
+        }
+      })
+    },
+    remove (item, index) {
+      this.$store.dispatch(this.isPersonal ? 'deleteUserRelease' : 'deleteSellerRelease', item.id).then(({data}) => {
+        if (data.error_code === 0) {
+          Toast('已删除')
+          this.releases.splice(index, 1)
+        } else {
+          Toast(data.message)
+        }
+      })
     }
   },
-  mounted () {
-    this.getMe()
+  created () {
+    this.getReleases()
   }
 }
 </script>
@@ -90,18 +129,13 @@ export default {
   font-weight: 500;
   color: rgba(51, 51, 51, 1);
 }
-.wode-fabu-cent {
-  display: flex;
-  justify-content: space-between;
-}
-.wode-fabu-cent div {
-  /* width:70%; */
-}
 .xiu-chu {
   /* width:70%; */
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
 }
 .xiu-chu-in {
-  display: flex;
   height: 1.4375rem /* 23/16 */;
   line-height: 1.4375rem /* 7/16 */;
   text-align: center;
@@ -118,7 +152,7 @@ export default {
 }
 .wode-fabu-box {
   height: 8.75rem /* 140/16 */;
-  background-color: blue;
+  /* background-color: blue; */
 }
 .xiu-chu div {
   background-color: #ffc74d;

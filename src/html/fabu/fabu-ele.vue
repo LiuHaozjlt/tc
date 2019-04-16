@@ -2,13 +2,14 @@
   <div>
     <!-- <div></div> -->
     <!-- {{menudata}} -->
-    <router-link tag='div' to="/fabupeop"  class="fabuyuand">
-      <div v-for="(item,index) in menudata" :key="index" class="routerItem">
-        <div class="fabu-cent">
+      <div class="fabuyuand">
+      <router-link tag='div' :to="'/fabuuser?releaseTypeId=' + item.module_id" v-for="(item,index) in menudata" :key="index" class="routerItem">
+        <!-- 跳到个人发布的页面 /fabupeop相应调整 -->
+         <div class="fabu-cent">
             {{item.name}}
         </div>
+        </router-link>
       </div>
-    </router-link>
     <div class="xuan-bie">选择发布类别</div>
   </div>
 </template>
@@ -16,7 +17,12 @@
 import {mapState} from 'vuex'
 export default {
   computed: {
-    ...mapState(['menudata'])
+    ...mapState(['menudata', 'isPersonal'])
+  },
+  created () {
+    if (!this.isPersonal) {
+      this.$router.push('/fabupeop') // 商家发布直接跳过去发布页嗯
+    }
   }
 }
 </script>

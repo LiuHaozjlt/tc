@@ -63,8 +63,11 @@ export default {
     },
     xiayibu () {
       this.$store.commit('updateSellerInfo', {release_type_id: this.xuanzelei[this.active].release_type_id})
-      this.$router.push({path: '/wodeshangjia'})
-      // this.$router.push({path: '/pinpaishangjiaxq?type=' + this.xuanzelei[this.active].release_type_id})
+      if (this.error_code == 400) {
+        return false
+      } else {
+        this.$router.push({path: '/wodeshangjia'})
+      }
     }
 
   },

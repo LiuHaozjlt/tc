@@ -148,7 +148,7 @@ export default {
   },
   computed: {
     isLaos () {
-      return this.$i18n.locale === 'laos'
+      return this.$store.state.isLaos
     }
   },
   methods: {

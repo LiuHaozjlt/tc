@@ -1,4 +1,6 @@
+
 <template>
+<!-- 个人发布 -->
   <div>
     <div>
       <div class="fabu-head">
@@ -38,102 +40,6 @@
             ></textarea>
           </div>
         </div>
-
-        <!--教育价格-->
-        <!-- <jiaoyujiage></jiaoyujiage> -->
-        <div v-if="releaseTypeId === 4">
-          价格
-          <input type="number" v-model="publish.prices">
-          <span @click="isPriceUnitShow = true">
-            {{publish.prices_unit}}
-            <van-icon name="arrow" />
-          </span>
-        </div>
-        <!--房源价格-->
-        <div v-if="releaseTypeId === 2">
-            <div class="yue" >
-                <div class="yue-left">
-                    <div>*</div>
-                    <div>月租金</div>
-                </div>
-
-                <div>
-                    <div class="yue-rit">
-                       <input type="number" v-model="publish.prices">
-                        <div class="yue-rit-rit" @click="isPriceUnitShow = true">
-                            <div> {{publish.prices_unit}}</div>
-                            <div>></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="yue">
-                <div class="yue-left">
-                    <div>*</div>
-                    <div>装修</div>
-                </div>
-
-                <div>
-                    <div class="yue-rit">
-                        <div class="yue-rit-rit" @click="isRentDecorationShow = true">
-                            <div class="qinze">{{rentDecoration.name}}</div>
-                            <div>></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="yue">
-                <div class="yue-left">
-                    <div>*</div>
-                    <div>厅金</div>
-                </div>
-
-                <div>
-                    <div class="yue-rit">
-                       
-                        <div class="yue-rit-rit" @click="isRentHallShow = true">
-                            <div class="qinze"> {{rentHall.name}}</div>
-                            <div>></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- <yueting></yueting> -->
-        <!-- <div v-if="releaseTypeId === 2">
-          <div class="yuezujing-cont">
-            <div>月租金</div>
-           
-            <input type="number" v-model="publish.prices">
-            <span @click="isPriceUnitShow = true">
-              {{publish.prices_unit}}
-              <van-icon name="arrow" />
-            </span>
-          </div>
-          <div>
-            装修
-            <span @click="isRentDecorationShow = true">
-              {{rentDecoration.name}}
-              <van-icon name="arrow" />
-            </span>
-          </div>
-          <div>
-            厅室
-            <span @click="isRentHallShow = true">
-              {{rentHall.name}}
-              <van-icon name="arrow" />
-            </span>
-          </div>
-        </div> -->
-
-        <!--上车-->
-        <!-- <shoushang></shoushang> -->
-
-        <!--金额合作-->
-        <!-- <jinhe></jinhe> -->
-
-        <!--岗位地址-->
-        <!-- <gangzhi></gangzhi> -->
 
         <div class="biaoti-cent deerse">
           <div class="shiwu-bl">
@@ -223,13 +129,13 @@
           <div class="fang-bai">放弃翻译</div>
         </div>
       </mt-popup>
-      <mt-popup v-model="isPriceUnitShow" popup-transition="popup-fade" class="mtpop-box"  position="bottom">
+      <mt-popup v-model="isPriceUnitShow" popup-transition="popup-fade" class="mtpop-box">
         <van-picker :columns="priceUnits"  @change="onPriceUnitChange" />
       </mt-popup>
-      <mt-popup v-model="isRentDecorationShow" popup-transition="popup-fade" class="mtpop-box"  position="bottom">
+      <mt-popup v-model="isRentDecorationShow" popup-transition="popup-fade" class="mtpop-box">
         <van-picker :columns="rentDecorations" value-key="name" @change="onRentDecorationChange" />
       </mt-popup>
-      <mt-popup v-model="isRentHallShow" popup-transition="popup-fade" class="mtpop-box"  position="bottom">
+      <mt-popup v-model="isRentHallShow" popup-transition="popup-fade" class="mtpop-box">
         <van-picker :columns="rentHalls" value-key="name" @change="onRentHallChange" />
       </mt-popup>
     </div>
@@ -483,38 +389,6 @@ export default {
 </script>
 
 <style>
-.yue-rit-rit div:nth-child(1){
-  color:#C3C3C3;
-}
-.qinze{
-    font-size:.9375rem /* 15/16 */;
-font-family:PingFang-SC-Medium;
-font-weight:500;
-color:rgba(195,195,195,1);
-}
-.yue-left div:nth-child(2){
-    font-size:.9375rem /* 15/16 */;
-font-family:PingFang-SC-Medium;
-font-weight:500;
-color:#333333;
-}
-.yue{
-    display:flex;
-    justify-content: space-between;
-}
-.yue-left{
-    display: flex;
-}
-.yue-rit{
-    display:flex;
-}
-.yue-rit-rit{
-    display:flex;
-}
-.yuezujing-cont{
-  display:flex;
-  justify-content: space-between;
-}
 .van-switch--on{
   background-color: #FFE9BF!important;
 }

@@ -55,15 +55,15 @@
             </div>
         </div>
         <div class="wode-cent">
-            <div class="wode-ct-ic" @click="changeVersion" v-if="isPersonal">
+            <div class="wode-ct-ic" @click="changeVersion">
                 <div class="wode-ct-ic-left">
                     <img src="../../image/qiehuan.png" alt=""  class="wode-cent-bot-ic">
 
-                    <span >切换成商家</span>
+                    <span >切换成 {{isPersonal ? "商家" : "个人"}}</span>
                 </div>
                 <img src="../../image/jiantoutou.png" alt="" class="ruzhuimg">
             </div>
-            <div class="wode-ct-ic" @click="applyVip" v-else>
+            <div class="wode-ct-ic" @click="applyVip" v-if="!isPersonal">
                 <div class="wode-ct-ic-left">
                     <img src="../../image/qiehuan.png" alt=""  class="wode-cent-bot-ic">
                     <span >入驻品牌商家</span>
@@ -92,9 +92,6 @@ export default {
   created () {
 
   },
-  beforeDestroy () {
-    this.$store.commit('setPersonal', true)
-  },
   methods: {
     gettongzhi () {
       this.$router.push({path: '/wodetongzhi'})
@@ -122,10 +119,12 @@ export default {
         if (this.userInfo.is_seller) {
           this.$store.commit('setPersonal', false)
           this.$store.dispatch('getSellerInfo')
+        //   this.$store.dispatch('getPublishReleaseValue')
         } else {
           this.$router.push({path: '/xuanzelei'})
         }
-        return false
+      } else {
+        this.$store.commit('setPersonal', true)
       }
     },
     applyVip () {
@@ -160,9 +159,6 @@ export default {
         align-items: center;
         height: 3.75rem /* 60/16 */;
         /* width:100%; */
-    }
-    .wode-cent div:nth-child(2){
-        margin-left: .8125rem /* 13/16 */;
     }
     .wode-cent-bot-rit{
         display: flex;

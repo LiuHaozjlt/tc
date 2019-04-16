@@ -54,28 +54,5 @@
 </template>
 
 <style>
-.qinze{
-    font-size:.9375rem /* 15/16 */;
-font-family:PingFang-SC-Medium;
-font-weight:500;
-color:rgba(195,195,195,1);
-}
-.yue-left div:nth-child(2){
-    font-size:.9375rem /* 15/16 */;
-font-family:PingFang-SC-Medium;
-font-weight:500;
-color:#333333;
-}
-.yue{
-    display:flex;
-}
-.yue-left{
-    display: flex;
-}
-.yue-rit{
-    display:flex;
-}
-.yue-rit-rit{
-    display:flex;
-}
+
 </style>

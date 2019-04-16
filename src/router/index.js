@@ -51,6 +51,7 @@ import xiugaidizhi from '../html/xiugaidizhi'
 import xuanzeji from '../html/wuliu/xuanzeji'
 import newxiangqin from '../html/xinwen/new-xiangqin'
 import fabupeop from '../html/fabu/fabu-peop'
+import fabuuser from '../html/fabu/fabu-user'
 import publishAddress from '../html/fabu/fabu-dizhi'
 import wodeshangjiamc from '../html/wode/wode-shangjmc'
 import wodeshangjia from '../html/wode/wode-shangjia'
@@ -202,6 +203,11 @@ export default new Router({
       path: '/fabupeop',
       name: 'fabupeop',
       component: fabupeop
+    },
+    {
+      path: '/fabuuser',
+      name: 'fabuuser',
+      component: fabuuser
     },
     {
       path: '/fabupeop/address',
