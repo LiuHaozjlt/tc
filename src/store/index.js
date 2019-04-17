@@ -173,6 +173,21 @@ export default new Vuex.Store({
         commit('saveUserAddressList', data.data)
       })
     },
+    updateUserAddress({commit}, data) {
+      let id = data.user_address_id
+      if(id) {
+        return $http.put('/apis/v1/user-address/' + id, data)
+      } else {
+        return $http.post('/apis/v1/user-address', data)
+      }
+    },
+    deleteUserAddress({commit}, user_address_id) {
+      return $http.post('/apis/v1/user-address/' + user_address_id)
+    },
+    setDefaultUserAddress(ctx, user_address_id) {
+      return $http.post('/apis/v1/user-address/set-default', {user_address_id})
+    },
+
     getUserRelease ({commit}, params = {}) {
       return $http.get('/apis/v1/user/releases/me', { params })
     },

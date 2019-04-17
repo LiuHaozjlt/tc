@@ -20,7 +20,9 @@ import pinpaijiaoyu from '../html/pinpai/pinpai-jiaoyu'
 import pinpaitudi from '../html/pinpai/pinpai-tudi'
 // import tab_c from '../html/xiaoshou/xiaoshou_comp/tab_c'
 import test from '../components/erjiliandong/test'
-import dizhi from '../html/wuliu/dizhi'
+import addressDetail from '../html/address/detail'
+import addressList from '../html/address/list'
+
 import liuyan from '../html/shouye/liuyan'
 import lishi from '../html/shouye/shouYe-lishi'
 import shouyexq from '../html/shouye/shouyexq'
@@ -47,13 +49,10 @@ import shoucang from '../html/wode/shoucang'
 import jubao from '../html/wode/jubao'
 import fuwuxieyi from '../html/wuliu/fuwuxieyi'
 import jishou from '../html/wuliu/ji-shou'
-import xiugaidizhi from '../html/xiugaidizhi'
-import xuanzeji from '../html/wuliu/xuanzeji'
 import newxiangqin from '../html/xinwen/new-xiangqin'
 import fabupeop from '../html/fabu/fabu-peop'
 import fabuxinzen from '../html/fabu/fabudizhixinzen'
 import fabuuser from '../html/fabu/fabu-user'
-import publishAddress from '../html/fabu/fabu-dizhi'
 import wodeshangjiamc from '../html/wode/wode-shangjmc'
 import wodeshangjia from '../html/wode/wode-shangjia'
 import wodezhid from '../html/wode/wode-zhid'
@@ -216,22 +215,11 @@ export default new Router({
       component: fabuuser
     },
     {
-      path: '/fabupeop/address',
-      name: 'fabupeop-address',
-      component: publishAddress
-    },
-    {
       path: '/newxiangqin',
       name: 'newxiangqin',
       component: newxiangqin
     },
 
-    {
-      path: '/xuanzeji',
-      name: 'xuanzeji',
-      component: xuanzeji
-
-    },
     {
       path: '/dingdan',
       name: 'dingdan',
@@ -387,14 +375,19 @@ export default new Router({
       component: test
     },
     {
-      path: '/xiugaidizhi',
-      name: 'xiugaidizhi',
-      component: xiugaidizhi
+      path: '/address/list',
+      name: 'addressList',
+      component: addressList
     },
     {
-      path: '/dizhi',
-      name: 'dizhi',
-      component: dizhi
+      path: '/address/detail',
+      name: 'addressDetailNew',
+      component: addressDetail
+    },
+    {
+      path: '/address/detail/:id',
+      name: 'addressDetail',
+      component: addressDetail
     },
     {
       path: '/liuyan',

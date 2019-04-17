@@ -160,7 +160,7 @@
 
           <!-- </div> -->
         </div>
-        <div class="di-xuan" @click="$router.push('/fabupeop/address?from=publish')">
+        <div class="di-xuan" @click="$router.push('/address/list?from=publish&title=选择地址')">
           <div class="shiwu-bl">*地址</div>
           <div class="xuanze-di">
             <div class="shiwu">{{activeAddress ? activeAddress.address : "选择地址"}}</div>
@@ -484,6 +484,7 @@ export default {
 <style>
 .yue-rit input{
   /* width:60%!important; */
+  margin-bottom: 0;
 }
 .yue-rit-rit div:nth-child(1){
   color:#C3C3C3;
@@ -506,10 +507,12 @@ color:#333333;
 }
 .yue-left{
     display: flex;
+    align-items: center;
     width:17%;
 }
 .yue-rit{
     display:flex;
+    align-items: center;
     width:70%;
 }
 .yue-rit-rit{
@@ -599,6 +602,7 @@ color:#333333;
   line-height: 2.25rem; /* 36/16 */
 }
 .mtpop-box {
+  height: 180px;
   text-align: center;
   width: 100%;
 }

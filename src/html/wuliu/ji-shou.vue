@@ -116,7 +116,7 @@ export default {
       this.popupVisible = true
     },
     getji () {
-      this.$router.push({ path: '/xuanzeji' })
+      this.$router.push({ path: '/address/list?from=logistic&title=选择寄件人' })
     },
     getwuliudingdan () {
       let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'

@@ -2,18 +2,18 @@
 
 <div class="dizhi-warp">
   <div class="xinzhen-head">
-        <img src="../../image/zuojiantou.png" alt="" @click="goxuanzedizhi">
-          新增地址
+        <img src="../../image/zuojiantou.png" alt="" @click="back">
+          {{id ? "修改地址" : "新增地址"}}
           <div></div>
   </div>
   <div class="dizhi-cent-cont">
       <div class="dizhi-cent">
         <div class="dizhi-ziliao">姓名</div>
-        <input  class="dizhi-ipt" type="text" placeholder="请输入真实姓名">
+        <input  class="dizhi-ipt" type="text" placeholder="请输入真实姓名" v-model="userAddress.consignee">
       </div>
     <div class="dizhi-cent">
         <div class="dizhi-ziliao">联系方式</div>
-        <input class="dizhi-ipt" type="text" placeholder="联系方式">
+        <input class="dizhi-ipt" type="text" placeholder="联系方式" v-model="userAddress.mobile">
       </div>
       <div class="suozai dizhi-cent" @click="popup4">
         <div class="dizhi-ziliao">所在地区</div>
@@ -22,7 +22,7 @@
       </div>
       <div class="dizhi-cent">
         <div class="dizhi-ziliao">详细地址</div>
-        <input class="dizhi-ipt" type="text" placeholder="详细地址">
+        <input class="dizhi-ipt" type="text" placeholder="详细地址" v-model="userAddress.address">
       </div>
   </div>
   <!-- <mt-button size="large" @click="popup4">下侧弹出Popup</mt-button> -->
@@ -43,24 +43,31 @@
                :visible-item-count="3" class="pik"></mt-picker>
   </mt-popup>
   <div class="peisong">*部分地区暂不支持配送</div>
-  <div class="save" @click="adddizhi">
+  <div class="save" @click="submit">
     保存
   </div>
 </div>
 
 </template>
 <script>
+import {Toast} from 'vant'
 import address from '../../js/areajson'
 // import { constants } from 'http2'
 let slot1Values = address.map(p => p.label)
 let slot2Values = address[0].children.map(p => p.label)
 export default {
-  name: 'Picker',
   data () {
     return {
       popupVisible4: false,
+      userAddress: {
+        consignee: '',
+        mobile: '',
+        address: '',
+        region_lv2: '', // 省
+        region_lv3: '' // 市
+      },
       address: [],
-      piackervalue: [],
+      pickerValue: [],
       laosAddressSlots: [
         {
           flex: 1,
@@ -127,31 +134,41 @@ export default {
   computed: {
     isLaos () {
       return this.$store.state.isLaos
+    },
+    from() {
+      return this.$route.query.from
+    },
+    id() {
+      return this.$route.params.id
+    }
+  },
+  created() {
+    if(this.id) {
+      let activeAddress = this.$store.state.activeAddress
+      if(activeAddress) {
+        this.userAddress = activeAddress
+        this.region = activeAddress.province + activeAddress.city
+        // this.pickervalue = [this.userAddress.region_lv2, this.userAddress.region_lv3]
+      } else {
+        this.back()
+      }
     }
   },
   mounted () {
     this.getRegion()
   },
   methods: {
-    goxuanzedizhi () {
-      this.$router.back(-1)
+    back() {
+      this.$router.back()
     },
-    adddizhi () {
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
-      this.axius.get('/apis/v1/user-address', {
-        data: {
-          goods_type_id: 444444,
-          weight: 99,
-          send_address_id: 555,
-          receive_address_id: 3333,
-          code: 4,
-          receive_time: 3
-        },
-        headers: {
-          'Authorization': 'Bearer ' + token
+    submit () {
+      this.$store.dispatch('updateUserAddress', this.userAddress).then(({data}) => {
+        if(data.error_code === 0) {
+          Toast(this.id ? '修改成功' : '添加成功')
+          this.back()
+        } else {
+          Toast(data.message)
         }
-      }).then(p => {
-        console.log('新整地址', p.data)
       })
     },
     popup4 () {
@@ -159,17 +176,19 @@ export default {
     },
     finish () {
       let isLaos = this.isLaos
-      this.region = this.piackervalue.map(item => {
+      this.region = this.pickerValue.map(item => {
         if (item) {
           return isLaos ? item.nameLa : item.name
         } else {
           return ''
         }
       }).join('')
+      this.userAddress.region_lv2 = this.pickerValue[0].id
+      this.userAddress.region_lv3 = this.pickerValue[1].id
       this.popupVisible4 = false
     },
     onAddressChange (picker, values) {
-      this.piackervalue = values
+      this.pickerValue = values
       let thirdChildren = null
       let secondObj = address.find(p => p.label == values[0])
       let secondValue = secondObj.children.map(p => {
@@ -187,19 +206,35 @@ export default {
       picker.setSlotValues(2, thirdChildren)
     },
     getRegion () {
+      let vm = this
       this.axius.get('/apis/v1/user-address/get-format-region').then(({data}) => {
         if (data.error_code === 0) {
           this.address = data.data
           setTimeout(() => {
-            this.$refs.region.setSlotValues(0, this.mapRegion(this.address))
-            this.$refs.region.setSlotValues(1, this.mapRegion(this.address[0].children || []))
+            vm.$refs.region.setSlotValues(0, vm.mapRegion(vm.address))
+            vm.$refs.region.setSlotValues(1, vm.mapRegion(vm.address[0].children || []))
           }, 0)
+          // if(this.id) {
+          //   let {region_lv2, region_lv3} = this.userAddress
+          //   this.address.some(province => {
+          //     if(province.id == region_lv2) {
+          //       vm.pickerValue.push({id: province.id, name: province.name, name_la: province.name_la})
+          //       (province.children || []).some(city => {
+          //         if(city.id == region_lv3) {
+          //           vm.pickerValue.push({id: city.id, name: city.name, name_la: city.name_la})
+          //           return true
+          //         }
+          //       })
+          //       return true
+          //     }
+          //   })
+          // }
         }
       })
     },
     onLaosAddressChange (picker, values) {
       if (this.address.length === 0) return
-      this.piackervalue = values
+      this.pickerValue = values
       let thirdChildren = []
       let secondObj = this.address.find(p => p.id == values[0].id)
       let secondValue = secondObj.children || []

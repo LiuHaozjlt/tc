@@ -48,13 +48,13 @@
   </div>
 </template>
 <script>
-import address from "../../js/areajson";
+import address from '../../js/areajson';
 // import { constants } from 'http2'
-let slot1Values = address.map(p => p.label);
-let slot2Values = address[0].children.map(p => p.label);
+let slot1Values = address.map(p => p.label)
+let slot2Values = address[0].children.map(p => p.label)
 export default {
-  name: "Picker",
-  data() {
+  name: 'Picker',
+  data () {
     return {
       popupVisible4: false,
       address: [],
@@ -63,19 +63,19 @@ export default {
         {
           flex: 1,
           values: [],
-          className: "slot1",
-          textAlign: "center"
+          className: 'slot1',
+          textAlign: 'center'
         },
         {
           divider: true,
           // content: '-',
-          className: "slot2"
+          className: 'slot2'
         },
         {
           flex: 1,
           values: [],
-          className: "slot3",
-          textAlign: "center"
+          className: 'slot3',
+          textAlign: 'center'
         }
         // {
         //   divider: true,
@@ -93,51 +93,51 @@ export default {
         {
           flex: 1,
           values: slot1Values,
-          className: "slot1",
-          textAlign: "center"
+          className: 'slot1',
+          textAlign: 'center'
         },
         {
           divider: true,
           // content: '-',
-          className: "slot2"
+          className: 'slot2'
         },
         {
           flex: 1,
           values: slot2Values,
-          className: "slot3",
-          textAlign: "center"
+          className: 'slot3',
+          textAlign: 'center'
         },
         {
           divider: true,
           // content: '-',
-          className: "slot4"
+          className: 'slot4'
         },
         {
           flex: 1,
           values: [],
-          className: "slot5",
-          textAlign: "center"
+          className: 'slot5',
+          textAlign: 'center'
         }
       ],
-      region: ""
-    };
-  },
-  computed: {
-    isLaos() {
-      return this.$store.state.isLaos;
+      region: ''
     }
   },
-  mounted() {
-    this.getRegion();
+  computed: {
+    isLaos () {
+      return this.$store.state.isLaos
+    }
+  },
+  mounted () {
+    this.getRegion()
   },
   methods: {
-    goxuanzedizhi() {
-      this.$router.back(-1);
+    goxuanzedizhi () {
+      this.$router.back(-1)
     },
-    adddizhi() {
-      let token = "TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113";
+    adddizhi () {
+      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113';
       this.axius
-        .get("/apis/v1/user-address", {
+        .get('/apis/v1/user-address', {
           data: {
             goods_type_id: 444444,
             weight: 99,
@@ -147,88 +147,92 @@ export default {
             receive_time: 3
           },
           headers: {
-            Authorization: "Bearer " + token
+            Authorization: 'Bearer ' + token
           }
         })
         .then(p => {
-          console.log("新整地址", p.data);
-        });
+          this.$router.push({
+            path: '/fabuuser',
+            params: ''
+          })
+        })
     },
-    popup4() {
-      this.popupVisible4 = !this.popupVisible4;
+    popup4 () {
+      this.popupVisible4 = !this.popupVisible4
     },
-    finish() {
-      let isLaos = this.isLaos;
+    finish () {
+      let isLaos = this.isLaos
       this.region = this.piackervalue
         .map(item => {
           if (item) {
-            return isLaos ? item.nameLa : item.name;
+            return isLaos ? item.nameLa : item.name
           } else {
-            return "";
+            return '';
           }
         })
-        .join("");
-      this.popupVisible4 = false;
+        .join('')
+      this.popupVisible4 = false
     },
-    onAddressChange(picker, values) {
-      this.piackervalue = values;
-      let thirdChildren = null;
-      let secondObj = address.find(p => p.label == values[0]);
+    onAddressChange (picker, values) {
+      this.piackervalue = values
+      let thirdChildren = null
+      let secondObj = address.find(p => p.label == values[0])
       let secondValue = secondObj.children.map(p => {
         if (p.label == values[1]) {
-          thirdChildren = p.children;
+          thirdChildren = p.children
         }
-        return p.label;
-      });
+        return p.label
+      })
       if (thirdChildren) {
-        thirdChildren = thirdChildren.map(p => p.label);
+        thirdChildren = thirdChildren.map(p => p.label)
       } else {
-        thirdChildren = [];
+        thirdChildren = []
       }
-      picker.setSlotValues(1, secondValue);
-      picker.setSlotValues(2, thirdChildren);
+      picker.setSlotValues(1, secondValue)
+      picker.setSlotValues(2, thirdChildren)
     },
-    getRegion() {
+    getRegion () {
       this.axius
-        .get("/apis/v1/user-address/get-format-region")
+        .get('/apis/v1/user-address/get-format-region')
         .then(({ data }) => {
           if (data.error_code === 0) {
-            this.address = data.data;
+            this.address = data.data
             setTimeout(() => {
-              this.$refs.region.setSlotValues(0, this.mapRegion(this.address));
+              this.$refs.region.setSlotValues(0, this.mapRegion(this.address))
               this.$refs.region.setSlotValues(
                 1,
                 this.mapRegion(this.address[0].children || [])
-              );
-            }, 0);
+              )
+            }, 0)
           }
-        });
+        })
     },
-    onLaosAddressChange(picker, values) {
-      if (this.address.length === 0) return;
-      this.piackervalue = values;
-      let thirdChildren = [];
-      let secondObj = this.address.find(p => p.id == values[0].id);
-      let secondValue = secondObj.children || [];
+    onLaosAddressChange (picker, values) {
+      if (this.address.length === 0) return
+      this.piackervalue = values
+      let thirdChildren = []
+      let secondObj = this.address.find(p => p.id == values[0].id)
+      let secondValue = secondObj.children || []
       values[1] &&
         secondValue.some(p => {
           if (p.id == values[1].id) {
-            thirdChildren = p.children || [];
-            return true;
+            thirdChildren = p.children || []
+            return true
           }
-        });
-      picker.setSlotValues(1, this.mapRegion(secondValue));
-      picker.setSlotValues(2, this.mapRegion(thirdChildren));
+        })
+      picker.setSlotValues(1, this.mapRegion(secondValue))
+      picker.setSlotValues(2, this.mapRegion(thirdChildren))
+      
     },
-    mapRegion(arr) {
+    mapRegion (arr) {
       return arr.map(({ id, name, name_la }) => ({
         id,
         name,
         nameLa: name_la
-      }));
+      }))
     }
   }
-};
+}
 </script>
 
 <style>
