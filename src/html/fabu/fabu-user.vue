@@ -4,7 +4,7 @@
   <div>
     <div>
       <div class="fabu-head">
-        <img src="../../image/zuojiantou.png" alt @click="gofabuele">
+        <img src="../../image/zuojiantou.png" alt @click="back">
         发布
         <div></div>
       </div>
@@ -36,7 +36,7 @@
               cols="5"
               placeholder="您可以对发布的内容进行详细的描述少时"
               class="shiwu"
-              v-model="publish.introduce"
+              v-model="publish.describe"
             ></textarea>
           </div>
         </div>
@@ -67,7 +67,8 @@
 
           <!-- </div> -->
         </div>
-        <div class="di-xuan" @click="$router.push('/fabuxinzen')">
+        <!-- <div class="di-xuan" @click="$router.push('/fabuxinzen')"> -->
+        <div class="di-xuan" @click="$router.push('/address/list?from=publish&title=选择地址')">
           <div class="shiwu-bl">*地址</div>
           <div class="xuanze-di">
             <div class="shiwu">{{activeAddress ? activeAddress.address : "选择地址"}}</div>
@@ -86,7 +87,7 @@
         <div class="weixin shuma-xiang">
           <div class="shiwu-bl">微信：</div>
           <div class="biaoti-ipt">
-            <input v-model="publish.weixin" type="text" placeholder="输入你的微信好" class="shiwu">
+            <input v-model="publish.weixin_id" type="text" placeholder="输入你的微信好" class="shiwu">
           </div>
         </div>
 
@@ -119,7 +120,7 @@
         <!--
           确定发
         布按钮-->
-        <div class="qued-fab shiwu" @click="postquedfab">{{ publish.id ? "修改发布" : "确定发布"}}</div>
+        <div class="qued-fab shiwu" @click="submit">{{ publish.id ? "修改发布" : "确定发布"}}</div>
       </div>
       <mt-popup v-model="popupVisible" popup-transition="popup-fade" class="mtpop-box">
         <div class="fan-bai">翻译失败</div>
@@ -128,15 +129,6 @@
         <div class="fangqi">
           <div class="fang-bai">放弃翻译</div>
         </div>
-      </mt-popup>
-      <mt-popup v-model="isPriceUnitShow" popup-transition="popup-fade" class="mtpop-box">
-        <van-picker :columns="priceUnits"  @change="onPriceUnitChange" />
-      </mt-popup>
-      <mt-popup v-model="isRentDecorationShow" popup-transition="popup-fade" class="mtpop-box">
-        <van-picker :columns="rentDecorations" value-key="name" @change="onRentDecorationChange" />
-      </mt-popup>
-      <mt-popup v-model="isRentHallShow" popup-transition="popup-fade" class="mtpop-box">
-        <van-picker :columns="rentHalls" value-key="name" @change="onRentHallChange" />
       </mt-popup>
     </div>
   </div>
@@ -163,27 +155,15 @@ export default {
     // 发布接口要求的参数
     this.publishInitial = {
       title: '',
-      introduce: '',
+      describe: '',
       mobile: '',
+      code: undefined,
       user_address_id: '',
-      weixin: undefined,
+      weixin_id: undefined,
       email: undefined,
       is_trans: 2,
-      img: undefined,
-      prices: undefined,
-      prices_unit: undefined,
-      rent_decoration_id: undefined,
-      rent_hall_id: undefined,
-      xh: '86',
-      car_brand_id: undefined,
-      car_registration_time: undefined,
-      land_age: undefined,
-      land_acreage: undefined,
-      land_use_id: undefined,
-      land_cooperation_id: undefined,
-      recruit_is_face: undefined,
-      recruit_prices_start: undefined,
-      recruit_prices_end: undefined
+      img: '',
+      xh: '86'
     }
 
     return {
@@ -192,27 +172,16 @@ export default {
       addList: [],
       imageList: [], // 存后台返回的地址
       showPopWin: false, // switchde 状态
-      zhuangtai: '',
-      rentDecoration: '',
-      rentHall: '',
-      isPriceUnitShow: false,
-      isRentDecorationShow: false,
-      isRentHallShow: false
+      zhuangtai: ''
     }
   },
   computed: {
-    ...mapState(['isPersonal', 'publish', 'publishReleaseValue', 'sellerInfo', 'activeAddress']),
+    ...mapState(['publish', 'activeAddress']),
     releaseTypeId () {
-      return this.isPersonal ? this.$route.query.releaseTypeId : this.sellerInfo.release_type_id
+      return this.$route.query.releaseTypeId
     },
-    priceUnits () {
-      return this.publishReleaseValue.prices_unit || []
-    },
-    rentDecorations () {
-      return this.publishReleaseValue.rent_decoration_id
-    },
-    rentHalls () {
-      return this.publishReleaseValue.rent_hall_id
+    releaseId () {
+      return this.$route.query.releaseId
     }
   },
   components: {
@@ -225,26 +194,21 @@ export default {
     gongsjianjie
   },
   created () {
-    // this.getruzhushengq()
-    this.getstatus()
-    this.releaseValueRequst = this.$store.dispatch('getPublishReleaseValue').then(() => {
-      this.publishInitial.prices_unit = this.priceUnits[0]
-    })
-
-    if (!this.isPersonal && !this.releaseTypeId) {
-      this.$store.dispatch('getSellerInfo')
+    if (!this.releaseTypeId) {
+      this.back()
+      return
     }
     if (this.activeAddress) {
       this.publishInitial.user_address_id = this.activeAddress.user_address_id
     }
     // this.getruzhushengq()
     // 通过url的releaseId判断是否是修改
-    if (this.$route.query.releaseId) {
+    if (this.releaseId) {
       // 如果用户刷新的话，store里的publish会丢失，解决办法是后台出一个查询发布详情的接口，根据id去查
       // 另一种方法就是把publish存到localStorage，刷新的时候再从localStorage取出来
       // 现在先简单做返回处理
       if (Object.keys(this.publish).length === 0) {
-        this.$router.back()
+        this.back()
       } else {
         this.mapPublish()
       }
@@ -254,26 +218,15 @@ export default {
     if (Object.keys(this.publish).length === 0) {
       this.$store.commit('updatePublish', this.publishInitial)
     } else {
-      this.releaseValueRequst.then(() => {
-        // 根据一些字段的id从 releaseValue 里找到对应的选项对象，其他类型的一些字段类似增加即可
-        let rdId = this.publish.rent_decoration_id
-        let rhId = this.publish.rent_hall_id
-        let img = this.publish.img
-        if (rdId) {
-          this.rentDecoration = this.rentDecorations.find(item => item.id == rdId)
-        }
-        if (rhId) {
-          this.rentHall = this.rentHalls.find(item => item.id == rhId)
-        }
-        if (img) {
-          this.imageList = img.split(',')
-        }
-      })
+      let img = this.publish.img
+      if (img) {
+        this.imageList = img.split(',')
+      }
     }
   },
   methods: {
-    gofabuele () {
-      this.$router.back(-1)
+    back () {
+      this.$router.back()
     },
 
     remove (index) {
@@ -317,49 +270,19 @@ export default {
         }
       })
     },
-    postquedfab () {
-      this.$store.dispatch('publishSeller', this.publish).then(({data}) => {
+    submit () {
+      this.$store.dispatch('publishUser', {
+        release_type_id: this.releaseTypeId,
+        ...this.publish
+      }).then(({data}) => {
         if (data.error_code === 0) {
-          Toast('发布成功')
-          this.$store.commit('updatePublish', {})
+          Toast(this.releaseId ? '修改发布成功' : '发布成功')
+          this.$store.commit('updatePublish', {_cover: true})
           this.$router.replace('/') // 发布成功后跳到的地址
         } else {
           Toast(data.message)
         }
       })
-    },
-    getstatus () {
-      //   console.log('getqinqiu')
-      let me = this
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
-      me.axius({
-        methods: 'get',
-        url: 'apis/v1/user/seller-status',
-        data: {},
-        headers: {
-          Authorization: 'Bearer ' + token
-        }
-      }).then(p => {
-        // debugger
-        me.zhuangtai = p.data.data.status
-        // console.log(me.zhuangtai)
-        // if (p.data.data.status === 1) {
-        //   me.postquedfab()
-        // } else {
-        // }
-      })
-    },
-
-    onPriceUnitChange (picker, value, index) {
-      this.publish.prices_unit = value
-    },
-    onRentDecorationChange (picker, value, index) {
-      this.rentDecoration = value
-      this.publish.rent_decoration_id = value.id
-    },
-    onRentHallChange (picker, value, index) {
-      this.rentHall = value
-      this.publish.rent_hall_id = value.id
     },
 
     // 修改发布时参数调整

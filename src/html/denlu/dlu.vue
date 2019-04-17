@@ -3,9 +3,10 @@
     <!-- <div @click="changeLang">{{$t('message.lang')}}</div> -->
     <div class="login-box">
     <!-- <div class="test">测试</div> -->
-      <denluhead :is-login="isLogin" :is-forget="isForget" @change="changeLogin"></denluhead>
+      <denluhead class="login-head" :is-login="isLogin" :is-forget="isForget"
+           @change="changeLogin" @back="handleBack"></denluhead>
       <denlulogo></denlulogo>
-      <denlufrm :is-login="isLogin" :is-forget="isForget" @forget="isForget = true" @change="isLogin = $event"></denlufrm>
+      <denlufrm :is-login="isLogin" :is-forget="isForget" @forget="isForget = true" @change="isForget = false;isLogin = $event"></denlufrm>
       <denluxuanxiang v-if="isLogin && !isForget"></denluxuanxiang>
     </div>
   </div>
@@ -32,13 +33,16 @@ export default {
 
   },
   methods: {
-    // setvalue() {
-    //   console.log("222");
-    //   this.$router.push({ path: "/yzsjhm" });
-    // },
     changeLogin (val) {
       // debugger
       this.isLogin = val
+    },
+    handleBack (type) {
+      if (type === 'forget') {
+        this.isForget = false
+      } else if (type === 'login') {
+        this.$router.back()
+      }
     },
     login () {
 
@@ -74,6 +78,9 @@ export default {
   height: auto;
   box-sizing: border-box;
   /* padding-top: 1.25rem; */
+}
+.login-head {
+  margin-bottom: 2.5rem;
 }
 
 .mui-input-row span{

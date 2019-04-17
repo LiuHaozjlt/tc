@@ -1,14 +1,21 @@
 <template>
   <div class="wode-zhanghao-warp">
-    <div class="wode-zhanghao-head">账号信息</div>
+    <div class="wode-zhanghao-head">
+      <img src="../../image/zuojiantou.png" alt="" @click="gozhaohaoqian">
+      账号信息
+      <div></div>
+    </div>
     <!-- <template> -->
     <div class="wode-zhanghao" v-for="(item,index) in four" :key="index">
       <div class="zhanghao">
         <div class="zhanghao-shouji">{{item.text}}</div>
-        <div class="zhanghao-haoma">{{item.phone}}</div>
+        <div class="zhanghao-haoma">
+          <!-- <input type="text"> -->
+          {{item.phone}}
+        </div>
       </div>
       <div class="huanb" @click="gohuanbang">
-        {{huanbang   }}
+        {{huanbang}}
         <img src='../../image/jiantoutou.png'>
       </div>
     </div>
@@ -31,6 +38,9 @@ export default {
     }
   },
   methods: {
+    gozhaohaoqian () {
+      this.$router.back(-1)
+    },
     gohuanbang (url) {
       this.huanbang = this.jiebang
     }
@@ -39,6 +49,9 @@ export default {
 </script>
 
 <style>
+.wode-zhanghao-head{
+
+}
 .zhanghao-shouji{
   /* color:#333333; */
 }
@@ -48,6 +61,13 @@ export default {
 .wode-zhanghao-head{
   height: 2.75rem /* 44/16 */;
   line-height: 2.75rem /* 44/16 */;
+  display:flex;
+  align-items: center;
+  justify-content: space-between
+}
+.wode-zhanghao-head img{
+  width:.6875rem /* 11/16 */;
+  height: 1.25rem /* 20/16 */;
 }
 .wode-zhanghao div:nth-child(1) {
   display: flex;

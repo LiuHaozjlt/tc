@@ -1,7 +1,7 @@
 <template>
-<div>
+  <div>
     <div class="new-xiangqinhead" @click="goNew">
-      <img src="../../image/zuojiantou.png" alt="">
+      <img src="../../image/zuojiantou.png" alt>
     </div>
     <div class="new-xiangqin">
       <div class="yinni">{{articlenew.title}}</div>
@@ -9,35 +9,32 @@
         <div class="xiaoshi">{{articlenew.create_time}}</div>
         <div class="guangf">官方</div>
       </div>
-      <div class="xiangqi-cont" v-html="articlenew.content">
-      </div>
+      <div class="xiangqi-cont" v-html="articlenew.content"></div>
       <!-- <div class="xiangqin-cent"></div> -->
       <!-- <div class="xiangqi-cent-ct">
         央视网消息（新闻联播）：中共中央总书记国家主席、中
         央军委主席、中央全面依法治国委员会主任习近平2开
       </div>
-      <div class="xiangqin-cent"></div> -->
+      <div class="xiangqin-cent"></div>-->
       <div class="wu-henxian"></div>
       <liuyanlist :list="articlenew.comment"></liuyanlist>
-      <div class="meiyou">
-          没有更多评论！
-      </div>
+      <div class="meiyou">没有更多评论！</div>
     </div>
     <div class="xiangqin-bot" @click="toplxq">
       <div>
-            <input type="text">
+        <input type="text">
       </div>
       <div class="xiangqin-bot-img">
-          <div>
-              <img src="../../image/ly.png" alt="">
-              <div class="xiangqin-topico">ssss万</div>
-          </div>
-          <img  src="../../image/sc.png" alt="">
-          <img src="../../image/fx.png" alt="">
+        <div>
+          <img src="../../image/ly.png" alt>
+          <div class="xiangqin-topico">ssss万</div>
+        </div>
+        <img src="../../image/sc.png" alt>
+        <img src="../../image/fx.png" alt>
       </div>
     </div>
-  <!-- </div> -->
-</div>
+    <!-- </div> -->
+  </div>
 </template>
 
 <script>
@@ -53,7 +50,7 @@ export default {
     liuyanlist
   },
   beforeRouteEnter (to, from, next) {
-    next((vm) => {
+    next(vm => {
       vm.id = vm.$route.query.id
       vm.getDetail()
     })
@@ -63,7 +60,7 @@ export default {
       this.$router.back(-1)
     },
     toplxq () {
-      this.$router.push({path: '/pinlunxiangq'})
+      this.$router.push({ path: '/pinlunxiangq' })
     },
     getDetail () {
       // console.log(this.id)
@@ -72,14 +69,14 @@ export default {
         methods: 'get',
         url: '/apis/v1/article/' + this.id,
         data: {
-        // goods_type_id: 444444,
-        // weight: 99,
-        // send_address_id: 555,
-        // receive_address_id: 3333,
-        // receive_time: 4
+          // goods_type_id: 444444,
+          // weight: 99,
+          // send_address_id: 555,
+          // receive_address_id: 3333,
+          // receive_time: 4
         },
         headers: {
-          'Authorization': 'Bearer ' + token
+          Authorization: 'Bearer ' + token
         }
       }).then(p => {
         // console.log(p.data.data)
@@ -87,102 +84,99 @@ export default {
       })
     }
   }
-
 }
 </script>
 
 <style>
-.new-xiangqinhead{
+.new-xiangqinhead {
   height: 2.75rem /* 44/16 */;
   line-height: 2.75rem /* 44/16 */;
-  display:flex;
+  display: flex;
   align-items: center;
 }
-.new-xiangqinhead img{
-  width:.6875rem /* 11/16 */;
+.new-xiangqinhead img {
+  width: 0.6875rem /* 11/16 */;
   height: 1.25rem /* 20/16 */;
-
 }
-.xiangqi-cont h1 img{
-  width:100%;
+.xiangqi-cont h1 img {
+  width: 100%;
   height: 12rem /* 192/16 */;
   margin-bottom: 5%;
 }
-.xiangqi-cont h1{
-  border-bottom: none!important;
+.xiangqi-cont h1 {
+  border-bottom: none !important;
 }
-.xiangqi-cont ul{
-  display: none!important;
+.xiangqi-cont ul {
+  display: none !important;
 }
-.xiangqi-cont p:nth-child(2){
-  display: none!important;
+.xiangqi-cont p:nth-child(2) {
+  display: none !important;
 }
-.xiangqi-cont p:nth-child(3){
-  display: none!important;
+.xiangqi-cont p:nth-child(3) {
+  display: none !important;
 }
-.xiangqi-cont p:nth-child(5){
-  display:none!important;
+.xiangqi-cont p:nth-child(5) {
+  display: none !important;
 }
-.xiangqi-cont p:nth-child(7){
-  display:none!important;
+.xiangqi-cont p:nth-child(7) {
+  display: none !important;
 }
-.xiangqi-cont p:nth-child(9){
-  display:none!important;
+.xiangqi-cont p:nth-child(9) {
+  display: none !important;
 }
-.xiangqi-cont p:nth-child(10){
-  display:none!important;
+.xiangqi-cont p:nth-child(10) {
+  display: none !important;
 }
-.xiangqi-cont p span{
-  display:none;
+.xiangqi-cont p span {
+  display: none;
 }
-.xiangqi-cont p img{
-    width:100%;
-    height: 12rem /* 192/16 */;
+.xiangqi-cont p img {
+  width: 100%;
+  height: 12rem /* 192/16 */;
 }
-.xiangqi-cont h1{
-  font-size:1.0625rem /* 17/16 */!important;
-font-family:PingFang-SC-Medium;
-font-weight:500;
-color:rgba(51,51,51,1);
+.xiangqi-cont h1 {
+  font-size: 1.0625rem /* 17/16 */ !important;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: rgba(51, 51, 51, 1);
 }
-.pinlun-cent-cent{
+.pinlun-cent-cent {
   margin-left: 2%;
 }
-.guangf{
+.guangf {
   text-align: center;
   line-height: 0.8125rem;
-  font-size:.5625rem /* 9/16 */;
-font-family:PingFang-SC-Medium;
-font-weight:500;
-color:rgba(255,255,255,1);
+  font-size: 0.5625rem /* 9/16 */;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 1);
 }
-.new-xiangqin{
+.new-xiangqin {
   padding-bottom: 100%;
 }
-.xiangqi-cont p:nth-child(2) img{
-  width:12.5rem /* 200/16 */;
+.xiangqi-cont p:nth-child(2) img {
+  width: 12.5rem /* 200/16 */;
   height: 12.5rem /* 200/16 */;
 }
-.meiyou{
-    font-size:.9375rem /* 15/16 */;
-    font-family:PingFang-SC-Regular;
-    font-weight:400;
-    color:rgba(153,153,153,1);
-    padding:1.75rem /* 28/16 */ 0 2.125rem /* 34/16 */ 0;
-    text-align: center;
+.meiyou {
+  font-size: 0.9375rem /* 15/16 */;
+  font-family: PingFang-SC-Regular;
+  font-weight: 400;
+  color: rgba(153, 153, 153, 1);
+  padding: 1.75rem /* 28/16 */ 0 2.125rem /* 34/16 */ 0;
+  text-align: center;
 }
-.pinlun-cent-warp{
-    justify-content: space-between;
-    width:100%;
-    display: flex;
-    align-items: center;
-    padding:1.0625rem /* 17/16 */ 0 1.0625rem /* 17/16 */ 0;
-    border-bottom: 1px solid  #FFEBEBEB;
+.pinlun-cent-warp {
+  justify-content: space-between;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1.0625rem /* 17/16 */ 0 1.0625rem /* 17/16 */ 0;
+  border-bottom: 1px solid #ffebebeb;
 }
-.pinlun-lf img{
-
+.pinlun-lf img {
 }
-.pinglun{
+.pinglun {
   display: flex;
   align-items: center;
 }
@@ -199,24 +193,21 @@ color:rgba(255,255,255,1);
 }
 .pinlun-cent-cent {
   /* border:1px solid red; */
-  padding:.75rem /* 12/16 */  0     .75rem /* 12/16 */ 0;
+  padding: 0.75rem /* 12/16 */ 0 0.75rem /* 12/16 */ 0;
   font-size: 0.9375rem /* 15/16 */;
   font-family: PingFang-SC-Medium;
   font-weight: 500;
   color: rgba(34, 34, 34, 1);
 }
-.pinlun-lf{
+.pinlun-lf {
   margin-right: 5%;
 }
 .pinglun {
-
   display: flex;
   line-height: 0.9375rem /* 15/16 */;
-
 }
 .fenz-hui {
   display: flex;
-
 }
 .fenz-hui div:nth-child(1) {
   margin-right: 0.75rem /* 12/16 */;

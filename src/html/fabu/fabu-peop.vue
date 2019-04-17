@@ -390,7 +390,7 @@ export default {
   },
   methods: {
     gofabuele () {
-      this.$router.back(-1)
+      this.$router.back()
     },
     remove (index) {
       this.imageList.splice(index, 1)
@@ -437,7 +437,7 @@ export default {
       this.$store.dispatch('publishSeller', this.publish).then(({ data }) => {
         if (data.error_code === 0) {
           Toast('发布成功')
-          this.$store.commit('updatePublish', {})
+          this.$store.commit('updatePublish', {_cover: true})
           this.$router.replace('/') // 发布成功后跳到的地址
         } else {
           Toast(data.message)

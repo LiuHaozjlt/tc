@@ -95,8 +95,8 @@ export default {
       fl: false,
       tr: true,
       list: [
-        { icon: IMG86, text: '86' },
-        { icon: IMG020, text: '020' }
+        { icon: IMG86, text: 86 },
+        { icon: IMG020, text: 856 }
       ],
       selected: null
     }

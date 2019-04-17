@@ -7,7 +7,7 @@
                 <!-- <div class="bianji-top"> -->
                 <div class="bianji-top-rit">
                     <div class="bianji-cet">
-                        <img src="" alt="">
+                        <img :src="userInfo.headimgurl" alt="">
                     </div>
                     <div class="bianji-you">
                          <img src="../../image/jiantoutou.png" alt="">
@@ -21,7 +21,7 @@
                 <div class="shiliu nic">昵称 :</div>
                 <div class="bianji-rit-warp">
                     <div class="tiannic shiliu">
-                        <input type="text" v-model="iptqingchengsss">
+                        {{userInfo.nickname}}
                     </div>
                     <div class="bianji-you">
                         <img src="../../image/jiantoutou.png" alt="">
@@ -31,15 +31,15 @@
          </router-link>
         <div class="bianji-head-botm" @click="popupVisible=true">
             <div class="shiliu">性别 :</div>
-            <div class="shiliu">{{sex}}</div>
+            <div class="shiliu">{{sexes[userInfo.sex || 0]}}</div>
             <div class="bianji-you">
                 <img src="../../image/jiantoutou.png" alt="">
             </div>
         </div>
         <fabupop :popupVisible='popupVisible' @closepop="closepop">
             <div>
-                <p  @click="changSex('男')">男</p>
-                <p  @click="changSex('女')">女</p>
+                <p  @click="changSex(1)">男</p>
+                <p  @click="changSex(2)">女</p>
             </div>
         </fabupop>
         <!-- <mt-popup
@@ -59,12 +59,20 @@ import fabupop from '../../components/fabu-pop'
 import headerPage from '../../components/header'
 export default {
   data () {
+    this.sexes = {
+      0: '未知',
+      1: '男',
+      2: '女'
+    }
     return {
       pageName: '编辑个人资料',
       msg: '填写昵称',
-      sex: '男',
-      popupVisible: false,
-      iptqingchengsss: ''
+      popupVisible: false
+    }
+  },
+  computed: {
+    userInfo () {
+      return this.$store.state.userInfo
     }
   },
   created () {
@@ -79,8 +87,14 @@ export default {
     closepop (flg) {
       this.popupVisible = flg
     },
-    changSex (val) {
-      this.sex = val
+    changSex (sex) {
+      this.$store.dispatch('updateUserInfo', {sex}).then(({error_code, message}) => {
+        if (error_code === 0) {
+          Toast('修改成功')
+        } else {
+          Toast(message)
+        }
+      })
       this.popupVisible = false
     },
     goBack () {
@@ -102,6 +116,9 @@ export default {
 </script>
 
 <style>
+.tiannic input{
+    margin-bottom: 0;
+}
 .tiannic input{
     text-align: right;
     border:0;

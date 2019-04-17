@@ -1,15 +1,15 @@
 <template>
   <div class="mui-input-warp denluhead-box">
     <!--这个箭头-->
-    <img class="mima-img" src="../image/zuojiantou.png" alt="" @click="godelyan"  v-if="isForget">
-    <div class="denluhead" v-if="!isForget">
-      <img src="../image/gb@2x.png" @click="huifudenglu">
+    <template v-if="!isForget">
+      <img class="close" src="../image/gb@2x.png" @click="back('login')">
       <a href class="denlu" @click.prevent="change">{{ isLogin ? $t('register') : $t('login') }}</a>
-    </div>
-    <!-- <div v-if="false"> -->
-    <span v-if="isForget">找回密码</span>
-    <span></span>
-    <!-- </div> -->
+    </template>
+      <template   v-if="isForget">
+      <img class="mima-img" src="../image/zuojiantou.png" alt="" @click="back('forget')" >
+      <span>找回密码</span>
+      <span></span>
+      </template>
   </div>
 </template>
 <script>
@@ -35,11 +35,8 @@ export default {
     this.login = this.isLogin
   },
   methods: {
-    huifudenglu () {
-      console.log('hdl')
-    },
-    godelyan () {
-      this.$router.back(-1)
+    back (type) {
+      this.$emit('back', type)
     },
     change () {
       this.$emit('change', !this.isLogin)
@@ -49,32 +46,22 @@ export default {
 }
 </script>
 
-<style>
-.mima-img{
-  width:.5625rem /* 9/16 */;
-  height: 1.0625rem /* 17/16 */;
-}
+<style scoped>
 .denluhead-box {
   /* margin-top: 1.25rem; */
   height:2.75rem /* 44/16 */;
   line-height: 2.75rem /* 44/16 */;
-
-}
-.denluhead-box>span{
-  display: flex;
-  justify-content: center;
-}
-.denluhead {
-  width: 100%;
-  height: auto;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2.8125rem;
   align-items: center;
+
 }
-.denluhead img {
-  display: inline-block;
+.close {
   width: 0.90625rem;
   height: 0.90625rem;
+}
+.mima-img{
+  width: 0.5625rem /* 9/16 */;
+  height: 1.0625rem /* 17/16 */;
 }
 </style>

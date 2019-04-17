@@ -2,7 +2,7 @@
     <div>
         <div class="guanyuleft-warp">
             <div class="guanyuleft">
-            <img src="../../image/zuojiantou.png" alt="">
+            <img src="../../image/zuojiantou.png" alt="" @click="gowodeguanyuqian">
             </div>
             <div class="guanyu-head">
             关于我们
@@ -21,6 +21,11 @@ export default {
   data () {
     return {
       four: 4
+    }
+  },
+  methods: {
+    gowodeguanyuqian () {
+      this.$router.back(-1)
     }
   }
 }

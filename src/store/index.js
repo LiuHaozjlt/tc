@@ -134,6 +134,11 @@ export default new Vuex.Store({
     setIsLaos (state, isLaos) {
       state.isLaos = !!isLaos
       wls.set('isLaos', state.isLaos)
+    },
+
+    updateUserInfo (state, data = {}) {
+      state.userInfo = {...state.userInfo, ...data}
+      wls.set('userInfo', state.userInfo)
     }
   },
   actions: {
@@ -210,6 +215,20 @@ export default new Vuex.Store({
     },
     deleteSellerRelease ({commeit}, ids) {
       return $http.post('/apis/v1/seller/my-publish-delete', {ids})
+    },
+
+    updateUserInfo ({commit}, data) {
+      return $http.post('/apis/v1/user/current', data).then(({data}) => {
+        if (data.error_code === 0) {
+          commit('updateUserInfo', data)
+        }
+        return data
+      })
+    },
+
+    publishUser (ctx, data) {
+      let path = data.id ? '/apis/v1/user/releases/' + data.id : '/apis/v1/user/releases'
+      return $http.post(path, data)
     }
   }
 })

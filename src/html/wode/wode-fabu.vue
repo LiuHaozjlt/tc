@@ -61,14 +61,23 @@ export default {
       this.$router.back(-1)
     },
     modify (item) {
-      this.$router.push({
-        path: '/fabupeop',
-        query: {
-          releaseId: item.id,
-          releaseTypeId: item.release_type_id
-        }
-      })
       this.$store.commit('updatePublish', item)
+      if (this.isPersonal) {
+        this.$router.push({
+          path: '/fabuuser',
+          query: {
+            releaseId: item.id,
+            releaseTypeId: item.release_type_id
+          }
+        })
+      } else {
+        this.$router.push({
+          path: '/fabupeop',
+          query: {
+            releaseId: item.id
+          }
+        })
+      }
     },
     refresh (item) {
       this.$store.dispatch(this.isPersonal ? 'refreshUserRelease' : 'refreshSellerRelease', item.id).then(({data}) => {

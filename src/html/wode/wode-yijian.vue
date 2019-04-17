@@ -1,7 +1,9 @@
 <template>
     <div>
         <div class="wode-yijian-head">
+            <img src="../../image/zuojiantou.png" alt="" @click="goyijianqian">
             意见反馈
+            <div></div>
         </div>
         <div class="fankuicont">
             <textarea type="textarea"  row="5" cols="5" placeholder="请在吃输入你要反馈的内容" ref="fankuitext" @input="getfanhuiLeft">
@@ -34,6 +36,9 @@ export default {
     }
   },
   methods: {
+    goyijianqian () {
+      this.$router.back(-1)
+    },
     getfanhuiLeft () {
       this.fankuiwenzi = this.$refs.fankuitext.value.length
     }
@@ -42,6 +47,16 @@ export default {
 </script>
 
 <style>
+     .wode-yijian-head img{
+         width:.6875rem /* 11/16 */;
+         height: 1.25rem /* 20/16 */;
+     }
+    .wode-yijian-head{
+        display:flex;
+        justify-content: space-between;
+        height: 2.75rem /* 44/16 */;
+        align-items: center;
+    }
     .shang-tu{
         font-size:1rem /* 16/16 */;
         font-family:PingFang-SC-Regular;

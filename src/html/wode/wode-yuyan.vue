@@ -2,7 +2,7 @@
     <div>
 
         <div class="wode-yuyan">
-            <img src="../../image/zuojiantou.png" alt="">
+            <img src="../../image/zuojiantou.png" alt="" @click="wodeyuyanqian">
           选择语言
           <div></div>
         </div>
@@ -41,6 +41,9 @@ export default {
     }
   },
   methods: {
+    wodeyuyanqian () {
+      this.$router.back(-1)
+    },
     geticon () {
       this.dui = true
       this.duishang = false

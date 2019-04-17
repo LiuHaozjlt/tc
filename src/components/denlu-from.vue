@@ -22,9 +22,9 @@
           </div>
       </div>
       <div class="mui-input-warp">
-          <denlubtn @click.native="submit">
-            {{isForget ? "重置密码" : (isLogin ? "登录" : "注册")}}
-          </denlubtn>
+        <denlubtn @click.native="submit">
+          {{isForget ? "重置密码" : (isLogin ? "登录" : "注册")}}
+        </denlubtn>
       </div>
       <div class="mui-input-warp" v-if="isLogin && !isForget">
       <div class="mui-button-row">
@@ -62,7 +62,7 @@ export default {
       mobile: '',
       code: '',
       password: '',
-      xh: ''
+      xh: 86
     }
   },
   components: {
@@ -94,10 +94,17 @@ export default {
     getmessage () {
       let self = this
       // console.log('短信验证')
+      let type = 0
+
+      if (this.isForget) {
+        type = 1
+      } else if (this.isLogin) {
+        type = 2
+      }
       this.axius.post('/apis/v1/sms/send', {
         mobile: self.mobile,
-        xh: 86,
-        type: 0
+        xh: this.xh,
+        type: type
       }).then(({ data }) => {
         // console.log(data)
         if (data.error_code === 0) {
@@ -201,6 +208,10 @@ export default {
         return false
       }
 
+      if (this.isForget) {
+        this.resetPassword()
+        return
+      }
       if (!this.isLogin) {
         this.getregist()
       } else {
@@ -210,6 +221,38 @@ export default {
           this.loginByCode()
         }
       }
+    },
+    resetPassword () {
+      if (this.code === '') {
+        Toast('请输入验证码')
+        return false
+      }
+      if (this.password === '') {
+        Toast('请输入密码')
+        return false
+      }
+
+      this.axius.post('/apis/v1/user/password-reset', {
+        xh: this.xh,
+        password: this.password,
+        code: this.code,
+        mobile: this.mobile
+      }).then(p => {
+        if (p.data.error_code === 0) {
+          this.$emit('change', true)
+          this.code = ''
+          Toast('重置密码成功，现在可以登录啦')
+        } else {
+          // console.log('其他错误')
+          // 其他错误
+
+          Toast({
+            message: p.data.message,
+            position: 'center'
+            // duration: -1
+          })
+        }
+      })
     },
     callAfterLogin (userInfo) {
       Toast('登录成功')

@@ -14,13 +14,15 @@
             <img src="../../image/fx.png" alt class="shangjiafengx shangjiayou" @click="fengxiang">
           </div>
         </div>
-        <div class="dianpu-logo-cont">
-          <div class="dianpu-logo">
-            <img src alt>
-          </div>
+
+      </div>
+      <div class="dianpu-logo-cont">
+        <div class="dianpu-logo">
+          <img src alt>
         </div>
         <div class="gsmchen">公司名字</div>
       </div>
+
       <gsjianjie></gsjianjie>
     </div>
 
@@ -276,7 +278,7 @@ export default {
 }
 .dianpu-logo img {
   width: 100%;
-  height: 5.375rem /* 86/16 */;
+  height: 2.1875rem /* 35/16 */;
   /* border: 1px solid red; */
 }
 .sangeliand {
@@ -307,13 +309,11 @@ export default {
 }
 .dianpu-logo-cont {
   width: 100%;
-  text-align: center;
   display: flex;
-  justify-content: center;
 }
 .dianpu-logo {
-  width: 5.375rem /* 86/16 */;
-  height: 5.375rem /* 86/16 */;
+  width:2.1875rem /* 35/16 */;
+  height: 2.1875rem /* 35/16 */;
   border-radius: 100%;
   border: 2px solid rebeccapurple;
 }

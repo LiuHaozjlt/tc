@@ -4,43 +4,52 @@
             <!-- <div class="bianji-head wodeft"  >
                 昵称
             </div> -->
-            <header-page :pageName="ipttext" @goWherer='goWherer'></header-page>
+            <header-page :pageName="ipttext" @goWherer='back'></header-page>
             <!-- <div class="nicheng-head">{{}}</div> -->
-            <input type="text" placeholder="请输入昵称"  v-model="iptqingcheng">
+            <input type="text" placeholder="请输入昵称"  v-model.trim="nickname">
         </div>
         <div class="zhichi-cont">
             <div class="zhichi shisan">
                 支持<div class="six">6</div>位字符以内的中英文、数字
             </div>
         </div>
-        <div class="bianji-save" @click="savenic">保存</div>
+        <div class="bianji-save" @click="submit">保存</div>
     </div>
 </template>
 
 <script>
 import headerPage from '../../components/header'
+import {Toast} from 'vant'
 export default {
 
   data () {
     return {
       ipttext: '昵称',
-      iptqingcheng: ''
+      nickname: ''
 
     }
   },
-  // computed: {
-
-  // },
+  created () {
+    this.nickname = this.$store.state.userInfo.nickname
+  },
   methods: {
-    savenic (v) {
-      this.$router.push({name: 'bianji', params: {'iptqingcheng': this.iptqingcheng}})
-      // return this.ipttext
-    },
-    goWherer () {
-    //   console.log('123123123')
-      this.$router.push({
-        path: '/bianji'
+    submit (v) {
+      let {nickname, sex = 1, headimgurl = ''} = this.$store.state.userInfo.nickname
+      if (this.nickname === nickname) {
+        this.back()
+        return
+      }
+      this.$store.dispatch('updateUserInfo', {nickname: this.nickname, sex, headimgurl}).then(({error_code, message}) => {
+        if (error_code === 0) {
+          this.back()
+          Toast('修改成功')
+        } else {
+          Toast(message)
+        }
       })
+    },
+    back () {
+      this.$router.back()
     }
   },
   components: {headerPage}
