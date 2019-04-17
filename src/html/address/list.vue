@@ -40,13 +40,14 @@
 </template>
 
 <script>
+import {Toast} from 'vant'
 export default {
   data () {
     return {}
   },
   computed: {
     title () {
-      return this.$route.query.title || "地址列表"
+      return this.$route.query.title || '地址列表'
     },
     addressList () {
       return this.$store.state.userAddressList
@@ -59,12 +60,12 @@ export default {
     setDefault (item) {
       if (item.is_default) return
       this.$store
-        .dispatch("setDefaultUserAddress", item.user_address_id)
+        .dispatch('setDefaultUserAddress', item.user_address_id)
         .then(({ data }) => {
           if (data.error_code === 0) {
             this.addressList.forEach(item => (item.is_default = 0))
             item.is_default = 1
-            Toast("设置成功")
+            Toast('设置成功')
           } else {
             Toast(data.message)
           }
@@ -75,7 +76,7 @@ export default {
     },
     deleteAddress (item, index) {
       this.$store
-        .dispatch("deleteUserAddress", item.user_address_id)
+        .dispatch('deleteUserAddress', item.user_address_id)
         .then(({ data }) => {
           if (data.error_code === 0) {
             this.addressList.splice(index, 1)
@@ -85,25 +86,25 @@ export default {
         })
     },
     edit (address) {
-      this.$store.commit("setActiveAddress", address)
-      this.$router.push("/address/detail/" + address.user_address_id)
+      this.$store.commit('setActiveAddress', address)
+      this.$router.push('/address/detail/' + address.user_address_id)
     },
     select (address) {
-      if (this.$route.query.from === "publish") {
-        this.$store.commit("updatePublish", {
+      if (this.$route.query.from === 'publish') {
+        this.$store.commit('updatePublish', {
           user_address_id: address.user_address_id
         })
-        this.$store.commit("setActiveAddress", address)
+        this.$store.commit('setActiveAddress', address)
       }
       // 物流
-      if (this.$route.query.from === "logistic") {
-        this.$store.commit("setActiveAddress", address)
+      if (this.$route.query.from === 'logistic') {
+        this.$store.commit('setActiveAddress', address)
       }
       this.$router.back()
     }
   },
   created () {
-    this.$store.dispatch("getUserAddressList")
+    this.$store.dispatch('getUserAddressList')
   }
 }
 </script>

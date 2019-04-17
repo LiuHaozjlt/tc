@@ -29,10 +29,9 @@ const wls = {
 if (wls.get('isPersonal')) {
   wls.set('isPersonal', true)
 }
-
-let token = wls.get('userInfo').access_token || 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+// let token = wls.get('userInfo').access_token || 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
 let $http = updateRequst(token)
-
 export default new Vuex.Store({
   state: {
     showLoading: false,
@@ -173,18 +172,18 @@ export default new Vuex.Store({
         commit('saveUserAddressList', data.data)
       })
     },
-    updateUserAddress({commit}, data) {
+    updateUserAddress ({commit}, data) {
       let id = data.user_address_id
-      if(id) {
+      if (id) {
         return $http.put('/apis/v1/user-address/' + id, data)
       } else {
         return $http.post('/apis/v1/user-address', data)
       }
     },
-    deleteUserAddress({commit}, user_address_id) {
+    deleteUserAddress ({commit}, user_address_id) {
       return $http.post('/apis/v1/user-address/' + user_address_id)
     },
-    setDefaultUserAddress(ctx, user_address_id) {
+    setDefaultUserAddress (ctx, user_address_id) {
       return $http.post('/apis/v1/user-address/set-default', {user_address_id})
     },
 

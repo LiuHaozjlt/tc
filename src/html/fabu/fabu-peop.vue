@@ -9,7 +9,9 @@
       <!--发布中间内容-->
       <div class="fabu-peop-cent">
         <div class="biaoti-cent">
-          <div class="shiwu-bl"><div class="biaox">*</div>标题</div>
+          <div class="shiwu-bl">
+            <div class="biaox">*</div>标题
+          </div>
           <div class="biaoti-ipt">
             <textarea
               type="textarea"
@@ -24,7 +26,7 @@
         </div>
 
         <div class="biaoti-cent">
-          <div class="shiwu-bl">描述</div>
+          <div class="shiwu-bl">房屋描述</div>
           <div class="biaoti-ipt">
             <!-- <input type="text" placeholder="您可以对发布的内容进行详细的描述少时" class="shiwu"> -->
             <textarea
@@ -46,63 +48,53 @@
           <input type="number" v-model="publish.prices">
           <span @click="isPriceUnitShow = true">
             {{publish.prices_unit}}
-            <van-icon name="arrow" />
+            <van-icon name="arrow"/>
           </span>
         </div>
         <!--房源价格-->
         <div v-if="releaseTypeId === 2">
-            <div class="yue" >
-                <div class="yue-left">
-                    <div>*</div>
-                    <div>月租金</div>
-                </div>
-
-              
-                <div class="yue-rit">
-                    <input type="number" v-model="publish.prices">
-                  
-                        <div > {{publish.prices_unit}}</div>
-                        <div @click="isPriceUnitShow = true">></div>
-                    
-                </div>
-                
+          <div class="yue">
+            <div class="yue-left">
+              <div>*</div>
+              <div>月租金</div>
             </div>
-            <div class="yue">
-                <div class="yue-left">
-                    <div>*</div>
-                    <div>装修</div>
-                </div>
-
-                <div>
-                    <div class="yue-rit">
-                        <div class="yue-rit-rit" @click="isRentDecorationShow = true">
-                            <div class="qinze">{{rentDecoration.name}}</div>
-                            <div>></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="yue-rit">
+              <input type="number" v-model="publish.prices" placeholder="0">
+              <div class="huobizhonlei">{{publish.prices_unit}}</div>
+              <div @click="isPriceUnitShow = true">></div>
             </div>
-            <div class="yue">
-                <div class="yue-left">
-                    <div>*</div>
-                    <div>厅金</div>
-                </div>
-
-                <div>
-                    <div class="yue-rit">                      
-                        <div class="yue-rit-rit" >
-                            <div class="qinze"> {{rentHall.name}}</div>
-                            <div @click="isRentHallShow = true">></div>
-                        </div>
-                    </div>
-                </div>
+          </div>
+          <div class="yue">
+            <div class="yue-left">
+              <div>*</div>
+              <div>装修</div>
             </div>
+
+            <div class="yue-rit">
+              <div class="yue-rit-rit" @click="isRentDecorationShow = true">
+                <div class="qinze">{{rentDecoration.name}}</div>
+                <div>></div>
+              </div>
+            </div>
+          </div>
+          <div class="yue">
+            <div class="yue-left">
+              <div>*</div>
+              <div>厅金</div>
+            </div>
+            <div class="yue-rit">
+              <div class="yue-rit-rit">
+                <div class="qinze">{{rentHall.name}}</div>
+                <div @click="isRentHallShow = true">></div>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- <yueting></yueting> -->
         <!-- <div v-if="releaseTypeId === 2">
           <div class="yuezujing-cont">
             <div>月租金</div>
-           
+
             <input type="number" v-model="publish.prices">
             <span @click="isPriceUnitShow = true">
               {{publish.prices_unit}}
@@ -123,7 +115,7 @@
               <van-icon name="arrow" />
             </span>
           </div>
-        </div> -->
+        </div>-->
 
         <!--上车-->
         <!-- <shoushang></shoushang> -->
@@ -165,7 +157,7 @@
           <div class="xuanze-di">
             <div class="shiwu">{{activeAddress ? activeAddress.address : "选择地址"}}</div>
             <div>
-              <img src="../../image/jiantoutou.png" alt="">
+              <img src="../../image/jiantoutou.png" alt>
             </div>
           </div>
         </div>
@@ -205,7 +197,12 @@
               </div>
             </div>
           </div>
-          <van-switch  class="vantsw"  v-model="publish.is_trans" :active-value="2" :inactive-value="0"></van-switch>
+          <van-switch
+            class="vantsw"
+            v-model="publish.is_trans"
+            :active-value="2"
+            :inactive-value="0"
+          ></van-switch>
         </div>
         <div class="shisan weixiang">*为必填项</div>
 
@@ -222,14 +219,29 @@
           <div class="fang-bai">放弃翻译</div>
         </div>
       </mt-popup>
-      <mt-popup v-model="isPriceUnitShow" popup-transition="popup-fade" class="mtpop-box"  position="bottom">
-        <van-picker :columns="priceUnits"  @change="onPriceUnitChange" />
+      <mt-popup
+        v-model="isPriceUnitShow"
+        popup-transition="popup-fade"
+        class="mtpop-box"
+        position="bottom"
+      >
+        <van-picker :columns="priceUnits" @change="onPriceUnitChange"/>
       </mt-popup>
-      <mt-popup v-model="isRentDecorationShow" popup-transition="popup-fade" class="mtpop-box"  position="bottom">
-        <van-picker :columns="rentDecorations" value-key="name" @change="onRentDecorationChange" />
+      <mt-popup
+        v-model="isRentDecorationShow"
+        popup-transition="popup-fade"
+        class="mtpop-box"
+        position="bottom"
+      >
+        <van-picker :columns="rentDecorations" value-key="name" @change="onRentDecorationChange"/>
       </mt-popup>
-      <mt-popup v-model="isRentHallShow" popup-transition="popup-fade" class="mtpop-box"  position="bottom">
-        <van-picker :columns="rentHalls" value-key="name" @change="onRentHallChange" />
+      <mt-popup
+        v-model="isRentHallShow"
+        popup-transition="popup-fade"
+        class="mtpop-box"
+        position="bottom"
+      >
+        <van-picker :columns="rentHalls" value-key="name" @change="onRentHallChange"/>
       </mt-popup>
     </div>
   </div>
@@ -247,7 +259,7 @@ import jinhe from '../../components/jin-he'
 import gangzhi from '../../components/gang-zhi'
 import qiyehangye from '../../components/qiyehangye'
 import gongsjianjie from '../../components/gonsjianjie'
-import {mapState} from 'vuex'
+import { mapState } from 'vuex'
 Vue.use(Uploader)
 Vue.component(Switch.name, Switch)
 Vue.component(Popup.name, Popup)
@@ -294,9 +306,17 @@ export default {
     }
   },
   computed: {
-    ...mapState(['isPersonal', 'publish', 'publishReleaseValue', 'sellerInfo', 'activeAddress']),
+    ...mapState([
+      'isPersonal',
+      'publish',
+      'publishReleaseValue',
+      'sellerInfo',
+      'activeAddress'
+    ]),
     releaseTypeId () {
-      return this.isPersonal ? this.$route.query.releaseTypeId : this.sellerInfo.release_type_id
+      return this.isPersonal
+        ? this.$route.query.releaseTypeId
+        : this.sellerInfo.release_type_id
     },
     priceUnits () {
       return this.publishReleaseValue.prices_unit || []
@@ -320,9 +340,11 @@ export default {
   created () {
     // this.getruzhushengq()
     this.getstatus()
-    this.releaseValueRequst = this.$store.dispatch('getPublishReleaseValue').then(() => {
-      this.publishInitial.prices_unit = this.priceUnits[0]
-    })
+    this.releaseValueRequst = this.$store
+      .dispatch('getPublishReleaseValue')
+      .then(() => {
+        this.publishInitial.prices_unit = this.priceUnits[0]
+      })
 
     if (!this.isPersonal && !this.releaseTypeId) {
       this.$store.dispatch('getSellerInfo')
@@ -353,7 +375,9 @@ export default {
         let rhId = this.publish.rent_hall_id
         let img = this.publish.img
         if (rdId) {
-          this.rentDecoration = this.rentDecorations.find(item => item.id == rdId)
+          this.rentDecoration = this.rentDecorations.find(
+            item => item.id == rdId
+          )
         }
         if (rhId) {
           this.rentHall = this.rentHalls.find(item => item.id == rhId)
@@ -368,7 +392,6 @@ export default {
     gofabuele () {
       this.$router.back(-1)
     },
-
     remove (index) {
       this.imageList.splice(index, 1)
     },
@@ -411,7 +434,7 @@ export default {
       })
     },
     postquedfab () {
-      this.$store.dispatch('publishSeller', this.publish).then(({data}) => {
+      this.$store.dispatch('publishSeller', this.publish).then(({ data }) => {
         if (data.error_code === 0) {
           Toast('发布成功')
           this.$store.commit('updatePublish', {})
@@ -482,87 +505,100 @@ export default {
 </script>
 
 <style>
-.yue-rit input{
+.van-switch__node {
+  left: -11px !important;
+}
+.yue-rit input {
+  border: 0;
+}
+.huobizhonlei {
+  margin: 0 5% 0 5%;
+  color: #c3c3c3;
+}
+.yue-rit input {
   /* width:60%!important; */
   margin-bottom: 0;
 }
-.yue-rit-rit div:nth-child(1){
-  color:#C3C3C3;
+.yue-rit-rit div:nth-child(1) {
+  color: #c3c3c3;
 }
-.qinze{
-    font-size:.9375rem /* 15/16 */;
-font-family:PingFang-SC-Medium;
-font-weight:500;
-color:rgba(195,195,195,1);
+.qinze {
+  font-size: 0.9375rem /* 15/16 */;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: rgba(195, 195, 195, 1);
 }
-.yue-left div:nth-child(2){
-    font-size:.9375rem /* 15/16 */;
-font-family:PingFang-SC-Medium;
-font-weight:500;
-color:#333333;
+.yue-left div:nth-child(2) {
+  font-size: 0.9375rem /* 15/16 */;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: #333333;
 }
-.yue{
-    display:flex;
-    /* justify-content: space-between; */
+.yue {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10%;
+  background-color: white;
 }
-.yue-left{
-    display: flex;
-    align-items: center;
-    width:17%;
+.yue-left {
+  display: flex;
+  align-items: center;
+  width: 17%;
 }
-.yue-rit{
-    display:flex;
-    align-items: center;
-    width:70%;
+.yue-rit {
+  display: flex;
+  align-items: center;
+  width: 70%;
 }
-.yue-rit-rit{
-    display:flex;
+.yue-rit-rit {
+  display: flex;
 }
-.yuezujing-cont{
-  display:flex;
+.yuezujing-cont {
+  display: flex;
   justify-content: space-between;
 }
-.van-switch--on{
-  background-color: #FFE9BF!important;
+.van-switch--on {
+  background-color: #ffe9bf !important;
 }
-.van-switch__node{
-  width:1.625rem /* 26/16 */;
+.van-switch__node {
+  width: 1.625rem /* 26/16 */;
   height: 1.625rem /* 26/16 */;
 }
-.vantsw{
-  width:2.8125rem /* 45/16 */;
+.vantsw {
+  width: 2.8125rem /* 45/16 */;
   height: 1.5625rem /* 25/16 */;
 }
-.mint-switch-core::before{
-  background-color: #E7E7E7;
+.mint-switch-core::before {
+  background-color: #e7e7e7;
 }
-.biaox{
-    color:red;
+.biaox {
+  color: red;
 }
-.weixiang{
-    padding-top: 2%;
+.weixiang {
+  padding-top: 2%;
 }
-.fanyijif{
-    height: 10%;
-    display: flex;
-    align-items: center;
+.fanyijif {
+  height: 10%;
+  display: flex;
+  align-items: center;
 }
-.biaoti-ipt input{
-    margin-bottom: 0!important;
-    border:0!important;
+.biaoti-ipt input {
+  margin-bottom: 0 !important;
+  border: 0 !important;
 }
-.shuma-xiang{
-    height: 10%;
-    background-color:white;
-    display:flex;
-    align-items: center;
+.shuma-xiang {
+  height: 10%;
+  background-color: white;
+  display: flex;
+  align-items: center;
 }
-.deerse{
-    background-color: #FFFFFF;
+.deerse {
+  background-color: #ffffff;
 }
 .fabu-peop-cent {
   background-color: #f5f5f5;
-      padding-top: 4%;
+  padding-top: 4%;
 }
 .fabu-head {
   display: flex;
@@ -712,7 +748,7 @@ color:#333333;
   align-items: center;
   /* justify-content: flex-start; */
   justify-content: space-between;
-  height:10%;
+  height: 10%;
   background-color: white;
   /* 具体自5己定 */
 }
@@ -752,7 +788,7 @@ color:#333333;
   padding-bottom: 2.3125rem /* 37/16 */;
   word-break: break-all;
   width: 100%;
-  color:#C3C3C3;
+  color: #c3c3c3;
 }
 .fabu-head {
   height: 2.75rem /* 44/16 */;
@@ -770,12 +806,12 @@ color:#333333;
   color: rgba(195, 195, 195, 1);
 }
 .shiwu-bl {
-    background-color: white;
+  background-color: white;
   font-size: 0.9375rem /* 15/16 */;
   font-family: PingFang-SC-Medium;
   font-weight: 500;
   color: #333333;
-  display:flex;
+  display: flex;
 }
 .mint-switch-input:checked + .mint-switch-core {
   border: 0 !important;

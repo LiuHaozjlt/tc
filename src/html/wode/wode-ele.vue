@@ -58,7 +58,6 @@
             <div class="wode-ct-ic" @click="changeVersion">
                 <div class="wode-ct-ic-left">
                     <img src="../../image/qiehuan.png" alt=""  class="wode-cent-bot-ic">
-
                     <span >切换成 {{isPersonal ? "商家" : "个人"}}</span>
                 </div>
                 <img src="../../image/jiantoutou.png" alt="" class="ruzhuimg">
@@ -115,6 +114,7 @@ export default {
       this.$router.push({path: '/jubao'})
     },
     changeVersion () {
+      this.$store.state.publish = ''
       if (this.isPersonal) {
         if (this.userInfo.is_seller) {
           this.$store.commit('setPersonal', false)

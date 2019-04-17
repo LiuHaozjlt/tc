@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="shoucang-head">
-            <div class="wode-shoucang"><img src="../../image/Path .png" alt=""></div>
+            <div class="wode-shoucang" @click="goshoucangqian"><img src="../../image/Path .png" alt=""></div>
             <div class="wode-shoucang">我的收藏</div>
             <div class="shoucang-head-quxiao">编辑</div>
         </div>
@@ -14,6 +14,9 @@ export default {
     return {}
   },
   methods: {
+    goshoucangqian () {
+      this.$router.back(-1)
+    }
     // goJuBao () {
     //   this.$router.push({
     //     path: '/jubao'

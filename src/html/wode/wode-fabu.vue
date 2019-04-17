@@ -10,8 +10,10 @@
     <div>
       <div>
         <div class="wode-fabu-box" v-for="(item, index) in releases" :key="item.id">
-          <img :src="item.img" alt="">
-          <p>{{isLaos ? item.title_la : item.title}}</p>
+          <div class="chanpinlist">
+            <img :src="item.img" alt="">
+            <div class="chanpinlisttitle">{{isLaos ? item.title_la : item.title}}</div>
+          </div>
           <div class="wode-fabu-cent">
             <div class="xiu-chu">
               <!-- 修改要跳到修改页面 -->
@@ -115,6 +117,17 @@ export default {
 </script>
 
 <style>
+.chanpinlisttitle{
+  margin-left: 5%;
+}
+.chanpinlist{
+  display:flex;
+
+}
+.chanpinlist img{
+
+  height: 10%;
+}
 .wode-fabu-head img {
   width: 0.625rem /* 10/16 */;
   height: 1.0625rem /* 17/16 */;
@@ -151,8 +164,7 @@ export default {
   height: 1.875rem /* 30/16 */;
 }
 .wode-fabu-box {
-  height: 8.75rem /* 140/16 */;
-  /* background-color: blue; */
+
 }
 .xiu-chu div {
   background-color: #ffc74d;
