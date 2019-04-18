@@ -311,12 +311,14 @@ export default {
 .dianpu-logo-cont {
   width: 100%;
   display: flex;
+  align-items: center;
 }
 .dianpu-logo {
   width:2.1875rem /* 35/16 */;
   height: 2.1875rem /* 35/16 */;
   border-radius: 100%;
   border: 2px solid rebeccapurple;
+  margin-right: 3%;
 }
 .nian-rang {
   font-size: 0.9375rem /* 15/16 */;
