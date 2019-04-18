@@ -197,12 +197,13 @@
               </div>
             </div>
           </div>
-          <van-switch
+          <!-- <van-switch
             class="vantsw"
             v-model="publish.is_trans"
             :active-value="2"
             :inactive-value="0"
-          ></van-switch>
+          ></van-switch> -->
+          <mt-switch class="mitsw" v-model="publish.is_trans"    :active-value="2"  :inactive-value="0"></mt-switch>
         </div>
         <div class="shisan weixiang">*为必填项</div>
 
@@ -505,8 +506,14 @@ export default {
 </script>
 
 <style>
+.mint-toast-text{
+  width:100%!important;
+}
+ 
+/*   */
 .van-switch__node {
-  left: -11px !important;
+  /* left: -11px !important; */
+  background-color: blue;
 }
 .yue-rit input {
   border: 0;

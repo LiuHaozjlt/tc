@@ -11,7 +11,7 @@
               class="shangjiafanghui-zuo shangjiazuo"
               @click="gowodeele"
             >
-            <img src="../../image/fx.png" alt class="shangjiafengx shangjiayou" @click="fengxiang">
+            <img src="../../image/fx.png" alt class="shangjiafengx shangjiayou">
           </div>
         </div>
 
@@ -125,7 +125,7 @@ export default {
         region_lv3: '',
         page: 1
       },
-      xiazai: false,
+      xiazai: true,
       searchOptions: [],
       sellerType: '',
       releaseList: [],

@@ -10,10 +10,40 @@
     <div>
       <div>
         <div class="wode-fabu-box" v-for="(item, index) in releases" :key="item.id">
-          <div class="chanpinlist">
-            <img :src="item.img" alt="">
+           <div class="chanpinlist">
+              <div class="chanpinlist-left">
+                  <img :src="item.img" alt="">  
+              </div>  
+              <div class="chanpinlist-rit"> 
+                  <div class="chanpinlisttitle">{{isLaos ? item.title_la : item.title}}</div>
+                  <div class="fabu-rit-cent">
+                    <img src="../../image/zuojiantou.png" alt="">
+                    <div class="shishan">123</div>
+                  </div>
+                  <div class="fabu-rit-bot">
+                    <div class="fabu-rit-cent">
+                      <img src="../../image/zuojiantou.png" alt="">
+                      <div class="shishan">123</div>
+                    </div>
+                    <div class="fabuyu">发布于：{{item.created_time}}</div>
+                  </div>
+              </div> 
+            
+           </div>
+          <!-- <div class="chanpinlist-rigt">
             <div class="chanpinlisttitle">{{isLaos ? item.title_la : item.title}}</div>
-          </div>
+            <div class="fabu-rit-cent">
+                <img src="../../image/zuojiantou.png" alt="">
+                <div class="shishan">123</div>
+            </div>
+            <div class="fabu-rit-bot">
+              <div class="fabu-rit-cent">
+                <img src="../../image/zuojiantou.png" alt="">
+                <div class="shishan">123</div>
+              </div>
+              <div class="fabuyu">发布于：{{item.created_time}}</div>
+            </div>
+          </div> -->
           <div class="wode-fabu-cent">
             <div class="xiu-chu">
               <!-- 修改要跳到修改页面 -->
@@ -126,16 +156,78 @@ export default {
 </script>
 
 <style>
+.fabu-rit-bot{
+  width:100%;
+  display:flex;
+  justify-content: space-between;
+}
+.fabu-rit-cent,.fabu-rit-bot{
+  display:flex;
+  align-items: center;
+}
+ 
+.chanpinlist-left img{
+  width:6.875rem /* 110/16 */;
+  height: 4.5rem /* 72/16 */;
+  
+}
+.shishan{
+  font-size:.8125rem /* 13/16 */;
+font-family:PingFang-SC-Regular;
+font-weight:400;
+color:rgba(153,153,153,1);
+margin-left: 5%;
+}
+.fabu-rit-bot{
+  display: flex;
+  justify-content: space-between;
+}
+.fabu-rit-cent{
+  display:flex;
+  height: .875rem /* 14/16 */;
+ 
+}
+.fabu-rit-cent img{
+  width:.8125rem /* 13/16 */;
+  height: .875rem /* 14/16 */;
+}
+.xin-yan{
+  display:flex;
+}
+.xiaoxin{
+  display:flex;
+}
+.fabuyu{
+  font-size:.8125rem /* 13/16 */;
+font-family:PingFang-SC-Regular;
+font-weight:400;
+color:rgba(153,153,153,1);
+}
 .chanpinlisttitle{
-  margin-left: 5%;
+ 
+   font-size:.8125rem /* 13/16 */;
+font-family:PingFang-SC-Medium;
+font-weight:500;
+color:rgba(51,51,51,1);
+ display:-webkit-box;
+-webkit-box-orient:vertical;
+-webkit-line-clamp:2;
+overflow:hidden;
+}
+ 
+.chanpinlist-rit{
+   
 }
 .chanpinlist{
   display:flex;
+  justify-content: space-between;
+  height: 6.375rem /* 102/16 */;
+  border-bottom: 1px solid #EDEDED;
 
 }
 .chanpinlist img{
 
-  height: 10%;
+  
 }
 .wode-fabu-head img {
   width: 0.625rem /* 10/16 */;
@@ -144,6 +236,9 @@ export default {
 .wode-fabu-head {
   display: flex;
   justify-content: space-between;
+  height: 2.75rem /* 44/16 */;
+  align-items: center;
+  background-color: #ffc74d;
 }
 .pi-chu {
   font-size: 0.9375rem /* 15/16 */;
@@ -155,13 +250,13 @@ export default {
   /* width:70%; */
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .xiu-chu-in {
   height: 1.4375rem /* 23/16 */;
   line-height: 1.4375rem /* 7/16 */;
   text-align: center;
-  padding: 0 0.5rem; /*我随便设置的  OK  */
+  padding: 0 0.5rem;  
 }
 .wode-fabu-head {
   font-size: 1.125rem /* 18/16 */;

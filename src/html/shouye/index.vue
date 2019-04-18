@@ -4,8 +4,9 @@
      <div class="circle"></div>
     <div class="shouYe-nav-warp">
       <div class='shouYe-nav' v-for="(item, index) in tabs" :key="index">
+          <router-link  :to="item.to">
         <img src="item.icon" alt="" style="width:20px;height:20px;background-color:red;">
-        <router-link  :to="item.to">
+      
           <div :class="[pathName==item.to?'checkRoute':'nav-ft'] " >{{item.label}}</div>
         </router-link>
       </div>

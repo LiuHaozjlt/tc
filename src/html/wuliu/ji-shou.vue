@@ -3,7 +3,7 @@
     <div class="ji-shou-head">
       <div class="ji-shou-head-lef">
         <!-- <img src="" alt=""> -->
-        <div></div>
+        <div @click="godingdanqian"><</div>
         <div></div>
         <div>我的订单</div>
       </div>
@@ -112,6 +112,9 @@ export default {
     }
   },
   methods: {
+    godingdanqian () {
+      this.$router.back(-1)
+    },
     wupinleix () {
       this.popupVisible = true
     },

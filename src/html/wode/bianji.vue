@@ -55,6 +55,7 @@
     </div>
 </template>
 <script>
+import {Toast} from 'mint-ui'
 import fabupop from '../../components/fabu-pop'
 import headerPage from '../../components/header'
 export default {
