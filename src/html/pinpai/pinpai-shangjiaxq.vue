@@ -223,6 +223,7 @@ export default {
 }
 .pinpaishangjia-head {
   background-color: #b2bbcf;
+  height: 30%;
 }
 .shangjiazuo {
   width: 0.5625rem /* 9/16 */;
