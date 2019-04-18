@@ -42,10 +42,10 @@
             </div>
             </template>
         </div>
-        <div class="wode-cent-bot-cont">
+        <div class="wode-cent-bot-cont"  @click="gettongzhi">
             <div class="wode-cent-bot">
                 <img src="../../image/tongzhi.png" alt=""  class="wode-cent-bot-ic">
-                <span class="shiliu" @click="gettongzhi">通知</span>
+                <span class="shiliu">通知</span>
             </div>
             <div class="wode-cent-bot-rit">
                 <div class="wode-red">1</div>

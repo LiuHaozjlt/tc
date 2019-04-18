@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="shouyeinpt">
     <div class="shouYe-head-cent">
         <input type="text" placeholder="找房子,  找工作, 找二手车" @focus="$emit('focus')" v-model="inputVal">
     </div>
@@ -25,6 +25,9 @@ export default {
 </script>
 
 <style>
+    .shouyeinpt{
+      
+    }
     .shouYe-head-cent input{
         font-size:.8125rem /* 13/16 */;
         font-family:PingFang-SC-Medium;

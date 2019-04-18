@@ -1,9 +1,9 @@
 <template>
     <div>
-        {{tongzhi}}
-        <!-- <div class="wode-tongzhi">
+        <!-- {{tongzhi}} -->
+         <div class="wode-tongzhi">
             <div class="wode-tongzhi-top">
-                <div class="wode-tongzhi-headimg"><img src="../../image/zuojiantou.png" alt=""></div>
+                <div class="wode-tongzhi-headimg"><img src="../../image/zuojiantou.png" alt="" @click="gotongzhiqian"></div>
                 <div class="wode-tongzhi-head">通知</div>
                 <div class="wode-tongzhi-head"></div>
             </div>
@@ -19,7 +19,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>
 </template>
 
@@ -34,6 +34,9 @@ export default {
     this.gettongzhi()
   },
   methods: {
+    gotongzhiqian(){
+      this.$router.back(-1)
+    },
     gettongzhi () {
       let me = this
       let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'

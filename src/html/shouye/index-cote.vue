@@ -5,6 +5,7 @@
       <div class="shouYe-head-top">
         <img src="../../image/图层 776@2x.png" alt>
       </div>
+      
       <zhaoipt @focus="inipt"></zhaoipt>
 
       <div>
@@ -245,7 +246,7 @@ export default {
 .tong-new-warp {
   display: flex;
   align-items: center;
-  background: rgba(255, 199, 77, 1);
+   background-color: #ffeec9;
 }
 .tong-new-warp img {
   width: 0.375rem /* 6/16 */;
@@ -358,13 +359,14 @@ export default {
 .shouYe-cent-left div img {
   display: inline-block;
   /* width:100%; */
-  height: 3.625rem /* 58/16 */;
+  height: 4.625rem /* 58/16 */;
 }
 .shouYe-rigt-top {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
+  height: 1.8125rem /* 29/16 */;
 }
 .shouYe-cent-rigt {
   margin-left: 3%;

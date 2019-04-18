@@ -8,7 +8,7 @@
       <div class="pi-chu">批量删除</div>
     </div>
     <div>
-      <div>
+      <div class="wode-fabu-box-warp">
         <div class="wode-fabu-box" v-for="(item, index) in releases" :key="item.id">
            <div class="chanpinlist">
               <div class="chanpinlist-left">
@@ -156,6 +156,20 @@ export default {
 </script>
 
 <style>
+.xiu-chu{
+  padding-bottom: 4%;
+}
+.wode-fabu-box{
+  background-color: white;
+}
+.wode-fabu-box-warp{
+  background-color: #F5F5F5;
+  height: 100%;
+}
+.wode-fabu-cent{
+  margin-top:5%;
+  
+}
 .fabu-rit-bot{
   width:100%;
   display:flex;
@@ -165,9 +179,11 @@ export default {
   display:flex;
   align-items: center;
 }
- 
+.chanpinlist-left{
+  margin-right: 4%;
+}
 .chanpinlist-left img{
-  width:6.875rem /* 110/16 */;
+ 
   height: 4.5rem /* 72/16 */;
   
 }
@@ -220,9 +236,10 @@ overflow:hidden;
 }
 .chanpinlist{
   display:flex;
-  justify-content: space-between;
+  
   height: 6.375rem /* 102/16 */;
   border-bottom: 1px solid #EDEDED;
+  padding-top:4%;
 
 }
 .chanpinlist img{
@@ -268,6 +285,7 @@ overflow:hidden;
   height: 1.875rem /* 30/16 */;
 }
 .wode-fabu-box {
+  margin-bottom: 2%;
 
 }
 .xiu-chu div {

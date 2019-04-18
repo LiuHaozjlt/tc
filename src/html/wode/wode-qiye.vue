@@ -315,7 +315,7 @@ export default {
       this.zhizhaodivs = true
       this.zhizhao = false
       this.yingyezz = this.shenghez
-      this.$router.push({path: '/index/wodeele'})
+      // this.$router.push({path: '/index/wodeele'})
     },
 
     getguimo (a) {

@@ -50,9 +50,9 @@
               <div class="qiye-xuan">
                   <div class="ruqi">
                       <div class="ruzhu"><img src="../../image/ruzhu.png" alt=""></div>
-                      <div class="qiyezen" @click="qiyerenzhen">企业认证</div>
+                      <div class="qiyezen">企业认证</div>
                   </div>
-                  <div class="xuantian">
+                  <div class="xuantian"  @click="qiyerenzhen">
                       <div>选填</div>
                       <img src="../../image/jiantoutou.png" alt="">
                   </div>

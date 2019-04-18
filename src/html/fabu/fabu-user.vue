@@ -458,7 +458,7 @@ export default {
   width: 4.0625rem /* 65/16 */;
   height: 4.0625rem /* 65/16 */;
   border-radius: 0.5rem /* 8/16 */;
-  border: 1px solid red;
+  
 }
 .qued-fab {
   margin-top: 2.8125rem /* 45/16 */;

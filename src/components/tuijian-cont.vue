@@ -12,10 +12,10 @@
                     <div class="rigt-wenzi wanxiang" style="text-align:right">{{item.address}}</div>
                     <div class="shouYe-rigt-bot">
                         <div
-                        class="  rigt-ft"
+                        class="rigt-ft"
                         style="display:inline;background-color:#FFC74D;text-align:center"
                         >{{item.type.name}}</div>
-                        <div class="rigt-wenzi" style="display:inline">
+                        <div class="rigt-wenzi dianzan" style="display:inline">
                             <img :src="item.imgi" alt>
                             {{item.num}}
                         </div>
@@ -88,6 +88,12 @@ export default {
 }
 </script>
 <style>
+    .dianzan img{
+      width:10%;
+      height: .75rem /* 12/16 */;
+      border:1px solid red;
+      
+    }
     .rigt-wenzi{
       color:#333333;
     }
