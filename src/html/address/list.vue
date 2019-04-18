@@ -66,6 +66,8 @@ export default {
             this.addressList.forEach(item => (item.is_default = 0))
             item.is_default = 1
             Toast('设置成功')
+            // 跳回订单页面
+            this.$router.back(-1)
           } else {
             Toast(data.message)
           }

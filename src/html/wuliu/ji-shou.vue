@@ -108,6 +108,7 @@ Vue.component(Popup.name, Popup)
 export default {
   data () {
     return {
+      defaultUserAddress:null,
       popupVisible: false
     }
   },
@@ -123,7 +124,7 @@ export default {
     },
     getwuliudingdan () {
       let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
-      this.axius
+      this.axios
         .get('/apis/v1/logistic', {
           data: {
             goods_type_id: 444444,
@@ -144,6 +145,16 @@ export default {
   },
   mounted () {
     this.getwuliudingdan()
+   
+     this.$store
+        .dispatch('getDefaultUserAddress')
+        .then(({ data }) => {
+          
+        this.defaultUserAddress = data.data.find(item=>item.is_default===1)
+        console.log(this.defaultUserAddress)
+    
+    
+        })
   }
 }
 </script>

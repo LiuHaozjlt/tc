@@ -51,6 +51,7 @@ export default new Vuex.Store({
     },
     publish: {},
     publishReleaseValue: {},
+  
     userAddressList: [],
     activeAddress: null,
     isLaos: wls.get('isLaos') || false
@@ -122,6 +123,7 @@ export default new Vuex.Store({
         state.publish = {...state.publish, ...data}
       }
     },
+   
     savePublishReleaseValue (state, data = {}) {
       state.publishReleaseValue = data
     },
@@ -171,6 +173,9 @@ export default new Vuex.Store({
     publishSeller ({commit}, data) {
       let path = data.id ? '/apis/v1/seller/my-release-update/' + data.id : '/apis/v1/seller/my-release-create'
       return $http.post(path, data)
+    },
+    getDefaultUserAddress({commit}){
+       return   $http.get('/apis/v1/user-address')
     },
     getUserAddressList ({commit}) {
       return $http.get('/apis/v1/user-address').then(({data}) => {
@@ -229,6 +234,17 @@ export default new Vuex.Store({
     publishUser (ctx, data) {
       let path = data.id ? '/apis/v1/user/releases/' + data.id : '/apis/v1/user/releases'
       return $http.post(path, data)
+    },
+    setZhiD({commit},params){
+      debugger
+     return $http.post('/apis/v1/user/top-releases', {
+        user_release_id:params.id,
+        scored_top_id:'scored_top_day'+params.days
+      })
+    },
+    getNotice({commit},params){
+      return $http.get('/apis/v1/user/notice')
     }
   }
+ 
 })

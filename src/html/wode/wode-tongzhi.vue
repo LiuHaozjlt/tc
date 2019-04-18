@@ -32,6 +32,15 @@ export default {
   },
   created () {
     this.gettongzhi()
+
+      this.$store
+        .dispatch('getNotice')
+        .then(({ data }) => {
+          
+     debugger
+    
+        })
+    
   },
   methods: {
     gotongzhiqian(){

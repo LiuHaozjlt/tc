@@ -119,14 +119,15 @@ export default {
       })
     },
     top (item) {
-      this.$store.dispatch('topUserRelease', item.id).then(({data}) => {
-        if (data.error_code === 0) {
-          Toast('置顶成功')
-          this.getReleases()
-        } else {
-          Toast(data.message)
-        }
-      })
+      // this.$store.dispatch('topUserRelease', item.id).then(({data}) => {
+      //   if (data.error_code === 0) {
+      //     Toast('置顶成功')
+      //     this.getReleases()
+      //   } else {
+      //     Toast(data.message)
+      //   }
+      // })
+      this.$router.push('wodezhid')
     },
     shelf (item) {
       this.$store.dispatch('shelfhUserRelease', item.id).then(({data}) => {

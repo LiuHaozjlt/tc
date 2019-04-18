@@ -7,8 +7,8 @@
         </div>
         <tujian :typeId="type" :showNum='showNum'></tujian>
         <div class="zhid-chang">置顶时长</div>
-        <div  @click="change(item.id)" class="wode-zhid" v-for="(item,index) in five" :key="index">
-            <div>1天</div>
+        <div  @click="change(item)" class="wode-zhid" v-for="(item,index) in five" :key="index">
+            <div>{{item.score}}天</div>
             <div>{{item.score}}积分</div>
              <div class="zhid-yuan" >
                 <div class="zhid-yuan-in" v-if="item.id !== checkId"></div>
@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="dang-fen">当前积分：<div class="dang-cout">50</div></div>
-        <div class="zhid-qued">
+        <div class="zhid-qued" @click="sure">
           确定
         </div>
     </div>
@@ -43,11 +43,25 @@ export default {
         }
       ],
       checkId: 0,
+      days:null,
       yuan: true,
       circ: false
     }
   },
   methods: {
+    sure(){
+        let id=this.checkId
+        let days=this.days
+
+    this.$store
+        .dispatch('setZhiD',{id,days})
+        .then(({ data }) => {
+          
+       debugger
+    
+    
+        })
+    },
     gozhidqian () {
       this.$router.back(-1)
     },
@@ -59,8 +73,9 @@ export default {
       this.circ = false
       this.yuan = true
     },
-    change (id) {
-      this.checkId = id
+    change (item) {
+      this.checkId = item.id
+      this.days=item.score
     }
 
   },
