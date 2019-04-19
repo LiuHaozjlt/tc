@@ -14,7 +14,7 @@
             <div>{{item.mobile}}</div>
             </div>
         </div>
-        <div class="xuanze-top-ft">{{item.country + item.province + item.city + item.district + item.address}}</div>
+        <div class="xuanze-top-ft duohangshengnue">{{item.country + item.province + item.city + item.district + item.address}}</div>
         <div class="xuanze-bot">
           <div class="xuanze-top-bot" :class="{active: item.is_default}" @click="setDefault(item)">
             <img src="../../image/choose_N.png" alt>
@@ -77,6 +77,7 @@ export default {
       this.shewei = index
     },
     deleteAddress (item, index) {
+      debugger
       this.$store
         .dispatch('deleteUserAddress', item.user_address_id)
         .then(({ data }) => {
@@ -92,15 +93,17 @@ export default {
       this.$router.push('/address/detail/' + address.user_address_id)
     },
     select (address) {
-      if (this.$route.query.from === 'publish') {
+      let {from, type} = this.$route.query
+      if (from === 'publish') {
         this.$store.commit('updatePublish', {
           user_address_id: address.user_address_id
         })
         this.$store.commit('setActiveAddress', address)
       }
       // 物流
-      if (this.$route.query.from === 'logistic') {
+      if (from === 'logistic') {
         this.$store.commit('setActiveAddress', address)
+        this.$store.commit('updateLogisticOrder', {[type === 'send' ? 'sendAddress' : 'receiveAddress']: address})
       }
       this.$router.back()
     }
@@ -112,6 +115,12 @@ export default {
 </script>
 
 <style>
+.duohangshengnue{
+  display:-webkit-box;
+-webkit-box-orient:vertical;
+-webkit-line-clamp:3;
+overflow:hidden;
+}
 .tianjia {
   width: 100%;
   bottom: 0.4375rem /* 7/16 */;

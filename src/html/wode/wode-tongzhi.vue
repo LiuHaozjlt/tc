@@ -32,18 +32,14 @@ export default {
   },
   created () {
     this.gettongzhi()
-
-      this.$store
-        .dispatch('getNotice')
-        .then(({ data }) => {
-          
-     debugger
-    
-        })
-    
+    this.$store
+      .dispatch('getNotice')
+      .then(({ data }) => {
+        console.log('通知', data)
+      })
   },
   methods: {
-    gotongzhiqian(){
+    gotongzhiqian () {
       this.$router.back(-1)
     },
     gettongzhi () {

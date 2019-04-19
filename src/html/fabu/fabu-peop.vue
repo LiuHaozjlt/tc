@@ -509,7 +509,7 @@ export default {
 .mint-toast-text{
   width:100%!important;
 }
- 
+
 /*   */
 .van-switch__node {
   /* left: -11px !important; */

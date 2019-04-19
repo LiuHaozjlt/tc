@@ -24,6 +24,7 @@
 
 <script>
 import tujian from '../../components/tuijian-cont'
+import { Toast } from 'vant'
 export default {
   data () {
     return {
@@ -43,24 +44,25 @@ export default {
         }
       ],
       checkId: 0,
-      days:null,
+      days: null,
       yuan: true,
       circ: false
     }
   },
   methods: {
-    sure(){
-        let id=this.checkId
-        let days=this.days
-
-    this.$store
-        .dispatch('setZhiD',{id,days})
+    sure () {
+      let id = this.checkId
+      let days = this.days
+      this.$store
+        .dispatch('setZhiD', {id, days})
         .then(({ data }) => {
-          
-       debugger
-    
-    
+          if (data.error_code === 400) {
+            Toast(data.message)
+          }
         })
+    },
+    getjifen () {
+      // this.$store.
     },
     gozhidqian () {
       this.$router.back(-1)
@@ -75,7 +77,7 @@ export default {
     },
     change (item) {
       this.checkId = item.id
-      this.days=item.score
+      this.days = item.score
     }
 
   },

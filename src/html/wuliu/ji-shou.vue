@@ -3,39 +3,39 @@
     <div class="ji-shou-head">
       <div class="ji-shou-head-lef">
         <!-- <img src="" alt=""> -->
-        <div @click="godingdanqian"><</div>
+        <div @click="godingdanqian">&lt;</div>
         <div></div>
-        <div>我的订单</div>
+        <div @click="godingdan">我的订单</div>
       </div>
       <div class="ji-shou-head-cent">
         <img src="../../image/wl.png" alt>
       </div>
     </div>
-    <div class="ji-cent-top" @click="getji">
+    <div class="ji-cent-top" @click="selectAddress('send')">
       <div class="ji-shou-ji">
         <img src="../../image/jijian.png" alt>
       </div>
       <div class="ji-cent-cent">
         <div class="name-cent">
-          <div class="ji-name name-numb">谢谢</div>
-          <div class="ji-numb">11111111111</div>
+          <div class="ji-name name-numb">{{sendAddress.consignee || '寄件人'}}</div>
+          <div class="ji-numb">{{sendAddress.mobile}}</div>
         </div>
-        <div class="ji-cent">湖南省 长沙市 荔枝湾 侨中中路223-227号 光电园七号楼209</div>
+        <div class="ji-cent">{{concatAddress(sendAddress)}}</div>
       </div>
       <div class="ji-rit">
         <img src="../../image/jiantoutou.png" alt>
       </div>
     </div>
-    <div class="ji-cent-top">
+    <div class="ji-cent-top" @click="selectAddress('receive')">
       <div class="ji-shou-ji">
         <img src="../../image/jijian.png" alt>
       </div>
       <div class="ji-cent-cent">
         <div class="name-cent">
-          <div class="ji-name name-numb">谢谢</div>
-          <div class="ji-numb">11111111111</div>
+          <div class="ji-name name-numb">{{receiveAddress.consignee || '收件人'}}</div>
+          <div class="ji-numb">{{receiveAddress.mobile}}</div>
         </div>
-        <div class="ji-cent">湖南省 长沙市 荔枝湾 侨中中路223-227号 光电园七号楼209</div>
+        <div class="ji-cent">{{concatAddress(receiveAddress)}}</div>
       </div>
       <div class="ji-rit">
         <img src="../../image/jiantoutou.png" alt>
@@ -43,18 +43,18 @@
     </div>
     <div class="qiwang">
       <div class="ji-cent-bot-lef">期望上门收货时间：</div>
-      <div class="ji-cent-bot-rit">
-        <div>今天</div>
+      <div class="ji-cent-bot-rit" @click="riQichajian">
+        <div >今天</div>
         <div class="jtian">
           <img src="../../image/jiantoutou.png" alt>
         </div>
       </div>
     </div>
 
-    <div class="qiwang" @click="wupinleix">
+    <div class="qiwang" @click="showGoodsType">
       <div class="ji-cent-bot-lef">物品类型：</div>
       <div class="ji-cent-bot-rit">
-        <div>生活用品</div>
+        <div>{{goodsType[isLaos ? 'name_la' : 'name']}}</div>
         <div class="jtian">
           <img src="../../image/jiantoutou.png" alt>
         </div>
@@ -65,22 +65,22 @@
       <div class="ji-cent-bot-lef">估计重量：</div>
       <div class="ji-cent-bot-rit">
         <div class="jia">
-          <img src="../../image/xjh.png" alt>
+          <img src="../../image/xjh.png" alt @click="addWeight(1)">
         </div>
-        <div class="jtian zhonliang">1kg</div>
+        <div class="jtian zhonliang">{{logisticOrder.weight}}kg</div>
         <div class="jian">
-          <img src="../../image/xjjh.png" alt>
+          <img src="../../image/xjjh.png" alt @click="addWeight(-1)">
         </div>
       </div>
     </div>
 
     <div class="beizhu">
       备注：
-      <textarea type="text" class="beizhu-text" placeholder="快点来少时诵诗书所所所"/>
+      <textarea v-model="logisticOrder.memo" class="beizhu-text" placeholder="快点来少时诵诗书所所所"/>
 
       <div class="jishu">
         <div class="jishugeshu">
-          <div>0</div>/
+          <div>{{memoLength}}</div>/
           <div>50</div>
         </div>
       </div>
@@ -90,76 +90,180 @@
       <div>《老挝咨询物流服务条款》</div>
     </div>
 
-    <div class="tijiao">提交</div>
+    <div class="tijiao" @click="submit">提交</div>
 
     <!--物品类
     型弹窗-->
-    <mt-popup class="wupinleixing" v-model="popupVisible" position="bottom">
+    <van-popup class="wupinleixing" v-model="popupVisible" position="bottom">
       <div class="tou-shou">投递违禁物品和无包装物品将拒收</div>
-    </mt-popup>
+    </van-popup>
+    <van-popup v-model="isGoodsTypeShow" position="bottom">
+      <van-picker :columns="logisticGoodsType" :value-key="isLaos ? 'name_la' : 'name'" @change="selectGoodsType" />
+    </van-popup>
+
+    <!--时间日期-->
+    <van-popup v-model="show" position="bottom">
+      <van-datetime-picker
+      v-model="currentDate"
+      type="date"
+      :min-date="minDate"
+      />
+    </van-popup>
+
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
-import { Popup } from 'mint-ui'
+import {mapState} from 'vuex'
+import {Popup, Toast} from 'vant'
+import { DatetimePicker } from 'vant'
+Vue.use(DatetimePicker)
+// Vue.use(Popup)
 
-Vue.component(Popup.name, Popup)
 export default {
   data () {
+    this.orderInitial = {
+      sendAddress: {},
+      receiveAddress: {},
+      goodsType: {},
+      weight: 1,
+      receive_time: 1,
+      memo: ''
+    }
     return {
-      defaultUserAddress:null,
-      popupVisible: false
+      show: false,
+      defaultUserAddress: null,
+      popupVisible: false,
+      isGoodsTypeShow: false,
+
+      minHour: 10,
+      maxHour: 20,
+      minDate: new Date(),
+      maxDate: new Date(2019, 10, 1),
+      currentDate: new Date()
+    }
+  },
+  computed: {
+    ...mapState(['logisticOrder', 'logisticGoodsType', 'isLaos']),
+    memoLength () {
+      return (this.logisticOrder.memo || '').length
+    },
+    sendAddress () {
+      return this.logisticOrder.sendAddress || {}
+    },
+    receiveAddress () {
+      return this.logisticOrder.receiveAddress || {}
+    },
+    goodsType () {
+      return this.logisticOrder.goodsType || {}
+    }
+  },
+  created () {
+    if (Object.keys(this.logisticOrder).length === 0) {
+      this.$store.commit('updateLogisticOrder', this.orderInitial)
     }
   },
   methods: {
+    formatter () {
+
+    },
+    riQichajian () {
+      this.show = true
+    },
+    godingdan () {
+      this.$router.push({path: '/dingdan'})
+    },
     godingdanqian () {
       this.$router.back(-1)
     },
-    wupinleix () {
-      this.popupVisible = true
+    showGoodsType () {
+      this.isGoodsTypeShow = true
     },
-    getji () {
-      this.$router.push({ path: '/address/list?from=logistic&title=选择寄件人' })
+    selectAddress (type) {
+      this.$router.push({
+        path: '/address/list?from=logistic',
+        query: {
+          title: type === 'send' ? '选择寄件人' : '选择收件人',
+          type
+        }
+      })
     },
-    getwuliudingdan () {
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
-      this.axios
-        .get('/apis/v1/logistic', {
-          data: {
-            goods_type_id: 444444,
-            weight: 99,
-            send_address_id: 555,
-            receive_address_id: 3333,
-            code: 4,
-            receive_time: 3
-          },
-          headers: {
-            Authorization: 'Bearer ' + token
-          }
-        })
-        .then(p => {
-          // console.log('寄收', p.data)
-        })
+
+    concatAddress ({provice = '', city = '', address = ''}) {
+      return [provice, city, address].join(' ')
+    },
+    selectGoodsType (picker, value, index) {
+      this.$store.commit('updateLogisticOrder', {goodsType: value})
+    },
+    addWeight (n) {
+      // debugger
+      let weight = this.logisticOrder.weight + n
+
+      if (weight === 0) weight = 1
+
+      this.logisticOrder.weight = weight
+    },
+    submit () {
+      let {
+        goodsType,
+        sendAddress,
+        receiveAddress,
+        weight,
+        receive_time,
+        memo
+      } = this.logisticOrder
+
+      let data = {
+        goods_type_id: goodsType.goods_type_id,
+        send_address_id: sendAddress.user_address_id,
+        receive_address_id: receiveAddress.user_address_id,
+        memo: memo.substr(0, 50),
+        weight,
+        receive_time
+      }
+      if (!data.send_address_id) {
+        Toast('请选择寄件人')
+        return
+      }
+      if (!data.receive_address_id) {
+        Toast('请选择寄件人')
+        return
+      }
+      if (!data.goods_type_id) {
+        Toast('请选择物品类型')
+        return
+      }
+
+      this.$store.dispatch('createLogisticOrder', data).then(({data}) => {
+        if (data.error_code === 0) {
+          Toast('物流订单创建成功')
+          this.$router.replace('/dingdan') // 创建成功后跳到物流订单列表
+          this.$store.commit('updateLogisticOrder', {_cover: true})
+        } else {
+          Toast(data.message)
+        }
+      })
     }
   },
   mounted () {
-    this.getwuliudingdan()
-   
-     this.$store
-        .dispatch('getDefaultUserAddress')
-        .then(({ data }) => {
-          
-        this.defaultUserAddress = data.data.find(item=>item.is_default===1)
-        console.log(this.defaultUserAddress)
-    
-    
-        })
+    if (this.logisticGoodsType.length === 0) {
+      this.$store.dispatch('getLogisticGoodsType').then(() => {
+        let goodsType = this.logisticGoodsType[0]
+        goodsType && this.$store.commit('updateLogisticOrder', {goodsType})
+      })
+    }
   }
 }
 </script>
 
 <style>
+.van-picker-column{
+  flex:static;
+}
+.van-picker__columns >.van-picker-column:nth-child(1){
+  display:none;
+}
 .tou-shou {
     width:100%;
   font-size: 0.8125rem /* 13/16 */;

@@ -51,10 +51,12 @@ export default new Vuex.Store({
     },
     publish: {},
     publishReleaseValue: {},
-  
+
     userAddressList: [],
     activeAddress: null,
-    isLaos: wls.get('isLaos') || false
+    isLaos: wls.get('isLaos') || false,
+    logisticOrder: {},
+    logisticGoodsType: []
   },
   getters: {
     testa (state) {
@@ -123,7 +125,7 @@ export default new Vuex.Store({
         state.publish = {...state.publish, ...data}
       }
     },
-   
+
     savePublishReleaseValue (state, data = {}) {
       state.publishReleaseValue = data
     },
@@ -141,6 +143,19 @@ export default new Vuex.Store({
     updateUserInfo (state, data = {}) {
       state.userInfo = {...state.userInfo, ...data}
       wls.set('userInfo', state.userInfo)
+    },
+
+    updateLogisticOrder (state, data) {
+      if (data._cover) {
+        delete data._cover
+        state.loginsticOrder = data
+      } else {
+        state.logisticOrder = { ...state.logisticOrder, ...data }
+      }
+    },
+
+    saveLogisticGoodsType (state, data = []) {
+      state.logisticGoodsType = data
     }
   },
   actions: {
@@ -174,8 +189,8 @@ export default new Vuex.Store({
       let path = data.id ? '/apis/v1/seller/my-release-update/' + data.id : '/apis/v1/seller/my-release-create'
       return $http.post(path, data)
     },
-    getDefaultUserAddress({commit}){
-       return   $http.get('/apis/v1/user-address')
+    getDefaultUserAddress ({commit}) {
+      return $http.get('/apis/v1/user-address')
     },
     getUserAddressList ({commit}) {
       return $http.get('/apis/v1/user-address').then(({data}) => {
@@ -235,16 +250,40 @@ export default new Vuex.Store({
       let path = data.id ? '/apis/v1/user/releases/' + data.id : '/apis/v1/user/releases'
       return $http.post(path, data)
     },
-    setZhiD({commit},params){
-      debugger
-     return $http.post('/apis/v1/user/top-releases', {
-        user_release_id:params.id,
-        scored_top_id:'scored_top_day'+params.days
+    getscorelist ({commit}, params) {
+      // debugger
+      return $http.post('/apis/v1/config/scored-top', {
+
       })
     },
-    getNotice({commit},params){
+    setZhiD ({commit}, params) {
+      // debugger
+      return $http.post('/apis/v1/user/top-releases', {
+        user_release_id: params.id,
+        scored_top_id: 'scored_top_day' + params.days
+      })
+    },
+    getNotice ({commit}, params) {
       return $http.get('/apis/v1/user/notice')
+    },
+
+    createLogisticOrder ({commit}, data) {
+      return $http.post('/apis/v1/logistic', data)
+    },
+    getLogisticOrder (ctx, params) {
+      return $http.get('/apis/v1/logistic', {params})
+    },
+    deleteLogisticOrder (ctx, id) {
+      return $http.delete('/apis/v1/logistic/' + id)
+    },
+
+    getLogisticGoodsType ({commit}) {
+      return $http.get('/apis/v1/logistic/goods-type').then(({data}) => {
+        if (data.error_code === 0) {
+          commit('saveLogisticGoodsType', data.data)
+        }
+      })
     }
   }
- 
+
 })

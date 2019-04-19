@@ -135,17 +135,17 @@ export default {
     isLaos () {
       return this.$store.state.isLaos
     },
-    from() {
+    from () {
       return this.$route.query.from
     },
-    id() {
+    id () {
       return this.$route.params.id
     }
   },
-  created() {
-    if(this.id) {
+  created () {
+    if (this.id) {
       let activeAddress = this.$store.state.activeAddress
-      if(activeAddress) {
+      if (activeAddress) {
         this.userAddress = activeAddress
         this.region = activeAddress.province + activeAddress.city
         // this.pickervalue = [this.userAddress.region_lv2, this.userAddress.region_lv3]
@@ -158,12 +158,12 @@ export default {
     this.getRegion()
   },
   methods: {
-    back() {
+    back () {
       this.$router.back()
     },
     submit () {
       this.$store.dispatch('updateUserAddress', this.userAddress).then(({data}) => {
-        if(data.error_code === 0) {
+        if (data.error_code === 0) {
           Toast(this.id ? '修改成功' : '添加成功')
           this.back()
         } else {

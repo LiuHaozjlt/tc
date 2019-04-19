@@ -1,41 +1,88 @@
 <template>
     <div>
         <div class="dingdan">
+            <div @click="godingdanqian"><</div>
             我的订单
+            <div></div>
         </div>
         <div class="dingdan-warp">
-            <div class="hao-chu">
-                <div class="dingdan-head">
-                    <div>订单号：</div>
-                    <div>222222222222</div>
+            <div class="dingdan-item" v-for="(item, index) in list" :key="item.logistic_id">
+                <div class="hao-chu">
+                    <div class="dingdan-head">
+                        <div>订单号：</div>
+                        <div>{{item.order_sn}}</div>
+                    </div>
+                    <div class="dingdan-head-rit">
+                        <img src="../../image/ssscc.png" alt="">
+                        <div @click="remove(item, index)">删除</div>
+                    </div>
                 </div>
-                <div class="dingdan-head-rit">
-                    <img src="../../image/ssscc.png" alt="">
-                    <div>删除</div>
-                </div>
-            </div>
-            <div class="dingdan-cent">
-                <div class="dingdan-cent-lf">
-                    <div class="dingdan-cent-top">很多</div>
-                    <div class="dingdan-cent-bot">和相关</div>
-
-                </div>
-                <div class="hengxian"></div>
-                <div class="dingdan-cent-rt">
-                    <div class="dingdan-cent-top">很多</div>
-                    <div class="dingdan-cent-bot">和相关</div>
-
+                <div class="dingdan-cent">
+                    <div class="dingdan-cent-lf">
+                        <div class="dingdan-cent-top">{{item.send_city}}</div>
+                        <div class="dingdan-cent-bot">{{item.send_consignee}}</div>
+                    </div>
+                    <div class="hengxian"></div>
+                    <div class="dingdan-cent-rt">
+                        <div class="dingdan-cent-top">{{item.receive_city}}</div>
+                        <div class="dingdan-cent-bot">{{item.receive_consignee}}</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="jikuaidi">
+        <div class="jikuaidi" @click="gojikuaidi">
             寄快递
         </div>
     </div>
 </template>
+<script>
+import {Toast} from 'vant'
+import {mapActions} from 'vuex'
+export default {
+  data () {
+    return {
+      list: []
+    }
+  },
+  methods: {
+    ...mapActions(['getLogisticOrder', 'deleteLogisticOrder']),
+    remove (order, index) {
+      this.deleteLogisticOrder(order.logistic_id).then(({data}) => {
+        if (data.error_code === 0) {
+          this.list.splice(index, 1)
+          Toast('删除成功')
+        } else {
+          Toast(data.message)
+        }
+      })
+    },
+    gojikuaidi () {
+      this.$router.back(-1)
+    },
+    godingdanqian () {
+      this.$router.back(-1)
+    }
+  },
+  created () {
+    this.getLogisticOrder({page: 1}).then(({data}) => {
+      if (data.error_code === 0) {
+        this.list = data.data
+        console.log(this.list)
+      } else {
+        Toast(data.message)
+      }
+    })
+  }
+}
+</script>
 
 <style>
+.dingdan{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
 .jikuaidi{
     font-size:.9375rem /* 15/16 */;
     font-family:PingFang-SC-Medium;
@@ -48,10 +95,13 @@
     position:fixed;
     bottom: .4375rem /* 7/16 */;
     width:100%;
-
 }
 .dingdan-warp{
-    background-color: aqua;
+    /* background-color: aqua; */
+}
+.dingdan-item {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
 }
 .hao-chu{
     display: flex;
@@ -70,7 +120,6 @@
 .dingdan-head-rit img{
     width:1.0625rem /* 17/16 */;
     height: 1.0625rem /* 17/16 */;
-
 }
 .dingdan-head{
     font-size:.9375rem /* 15/16 */;
@@ -112,7 +161,6 @@
     display:flex;
     align-items: center;
 
-
 }
 .hengxian{
     width:100%;
@@ -120,6 +168,7 @@
     background:rgba(153,153,153,1);
 }
 .dingdan{
+    height: 2.75rem /* 44/16 */;
     font-size:1.0625rem /* 17/16 */;
     font-family:PingFang-SC-Medium;
     font-weight:500;

@@ -113,7 +113,7 @@
               </div>
             </div>
           </div>
-          <van-switch  class="vantsw"  v-model="publish.is_trans" :active-value="2" :inactive-value="0"></van-switch>
+          <mt-switch class="mtsw"  v-model="publish.is_trans" :active-value="2" :inactive-value="0"></mt-switch>
         </div>
         <div class="shisan weixiang">*为必填项</div>
 
@@ -458,7 +458,7 @@ export default {
   width: 4.0625rem /* 65/16 */;
   height: 4.0625rem /* 65/16 */;
   border-radius: 0.5rem /* 8/16 */;
-  
+
 }
 .qued-fab {
   margin-top: 2.8125rem /* 45/16 */;
