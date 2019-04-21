@@ -7,7 +7,7 @@
     </template>
       <template   v-if="isForget">
       <img class="mima-img" src="../image/zuojiantou.png" alt="" @click="back('forget')" >
-      <span>找回密码</span>
+      <span class="zhaohuimima">找回密码</span>
       <span></span>
       </template>
   </div>
@@ -47,6 +47,12 @@ export default {
 </script>
 
 <style scoped>
+.zhaohuimima{
+  font-size:.9375rem /* 15/16 */;
+font-family:PingFang-SC-Regular;
+font-weight:400;
+color:rgba(51,51,51,1);
+}
 .denluhead-box {
   /* margin-top: 1.25rem; */
   height:2.75rem /* 44/16 */;

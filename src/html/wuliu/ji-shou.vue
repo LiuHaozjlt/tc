@@ -106,7 +106,6 @@
       <van-datetime-picker
       v-model="currentDate"
       type="date"
-      :min-date="minDate"
       />
     </van-popup>
 
@@ -136,11 +135,10 @@ export default {
       defaultUserAddress: null,
       popupVisible: false,
       isGoodsTypeShow: false,
-
-      minHour: 10,
-      maxHour: 20,
-      minDate: new Date(),
-      maxDate: new Date(2019, 10, 1),
+      // minHour: 10,
+      // maxHour: 20,
+      // minDate: new Date(),
+      // maxDate: new Date(2019, 10, 1),
       currentDate: new Date()
     }
   },
@@ -258,8 +256,14 @@ export default {
 </script>
 
 <style>
+.van-picker__columns{
+  justify-content: center;
+}
+.van-picker-column__item{
+  padding:0 0!important;
+}
 .van-picker-column{
-  flex:static;
+  flex:none!important;
 }
 .van-picker__columns >.van-picker-column:nth-child(1){
   display:none;

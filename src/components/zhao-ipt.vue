@@ -19,6 +19,9 @@ export default {
   watch: {
     type (type) {
       this.inputVal = type
+    },
+    inputVal () {
+      this.$emit('search', this.inputVal)
     }
   }
 }
@@ -26,7 +29,7 @@ export default {
 
 <style>
     .shouyeinpt{
-      
+
     }
     .shouYe-head-cent input{
         font-size:.8125rem /* 13/16 */;

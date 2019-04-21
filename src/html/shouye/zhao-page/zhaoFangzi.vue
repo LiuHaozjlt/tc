@@ -7,7 +7,7 @@
 
             <img src="@/image/zufangzi.png" alt="">
         </div>
-        <zhaoipt  :type="type"></zhaoipt>
+        <zhaoipt @search="fabuType"  :type="type"></zhaoipt>
         <div>
             <!-- {{indexData}} -->
         </div>
@@ -58,13 +58,14 @@ export default {
       // console.log(type)
     },
 
-    fabuType () {
+    fabuType (e) {
       let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
       this.axius({
         methods: 'get',
         url: 'apis/v1/user/releases',
         params: {
           release_type_id: this.releaseTypeId,
+          search: e,
           pageSize: 20,
           page: 1
         },
@@ -83,6 +84,7 @@ export default {
 </script>
 
 <style>
+
 .zhao-left{
   position: absolute;
     top: 3%;
@@ -91,6 +93,8 @@ export default {
     .zhao-left img{
       width:.5rem /* 8/16 */;
       height: .9375rem /* 15/16 */;
+      z-index: 99999;
+    border: 14px solid red;
     }
     .shouye-cent-girl{
         text-align: center;

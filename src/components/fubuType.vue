@@ -71,7 +71,7 @@ export default {
 .tong-new-warp img {
   width: 0.375rem /* 6/16 */;
   height: 0.6875rem /* 11/16 */;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 .tong-new {
   font-size: 1.0625rem /* 17/16 */;

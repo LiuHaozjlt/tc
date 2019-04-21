@@ -35,6 +35,9 @@
       </div>
       </div>
     </form>
+    <div class="zhucexieyi" v-if="!isLogin">
+      注册表示已同意《老挝咨询使用协议》
+    </div>
   </div>
 </template>
 
@@ -264,6 +267,13 @@ export default {
 </script>
 
 <style>
+.zhucexieyi{
+  font-size:.8125rem /* 13/16 */;
+font-family:PingFang-SC-Regular;
+font-weight:400;
+color:rgba(153,153,153,1);
+text-align: center;
+}
 .dx-yanzhen,
 .wj-mima {
   font-size: 0.8125rem;
