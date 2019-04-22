@@ -23,8 +23,7 @@ import test from '../components/erjiliandong/test'
 import addressDetail from '../html/address/detail'
 import addressList from '../html/address/list'
 
-import liuyan from '../html/shouye/liuyan'
-import lishi from '../html/shouye/shouYe-lishi'
+import search from '../html/shouye/shouYe-lishi'
 import shouyexq from '../html/shouye/shouyexq'
 // import tishi from '../html/tishi.vue'
 // eslint-disable-next-line camelcase
@@ -130,9 +129,9 @@ export default new Router({
     },
 
     {
-      path: '/lishi',
-      name: 'lishi',
-      component: lishi
+      path: '/search',
+      name: 'search',
+      component: search
     },
     {
       path: '/apitest',
@@ -389,11 +388,7 @@ export default new Router({
       name: 'addressDetail',
       component: addressDetail
     },
-    {
-      path: '/liuyan',
-      name: 'liuyan',
-      component: liuyan
-    },
+
     // {
     //   path: '/tishi',
     //   name: 'tishi',

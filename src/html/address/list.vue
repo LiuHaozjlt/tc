@@ -77,7 +77,7 @@ export default {
       this.shewei = index
     },
     deleteAddress (item, index) {
-      debugger
+      // debugger
       this.$store
         .dispatch('deleteUserAddress', item.user_address_id)
         .then(({ data }) => {

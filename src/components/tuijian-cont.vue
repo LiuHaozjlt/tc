@@ -1,7 +1,7 @@
 <template>
     <div>
      <template  v-for="(item, index) in indexData">
-            <div class="shouYe-cent" :key="index" v-if="showNum == 0  || (showNum > index)">
+            <div class="shouYe-cent" :key="index" v-if="showNum == 0  || (showNum > index)" @click="goshouyexiangq">
                 <div class="shouYe-cent-left">
                     <div>
                         <img :src="item.img">
@@ -49,6 +49,9 @@ export default {
     ...mapState(['indexData']) // indexData的数据哪里来的请求的地方
   },
   methods: {
+    goshouyexiangq () {
+      this.$router.push({path: '/shouyexq'})
+    }
     // init () {
     //   let self = this
     //   var data = this.mock.mock({
@@ -92,7 +95,7 @@ export default {
       width:10%;
       height: .75rem /* 12/16 */;
       border:1px solid red;
-      
+
     }
     .rigt-wenzi{
       color:#333333;

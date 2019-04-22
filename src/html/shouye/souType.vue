@@ -1,18 +1,18 @@
 <template>
 <div>
     <div class="shouye-sech-head">
-        <img src="@/image/zuojiantou.png" alt="" @click="getsou">
+        <img src="@/image/zuojiantou.png" alt="" @click="back">
         <div class="shouye-sech">选择搜索类别</div>
     </div>
     <div class="sou-cent">
       <div class="sou-cent-top">
-          <router-link :to="{path: '/zhaoFangzi', query: {type: item.name, typeId: item.release_type_id}}"
-            v-for="(item,index) in menuData" :key="index" class="item" :class="{active: index === activeIndex}"
-              @click="activeIndex = index">
-              <div class="item-inner">
+          <div v-for="(item,index) in menuData" :key="index" class="item"
+              :class="{active: index === activeIndex}"
+              @click="select(item, index)">
+              <span class="item-inner">
                   {{item.name}}
-              </div>
-          </router-link>
+              </span>
+          </div>
       </div>
       <!-- <div class="sou-cent-top">
           <div v-for="(item,index) in menuData.slice(4)" :key="index" :class="{active: index === activeIndex}"
@@ -28,25 +28,35 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
       fs: false,
       sige: '',
       none: 'display:none',
-      activeIndex: 0
+      activeIndex: ''
     }
   },
   computed: {
-    ...mapGetters(['menuData'])
+    ...mapState(['menuData', 'queryType'])
   },
   methods: {
-    getsou () {
-      this.$router.back(-1)
+    back () {
+      this.$router.back()
+    },
+    select (item, index) {
+      this.activeIndex = index
+      this.$store.commit('setQueryType', item)
+      this.back()
     }
   },
   mounted () {
+    let type = this.queryType
+
+    if (type) {
+      this.activeIndex = this.menuData.findIndex(item => item.module_id === type.module_id)
+    }
     // var data = this.mock.mock({
     //   // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
     //   'list|8': [
@@ -119,5 +129,8 @@ export default {
     }
     .sou-cent-top>.active {
         border-bottom: 2px solid yellow;
+    }
+    .sou-cent-top{
+      text-align: center;
     }
 </style>

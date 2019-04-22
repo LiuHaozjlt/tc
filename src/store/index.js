@@ -32,12 +32,21 @@ if (wls.get('isPersonal')) {
 let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
 // let token = wls.get('userInfo').access_token || 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
 let $http = updateRequst(token)
+
+let queryParamDefault = {
+  release_type_id: undefined,
+  search: undefined,
+  region_lv2: undefined,
+  region_lv3: undefined,
+  page: 1
+}
+
 export default new Vuex.Store({
   state: {
     showLoading: false,
     indexData: [],
     userInfo: wls.get('userInfo', {}),
-    menudata: [],
+    menuData: [],
     iptqingcheng: '',
     isPersonal: !!wls.get('isPersonal'),
     imgCache: '',
@@ -56,7 +65,12 @@ export default new Vuex.Store({
     activeAddress: null,
     isLaos: wls.get('isLaos') || false,
     logisticOrder: {},
-    logisticGoodsType: []
+    logisticGoodsType: [],
+    queryParam: {...queryParamDefault},
+    queryHistory: wls.get('queryHistory', []), // {keyword, releaseTypeId}
+    queryType: null,
+    queryList: [],
+    queryTotal: 0
   },
   getters: {
     testa (state) {
@@ -68,12 +82,7 @@ export default new Vuex.Store({
     indexData (state) {
       let data = wls.get('indexData') || []
       return state.indexData.length === 0 ? data : state.indexData
-    },
-    menuData (state) {
-      let data = wls.get('menudata') || []
-      return state.menudata.length === 0 ? data : state.menudata
     }
-
   },
   mutations: {
     getlianjie (state) {
@@ -103,8 +112,8 @@ export default new Vuex.Store({
       updateRequst(data.access_token)
     },
     saveIndexsou (state, data) {
-      wls.set('menudata', data)
-      state.menudata = data || []
+      wls.set('menuData', data)
+      state.menuData = data || []
     },
     setPersonal (state, data) {
       state.isPersonal = !!data
@@ -156,6 +165,42 @@ export default new Vuex.Store({
 
     saveLogisticGoodsType (state, data = []) {
       state.logisticGoodsType = data
+    },
+
+    updateQueryParam (state, data) {
+      state.queryParam = {...state.queryParam, ...data}
+    },
+    resetQueryParam (state) {
+      state.queryParam = {...queryParamDefault}
+    },
+    addQueryHistory (state, history) {
+      const hasHistory = state.queryHistory.some(item => {
+        return item.keyword === history.keyword && item.releaseTypeId === history.releaseTypeId
+      })
+
+      if (hasHistory) return // TODO 移到最上面
+      else {
+        let len = state.queryHistory.push(history)
+        if (len > 10) { // 保存10条记录
+          state.queryHistory.pop()
+        }
+      }
+
+      wls.set('queryHistory', state.queryHistory)
+    },
+    setQueryType (state, data) {
+      state.queryType = data
+      state.queryParam.release_type_id = data ? data.module_id : undefined
+    },
+    addQueryList (state, data) {
+      if (data === -1) {
+        state.queryList = []
+      } else {
+        state.queryList = state.queryList.concat(data)
+      }
+    },
+    setQueryTotal (state, total) {
+      state.queryTotal = total
     }
   },
   actions: {
@@ -166,8 +211,8 @@ export default new Vuex.Store({
         data: {
         }
       }).then(p => {
-        let menudata = p.data.data
-        commit('saveIndexsou', menudata)
+        let data = p.data.data
+        commit('saveIndexsou', data)
       })
     },
     getRecommendList ({ commit }) {
@@ -283,6 +328,10 @@ export default new Vuex.Store({
           commit('saveLogisticGoodsType', data.data)
         }
       })
+    },
+
+    getReleases ({commit}, params) {
+      return $http.get('/apis/v1/user/releases', {params})
     }
   }
 

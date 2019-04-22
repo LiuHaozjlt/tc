@@ -119,8 +119,6 @@ export default {
 }
 .shouYe-head-cent input {
   box-shadow: 0px 0px 12px 0px rgba(132, 132, 132, 0.1);
-  top: 100px;
-  position: absolute;
   text-align: center;
   /* margin-bottom: 20px; */
   /* left: 5%;

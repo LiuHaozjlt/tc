@@ -5,13 +5,13 @@
       <div class="shouYe-head-top">
         <img src="../../image/图层 776@2x.png" alt>
       </div>
-      
+
       <zhaoipt @focus="inipt"></zhaoipt>
 
       <div>
         <div class="index-menu-warp">
             <!--跳转到jishou页面-->
-            <div class="index-menu" v-for="(item,i) in menudata" :key="i" @click="tapAction(i)">
+            <div class="index-menu" v-for="(item,i) in menuData" :key="i" @click="tapAction(i)">
               <div>
                 <img :src="item.icon" alt style="width:20px;height:20px">
               </div>
@@ -43,7 +43,7 @@
       <img src="../../image/ic-more.png" alt="" @click="getxinwen">
       </div>
       <div class="tuiJian">推荐</div>
-      <tuijiancont></tuijiancont>
+      <tuijiancont @click="gotuijianxq"></tuijiancont>
      </div>
   </div>
 </template>
@@ -59,16 +59,16 @@ export default {
   data () {
     return {
       // indexData: []
-      // menudata: []
+      // menuData: []
     }
   },
   computed: {
-    ...mapState(['menudata', 'indexData'])
+    ...mapState(['menuData', 'indexData'])
   },
   created () {
     // debugger
     // eslint-disable-next-line no-unused-expressions 这里调了 运行一下金debugger
-    // this.indexData = this.$store.state.menudata
+    // this.indexData = this.$store.state.menuData
     this.$store.dispatch('getRecommendList')
   },
   components: {
@@ -78,7 +78,6 @@ export default {
   methods: {
     tapAction (i) {
       if (i == 0) {
-        // 点击第一个 都可以单独点呢 加if或者改成switch case根据点击的是第几个 你写过这种类似的 懂？？嗯
         this.$router.push({
           path: '/jishou'
         })
@@ -112,7 +111,7 @@ export default {
     //     }
     //   }).then(p => {
     //     // debugger
-    //     this.menudata = p.data.data
+    //     this.menuData = p.data.data
     //     // console.log(p.data.data)
     //   })
     // },
@@ -139,14 +138,14 @@ export default {
     //   this.mock.mock('/menu', data)
     //   this.axius.get('/apis/v1/user/releases').then(p => {
     //   // console.log(p)
-    //     // this.menudata = p.data.list
+    //     // this.menuData = p.data.list
     //     this.indexData = p.data.list
-    //   // console.log(this.menudata);
+    //   // console.log(this.menuData);
     //   })
-    //   // this.indexData = this.menudata
+    //   // this.indexData = this.menuData
     // },
     inipt () {
-      this.$router.push('/souType')
+      this.$router.push('/search')
     }
   },
   mounted () {
@@ -201,14 +200,18 @@ export default {
     // 八个图标
     // self.axius.get('/apis/v1/article/comments').then(p => {
     //   console.log(p)
-    // this.menudata = p.data.list
-    // console.log(this.menudata);
+    // this.menuData = p.data.list
+    // console.log(this.menuData);
     // })
   }
 }
 </script>
 
 <style>
+.shouYe-cent-left{
+  width:30%;
+  overflow: hidden;
+}
 .van-swipe-item {
   /* border:2px solid yellow; */
   font-size: 0.8125rem /* 13/16 */ /* 26/16 */;
@@ -370,7 +373,7 @@ export default {
 }
 .shouYe-cent-rigt {
   margin-left: 3%;
-  width:100%;
+  width:70%;
   line-height: 0.875rem /* 14/16 */;
 }
 .shouYe-cent-rigt > span {

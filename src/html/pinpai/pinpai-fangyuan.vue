@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <div>品牌房源</div>
+            <div class="shangjia">品牌房源</div>
         </div>
 
        <div  v-for="(item,index) in seller " :key="index">

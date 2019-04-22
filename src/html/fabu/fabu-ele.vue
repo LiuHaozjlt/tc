@@ -21,7 +21,7 @@ export default {
   },
   created () {
     if (!this.isPersonal) {
-      this.$router.replace('/fabupeop') // 商家发布直接跳过去发布页嗯
+      this.$router.replace('/fabupeop') // 商家发布直接跳过去发布页
     }
   }
 }

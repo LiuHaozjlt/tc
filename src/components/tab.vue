@@ -7,11 +7,7 @@
           <div class="tab-head">{{item.text}}</div>
       </router-link>
     </div>
-    <!-- <div class="box1" v-if="num === 0">1</div>
-    <div class="box2" v-if="num === 1">2</div>
-    <div class="box3" v-if="num === 2">3</div>
-    <div class="box4" v-if="num === 3">4</div>
-    <div class="box5" v-if="num === 4">5</div> -->
+
   </div>
 </template>
 <script>

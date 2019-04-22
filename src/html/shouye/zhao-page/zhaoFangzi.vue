@@ -1,32 +1,35 @@
 <template>
-    <div>
-        <div class="zhao-left">
-          <img src="../../../image/zuojiantou.png" alt="" @click="gosousuo">
-        </div>
-        <div class="shouye-souc-head">
-
-            <img src="@/image/zufangzi.png" alt="">
-        </div>
-        <zhaoipt @search="fabuType"  :type="type"></zhaoipt>
-        <div>
-            <!-- {{indexData}} -->
-        </div>
-        <div class="shouye-sec-guj">
-            <div>
-                <div>"两房一厅"</div>下共有<div>{{total}}</div>条搜索信息
-            </div>
-        </div>
-        {{fabuTypeData + '111111111111111111111'}}
-        <fubuType @select-type="onTypeChange" :list='fabuTypeData'></fubuType>
-        <kongtishi v-if='fabuTypeData.length === 0'></kongtishi>
+  <div>
+    <div class="zhao-left">
+      <img src="../../../image/zuojiantou.png" alt @click="back">
     </div>
+    <div class="shouye-souc-head">
+      <img src="@/image/zufangzi.png" alt>
+    </div>
+    <zhaoipt
+      @search="onChangeKeyword"
+      :value="queryParam.search"
+    ></zhaoipt>
+    <div class="shouye-sec-guj" v-show="queryList.length > 0">
+      <div>
+        <div v-show="queryParam.search !== '' || queryType">
+          "{{queryParam.search}}
+          <span v-if="queryType">{{queryType.name}}</span>"下
+        </div>共有
+        <div>{{queryTotal}}</div>条搜索信息
+      </div>
+    </div>
+    <fubuType @select-type="onTypeChange" :list="queryList"></fubuType>
+    <kongtishi v-show="queryList.length === 0"></kongtishi>
+  </div>
 </template>
 
 <script>
 import fubuType from '../../../components/fubuType'
 import kongtishi from '../../../components/kongtishi'
 import zhaoipt from '@/components/zhao-ipt.vue'
-import {mapGetters} from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
+import { Toast } from 'vant'
 export default {
   components: {
     zhaoipt,
@@ -35,49 +38,64 @@ export default {
   },
   data () {
     return {
-      fabuTypeData: [],
-      total: 0
+      releaseTypes: [] // 类型的一些参数。如背景图片
     }
   },
   computed: {
-    type () {
-      return this.$route.query.type || ''
-    },
-    releaseTypeId () {
-      return this.$route.query.typeId
-    },
-    ...mapGetters([
-      'indexData'
+    ...mapState([
+      'queryParam',
+      'menuData',
+      'queryList',
+      'queryTotal',
+      'queryType'
     ])
   },
+  created () {
+    if (this.queryList.length === 0) {
+      let { keyword, releaseTypeId } = this.$route.query
+
+      this.updateQueryParam({
+        search: keyword,
+        release_type_id: releaseTypeId
+      })
+
+      this.search()
+    }
+  },
   methods: {
-    gosousuo () {
-      this.$router.back(-1)
+    ...mapMutations([
+      'updateQueryParam',
+      'addQueryHistory',
+      'addQueryList',
+      'setQueryTotal'
+    ]),
+    ...mapActions(['getReleases']),
+    search () {
+      this.getReleases(this.queryParam).then(({ data }) => {
+        if (data.error_code === 0) {
+          this.addQueryList(data.data || [])
+          this.setQueryTotal(data.total || this.queryList.length)
+        } else {
+          Toast('请求出错了')
+        }
+      })
+    },
+    onChangeKeyword (search) {
+      this.updateQueryParam({ search })
+      this.search()
+    },
+    back () {
+      this.$router.back()
+      this.updateQueryParam({
+        region_lv2: undefined,
+        region_lv3: undefined,
+        page: 1
+      })
+      this.addQueryList(-1)
+      this.setQueryTotal(0)
     },
     onTypeChange (type) {
       // console.log(type)
-    },
-
-    fabuType (e) {
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
-      this.axius({
-        methods: 'get',
-        url: 'apis/v1/user/releases',
-        params: {
-          release_type_id: this.releaseTypeId,
-          search: e,
-          pageSize: 20,
-          page: 1
-        },
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
-      }).then(p => {
-        // debugger
-        this.fabuTypeData = p.data.data || []
-        this.total = (p.data.data || []).length
-        // console.log('获取商品列表', p.data)
-      })
     }
   }
 }
@@ -85,48 +103,46 @@ export default {
 
 <style>
 
-.zhao-left{
+.zhao-left {
   position: absolute;
-    top: 3%;
-    z-index: 8888;
+  top: 3%;
+  z-index: 8888;
 }
-    .zhao-left img{
-      width:.5rem /* 8/16 */;
-      height: .9375rem /* 15/16 */;
-      z-index: 99999;
-    border: 14px solid red;
-    }
-    .shouye-cent-girl{
-        text-align: center;
-        padding-top:10%;
-    }
-    .shouye-kong-con{
-        font-size:.9375rem /* 15/16 */;
-        font-family:PingFang-SC-Medium;
-        font-weight:500;
-        color:rgba(153,153,153,1);
-    }
-    .shouye-no{
-        padding-top:5%;
-    }
-    .shouye-no img{
-        height: 5.8125rem /* 93/16 */;
-
-    }
-    .shouye-sec-guj div{
-        display:flex;
-        font-size:.6875rem /* 11/16 */;
-        font-family:PingFang-SC-Medium;
-        font-weight:500;
-        color:rgba(153,153,153,1);
-    }
-    .shouYe-head-cent{
-
-    }
-    .shouye-souc-head{
-        position: relative;
-    }
-    .shouye-souc-head img{
-        height: 6.25rem /* 100/16 */;
-    }
+.zhao-left img {
+  width: 0.5rem /* 8/16 */;
+  height: 0.9375rem /* 15/16 */;
+  z-index: 99999;
+  border: 14px solid red;
+}
+.shouye-cent-girl {
+  text-align: center;
+  padding-top: 10%;
+}
+.shouye-kong-con {
+  font-size: 0.9375rem /* 15/16 */;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: rgba(153, 153, 153, 1);
+}
+.shouye-no {
+  padding-top: 5%;
+}
+.shouye-no img {
+  height: 5.8125rem /* 93/16 */;
+}
+.shouye-sec-guj div {
+  display: flex;
+  font-size: 0.6875rem /* 11/16 */;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: rgba(153, 153, 153, 1);
+}
+.shouYe-head-cent {
+}
+.shouye-souc-head {
+  position: relative;
+}
+.shouye-souc-head img {
+  height: 6.25rem /* 100/16 */;
+}
 </style>
