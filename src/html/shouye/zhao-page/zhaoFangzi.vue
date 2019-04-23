@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="zhao-left">
-      <img src="../../../image/zuojiantou.png" alt @click="back">
+      <img src="../../../image/dajiantou.png" alt @click="back">
     </div>
     <div class="shouye-souc-head">
       <img src="@/image/zufangzi.png" alt>
@@ -102,17 +102,20 @@ export default {
 </script>
 
 <style>
-
+.shouye-sec-guj{
+  /* margin-top:30%; */
+      margin-top: 15%;
+}
 .zhao-left {
   position: absolute;
   top: 3%;
   z-index: 8888;
 }
 .zhao-left img {
-  width: 0.5rem /* 8/16 */;
-  height: 0.9375rem /* 15/16 */;
+  margin: 0 0 0 56%;
+  width:1.375rem /* 22/16 */;
+  height: .9375rem /* 15/16 */;
   z-index: 99999;
-  border: 14px solid red;
 }
 .shouye-cent-girl {
   text-align: center;

@@ -20,7 +20,7 @@ export default {
 <style>
     .shouye-cent-girl{
         text-align: center;
-        padding-top:10%;
+        padding-top:50%;
     }
     .shouye-kong-con{
         font-size:.9375rem /* 15/16 */;

@@ -11,13 +11,14 @@
       <div>
         <div class="index-menu-warp">
             <!--跳转到jishou页面-->
-            <div class="index-menu" v-for="(item,i) in menuData" :key="i" @click="tapAction(i)">
-              <div>
-                <img :src="item.icon" alt style="width:20px;height:20px">
+            <!-- <router-link to="/zhaofangzi"> -->
+              <div class="index-menu" v-for="(item,i) in menuData" :key="i" @click="tapAction(i)">
+                <div>
+                  <img :src="item.icon" alt style="width:20px;height:20px">
+                </div>
+                <div>{{item.name}}</div>
               </div>
-              <div>{{item.name}}</div>
-            </div>
-
+            <!-- </router-link> -->
         </div>
       </div>
       <div class="tong-new-warp">

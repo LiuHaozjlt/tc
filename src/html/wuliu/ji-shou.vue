@@ -3,7 +3,9 @@
     <div class="ji-shou-head">
       <div class="ji-shou-head-lef">
         <!-- <img src="" alt=""> -->
-        <div @click="godingdanqian">&lt;</div>
+        <div @click="godingdanqian">
+          <img src="../../image/dajiantou.png" alt="">
+        </div>
         <div></div>
         <div @click="godingdan">我的订单</div>
       </div>
@@ -347,6 +349,7 @@ export default {
   color: rgba(51, 51, 51, 1);
 }
 .zhonliang {
+  padding: 2% 15%;
   margin: 0 0.9375rem /* 15/16 */;
   height: 1.6875rem /* 27/16 */;
   background-color: #ffc74d;
@@ -432,7 +435,7 @@ export default {
 .ji-shou-head-lef img {
   width: 1.375rem /* 22/16 */;
   height: 0.9375rem /* 15/16 */;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .ji-shou-ji img {

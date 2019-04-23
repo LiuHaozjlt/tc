@@ -97,11 +97,13 @@ export default {
     width:100%;
 }
 .dingdan-warp{
-    /* background-color: aqua; */
+     background-color: #F5F5F5;
+      padding: 5%;
 }
 .dingdan-item {
-    border: 1px solid #ccc;
+
     margin-bottom: 10px;
+    background-color: white;
 }
 .hao-chu{
     display: flex;
@@ -156,7 +158,7 @@ export default {
     color:rgba(51,51,51,1);
 }
 .dingdan-cent{
-
+    padding-bottom: 10%;
     padding-top:2.5625rem /* 41/16 */;
     display:flex;
     align-items: center;
