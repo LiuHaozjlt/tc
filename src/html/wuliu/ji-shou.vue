@@ -272,6 +272,10 @@ export default {
 </script>
 
 <style>
+.van-picker-column ul{
+  display:flex;
+  flex-wrap: wrap;
+}
 .van-picker__columns{
   justify-content: center;
 }

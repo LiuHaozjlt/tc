@@ -12,7 +12,7 @@
         <div class="index-menu-warp">
             <!--跳转到jishou页面-->
             <!-- <router-link to="/zhaofangzi"> -->
-              <div class="index-menu" v-for="(item,i) in menuData" :key="i" @click="tapAction(i)">
+              <div class="index-menu" v-for="(item,i) in menuData" :key="i" @click="tapAction(item, i)">
                 <div>
                   <img :src="item.icon" alt style="width:20px;height:20px">
                 </div>
@@ -68,7 +68,7 @@ export default {
   },
   created () {
     // debugger
-    // eslint-disable-next-line no-unused-expressions 这里调了 运行一下金debugger
+
     // this.indexData = this.$store.state.menuData
     this.$store.dispatch('getRecommendList')
   },
@@ -77,20 +77,32 @@ export default {
     tuijiancont
   },
   methods: {
-    tapAction (i) {
-      if (i == 0) {
-        this.$router.push({
-          path: '/jishou'
-        })
+    tapAction (item, i) {
+      let path = ''
+      let query = {}
+      let searchPath = '/zhaofangzi'
+      switch (i) {
+        case 0:
+          path = '/jishou'
+          break
+        case 1:
+          path = '/'
+          break
+        case 2:
+          path = searchPath
+          query = {keyword: ''}
+          break
       }
-      // switch (i) {
-      //   case 0:
-      //     // someThing
-      //     break
-      //   case 1:
-      //     // someThing
-      //     break
-      // }
+
+      if (i > 2) {
+        path = searchPath
+        query = {
+          releaseTypeId: item.module_id,
+          keyword: ''
+        }
+      }
+
+      this.$router.push({path, query})
     },
     getxinwen () {
       this.$router.push({path: '/xinwen'})

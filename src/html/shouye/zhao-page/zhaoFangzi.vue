@@ -2,10 +2,13 @@
   <div>
     <div class="zhao-left">
       <img src="../../../image/dajiantou.png" alt @click="back">
+
     </div>
     <div class="shouye-souc-head">
       <img src="@/image/zufangzi.png" alt>
     </div>
+    <!--地址二级联动-->
+
     <zhaoipt
       @search="onChangeKeyword"
       :value="queryParam.search"
@@ -21,20 +24,28 @@
     </div>
     <fubuType @select-type="onTypeChange" :list="queryList"></fubuType>
     <kongtishi v-show="queryList.length === 0"></kongtishi>
+    <!--右边的我要求职-->
+    <div class="woqiuzhi" v-if="queryParam.release_type_id == 1">
+      我要求职
+    </div>
   </div>
 </template>
 
 <script>
+
 import fubuType from '../../../components/fubuType'
 import kongtishi from '../../../components/kongtishi'
 import zhaoipt from '@/components/zhao-ipt.vue'
+import RegionPicker from '../../../components/RegionPicker'
 import { mapState, mapMutations, mapActions } from 'vuex'
 import { Toast } from 'vant'
 export default {
   components: {
     zhaoipt,
     kongtishi,
-    fubuType
+    fubuType,
+
+    RegionPicker
   },
   data () {
     return {
@@ -102,6 +113,23 @@ export default {
 </script>
 
 <style>
+.woqiuzhi{
+  width:40%;
+  height:1.75rem /* 28/16 */;
+  background-color: #B2B2B2;
+  color:white;
+  font-size:.875rem /* 14/16 */;
+font-family:PingFang-SC-Medium;
+font-weight:500;
+color:rgba(255,255,255,1);
+position: absolute;
+    right: 0;
+    bottom: 9%;
+    color:white;
+    border-radius: .875rem /* 14/16 */ 0 0 .875rem /* 14/16 */;
+    text-align: center;
+    line-height: 1.75rem /* 28/16 */
+}
 .shouye-sec-guj{
   /* margin-top:30%; */
       margin-top: 15%;

@@ -14,7 +14,7 @@ function updateRequst (token) {
     }
   })
 }
-const wls = {
+export const wls = {
   get (key, defaultValue) {
     let value = window.localStorage.getItem(key)
 

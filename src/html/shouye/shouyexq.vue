@@ -68,7 +68,7 @@
           </div>
             <div class="lianxidianhua-bot">
             <img src="../../image/youjian.png" alt="">
-            <div class="callfangshi">1507482649611111111111111</div>
+            <div class="callfangshi">1275031970@qq.com</div>
             <div class="call">
               复制
             </div>
@@ -142,8 +142,11 @@ export default {
 font-family:PingFang-SC-Medium;
 font-weight:500;
 color:rgba(51,51,51,1);
+padding-left: 3%;
 }
 .call{
+  position: absolute;
+  right: 0;
   width:30%;
   border-radius: .875rem /* 14/16 */;
   background-color: #FFB31E;
@@ -154,7 +157,7 @@ color:rgba(51,51,51,1);
 }
 .lianxidianhua-bot{
   display:flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   margin-bottom: 10%;
 }
 .lianxidianhua-bot img{

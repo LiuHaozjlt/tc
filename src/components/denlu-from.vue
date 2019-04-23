@@ -135,9 +135,6 @@ export default {
         // console.log('登录接口')
         if (p.data.error_code === 0) {
           this.callAfterLogin(p.data.data)
-        } else if (p.data.error_code === 400) {
-          // console.log('未注册')
-          this.$emit('change', false)
         } else {
           // console.log('其他错误')
           Toast({
@@ -145,12 +142,15 @@ export default {
             position: 'center',
             duration: -1
           })
+          if (p.data.message.indexOf('未注册') > -1) {
+            this.$emit('change', false)
+          }
         }
       })
     },
     getregist () {
       if (this.code === '') {
-        // console.log('没输入验证码')
+        Toast('请输入验证码')
         return false
       }
 
@@ -174,7 +174,7 @@ export default {
     // 密码登录
     loginByPassword () {
       if (this.password === '') {
-        console.log('没输入密码')
+        Toast('请输入密码')
         return false
       }
       this.axius.post('/apis/v1/user/login', {
@@ -187,20 +187,15 @@ export default {
         if (p.data.error_code === 0) {
           // 登录成功
           this.callAfterLogin(p.data.data)
-        } else if (p.data.error_code === 400) {
-          // console.log('未注册')
-
-          // 切换注册页面
-          this.$emit('change', false)
         } else {
-          // console.log('其他错误')
-          // 其他错误
-
           Toast({
             message: p.data.message,
             position: 'center'
             // duration: -1
           })
+          if (p.data.message.indexOf('未注册') > -1) {
+            this.$emit('change', false)
+          }
         }
       })
     },
