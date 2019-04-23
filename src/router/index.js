@@ -11,13 +11,7 @@ import appView from '../App'
 // import dropdownmenu from '../components/dropdown-menu'
 // import xiaoshou from '../html/xiaoshou/xiaoshou'
 // import tab_publc from '../html/xiaoshou_public/tab_publc.vue'
-import tab from '../components/tab'
 // import tab_b from '../html/xiaoshou/xiaoshou_comp/tab_b'
-import pinpaiqiye from '../html/pinpai/pinpai-qiye'
-import pinpaifangyuan from '../html/pinpai/pinpai-fangyuan'
-import pinpaiershouche from '../html/pinpai/pinpai-ershouche'
-import pinpaijiaoyu from '../html/pinpai/pinpai-jiaoyu'
-import pinpaitudi from '../html/pinpai/pinpai-tudi'
 // import tab_c from '../html/xiaoshou/xiaoshou_comp/tab_c'
 import test from '../components/erjiliandong/test'
 import addressDetail from '../html/address/detail'
@@ -70,7 +64,6 @@ import wodefabu from '../html/wode/wode-fabu'
 import apitest from './../../demo/api-test'
 import wodetongzhi from '../html/wode/wode-tongzhi'
 import pinlunxiangq from '../html/xinwen/pinlunxiangq'
-import xuanzelei from '../html/wode/wode-xuanzelei'
 
 // import map_text from "AmapText"
 Vue.use(Router)
@@ -80,11 +73,6 @@ export default new Router({
       path: '/fabuxinzen',
       name: 'fabuxinzen',
       component: fabuxinzen
-    },
-    {
-      path: '/xuanzelei',
-      name: 'xuanzelei',
-      component: xuanzelei
     },
     {
       path: '/shouyexq',
@@ -273,37 +261,7 @@ export default new Router({
         {
           path: 'pinpai',
           name: 'pinpai',
-          component: pinpai,
-          children: [{
-            path: 'pinpaiqiye',
-            name: 'pinpaiqiye',
-            component: pinpaiqiye
-          },
-          {
-            path: 'pinpaifangyuan',
-            name: 'pinpaifangyuan',
-            component: pinpaifangyuan
-          },
-          {
-            path: 'pinpaiershouche',
-            name: 'pinpaiershouche',
-            component: pinpaiershouche
-          },
-          {
-            path: 'pinpaijiaoyu',
-            name: 'pinpaijiaoyu',
-            component: pinpaijiaoyu
-          },
-          {
-            path: 'pinpaitudi',
-            name: 'pinpaitudi',
-            component: pinpaitudi
-          },
-          {
-            path: '',
-            redirect: 'pinpaiqiye'
-          }
-          ]
+          component: pinpai
         },
         {
           path: 'fabuele',

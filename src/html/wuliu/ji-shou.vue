@@ -43,8 +43,8 @@
     </div>
     <div class="qiwang">
       <div class="ji-cent-bot-lef">期望上门收货时间：</div>
-      <div class="ji-cent-bot-rit" @click="riQichajian">
-        <div >今天</div>
+      <div class="ji-cent-bot-rit" @click="isShowDate = true">
+        <div >{{logisticOrder.receive_time === today ? "今天" : logisticOrder.receive_time}}</div>
         <div class="jtian">
           <img src="../../image/jiantoutou.png" alt>
         </div>
@@ -98,13 +98,16 @@
       <div class="tou-shou">投递违禁物品和无包装物品将拒收</div>
     </van-popup>
     <van-popup v-model="isGoodsTypeShow" position="bottom">
-      <van-picker :columns="logisticGoodsType" :value-key="isLaos ? 'name_la' : 'name'" @change="selectGoodsType" />
+      <van-picker :columns="logisticGoodsType" :value-key="isLaos ? 'name_la' : 'name'"
+        @change="selectGoodsType" />
     </van-popup>
 
     <!--时间日期-->
-    <van-popup v-model="show" position="bottom">
+    <van-popup v-model="isShowDate" position="bottom">
       <van-datetime-picker
       v-model="currentDate"
+      :min-date="minDate"
+      @confirm="onDateSelect"
       type="date"
       />
     </van-popup>
@@ -114,7 +117,7 @@
 
 <script>
 import Vue from 'vue'
-import {mapState} from 'vuex'
+import {mapState, mapMutations} from 'vuex'
 import {Popup, Toast} from 'vant'
 import { DatetimePicker } from 'vant'
 Vue.use(DatetimePicker)
@@ -122,22 +125,24 @@ Vue.use(DatetimePicker)
 
 export default {
   data () {
+    let today = new Date()
+    this.today = this.formatDate(today)
     this.orderInitial = {
       sendAddress: {},
       receiveAddress: {},
       goodsType: {},
       weight: 1,
-      receive_time: 1,
+      receive_time: this.today,
       memo: ''
     }
     return {
-      show: false,
+      isShowDate: false,
       defaultUserAddress: null,
       popupVisible: false,
       isGoodsTypeShow: false,
       // minHour: 10,
       // maxHour: 20,
-      // minDate: new Date(),
+      minDate: today,
       // maxDate: new Date(2019, 10, 1),
       currentDate: new Date()
     }
@@ -159,10 +164,11 @@ export default {
   },
   created () {
     if (Object.keys(this.logisticOrder).length === 0) {
-      this.$store.commit('updateLogisticOrder', this.orderInitial)
+      this.updateLogisticOrder(this.orderInitial)
     }
   },
   methods: {
+    ...mapMutations(['updateLogisticOrder']),
     formatter () {
 
     },
@@ -192,7 +198,7 @@ export default {
       return [provice, city, address].join(' ')
     },
     selectGoodsType (picker, value, index) {
-      this.$store.commit('updateLogisticOrder', {goodsType: value})
+      this.updateLogisticOrder({goodsType: value})
     },
     addWeight (n) {
       // debugger
@@ -201,6 +207,14 @@ export default {
       if (weight === 0) weight = 1
 
       this.logisticOrder.weight = weight
+    },
+    onDateSelect (value) {
+      this.updateLogisticOrder({receive_time: this.formatDate(value)})
+      this.isShowDate = false
+    },
+    formatDate (aDate) {
+      let month = (aDate.getMonth() + 1).toString().padStart(2, 0)
+      return '' + aDate.getFullYear() + month + aDate.getDate()
     },
     submit () {
       let {
@@ -236,8 +250,8 @@ export default {
       this.$store.dispatch('createLogisticOrder', data).then(({data}) => {
         if (data.error_code === 0) {
           Toast('物流订单创建成功')
+          this.updateLogisticOrder({_cover: true})
           this.$router.replace('/dingdan') // 创建成功后跳到物流订单列表
-          this.$store.commit('updateLogisticOrder', {_cover: true})
         } else {
           Toast(data.message)
         }
@@ -248,7 +262,7 @@ export default {
     if (this.logisticGoodsType.length === 0) {
       this.$store.dispatch('getLogisticGoodsType').then(() => {
         let goodsType = this.logisticGoodsType[0]
-        goodsType && this.$store.commit('updateLogisticOrder', {goodsType})
+        goodsType && this.updateLogisticOrder({goodsType})
       })
     }
   }
@@ -259,15 +273,15 @@ export default {
 .van-picker__columns{
   justify-content: center;
 }
-.van-picker-column__item{
+/* .van-picker-column__item{
   padding:0 0!important;
 }
 .van-picker-column{
   flex:none!important;
-}
-.van-picker__columns >.van-picker-column:nth-child(1){
+} */
+/* .van-picker__columns >.van-picker-column:nth-child(1){
   display:none;
-}
+} */
 .tou-shou {
     width:100%;
   font-size: 0.8125rem /* 13/16 */;

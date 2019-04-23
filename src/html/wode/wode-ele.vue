@@ -62,13 +62,13 @@
                 </div>
                 <img src="../../image/jiantoutou.png" alt="" class="ruzhuimg">
             </div>
-            <div class="wode-ct-ic" @click="applyVip" v-if="!isPersonal">
+            <!-- <div class="wode-ct-ic" @click="applyVip" v-if="!isPersonal">
                 <div class="wode-ct-ic-left">
                     <img src="../../image/qiehuan.png" alt=""  class="wode-cent-bot-ic">
                     <span >入驻品牌商家</span>
                 </div>
                 <img src="../../image/jiantoutou.png" alt="" class="ruzhuimg">
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -121,7 +121,7 @@ export default {
           this.$store.dispatch('getSellerInfo')
         //   this.$store.dispatch('getPublishReleaseValue')
         } else {
-          this.$router.push({path: '/xuanzelei'})
+          this.$router.push({path: '/wodexuanzelei'})
         }
       } else {
         this.$store.commit('setPersonal', true)

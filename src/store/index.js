@@ -60,7 +60,6 @@ export default new Vuex.Store({
     },
     publish: {},
     publishReleaseValue: {},
-
     userAddressList: [],
     activeAddress: null,
     isLaos: wls.get('isLaos') || false,
@@ -70,7 +69,8 @@ export default new Vuex.Store({
     queryHistory: wls.get('queryHistory', []), // {keyword, releaseTypeId}
     queryType: null,
     queryList: [],
-    queryTotal: 0
+    queryTotal: 0,
+    sellerTypes: []
   },
   getters: {
     testa (state) {
@@ -91,9 +91,11 @@ export default new Vuex.Store({
 
       // }
     },
-    qingchulocalstore (state) {
+    logout (state) {
       state.userInfo = {}
       window.localStorage.removeItem('userInfo')
+      state.isPersonal = true
+      wls.set('isPersonal', state.isPersonal)
     },
     showLoading (state) {
       state.showLoading = true
@@ -157,7 +159,7 @@ export default new Vuex.Store({
     updateLogisticOrder (state, data) {
       if (data._cover) {
         delete data._cover
-        state.loginsticOrder = data
+        state.logisticOrder = data
       } else {
         state.logisticOrder = { ...state.logisticOrder, ...data }
       }
@@ -201,6 +203,9 @@ export default new Vuex.Store({
     },
     setQueryTotal (state, total) {
       state.queryTotal = total
+    },
+    saveSellerTypes (state, data) {
+      state.sellerTypes = data
     }
   },
   actions: {
@@ -251,7 +256,7 @@ export default new Vuex.Store({
       }
     },
     deleteUserAddress ({commit}, user_address_id) {
-      return $http.post('/apis/v1/user-address/' + user_address_id)
+      return $http.delete('/apis/v1/user-address/' + user_address_id)
     },
     setDefaultUserAddress (ctx, user_address_id) {
       return $http.post('/apis/v1/user-address/set-default', {user_address_id})
@@ -332,6 +337,17 @@ export default new Vuex.Store({
 
     getReleases ({commit}, params) {
       return $http.get('/apis/v1/user/releases', {params})
+    },
+
+    getSellerTypes ({commit}) {
+      return $http.get('/apis/v1/seller/get-seller-type').then(({data}) => {
+        if (data.error_code === 0) {
+          commit('saveSellerTypes', data.data || [])
+        }
+      })
+    },
+    getSellers ({commit}, params) {
+      return $http.get('/apis/v1/user/seller', {params})
     }
   }
 

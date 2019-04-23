@@ -43,7 +43,7 @@
       <img src="../../image/ic-more.png" alt="" @click="getxinwen">
       </div>
       <div class="tuiJian">推荐</div>
-      <tuijiancont @click="gotuijianxq"></tuijiancont>
+      <tuijiancont></tuijiancont>
      </div>
   </div>
 </template>

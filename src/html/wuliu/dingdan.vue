@@ -58,7 +58,7 @@ export default {
       })
     },
     gojikuaidi () {
-      this.$router.back(-1)
+      this.$router.push('/jishou')
     },
     godingdanqian () {
       this.$router.back(-1)

@@ -1,9 +1,7 @@
 <template>
   <div>
-    <!-- <div></div> -->
-    <!-- {{menudata}} -->
       <div class="fabuyuand">
-      <router-link tag='div' :to="'/fabuuser?releaseTypeId=' + item.module_id" v-for="(item,index) in menudata" :key="index" class="routerItem">
+      <router-link tag='div' :to="'/fabuuser?releaseTypeId=' + item.module_id" v-for="(item,index) in menuData" :key="index" class="routerItem">
         <!-- 跳到个人发布的页面 /fabupeop相应调整 -->
          <div class="fabu-cent">
             {{item.name}}
@@ -17,7 +15,7 @@
 import {mapState} from 'vuex'
 export default {
   computed: {
-    ...mapState(['menudata', 'isPersonal'])
+    ...mapState(['menuData', 'isPersonal'])
   },
   created () {
     if (!this.isPersonal) {

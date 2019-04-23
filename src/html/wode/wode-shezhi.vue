@@ -31,9 +31,8 @@ export default {
       this.$router.back(-1)
     },
     tuichudl () {
+      this.$store.commit('logout')
       this.$router.push({path: '/dlu'})
-
-      this.$store.commit('qingchulocalstore')
     },
     gopage (url) {
       this.$router.push({path: url})

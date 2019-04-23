@@ -161,7 +161,7 @@ export default {
       user_address_id: '',
       weixin_id: undefined,
       email: undefined,
-      is_trans: 2,
+      is_trans: 0,
       img: '',
       xh: '86'
     }

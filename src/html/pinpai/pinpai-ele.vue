@@ -2,11 +2,42 @@
     <div>
         <div class="pinpai-head">
             <img src="../../image/shangdian.png" alt="">
-            <pinpaitab></pinpaitab>
+            <pinpaitab :tabs="types" :active="type"></pinpaitab>
         </div>
-        <router-view></router-view>
+        <pin-pai-list :release-type-id="active.release_type_id"></pin-pai-list>
     </div>
 </template>
+<script>
+import PinPaiList from './pinpai-list'
+import pinpaitab from './tab'
+
+export default {
+  components: {
+    PinPaiList,
+    pinpaitab
+  },
+  data () {
+    return {
+    }
+  },
+  computed: {
+    types () {
+      return this.$store.state.sellerTypes
+    },
+    type () {
+      return this.$route.hash.substr(1) || (this.types[0] ? this.types[0].code : '')
+    },
+    active () {
+      let type = this.type
+      return this.types.find(item => item.code === type) || {}
+    }
+  },
+  created () {
+    if (this.types.length === 0) this.$store.dispatch('getSellerTypes')
+  }
+
+}
+</script>
 
 <style>
     .pinp-cent-bot img{
@@ -57,12 +88,3 @@
         height: 7.75rem /* 124/16 */;
     }
 </style>
-
-<script>
-import pinpaitab from '../../components/tab'
-export default {
-  components: {
-    pinpaitab
-  }
-}
-</script>

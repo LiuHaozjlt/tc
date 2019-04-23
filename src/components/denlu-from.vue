@@ -114,7 +114,7 @@ export default {
           self.send()
         } else {
           Toast(data.message)
-          if (!this.isLogin && data.error_code === 400 && data.message === '该手机号已注册过') {
+          if (type === 0 && data.error_code === 400) {
             this.$emit('change', true)
           }
         }

@@ -8,7 +8,7 @@
             </div>
 
               <div class="xuanzexiang">
-                <div v-for="(item,index) in xuanzelei" :key="index" :class="{selected: index === active}"
+                <div v-for="(item,index) in sellerTypes" :key="index" :class="{selected: index === active}"
                   @click="active = index">
                     <div>{{item.name}}</div>
                 </div>
@@ -24,55 +24,27 @@
 export default {
   data () {
     return {
-      xuanzelei: [],
       active: 0
     }
   },
-
+  computed: {
+    sellerTypes () {
+      return this.$store.state.sellerTypes
+    }
+  },
   methods: {
     towodeele () {
       this.$router.back(-1)
     },
-    getxuanzeleib () {
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
-      this.axius({
-        methods: 'get',
-        url: 'apis/v1/seller/get-seller-type',
-        data: {
-          // upimage:
-          // release_type_id: 444444,
-          // title: 99,
-          // describe: 555,
-          // mobile: 3333,
-          // code: 4,
-          // address: '长沙',
-          // img: 3,
-          // is_trans: 1,
-
-          // xh: 86,
-          // user_address_id: 0
-        },
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
-      }).then(p => {
-        // debugger
-        this.xuanzelei = p.data.data
-        // console.log('类别', p)
-      })
-    },
     xiayibu () {
-      this.$store.commit('updateSellerInfo', {release_type_id: this.xuanzelei[this.active].release_type_id})
-      if (this.error_code == 400) {
-        return false
-      } else {
-        this.$router.push({path: '/wodeshangjia'})
-      }
+      this.$store.commit('updateSellerInfo', {
+        release_type_id: this.sellerTypes[this.active].release_type_id
+      })
+      this.$router.push({path: '/wodeshangjia'})
     }
-
   },
-  mounted () {
-    this.getxuanzeleib()
+  created () {
+    if (this.sellerTypes.length === 0) this.$store.dispatch('getSellerTypes')
   }
 }
 </script>

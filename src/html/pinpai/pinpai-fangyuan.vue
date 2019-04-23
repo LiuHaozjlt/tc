@@ -67,3 +67,10 @@ export default {
   }
 }
 </script>
+
+<style>
+  .fang-icon img{
+    width:3.375rem /* 54/16 */;
+    height: 3.375rem /* 54/16 */;
+  }
+</style>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>教育机构</div>
+        <div class="jiaoyujigou">教育机构</div>
         <div  v-for="(item,index) in seller " :key="index">
             <!-- {{myrelease}} -->
             <div class="pinpai-cent">

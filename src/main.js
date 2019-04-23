@@ -1,5 +1,15 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+
+import '../src/fonts/mui.ttf'
+import '../src/css/mui.css'
+import '../src/css/new-cent.css'
+// //引入css
+import 'mint-ui/lib/style.css'
+import '../src/css/publ-styl.css'
+import 'vant/lib/index.css'
+import eleuicss from '../node_modules/element-ui/lib/theme-chalk/index.css'
+import '../src/js/mui.js'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import App from './App'
@@ -17,20 +27,11 @@ import i18nLaos from '@/i18n/laos'
 // }
 import VueAMap from 'vue-amap'
 import vant from 'vant'
-import 'vant/lib/index.css'
 // import mock from 'mockjs'
 import axius from 'axios'
 import mint from 'mint-ui'
 import eleui from 'element-ui'
-import eleuicss from '../node_modules/element-ui/lib/theme-chalk/index.css'
 import eleuiconp from '../node_modules/element-ui/lib/index.js'
-import '../src/js/mui.js'
-import '../src/fonts/mui.ttf'
-import '../src/css/mui.css'
-import '../src/css/new-cent.css'
-// //引入css
-import 'mint-ui/lib/style.css'
-import '../src/css/publ-styl.css'
 import {api} from '../src/api/api'
 // 公共方法
 import uploadFileFn from '../src/js/icon-file'

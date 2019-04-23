@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>二手车商家</div>
+        <div class="ershouceshangjia">二手车商家</div>
        <div  v-for="(item,index) in seller " :key="index">
             <!-- {{myrelease}} -->
             <div class="pinpai-cent">
@@ -26,3 +26,13 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+
+    }
+  }
+}
+</script>

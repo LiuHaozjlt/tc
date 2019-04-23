@@ -1,10 +1,10 @@
 <template>
   <div class="tab-warp">
     <div class="tab">
-      <router-link tag="div" class="tab_nav" :class="{'active': active == item.path}"
-        v-for="(item,index ) in nav" :key="index"  :to="item.path">
+      <router-link tag="div" class="tab_nav" :class="{'active': active == item.code}"
+        v-for="(item,index ) in tabs" :key="index"  :to="'#'+item.code">
           <div class="tab-back"></div>
-          <div class="tab-head">{{item.text}}</div>
+          <div class="tab-head">{{item.name}}</div>
       </router-link>
     </div>
 
@@ -13,31 +13,17 @@
 <script>
 
 export default {
+  props: {
+    tabs: Array,
+    active: String
+  },
   data () {
     return {
-      num: 0,
-      nav: [
-        { text: '企业招聘', path: './pinpaiqiye' },
-        { text: '品牌房源', path: './pinpaifangyuan' },
-        { text: '二手车商家', path: './pinpaiershouche' },
-        {text: '教育机构', path: './pinpaijiaoyu'},
-        {text: '土地交易', path: './pinpaitudi'}]
-    }
-  },
-  computed: {
-    active () {
-      return './' + this.$route.path.split('/').pop()
-    }
-  },
-
-  methods: {
-    div_chan (val) {
-      console.log(val)
-      this.num = val
     }
   }
 }
 </script>
+
 <style>
 .tab-head{
   font-size:.8125rem /* 13/16 */;

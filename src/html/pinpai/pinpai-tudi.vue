@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <div>土地交易</div>
+            <div class="tudijiaoyi">土地交易</div>
              <div  v-for="(item,index) in seller " :key="index">
             <!-- {{myrelease}} -->
             <div class="pinpai-cent">

@@ -274,7 +274,7 @@ export default {
       user_address_id: '',
       weixin: undefined,
       email: undefined,
-      is_trans: 2,
+      is_trans: 0, // 0 2
       img: undefined,
       prices: undefined,
       prices_unit: undefined,

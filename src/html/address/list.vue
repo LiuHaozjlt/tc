@@ -13,11 +13,13 @@
             <div>{{item.consignee}}</div>
             <div>{{item.mobile}}</div>
             </div>
+          <div class="xuanze-top-ft duohangshengnue">
+            {{item.country + item.province + item.city + item.district + item.address}}
+          </div>
         </div>
-        <div class="xuanze-top-ft duohangshengnue">{{item.country + item.province + item.city + item.district + item.address}}</div>
         <div class="xuanze-bot">
           <div class="xuanze-top-bot" :class="{active: item.is_default}" @click="setDefault(item)">
-            <img src="../../image/choose_N.png" alt>
+            <img :src="item.is_default ? iconChoose : iconChooseNo" alt>
             <div class="xuanze-top-ft" v-if="item.is_default">默认地址</div>
             <div class="xuanze-top-ft" v-else>设置默认</div>
           </div>
@@ -41,9 +43,14 @@
 
 <script>
 import {Toast} from 'vant'
+import iconChoose from '../../image/choose.png'
+import iconChooseNo from '../../image/choose_N.png'
 export default {
   data () {
-    return {}
+    return {
+      iconChoose,
+      iconChooseNo
+    }
   },
   computed: {
     title () {
@@ -83,6 +90,7 @@ export default {
         .then(({ data }) => {
           if (data.error_code === 0) {
             this.addressList.splice(index, 1)
+            Toast('已刪除')
           } else {
             Toast(data.message)
           }
