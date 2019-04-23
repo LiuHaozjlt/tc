@@ -12,9 +12,9 @@
         <div class="wode-fabu-box" v-for="(item, index) in releases" :key="item.id">
            <div class="chanpinlist">
               <div class="chanpinlist-left">
-                  <img :src="item.img" alt="">  
-              </div>  
-              <div class="chanpinlist-rit"> 
+                  <img :src="item.img" alt="">
+              </div>
+              <div class="chanpinlist-rit">
                   <div class="chanpinlisttitle">{{isLaos ? item.title_la : item.title}}</div>
                   <div class="fabu-rit-cent">
                     <img src="../../image/zuojiantou.png" alt="">
@@ -27,8 +27,8 @@
                     </div>
                     <div class="fabuyu">发布于：{{item.created_time}}</div>
                   </div>
-              </div> 
-            
+              </div>
+
            </div>
           <!-- <div class="chanpinlist-rigt">
             <div class="chanpinlisttitle">{{isLaos ? item.title_la : item.title}}</div>
@@ -169,7 +169,7 @@ export default {
 }
 .wode-fabu-cent{
   margin-top:5%;
-  
+
 }
 .fabu-rit-bot{
   width:100%;
@@ -181,12 +181,16 @@ export default {
   align-items: center;
 }
 .chanpinlist-left{
+  width:30%;
   margin-right: 4%;
 }
+.chanpinlist-rit{
+  width:70%;
+}
 .chanpinlist-left img{
- 
+
   height: 4.5rem /* 72/16 */;
-  
+
 }
 .shishan{
   font-size:.8125rem /* 13/16 */;
@@ -202,7 +206,7 @@ margin-left: 5%;
 .fabu-rit-cent{
   display:flex;
   height: .875rem /* 14/16 */;
- 
+
 }
 .fabu-rit-cent img{
   width:.8125rem /* 13/16 */;
@@ -221,7 +225,7 @@ font-weight:400;
 color:rgba(153,153,153,1);
 }
 .chanpinlisttitle{
- 
+
    font-size:.8125rem /* 13/16 */;
 font-family:PingFang-SC-Medium;
 font-weight:500;
@@ -231,13 +235,13 @@ color:rgba(51,51,51,1);
 -webkit-line-clamp:2;
 overflow:hidden;
 }
- 
+
 .chanpinlist-rit{
-   
+
 }
 .chanpinlist{
   display:flex;
-  
+
   height: 6.375rem /* 102/16 */;
   border-bottom: 1px solid #EDEDED;
   padding-top:4%;
@@ -245,7 +249,6 @@ overflow:hidden;
 }
 .chanpinlist img{
 
-  
 }
 .wode-fabu-head img {
   width: 0.625rem /* 10/16 */;
@@ -274,7 +277,7 @@ overflow:hidden;
   height: 1.4375rem /* 23/16 */;
   line-height: 1.4375rem /* 7/16 */;
   text-align: center;
-  padding: 0 0.5rem;  
+  padding: 0 0.5rem;
 }
 .wode-fabu-head {
   font-size: 1.125rem /* 18/16 */;
