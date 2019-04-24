@@ -1,12 +1,12 @@
 <template>
     <div>
-        <div  v-for="(item,index) in list " :key="index" class="pinpaishop">
+        <div  v-for="(item,index) in list " :key="index" class="pinpaishop" @click="gopinpaishangjiaxq">
             <div class="pinpai-cent">
                 <div class="fang-icon">
                       <img :src="item.img">
                 </div>
                 <div>
-                    <div class="gongsi">{{item.name}}</div>
+                    <div class="gongsi ershouchetop">{{item.name}}</div>
                     <div class="gon-yuan">共有{{item.SellerReleaseInfo.length}}{{units[releaseTypeId]}}</div>
                 </div>
                 <div>
@@ -65,7 +65,6 @@ export default {
   methods: {
     getList () {
       if (this.cache[this.releaseTypeId]) return
-
       this.$store.dispatch('getSellers', {
         release_type_id: this.releaseTypeId
       }).then(({data}) => {
@@ -76,12 +75,21 @@ export default {
         }
       })
     }
+
   }
 }
 </script>
 
 <style>
+.ershouchetop{
+  width:100%;
+}
 .vqiye{
+  font-size:.6875rem /* 11/16 */;
+font-family:PingFang-SC-Regular;
+font-weight:400;
+color:rgba(177,104,0,1);
+background-color:#FFC74D;
 
 }
 .pinpaishop{
@@ -90,6 +98,7 @@ export default {
  .fang-icon img{
     width:3.375rem /* 54/16 */;
     height: 3.375rem /* 54/16 */;
+    border-radius:100%;
   }
   .pinp-cent-bot img{
         width:8.75rem /* 140/16 */;
@@ -129,7 +138,8 @@ export default {
     .fang-icon{
         width:3.375rem /* 54/16 */;
         height: 3.375rem /* 54/16 */;
-        border:1px solid red;
+        margin-right: 3%;
+
     }
     .pinpai-head{
         position: relative;
@@ -137,5 +147,10 @@ export default {
     .pinpai-head img{
         width:100%;
         height: 7.75rem /* 124/16 */;
+    }
+    .pinpai-cent-bot{
+      display:flex;
+      justify-content: space-between;
+
     }
 </style>

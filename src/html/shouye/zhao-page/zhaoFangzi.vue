@@ -8,7 +8,6 @@
       <img src="@/image/zufangzi.png" alt>
     </div>
     <!--地址二级联动-->
-
     <zhaoipt
       @search="onChangeKeyword"
       :value="queryParam.search"
@@ -175,5 +174,6 @@ position: absolute;
 }
 .shouye-souc-head img {
   height: 6.25rem /* 100/16 */;
+  width:100%;
 }
 </style>

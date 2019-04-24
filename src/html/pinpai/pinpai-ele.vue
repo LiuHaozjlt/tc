@@ -78,7 +78,7 @@ export default {
     .fang-icon{
         width:3.375rem /* 54/16 */;
         height: 3.375rem /* 54/16 */;
-        border:1px solid red;
+        /* border:1px solid red; */
     }
     .pinpai-head{
         position: relative;

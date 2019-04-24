@@ -16,7 +16,7 @@
                         style="display:inline;background-color:#FFC74D;text-align:center"
                         >{{item.type.name}}</div>
                         <div class="rigt-wenzi dianzan" style="display:inline">
-                            <img :src="item.imgi" alt>
+                            <!-- <img :src="item.imgi" alt> -->
                             {{item.num}}
                         </div>
                         <div class="rigt-wenzi" style="display:inline" :class="[typeId==1?'red':'']">{{item.created_time}}</div>
