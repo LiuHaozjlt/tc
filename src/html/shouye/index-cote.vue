@@ -318,6 +318,9 @@ export default {
   top: 100px;
   position: absolute;
   text-align: center;
+  transform: translateX(-50%);
+  left: 50%;
+  width: 90%;
   /* margin-bottom: 20px; */
   /* left: 5%;
   width: 90% !important; */

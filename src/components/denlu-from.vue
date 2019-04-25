@@ -104,7 +104,7 @@ export default {
       } else if (this.isLogin) {
         type = 2
       }
-      this.axius.post('/apis/v1/sms/send', {
+      this.axius.get('/apis/v1/sms/send', {
         mobile: self.mobile,
         xh: this.xh,
         type: type
@@ -126,7 +126,7 @@ export default {
         // console.log('没输入验证码')
         return false
       }
-      this.axius.post('/apis/v1/user/login', {
+      this.axius.get('/apis/v1/user/login', {
         xh: 86,
         code: this.code,
         type: 2,
@@ -154,7 +154,7 @@ export default {
         return false
       }
 
-      this.axius.post('/apis/v1/user/register', {
+      this.axius.get('/apis/v1/user/register', {
         xh: 86,
         code: this.code,
         password: this.password,
@@ -177,7 +177,7 @@ export default {
         Toast('请输入密码')
         return false
       }
-      this.axius.post('/apis/v1/user/login', {
+      this.axius.get('/apis/v1/user/login', {
         xh: 86,
         password: this.password,
         type: 1,
@@ -230,7 +230,7 @@ export default {
         return false
       }
 
-      this.axius.post('/apis/v1/user/password-reset', {
+      this.axius.get('/apis/v1/user/password-reset', {
         xh: this.xh,
         password: this.password,
         code: this.code,
