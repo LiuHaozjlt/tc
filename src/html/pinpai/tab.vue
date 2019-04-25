@@ -25,7 +25,9 @@ export default {
 </script>
 
 <style>
+
 .tab-head{
+  margin-bottom: 15%;
   font-size:.8125rem /* 13/16 */;
   font-family:PingFang-SC-Bold;
   font-weight:bold;

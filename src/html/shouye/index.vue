@@ -6,8 +6,8 @@
       <div class='shouYe-nav' v-for="(item, index) in tabs" :key="index">
           <router-link  :to="item.to">
         <img src="item.icon" alt="" style="width:20px;height:20px;background-color:red;">
-      
-          <div :class="[pathName==item.to?'checkRoute':'nav-ft'] " >{{item.label}}</div>
+
+          <div :class="[pathName==item.to?'checkRoute':'nav-ft']" >{{item.label}}</div>
         </router-link>
       </div>
     </div>
@@ -46,41 +46,12 @@ export default {
   watch: {
     '$route': 'checkRouter'
   },
-  components: {
 
-  },
   methods: {
     checkRouter (val) {
       // debugger
       this.pathName = val.path
     }
-  },
-  mounted () {
-    //  var data = this.mock.mock({
-    //   // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
-    //   "list|5": [
-    //     {
-    //       // 属性 id 是一个自增数，起始值为 1，每次增 1
-    //       // "id|+1": 1,
-    //       // "content|6": "有房的注意,这两个证件抓紧办理",
-    //       "navtype|1": "首页",
-    //       // "from|1": "万象",
-    //       // img: this.mock.Random.image("110x72", "#000000", "png"),
-    //       navimg: this.mock.Random.image("21x20", "yellow", "png")
-    //       // "num|1-1000": 1,
-    //       // 'datetime': '@datetime("yyyy-MM-dd A HH:mm:ss")'
-    //       // datetime: '@datetime("yyyy-MM-dd")'
-    //     }
-    //   ]
-    // });
-    // // 输出结果
-    // // console.log(data);
-    // this.mock.mock("/nav", data);
-    // this.axius.get("/nav").then(p => {
-    //   // console.log(p)
-    //   this.navPersoanl = p.data.list;
-    //   // console.log(this.navPersoanl);
-    // });
   }
 
 }

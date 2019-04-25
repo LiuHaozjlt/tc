@@ -13,6 +13,7 @@
         <img src="../../image/wl.png" alt>
       </div>
     </div>
+    <!--寄件人-->
     <div class="ji-cent-top" @click="selectAddress('send')">
       <div class="ji-shou-ji">
         <img src="../../image/jijian.png" alt>
@@ -28,9 +29,10 @@
         <img src="../../image/jiantoutou.png" alt>
       </div>
     </div>
+    <!--收件人-->
     <div class="ji-cent-top" @click="selectAddress('receive')">
       <div class="ji-shou-ji">
-        <img src="../../image/jijian.png" alt>
+        <img src="../../image/shou.png" alt>
       </div>
       <div class="ji-cent-cent">
         <div class="name-cent">
@@ -106,9 +108,8 @@
 
     <!--时间日期-->
     <van-popup v-model="isShowDate" position="bottom">
-      <van-picker
+      <van-picker class="test"
   show-toolbar
-  title="标题"
   :columns="columns"
   @cancel="onCancel"
   @confirm="onConfirm"
@@ -141,7 +142,7 @@ export default {
       memo: ''
     }
     return {
-      columns: ['今天', '明天', '2月26日', '嘉兴', '湖州'],
+      // columns: ['今天', '明天', '2月26日', '嘉兴', '湖州'],
       isShowDate: false,
       defaultUserAddress: null,
       popupVisible: false,
@@ -172,14 +173,14 @@ export default {
     if (Object.keys(this.logisticOrder).length === 0) {
       this.updateLogisticOrder(this.orderInitial)
     }
-    this.columns = this.test(0, 5)
+    this.columns = this.xuanzeDate(0, 500)
   },
   methods: {
     ...mapMutations(['updateLogisticOrder']),
     formatter () {
 
     },
-    test (min, max) {
+    xuanzeDate (min, max) {
       var arr = []
       var de = new Date()
       for (var i = min; i <= max; i++) {
@@ -294,24 +295,24 @@ export default {
 </script>
 
 <style>
+.van-picker-column__item{
+  padding:0!important;
+  width:33%;
+}
+.van-picker__title{
+  display:none;
+}
 .van-picker-column ul{
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 .van-picker__columns{
   justify-content: center;
 }
-/* .van-picker-column__item{
-  padding:0 0!important;
-}
-.van-picker-column{
-  flex:none!important;
-} */
-/* .van-picker__columns >.van-picker-column:nth-child(1){
-  display:none;
-} */
+
 .tou-shou {
-    width:100%;
+  width:100%;
   font-size: 0.8125rem /* 13/16 */;
   font-family: PingFang-SC-Medium;
   font-weight: 500;

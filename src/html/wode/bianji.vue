@@ -42,16 +42,6 @@
                 <p  @click="changSex(2)">女</p>
             </div>
         </fabupop>
-        <!-- <mt-popup
-            v-model="popupVisible"
-            position="bottom">
-            <div class="popBottom">
-                <p  @click="changSex('男')">男</p>
-                <p  @click="changSex('女')">女</p>
-                <p @click="popupVisible=false">取消</p>
-            </div>
-
-        </mt-popup> -->
     </div>
 </template>
 <script>
@@ -197,7 +187,5 @@ p{
     height: 40px;
     line-height: 40px;
 }
-.popBottom p:nth-child(3){
-  color:#FF921E;
-}
+
 </style>

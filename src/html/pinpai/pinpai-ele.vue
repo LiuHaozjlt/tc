@@ -2,6 +2,7 @@
     <div>
         <div class="pinpai-head">
             <img src="../../image/shangdian.png" alt="">
+            <div class="fangdajin"></div>
             <pinpaitab :tabs="types" :active="type"></pinpaitab>
         </div>
         <pin-pai-list :release-type-id="active.release_type_id"></pin-pai-list>
@@ -40,6 +41,15 @@ export default {
 </script>
 
 <style>
+    .fangdajin{
+     width: 20%;
+    height: 25%;
+    border-radius: 100%;
+    border: 2px solid red;
+    position: absolute;
+    top: 10%;
+    right: 0;
+    }
     .pinp-cent-bot img{
         width:8.75rem /* 140/16 */;
         height: 6.5rem /* 104/16 */;
