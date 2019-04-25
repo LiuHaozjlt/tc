@@ -21,9 +21,11 @@
             </div>
           </div>
         </div>
-        <!-- <div class="shouxq-top">
-        <img :src="img" alt>
-        </div>-->
+        <!--首页详情内容-->
+        <div class="shouyexiangq-content">
+
+        </div>
+
       </div>
     </div>
     <!-- <mt-button size="large" >下侧弹出Popup</mt-button> -->

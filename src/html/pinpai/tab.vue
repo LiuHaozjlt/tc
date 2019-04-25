@@ -49,8 +49,7 @@ export default {
 .tab_nav {
   flex: 3;
   padding: 0;
-  line-height: 16px;
-  /* border: 1px solid red; */
+
   text-align: center;
 }
 .tab_nav.active{

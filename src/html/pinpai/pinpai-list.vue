@@ -1,7 +1,8 @@
 <template>
     <div>
-        <div  v-for="(item,index) in list " :key="index" class="pinpaishop" @click="gopinpaishangjiaxq">
-            <div class="pinpai-cent">
+        <div  v-for="(item,index) in list " :key="index" class="pinpaishop" >
+          <!--跳转到logo详情-->
+            <div class="pinpai-cent" @click="gopinpaishangjiaxq">
                 <div class="fang-icon">
                       <img :src="item.img">
                 </div>
@@ -14,7 +15,8 @@
                     <div></div>
                 </div>
             </div>
-            <div class="pinpai-cent-bot" v-if="item.SellerReleaseInfo.length > 0">
+            <!--跳转到产品详情-->
+            <div class="pinpai-cent-bot" v-if="item.SellerReleaseInfo.length > 0" @click="gochanpxiangq">
                 <div v-for="release in item.SellerReleaseInfo" :key="release.seller_release_id">
                     <div class="pinp-cent-top">{{release.title}}</div>
                     <div class="kip">
@@ -50,7 +52,7 @@ export default {
   },
   computed: {
     list () {
-      console.log(this.releaseTypeId)
+      // console.log(this.releaseTypeId)
       return this.cache[this.releaseTypeId] || []
     }
   },
@@ -63,7 +65,12 @@ export default {
     }
   },
   methods: {
-    gopinpaishangjiaxq () {},
+    gopinpaishangjiaxq () {
+      this.$router.push({path: '/pinpaishangjiaxq'})
+    },
+    gochanpxiangq () {
+      this.$router.push({path: '/pinpaichanpxq'})
+    },
     getList () {
       if (this.cache[this.releaseTypeId]) return
       this.$store.dispatch('getSellers', {
@@ -76,7 +83,6 @@ export default {
         }
       })
     }
-
   }
 }
 </script>
