@@ -106,12 +106,13 @@
 
     <!--时间日期-->
     <van-popup v-model="isShowDate" position="bottom">
-      <van-datetime-picker
-      v-model="currentDate"
-      :min-date="minDate"
-      @confirm="onDateSelect"
-      type="date"
-      />
+      <van-picker
+  show-toolbar
+  title="标题"
+  :columns="columns"
+  @cancel="onCancel"
+  @confirm="onConfirm"
+/>
     </van-popup>
 
   </div>
@@ -120,9 +121,11 @@
 <script>
 import Vue from 'vue'
 import {mapState, mapMutations} from 'vuex'
-import {Popup, Toast} from 'vant'
-import { DatetimePicker } from 'vant'
+import {Popup, Toast, DatetimePicker, Picker} from 'vant'
+
 Vue.use(DatetimePicker)
+
+Vue.use(Picker)
 // Vue.use(Popup)
 
 export default {
@@ -138,6 +141,7 @@ export default {
       memo: ''
     }
     return {
+      columns: ['今天', '明天', '2月26日', '嘉兴', '湖州'],
       isShowDate: false,
       defaultUserAddress: null,
       popupVisible: false,
@@ -168,11 +172,29 @@ export default {
     if (Object.keys(this.logisticOrder).length === 0) {
       this.updateLogisticOrder(this.orderInitial)
     }
+    this.columns = this.test(0, 5)
   },
   methods: {
     ...mapMutations(['updateLogisticOrder']),
     formatter () {
 
+    },
+    test (min, max) {
+      var arr = []
+      var de = new Date()
+      for (var i = min; i <= max; i++) {
+        var de2 = new Date(de.getTime() + i * 24 * 60 * 60 * 1000)
+        var month = de2.getMonth() + 1
+        var day = de2.getDate()
+        arr.push(month + '月' + day + '日')
+      }
+      return arr
+    },
+    onConfirm (value, index) {
+      // value
+    },
+    onCancel () {
+      Toast('取消')
     },
     riQichajian () {
       this.show = true

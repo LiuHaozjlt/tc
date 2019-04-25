@@ -63,6 +63,7 @@ export default {
     }
   },
   methods: {
+    gopinpaishangjiaxq () {},
     getList () {
       if (this.cache[this.releaseTypeId]) return
       this.$store.dispatch('getSellers', {

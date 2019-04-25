@@ -234,7 +234,7 @@
         class="mtpop-box"
         position="bottom"
       >
-        <van-picker :columns="rentDecorations" value-key="name" @change="onRentDecorationChange"/>
+        <van-picker class="test" :columns="rentDecorations" value-key="name" @change="onRentDecorationChange"/>
       </mt-popup>
       <mt-popup
         v-model="isRentHallShow"
@@ -506,6 +506,9 @@ export default {
 </script>
 
 <style>
+.test  .van-picker__columns>.van-picker-column {
+        margin-top: -70px;
+}
 .mint-toast-text{
   width:100%!important;
 }
