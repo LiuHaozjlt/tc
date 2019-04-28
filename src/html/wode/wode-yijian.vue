@@ -19,7 +19,6 @@
         <!--上传图片-->
         <div>
             <div class="shang-tu">上传截图</div>
-
         </div>
 
         <div class="yijian-tij">
@@ -28,11 +27,14 @@
     </div>
 </template>
 <script>
+import { Switch, Toast } from 'mint-ui'
+import { Popup } from 'mint-ui'
 
 export default {
   data () {
     return {
       fankuiwenzi: 0
+
     }
   },
   methods: {
@@ -42,6 +44,8 @@ export default {
     getfanhuiLeft () {
       this.fankuiwenzi = this.$refs.fankuitext.value.length
     }
+    // 图片上传
+
   }
 }
 </script>
@@ -107,4 +111,5 @@ export default {
         color:rgba(51,51,51,1);
         text-align: center;
     }
+
 </style>

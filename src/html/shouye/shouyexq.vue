@@ -13,9 +13,9 @@
             <div>
               <img src="../../image/sc.png" alt>
             </div>
-            <div>
+            <!-- <div>
               <img src="../../image/fx.png" alt>
-            </div>
+            </div> -->
             <div>
               <img src="../../image/jubao (2).png" alt>
             </div>

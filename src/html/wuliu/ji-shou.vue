@@ -81,7 +81,6 @@
     <div class="beizhu">
       备注：
       <textarea v-model="logisticOrder.memo" class="beizhu-text" placeholder="快点来少时诵诗书所所所"/>
-
       <div class="jishu">
         <div class="jishugeshu">
           <div>{{memoLength}}</div>/

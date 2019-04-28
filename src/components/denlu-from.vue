@@ -200,7 +200,7 @@ export default {
       })
     },
     submit () {
-      console.log('submit')
+      // console.log('submit')
       if (this.mobile === '') {
         Toast('没输入')
         return false

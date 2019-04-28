@@ -226,7 +226,7 @@
         class="mtpop-box"
         position="bottom"
       >
-        <van-picker :columns="priceUnits" @change="onPriceUnitChange"/>
+      <van-picker :columns="priceUnits" @change="onPriceUnitChange"/>
       </mt-popup>
       <mt-popup
         v-model="isRentDecorationShow"
