@@ -213,6 +213,8 @@ padding-left: 3%;
 
 .shouyexiangq-head-right {
   display: flex;
+  justify-content: space-between;
+  width: 30%;
 }
 .shouyexiangq-head-right img {
 }
