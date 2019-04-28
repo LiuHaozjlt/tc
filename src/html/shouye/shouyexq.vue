@@ -15,7 +15,7 @@
             </div>
             <!-- <div>
               <img src="../../image/fx.png" alt>
-            </div> -->
+            </div>-->
             <div>
               <img src="../../image/jubao (2).png" alt>
             </div>
@@ -23,9 +23,40 @@
         </div>
         <!--首页详情内容-->
         <div class="shouyexiangq-content">
+          <div class="shouyexq-cont-top">
+            <div class="shouyexq-cont-top-lef">
+              <img src alt>
+              <div class="shouyexq-top-lef">伊人</div>
+            </div>
+            <div class="shouyexq-cont-top-rit">
+              <div></div>
+              <div class="shouyexq-cont-top-rit-time">时间</div>
+            </div>
+          </div>
+          <div class="shouyexq-cont-cent">
+            <div class="shouyexq-cont-cent-miaoxu">描叙</div>
+          </div>
+          <div class="shouyexq-cont-cent-btm">
+            <div class="shouyexq-btmjianjie">
+              本人是一位职业插画师，常年在国外发展，
+              办过自己的画展开过课，这套插画是纪念站酷10周年的时候原创的耗时半年
+              ，灵感来源于80年代森女系风格，目前已商用并反响很好，
+              因为留学需要经费只能忍痛割爱出售这套得意之作的版权，留给有缘人
+            </div>
+          </div>
 
+          <!--定位内容-->
+          <div class="shouyexq-dingwei">
+            <div class="shouyexq-dingwei-icon">
+              <img src="../../image/dizhi.png" alt>
+              <div class="dingwei-text">湖南长沙雨花区金鸿宇大厦14楼</div>
+            </div>
+          </div>
         </div>
-
+        <!--浏览过改信息的人-->
+        <div class="liulanguoderen">
+          <div class="liulankanguo">浏览过该信息的人还看过</div>
+        </div>
       </div>
     </div>
     <!-- <mt-button size="large" >下侧弹出Popup</mt-button> -->
@@ -52,30 +83,24 @@
     </mt-popup>
 
     <!--联系电话弹窗-->
-     <mt-popup v-model="popupVisible5" position="bottom" class="  mint-popup-5">
-       <div class="lianxidianhuawarp">
-          <div class="lianxidianhua-bot">
-            <img src="../../image/dianhua (1).png" alt="">
-            <div class="callfangshi">15074826496</div>
-            <div class="call">
-              拨打电话
-            </div>
-          </div>
-            <div class="lianxidianhua-bot">
-            <img src="../../image/weixin.png" alt="">
-            <div class="callfangshi">15074826496</div>
-            <div class="call">
-              复制
-            </div>
-          </div>
-            <div class="lianxidianhua-bot">
-            <img src="../../image/youjian.png" alt="">
-            <div class="callfangshi">1275031970@qq.com</div>
-            <div class="call">
-              复制
-            </div>
-          </div>
-       </div>
+    <mt-popup v-model="popupVisible5" position="bottom" class="mint-popup-5">
+      <div class="lianxidianhuawarp">
+        <div class="lianxidianhua-bot">
+          <img src="../../image/dianhua (1).png" alt>
+          <div class="callfangshi">15074826496</div>
+          <div class="call">拨打电话</div>
+        </div>
+        <div class="lianxidianhua-bot">
+          <img src="../../image/weixin.png" alt>
+          <div class="callfangshi">15074826496</div>
+          <div class="call">复制</div>
+        </div>
+        <div class="lianxidianhua-bot">
+          <img src="../../image/youjian.png" alt>
+          <div class="callfangshi">1275031970@qq.com</div>
+          <div class="call">复制</div>
+        </div>
+      </div>
     </mt-popup>
 
     <div class="liuyang">
@@ -131,39 +156,108 @@ export default {
 </script>
 
 <style scoped>
-.mint-popup-5{
+.liulankanguo{
+  padding: 12% 0;
+  font-size:.8125rem /* 13/16 */;
+font-family:PingFang-SC-Regular;
+font-weight:400;
+color:rgba(153,153,153,1);
+}
+.shouyexq-dingwei-icon{
+  display:flex;
+  border:2px solid #EDEDED;
+  border-left: none;
+  border-right: none;
+  height: 8%;
+  align-items: center;
+}
+.dingwei-text {
+  padding-left: 5%;
+  font-size: 0.9375rem /* 15/16 */;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: rgba(51, 51, 51, 1);
+}
+.shouyexq-dingwei-icon img {
+  width: 0.8125rem /* 13/16 */;
+  height: 1.0625rem /* 17/16 */;
+}
+.shouyexq-cont-top-rit-time {
+  font-size: 0.8125rem /* 13/16 */;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: rgba(153, 153, 153, 1);
+}
+.shouyexq-cont-cent-miaoxu {
+  font-size: 1.0625rem /* 17/16 */;
+  font-family: PingFang-SC-Bold;
+  font-weight: bold;
+  color: rgba(51, 51, 51, 1);
+      padding: 5% 0;
+}
+.shouyexq-cont-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5% 0;
+}
+.shouyexq-top-lef {
+  font-size: 1.0625rem /* 17/16 */;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: rgba(51, 51, 51, 1);
+}
+.shouyexq-cont-top-lef {
+  display: flex;
+  align-items: center;
+  width: 30%;
+  justify-content: space-between;
+}
+.shouyexq-cont-top-lef img {
+  width: 2.6875rem /* 43/16 */;
+  height: 2.6875rem /* 43/16 */;
+  border-radius: 100%;
+}
+.shouyexq-btmjianjie {
+  font-size: 0.875rem /* 14/16 */;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: rgba(153, 153, 153, 1);
+  padding:5% 0;
+}
+.mint-popup-5 {
   width: 100%;
   border-top-left-radius: 1.125rem /* 18/16 */;
   border-top-right-radius: 1.125rem /* 18/16 */;
 }
-.lianxidianhuawarp{
+.lianxidianhuawarp {
   padding-top: 10%;
 }
-.callfangshi{
-  font-size:1.0625rem /* 17/16 */;
-font-family:PingFang-SC-Medium;
-font-weight:500;
-color:rgba(51,51,51,1);
-padding-left: 3%;
+.callfangshi {
+  font-size: 1.0625rem /* 17/16 */;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: rgba(51, 51, 51, 1);
+  padding-left: 3%;
 }
-.call{
+.call {
   position: absolute;
   right: 0;
-  width:30%;
-  border-radius: .875rem /* 14/16 */;
-  background-color: #FFB31E;
-  color:white;
+  width: 30%;
+  border-radius: 0.875rem /* 14/16 */;
+  background-color: #ffb31e;
+  color: white;
   text-align: center;
   height: 1.75rem /* 28/16 */;
   line-height: 1.75rem /* 28/16 */;
 }
-.lianxidianhua-bot{
-  display:flex;
+.lianxidianhua-bot {
+  display: flex;
   /* justify-content: space-between; */
   margin-bottom: 10%;
 }
-.lianxidianhua-bot img{
-  width:1.75rem /* 28/16 */;
+.lianxidianhua-bot img {
+  width: 1.75rem /* 28/16 */;
   height: 1.4375rem /* 23/16 */;
 }
 .liuyan-icon {
@@ -173,9 +267,9 @@ padding-left: 3%;
 .liuyang {
   display: flex;
   align-items: center;
-  position:fixed;
+  position: fixed;
   bottom: 2%;
-  width:100%;
+  width: 100%;
 }
 .lianxifangs {
   width: 100%;
