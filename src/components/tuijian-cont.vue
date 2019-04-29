@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     goshouyexiangq () {
-      this.$router.push({path: '/shouyexq'})
+      this.$router.push({path: '/shouyexq', params: { title: this.title }})
     }
 
   },

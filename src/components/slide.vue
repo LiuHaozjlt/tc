@@ -29,7 +29,6 @@ export default {
   },
   methods: {
     handleChange (index) {
-      console.log(index)
       this.curSwiper = index + 1
       if (this.curSwiper > this.list.length) this.curSwiper = 1
     }

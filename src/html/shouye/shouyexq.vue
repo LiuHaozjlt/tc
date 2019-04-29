@@ -21,6 +21,8 @@
             </div>
           </div>
         </div>
+        <!--轮播内容-->
+        <!-- <lunbo></lunbo> -->
         <!--首页详情内容-->
         <div class="shouyexiangq-content">
           <div class="shouyexq-cont-top">
@@ -34,7 +36,8 @@
             </div>
           </div>
           <div class="shouyexq-cont-cent">
-            <div class="shouyexq-cont-cent-miaoxu">描叙</div>
+            <!-- <div class="shouyexq-cont-cent-miaoxu">描叙</div> -->
+             <div class="shouyexq-cont-cent-miaoxu">ssssssssssssss{{this.$route.params.title}}</div>
           </div>
           <div class="shouyexq-cont-cent-btm">
             <div class="shouyexq-btmjianjie">
@@ -114,6 +117,7 @@
 </template>
 <script>
 import liuyanlist from '../../components/liuyan-list'
+import lunbo from '../../components/slide'
 export default {
   name: 'Picker',
   data () {
@@ -130,7 +134,8 @@ export default {
     }
   },
   components: {
-    liuyanlist
+    liuyanlist,
+    lunbo
   },
   methods: {
     goshouye () {
@@ -139,7 +144,6 @@ export default {
     sendEvent () {
       // this.popupVisible4 = false
       this.false = true
-
       this.list.push({
         id: this.list.length + 1,
         content: new Date().toLocaleString()
