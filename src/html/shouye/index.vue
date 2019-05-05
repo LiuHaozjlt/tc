@@ -4,9 +4,8 @@
      <div class="circle"></div>
     <div class="shouYe-nav-warp">
       <div class='shouYe-nav' v-for="(item, index) in tabs" :key="index">
-          <router-link  :to="item.to">
-        <img src="item.icon" alt="" style="width:20px;height:20px;background-color:red;">
-
+        <router-link  :to="item.to">
+          <img :src="item.icon" alt="" style="width:20px;height:20px;">
           <div :class="[pathName==item.to?'checkRoute':'nav-ft']" >{{item.label}}</div>
         </router-link>
       </div>
@@ -28,16 +27,16 @@ export default {
     },
     tabs () {
       const navPersoanl = [
-        {name: 'home', label: '首页', icon: '', to: '/index/'},
-        {name: 'news', label: '新闻', icon: '', to: '/index/xinwen'},
-        {name: 'putout', label: '发布', icon: '../image/fabu_s.png', to: '/index/fabuele'},
-        {name: 'brand', label: '品牌', icon: '', to: '/index/pinpai'},
-        {name: 'mine', label: '我的', icon: '', to: '/index/wodeele'}
+        {name: 'home', label: '首页', icon: require('../../image/shouye_s.png'), to: '/index/'},
+        {name: 'news', label: '新闻', icon: require('../../image/xinwen_s.png'), to: '/index/xinwen'},
+        {name: 'putout', label: '发布', icon: require('../../image/fabu_s.png'), to: '/index/fabuele'},
+        {name: 'brand', label: '品牌', icon: require('../../image/pingpai _s.png'), to: '/index/pinpai'},
+        {name: 'mine', label: '我的', icon: require('../../image/wode_s.png'), to: '/index/wodeele'}
       ]
       const navCorp = [
-        {name: 'home', label: '首页', icon: '', to: '/index/'},
-        {name: 'putout', label: '发布', icon: '../image/fabu_s.png', to: '/index/fabuele'},
-        {name: 'mine', label: '我的', icon: '', to: '/index/wodeele'}
+        {name: 'home', label: '首页', icon: require('../../image/shouye_s.png'), to: '/index/'},
+        {name: 'putout', label: '发布', icon: require('../../image/fabu_s.png'), to: '/index/fabuele'},
+        {name: 'mine', label: '我的', icon: require('../../image/wode_s.png'), to: '/index/wodeele'}
       ]
 
       return this.isPersonal ? navPersoanl : navCorp

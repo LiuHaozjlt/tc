@@ -29,12 +29,8 @@ export default {
     denluxuanxiang,
     denlufrm
   },
-  created () {
-
-  },
   methods: {
     changeLogin (val) {
-      // debugger
       this.isLogin = val
     },
     handleBack (type) {

@@ -4,7 +4,7 @@
             <div class="shouYe-cent" :key="index" v-if="showNum == 0  || (showNum > index)" @click="goshouyexiangq">
                 <div class="shouYe-cent-left">
                     <div>
-                        <img :src="item.img">
+                        <img :src="'http://info.00856.la'+item.img">
                     </div>
                 </div>
                 <div class="shouYe-cent-rigt">
@@ -29,6 +29,7 @@
 
 <script>
 import { mapState } from 'vuex'
+
 export default {
   props: {
     typeId: {
@@ -42,19 +43,22 @@ export default {
   },
   data () {
     return {
-
     }
   },
   computed: {
     ...mapState(['indexData'])
   },
   methods: {
-    goshouyexiangq () {
-      this.$router.push({path: '/shouyexq', params: { title: this.title }})
+
+    goshouyexiangq (title, img) {
+      this.$router.push({path: '/shouyexq'
+        // query: {
+        //   zh: zhonwen,
+        //   laowo: laos
+        // }
+      })
     }
-
   },
-
   created () {
     this.$store.dispatch('getRecommendList')
   }
@@ -65,7 +69,6 @@ export default {
       width:10%;
       height: .75rem /* 12/16 */;
       border:1px solid red;
-
     }
     .rigt-wenzi{
       color:#333333;

@@ -37,7 +37,7 @@
           </div>
           <div class="shouyexq-cont-cent">
             <!-- <div class="shouyexq-cont-cent-miaoxu">描叙</div> -->
-             <div class="shouyexq-cont-cent-miaoxu">ssssssssssssss{{this.$route.params.title}}</div>
+            <div class="shouyexq-cont-cent-miaoxu"></div>
           </div>
           <div class="shouyexq-cont-cent-btm">
             <div class="shouyexq-btmjianjie">
@@ -127,6 +127,9 @@ export default {
       list: []
     }
   },
+  created () {
+    let tit = this.$route.params.title
+  },
   mounted () {},
   computed: {
     img () {
@@ -160,16 +163,16 @@ export default {
 </script>
 
 <style scoped>
-.liulankanguo{
+.liulankanguo {
   padding: 12% 0;
-  font-size:.8125rem /* 13/16 */;
-font-family:PingFang-SC-Regular;
-font-weight:400;
-color:rgba(153,153,153,1);
+  font-size: 0.8125rem /* 13/16 */;
+  font-family: PingFang-SC-Regular;
+  font-weight: 400;
+  color: rgba(153, 153, 153, 1);
 }
-.shouyexq-dingwei-icon{
-  display:flex;
-  border:2px solid #EDEDED;
+.shouyexq-dingwei-icon {
+  display: flex;
+  border: 2px solid #ededed;
   border-left: none;
   border-right: none;
   height: 8%;
@@ -197,7 +200,7 @@ color:rgba(153,153,153,1);
   font-family: PingFang-SC-Bold;
   font-weight: bold;
   color: rgba(51, 51, 51, 1);
-      padding: 5% 0;
+  padding: 5% 0;
 }
 .shouyexq-cont-top {
   display: flex;
@@ -227,7 +230,7 @@ color:rgba(153,153,153,1);
   font-family: PingFang-SC-Medium;
   font-weight: 500;
   color: rgba(153, 153, 153, 1);
-  padding:5% 0;
+  padding: 5% 0;
 }
 .mint-popup-5 {
   width: 100%;

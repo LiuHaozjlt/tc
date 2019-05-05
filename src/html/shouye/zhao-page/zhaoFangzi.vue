@@ -173,7 +173,7 @@ position: absolute;
   position: relative;
 }
 .shouye-souc-head img {
-  height: 6.25rem /* 100/16 */;
+  height: 7.4375rem /* 119/16 */;
   width:100%;
 }
 </style>

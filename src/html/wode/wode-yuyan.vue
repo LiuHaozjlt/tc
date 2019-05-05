@@ -24,12 +24,13 @@
           </div>
         </div>
       </div>
-      <div class="yuyan-qued">确定</div>
+      <div class="yuyan-qued" @click="quedingyuyan">确定</div>
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
   data () {
     return {
@@ -41,13 +42,33 @@ export default {
     wodeyuyanqian () {
       this.$router.back(-1)
     },
+    // 选择老挝文
     geticon () {
       this.dui = true
       this.duishang = false
+      this.xuanzelaowo()
     },
+    // 选择中文
     geticonshang () {
       this.dui = false
       this.duishang = true
+      this.xuanzezhonwen()
+    },
+    xuanzelaowo () {
+      // if (lang == 'zh') {
+      //   localStorage.setItem('locale', 'zh')
+      //   this.$i18n.locale = localStorage.getItem('locale')
+      // } else if (lang == 'laos') {
+      //   localStorage.setItem('locale', 'laos')
+      //   this.$i18n.locale = localStorage.getItem('locale')
+      // }
+    },
+    xuanzezhonwen () {
+
+    },
+
+    quedingyuyan () {
+
     }
   }
 }

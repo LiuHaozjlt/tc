@@ -20,11 +20,6 @@ import publi_css from './css/dlu.css'
 import VueI18n from 'vue-i18n'
 import i18nZh from '@/i18n/zh'
 import i18nLaos from '@/i18n/laos'
-
-// for (const key in VueAMap) {
-//   console.log(VueAMap)
-
-// }
 import VueAMap from 'vue-amap'
 import vant from 'vant'
 // import mock from 'mockjs'
@@ -35,6 +30,10 @@ import eleuiconp from '../node_modules/element-ui/lib/index.js'
 import {api} from '../src/api/api'
 // 公共方法
 import uploadFileFn from '../src/js/icon-file'
+
+// for (const key in VueI18n) {
+//   console.log(VueI18n[key])
+// }
 Vue.prototype.$uploadFileFn = uploadFileFn
 // console.log(Vuex)
 // console.log(api)
@@ -60,16 +59,15 @@ Vue.use(eleuicss)
 Vue.use(eleui)
 // Vue.use(VueAMap)
 Vue.use(mint)
-
 Vue.use(VueI18n)
-
 const i18n = new VueI18n({
-  locale: 'zh', // set locale
+  locale: localStorage.getItem('locale') || 'zh', // set locale
   messages: {
     zh: i18nZh,
     laos: i18nLaos
   } // set locale messages
 })
+console.log(i18n.messages.zh)
 Vue.prototype.Vue = Vue
 Vue.prototype.mint = mint
 Vue.prototype.axius = axius

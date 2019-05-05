@@ -17,7 +17,6 @@ function updateRequst (token) {
 export const wls = {
   get (key, defaultValue) {
     let value = window.localStorage.getItem(key)
-
     if (value === null) return defaultValue
     else return JSON.parse(value)
   },
@@ -47,6 +46,9 @@ export default new Vuex.Store({
     indexData: [],
     userInfo: wls.get('userInfo', {}),
     menuData: [],
+    // menuData: [{icon: '../image/wuliu.png'}, {icon: '../image/huodong.png'},
+    //   {icon: '../image/shangping.png'}, {icon: '../image/e.png'},
+    //   {icon: '../image/i.png'}, {icon: '../image/r.png'}, {icon: '../image/t.png'}, {icon: '../image/q.png'}],
     iptqingcheng: '',
     isPersonal: !!wls.get('isPersonal'),
     imgCache: '',

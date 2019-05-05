@@ -14,7 +14,7 @@
             <!-- <router-link to="/zhaofangzi"> -->
               <div class="index-menu" v-for="(item,i) in menuData" :key="i" @click="tapAction(item, i)">
                 <div>
-                  <img :src="item.icon" alt style="width:20px;height:20px">
+                  <img :src="'http://info.00856.la'+item.icon"   style="width:20px;height:20px">
                 </div>
                 <div>{{item.name}}</div>
               </div>

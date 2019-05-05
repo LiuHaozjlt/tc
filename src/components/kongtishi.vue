@@ -42,14 +42,7 @@ export default {
         font-weight:500;
         color:rgba(153,153,153,1);
     }
-    .shouYe-head-cent{
-
-    }
     .shouye-souc-head{
         position: relative;
     }
-    .shouye-souc-head img{
-        height: 6.25rem /* 100/16 */;
-    }
-
 </style>
