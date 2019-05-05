@@ -285,9 +285,7 @@ overflow:hidden;
   font-weight: 500;
   color: rgba(33, 33, 33, 1);
 }
-.shouYe-cent-left div img {
-  height: 1.875rem /* 30/16 */;
-}
+
 .wode-fabu-box {
   margin-bottom: 2%;
 

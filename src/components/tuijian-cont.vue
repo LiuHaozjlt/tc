@@ -64,7 +64,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scope>
     .dianzan img{
       width:10%;
       height: .75rem /* 12/16 */;
