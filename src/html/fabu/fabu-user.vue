@@ -247,7 +247,8 @@ export default {
       data.append('upimage', file.file)
 
       //   console.log(data)
-      //   Toast('正在上传...')
+      Toast('正在上传...')
+
       let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
       this.axius({
         method: 'post',
@@ -263,7 +264,9 @@ export default {
         if (p.data.error_code === 0) {
           Toast('上传成功')
           // me.addList.push(file)
+
           me.imageList.push(p.data.data.uploadFilePath)
+          debugger
           this.publish.img = this.imageList.join(',')
         } else {
           Toast(p.data.message)

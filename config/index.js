@@ -50,8 +50,7 @@ module.exports = {
     proxyTable: {
       '/apis': {
         secure: false,
-        // target: 'http://192.168.0.25:8080',
-        target: 'http://info.00856.la',
+        target: 'http://192.168.0.25:8080',
         changeOrigin: true,
         path: [
           '/apis/**'
@@ -59,7 +58,7 @@ module.exports = {
       },
       '/upload': {
         secure: false,
-        // target: 'http://192.168.0.25:8080',
+        target: 'http://192.168.0.25:8080',
 
         changeOrigin: true,
         path: [

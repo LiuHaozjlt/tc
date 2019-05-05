@@ -4,7 +4,8 @@
       <router-link tag='div' :to="'/fabuuser?releaseTypeId=' + item.module_id" v-for="(item,index) in menuData" :key="index" class="routerItem">
         <!-- 跳到个人发布的页面 /fabupeop相应调整 -->
          <div class="fabu-cent">
-            {{item.name}}
+           <img  :src="'http://info.00856.la'+item.icon" style="width:65px;height:50px">
+            <div>{{item.name}}</div>
         </div>
         </router-link>
       </div>
@@ -38,6 +39,7 @@ export default {
     width: 50%;
     text-align: center;
     height: 15%;
+    margin-bottom: 5%;
   }
   .xuan-bie{
     font-size:.875rem /* 14/16 */;

@@ -67,7 +67,7 @@ const i18n = new VueI18n({
     laos: i18nLaos
   } // set locale messages
 })
-console.log(i18n.messages.zh)
+// console.log(i18n.messages.zh)
 Vue.prototype.Vue = Vue
 Vue.prototype.mint = mint
 Vue.prototype.axius = axius
