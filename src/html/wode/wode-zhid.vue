@@ -143,9 +143,7 @@ export default {
       font-weight:500;
       color:rgba(51,51,51,1);
     }
-    .shouYe-cent-left div img{
-      height: 3.9375rem /* 63/16 */;
-    }
+
     .shouYe-cent{
       display: flex;
       justify-content: space-between;
