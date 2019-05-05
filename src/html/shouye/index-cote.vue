@@ -14,7 +14,7 @@
             <!-- <router-link to="/zhaofangzi"> -->
               <div class="index-menu" v-for="(item,i) in menuData" :key="i" @click="tapAction(item, i)">
                 <div>
-                  <img :src="'http://info.00856.la'+item.icon"   style="width:20px;height:20px">
+                  <img :src="'http://info.00856.la'+item.icon"   style="width:57px;height:45px">
                 </div>
                 <div>{{item.name}}</div>
               </div>
@@ -377,7 +377,7 @@ export default {
 }
 .shouYe-cent-left div img {
   display: inline-block;
-  /* width:100%; */
+  width:100%;
   height: 4.625rem /* 58/16 */;
 }
 .shouYe-rigt-top {
