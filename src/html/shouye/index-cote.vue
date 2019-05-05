@@ -375,11 +375,11 @@ export default {
 .shouYe-cent-left {
 
 }
-.shouYe-cent-left div img {
+/* .shouYe-cent-left div img {
   display: inline-block;
   width:100%;
-  height: 4.625rem /* 58/16 */;
-}
+  height: 4.625rem /* 58/16 */
+/* }  */
 .shouYe-rigt-top {
   display: -webkit-box;
   -webkit-box-orient: vertical;

@@ -80,4 +80,9 @@ export default {
       font-size: .6875rem /* 11/16 */;
       color:#B16800;
     }
+    .shouYe-cent-left div img {
+  display: inline-block;
+  width:100%;
+  height: 4.625rem /* 58/16 */;
+}
 </style>
