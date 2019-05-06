@@ -248,13 +248,15 @@ export default {
 
       //   console.log(data)
       Toast('正在上传...')
+      debugger
+
       // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
       this.axius({
         method: 'post',
         url: 'apis/v1/upload/image',
         data: data,
         headers: {
-          Authorization: 'Bearer ' + this.userInfo.access_token,
+          Authorization: 'Bearer ' + me.userInfo.access_token,
           'Content-Type': 'multipart/form-data'
         }
       }).then(p => {
