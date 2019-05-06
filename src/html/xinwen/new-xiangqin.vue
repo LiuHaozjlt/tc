@@ -64,7 +64,7 @@ export default {
     },
     getDetail () {
       // console.log(this.id)
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+      // let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
       this.axius({
         methods: 'get',
         url: '/apis/v1/article/' + this.id,
@@ -76,7 +76,7 @@ export default {
           // receive_time: 4
         },
         headers: {
-          Authorization: 'Bearer ' + token
+          Authorization: 'Bearer ' + this.token
         }
       }).then(p => {
         // console.log(p.data.data)

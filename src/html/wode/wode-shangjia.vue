@@ -132,13 +132,13 @@ export default {
     },
     getruzhushengq () {
       let me = this
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+      // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
       me.axius({
         method: 'post',
         url: 'apis/v1/seller',
         data: this.sellerInfo,
         headers: {
-          Authorization: 'Bearer ' + token
+          Authorization: 'Bearer ' + me.token
         }
       }).then(p => {
         if (p.data.error_code !== 0) {

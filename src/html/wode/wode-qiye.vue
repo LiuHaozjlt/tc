@@ -319,13 +319,13 @@ export default {
     },
 
     getguimo (a) {
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+      // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
       this.axius({
         methods: 'post',
         url: '/apis/v1/seller/auth-info',
         data: {},
         headers: {
-          Authorization: 'Bearer ' + token
+          Authorization: 'Bearer ' + this.token
         }
       }).then(p => {
         // debugger
@@ -335,13 +335,13 @@ export default {
       })
     },
     getxingzhi (b) {
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+      // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
       this.axius({
         methods: 'post',
         url: 'apis/v1/seller/auth-info',
         data: {},
         headers: {
-          Authorization: 'Bearer ' + token
+          Authorization: 'Bearer ' + this.token
         }
       }).then(p => {
         // debugger
@@ -354,13 +354,13 @@ export default {
       })
     },
     getindustry (c) {
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+      // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
       this.axius({
         methods: 'post',
         url: 'apis/v1/seller/auth-info',
         data: {},
         headers: {
-          Authorization: 'Bearer ' + token
+          Authorization: 'Bearer ' + this.token
         }
       }).then(p => {
         // debugger

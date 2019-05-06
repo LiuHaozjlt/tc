@@ -44,13 +44,12 @@ module.exports = {
     // set this to false - it *may* help
     // https://vue-loader.vuejs.org/en/options.html#cachebusting
     cacheBusting: true,
-
     cssSourceMap: true,
 
     proxyTable: {
       '/apis': {
         secure: false,
-        target: 'http://192.168.0.25:8080',
+        target: 'http://info.00856.la:8081',
         changeOrigin: true,
         path: [
           '/apis/**'
@@ -58,7 +57,7 @@ module.exports = {
       },
       '/upload': {
         secure: false,
-        target: 'http://192.168.0.25:8080',
+        target: 'http://info.00856.la:8081',
 
         changeOrigin: true,
         path: [

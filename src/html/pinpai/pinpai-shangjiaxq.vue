@@ -166,7 +166,7 @@ export default {
       })
     },
     getSellInfo (filters = {}) {
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+      let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
       this.axius({
         methods: 'get',
         url: 'apis/v1/seller/my-release',

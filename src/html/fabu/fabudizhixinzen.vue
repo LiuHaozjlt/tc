@@ -48,7 +48,7 @@
   </div>
 </template>
 <script>
-import address from '../../js/areajson';
+import address from '../../js/areajson'
 // import { constants } from 'http2'
 let slot1Values = address.map(p => p.label)
 let slot2Values = address[0].children.map(p => p.label)
@@ -135,7 +135,7 @@ export default {
       this.$router.back(-1)
     },
     adddizhi () {
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113';
+      // let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113';
       this.axius
         .get('/apis/v1/user-address', {
           data: {
@@ -147,7 +147,7 @@ export default {
             receive_time: 3
           },
           headers: {
-            Authorization: 'Bearer ' + token
+            Authorization: 'Bearer ' + this.token
           }
         })
         .then(p => {
@@ -167,7 +167,7 @@ export default {
           if (item) {
             return isLaos ? item.nameLa : item.name
           } else {
-            return '';
+            return ''
           }
         })
         .join('')
@@ -222,7 +222,6 @@ export default {
         })
       picker.setSlotValues(1, this.mapRegion(secondValue))
       picker.setSlotValues(2, this.mapRegion(thirdChildren))
-      
     },
     mapRegion (arr) {
       return arr.map(({ id, name, name_la }) => ({

@@ -45,13 +45,13 @@ export default {
         case '土地交易':
           console.log(1)
           // somtghing 在这里调用接口。获取数据
-          let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+          // let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
           this.axius({
             methods: 'get',
             url: 'apis/v1/seller/my-release',
             data: {},
             headers: {
-              Authorization: 'Bearer ' + token
+              Authorization: 'Bearer ' + this.token
             }
           }).then(p => {
             console.log('土地数据', p.data.data.SellerReleaseInfo)

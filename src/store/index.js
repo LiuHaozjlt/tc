@@ -28,9 +28,9 @@ export const wls = {
 if (wls.get('isPersonal')) {
   wls.set('isPersonal', true)
 }
-let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+// let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
 // let token = wls.get('userInfo').access_token || 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
-let $http = updateRequst(token)
+let $http = updateRequst(this.access_token)
 
 let queryParamDefault = {
   release_type_id: undefined,

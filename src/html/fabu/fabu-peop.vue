@@ -403,6 +403,7 @@ export default {
       this.popupVisible = false
     },
     onRead (file) {
+      debugger
       let me = this
       this.notimg = true
       //   this.$refs.goodImg.src = file.content
@@ -412,13 +413,14 @@ export default {
 
       //   console.log(data)
       //   Toast('正在上传...')
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+
+      // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
       this.axius({
         method: 'post',
         url: 'apis/v1/upload/image',
         data: data,
         headers: {
-          Authorization: 'Bearer ' + token,
+          Authorization: 'Bearer ' + this.token,
           'Content-Type': 'multipart/form-data'
         }
       }).then(p => {
@@ -448,13 +450,13 @@ export default {
     getstatus () {
       //   console.log('getqinqiu')
       let me = this
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+      // let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
       me.axius({
         methods: 'get',
         url: 'apis/v1/user/seller-status',
         data: {},
         headers: {
-          Authorization: 'Bearer ' + token
+          Authorization: 'Bearer ' + me.token
         }
       }).then(p => {
         // debugger

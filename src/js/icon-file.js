@@ -5,7 +5,7 @@ export default function (file) {
   data.append('upimage', file.file)
   //   console.log(data)
   // Toast('正在上传...')
-  let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+  let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
   return axios({
     method: 'post',
     url: 'apis/v1/upload/image',

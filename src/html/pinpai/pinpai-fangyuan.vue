@@ -39,7 +39,7 @@ export default {
 
   },
   created () {
-    let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+    // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
     this.axius({
       methods: 'post',
       url: 'apis/v1/upload/image',
@@ -58,7 +58,7 @@ export default {
         // user_address_id: 0
       },
       headers: {
-        'Authorization': 'Bearer ' + token
+        'Authorization': 'Bearer ' + this.token
       }
     }).then(p => {
       // debugger

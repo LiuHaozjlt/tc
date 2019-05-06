@@ -289,6 +289,7 @@ export default {
 .index-menu-warp {
   display: flex;
   flex-flow: wrap;
+  height: 13.75rem /* 220/16 */;
 }
 .index-menu {
   width: 25%;

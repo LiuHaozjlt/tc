@@ -50,7 +50,7 @@
           <div class="jia">
             <div v-for="(item, index) of imageList" :key="item">
               <div class="fenm-ico">
-                <img :src="item" alt @click="handleImageClick(item)">
+                <img :src="'http://info.00856.la'+item" alt @click="handleImageClick(item)">
                 <div class="fs-ico" @click="remove(index)">x</div>
               </div>
             </div>
@@ -176,7 +176,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['publish', 'activeAddress']),
+    ...mapState(['publish', 'activeAddress', 'userInfo']),
     releaseTypeId () {
       return this.$route.query.releaseTypeId
     },
@@ -248,14 +248,13 @@ export default {
 
       //   console.log(data)
       Toast('正在上传...')
-
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+      // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
       this.axius({
         method: 'post',
         url: 'apis/v1/upload/image',
         data: data,
         headers: {
-          Authorization: 'Bearer ' + token,
+          Authorization: 'Bearer ' + this.userInfo.access_token,
           'Content-Type': 'multipart/form-data'
         }
       }).then(p => {
@@ -266,7 +265,7 @@ export default {
           // me.addList.push(file)
 
           me.imageList.push(p.data.data.uploadFilePath)
-          debugger
+
           this.publish.img = this.imageList.join(',')
         } else {
           Toast(p.data.message)

@@ -78,14 +78,14 @@ export default {
   },
   mounted () {
     let self = this
-    let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+    // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
     this.axius.get('/apis/v1/logistic', {
       headers: {
-        'Authorization': 'Bearer ' + token
+        'Authorization': 'Bearer ' + self.token
       }
     }).then(p => {
       self.logistic = p.data.data
-      console.log(p.data.data)
+      // console.log(p.data.data)
     })
   }
 

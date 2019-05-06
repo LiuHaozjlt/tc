@@ -125,6 +125,7 @@ new Vue({
   i18n,
   created () {
     let userInfo = store.state.userInfo
+    console.log(userInfo, 'SSSSSSSSSSS')
     if ((!userInfo || !userInfo.access_token) && this.$route.path === '/index') {
       this.$router.replace('/dlu')
     } else {

@@ -44,18 +44,18 @@ export default {
     },
     gettongzhi () {
       let me = this
-      let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+      // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
       me.axius({
         methods: 'get',
         url: 'apis/v1/user/notice',
         data: {
         },
         headers: {
-          'Authorization': 'Bearer ' + token
+          'Authorization': 'Bearer ' + me.token
         }
       }).then(p => {
         this.tongzhi = p.data.data
-        console.log(this.tongzhi)
+        // console.log(this.tongzhi)
       })
     }
   }
