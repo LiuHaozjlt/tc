@@ -76,7 +76,7 @@ export default {
           // receive_time: 4
         },
         headers: {
-          Authorization: 'Bearer ' + this.token
+          Authorization: 'Bearer ' + this.userInfo.access_token
         }
       }).then(p => {
         // console.log(p.data.data)

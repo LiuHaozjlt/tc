@@ -325,7 +325,7 @@ export default {
         url: '/apis/v1/seller/auth-info',
         data: {},
         headers: {
-          Authorization: 'Bearer ' + this.token
+          Authorization: 'Bearer ' + this.userInfo.access_token
         }
       }).then(p => {
         // debugger
@@ -341,7 +341,7 @@ export default {
         url: 'apis/v1/seller/auth-info',
         data: {},
         headers: {
-          Authorization: 'Bearer ' + this.token
+          Authorization: 'Bearer ' + this.userInfo.access_token
         }
       }).then(p => {
         // debugger
@@ -360,7 +360,7 @@ export default {
         url: 'apis/v1/seller/auth-info',
         data: {},
         headers: {
-          Authorization: 'Bearer ' + this.token
+          Authorization: 'Bearer ' + this.userInfo.access_token
         }
       }).then(p => {
         // debugger

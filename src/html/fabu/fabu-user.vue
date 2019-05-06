@@ -248,7 +248,7 @@ export default {
 
       //   console.log(data)
       Toast('正在上传...')
-      debugger
+      // debugger
 
       // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
       this.axius({

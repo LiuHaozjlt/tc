@@ -147,7 +147,7 @@ export default {
             receive_time: 3
           },
           headers: {
-            Authorization: 'Bearer ' + this.token
+            Authorization: 'Bearer ' + this.userInfo.access_token
           }
         })
         .then(p => {

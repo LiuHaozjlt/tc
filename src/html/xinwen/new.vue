@@ -48,7 +48,7 @@ export default {
         // is_recommend: 0
       },
       headers: {
-        'Authorization': 'Bearer ' + this.token
+        'Authorization': 'Bearer ' + this.userInfo.access_token
       }
     }).then(p => {
     //   debugger

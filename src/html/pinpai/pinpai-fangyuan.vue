@@ -58,7 +58,7 @@ export default {
         // user_address_id: 0
       },
       headers: {
-        'Authorization': 'Bearer ' + this.token
+        'Authorization': 'Bearer ' + this.userInfo.access_token
       }
     }).then(p => {
       // debugger

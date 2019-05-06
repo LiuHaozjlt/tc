@@ -51,7 +51,7 @@ export default {
         data: {
         },
         headers: {
-          'Authorization': 'Bearer ' + me.token
+          'Authorization': 'Bearer ' + me.userInfo.access_token
         }
       }).then(p => {
         this.tongzhi = p.data.data

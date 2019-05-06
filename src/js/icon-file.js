@@ -5,13 +5,13 @@ export default function (file) {
   data.append('upimage', file.file)
   //   console.log(data)
   // Toast('正在上传...')
-  let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
+  // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
   return axios({
     method: 'post',
     url: 'apis/v1/upload/image',
     data: data,
     headers: {
-      'Authorization': 'Bearer ' + token,
+      'Authorization': 'Bearer ' + this.userInfo.access_token,
       'Content-Type': 'multipart/form-data'
     }
   })

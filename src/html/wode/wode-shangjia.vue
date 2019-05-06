@@ -138,7 +138,7 @@ export default {
         url: 'apis/v1/seller',
         data: this.sellerInfo,
         headers: {
-          Authorization: 'Bearer ' + me.token
+          Authorization: 'Bearer ' + me.userInfo.access_token
         }
       }).then(p => {
         if (p.data.error_code !== 0) {

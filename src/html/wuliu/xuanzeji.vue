@@ -81,7 +81,7 @@ export default {
     // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
     this.axius.get('/apis/v1/logistic', {
       headers: {
-        'Authorization': 'Bearer ' + self.token
+        'Authorization': 'Bearer ' + self.userInfo.access_token
       }
     }).then(p => {
       self.logistic = p.data.data

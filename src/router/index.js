@@ -68,6 +68,7 @@ import pinlunxiangq from '../html/xinwen/pinlunxiangq'
 // import map_text from "AmapText"
 Vue.use(Router)
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/fabuxinzen',

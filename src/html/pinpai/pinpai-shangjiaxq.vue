@@ -166,13 +166,13 @@ export default {
       })
     },
     getSellInfo (filters = {}) {
-      let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
+      // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
       this.axius({
         methods: 'get',
         url: 'apis/v1/seller/my-release',
         params: filters,
         headers: {
-          Authorization: 'Bearer ' + token
+          Authorization: 'Bearer ' + this.userInfo.access_token
         }
       }).then(({ data }) => {
         if (data.error_code !== 0) {
