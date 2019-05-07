@@ -10,6 +10,7 @@
               <div class="xuanzexiang">
                 <div v-for="(item,index) in sellerTypes" :key="index" :class="{selected: index === active}"
                   @click="active = index">
+                    <div class=""><img  class="shangjiaIcon" :src="'http://info.00856.la'+item.icon" alt=""></div>
                     <div>{{item.name}}</div>
                 </div>
               </div>
@@ -25,6 +26,7 @@ export default {
   data () {
     return {
       active: 0
+
     }
   },
   computed: {
@@ -51,11 +53,15 @@ export default {
 </script>
 
 <style>
+.shangjiaIcon{
+  width:4rem /* 64/16 */;
+  height: 2.4375rem /* 39/16 */;
+}
 .xuanzexiang{
   display: inline-flex;
   flex-wrap: wrap;
   text-align: center;
-  margin-top: 30vh;
+  margin-top: 10vh;
 }
 .xuanzexiang > div{
   width: 50%;

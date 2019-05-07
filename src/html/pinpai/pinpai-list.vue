@@ -1,40 +1,45 @@
 <template>
-    <div>
-        <div  v-for="(item,index) in list " :key="index" class="pinpaishop" >
-          <!--跳转到logo详情-->
-            <div class="pinpai-cent" @click="gopinpaishangjiaxq">
-                <div class="fang-icon">
-                      <img :src="'http://info.00856.la'+item.img">
-                </div>
-                <div>
-                    <div class="gongsi ershouchetop">{{item.name}}</div>
-                    <div class="gon-yuan">共有{{(item.SellerReleaseInfo || []).length}}{{units[releaseTypeId]}}</div>
-                </div>
-                <div>
-                    <div class="vqiye">v企业</div>
-                    <div></div>
-                </div>
-            </div>
-            <!--跳转到产品详情-->
-            <div class="pinpai-cent-bot" v-if="(item.SellerReleaseInfo || []).length > 0">
-                <div v-for="release in item.SellerReleaseInfo" :key="release.seller_release_id"
-                    @click="gochanpxiangq(release)">
-                    <div class="pinp-cent-top">{{release.title}}</div>
-                    <div class="kip">
-                      <template v-if="release.prices !== undefined">{{release.prices}}</template>
-                      <template v-else>{{release.recruit_prices_start}}-{{release.recruit_prices_end}}</template>
-                      {{release.prices_unit}}
-                    </div>
-                    <div class="pinp-cent-bot" v-if="release.img"><img :src="release.img" alt=""></div>
-                </div>
-            </div>
+  <div>
+    <div v-for="(item,index) in list " :key="index" class="pinpaishop">
+      <!--跳转到logo详情-->
+      <div class="pinpai-cent" @click="gopinpaishangjiaxq">
+        <div class="fang-icon">
+          <img :src="'http://info.00856.la'+item.img">
         </div>
-        <div v-if="list.length === 0">暂无数据</div>
+        <div>
+          <div class="gongsi ershouchetop">{{item.name}}</div>
+          <div class="gon-yuan">共有{{(item.SellerReleaseInfo || []).length}}{{units[releaseTypeId]}}</div>
+        </div>
+        <div>
+          <div class="vqiye">v企业</div>
+          <div></div>
+        </div>
+      </div>
+      <!--跳转到产品详情-->
+      <div class="pinpai-cent-bot" v-if="(item.SellerReleaseInfo || []).length > 0">
+        <div
+          v-for="release in item.SellerReleaseInfo"
+          :key="release.seller_release_id"
+          @click="gochanpxiangq(release)"
+        >
+          <div class="pinp-cent-top">{{release.title}}</div>
+          <div class="kip">
+            <template v-if="release.prices !== undefined">{{release.prices}}</template>
+            <template v-else>{{release.recruit_prices_start}}-{{release.recruit_prices_end}}</template>
+            {{release.prices_unit}}
+          </div>
+          <div class="pinp-cent-bot" v-if="release.img">
+            <img :src="release.img" alt>
+          </div>
+        </div>
+      </div>
     </div>
+    <div v-if="list.length === 0">暂无数据</div>
+  </div>
 </template>
 
 <script>
-import {Toast} from 'vant'
+import { Toast } from 'vant'
 export default {
   props: {
     releaseTypeId: [String, Number]
@@ -67,95 +72,99 @@ export default {
   },
   methods: {
     gopinpaishangjiaxq () {
-      this.$router.push({path: '/pinpaishangjiaxq'})
+      this.$router.push({ path: '/pinpaishangjiaxq' })
     },
     gochanpxiangq () {
-      this.$router.push({path: '/pinpaichanpxq'})
+      this.$router.push({ path: '/pinpaichanpxq' })
     },
     getList () {
       if (this.cache[this.releaseTypeId]) return
-      this.$store.dispatch('getSellers', {
-        release_type_id: this.releaseTypeId
-      }).then(({data}) => {
-        if (data.error_code === 0) {
-          this.$set(this.cache, this.releaseTypeId, data.data || [])
-        } else {
-          Toast(data.message)
-        }
-      })
+      this.$store
+        .dispatch('getSellers', {
+          release_type_id: this.releaseTypeId
+        })
+        .then(({ data }) => {
+          if (data.error_code === 0) {
+            this.$set(this.cache, this.releaseTypeId, data.data || [])
+          } else {
+            Toast(data.message)
+          }
+        })
     }
   }
 }
 </script>
 
 <style>
-.ershouchetop{
-  width:100%;
+.ershouchetop {
+  width: 100%;
 }
-.vqiye{
-  font-size:.6875rem /* 11/16 */;
-font-family:PingFang-SC-Regular;
-font-weight:400;
-color:rgba(177,104,0,1);
-background-color:#FFC74D;
-
+.vqiye {
+  font-size: 0.6875rem /* 11/16 */;
+  font-family: PingFang-SC-Regular;
+  font-weight: 400;
+  color: rgba(177, 104, 0, 1);
+  background-color: #ffc74d;
 }
-.pinpaishop{
+.pinpaishop {
   margin-bottom: 5%;
+  /* border: 2px solid red; */
+    border-radius:.875rem /* 14/16 */;
+    background:rgba(255,255,255,1);
 }
- .fang-icon img{
-    width:3.375rem /* 54/16 */;
-    height: 3.375rem /* 54/16 */;
-    border-radius:100%;
-  }
-  .pinp-cent-bot img{
-        width:8.75rem /* 140/16 */;
-        height: 6.5rem /* 104/16 */;
-        background-color: aqua;
-    }
-    .kip{
-        font-size:1rem /* 16/16 */;
-        font-family:PingFang-SC-Medium;
-        font-weight:500;
-        color:rgba(235,94,94,1);
-    }
-    .pinp-cent-top{
-        font-size:.75rem /* 12/16 */;
-        font-family:PingFang-SC-Medium;
-        font-weight:500;
-        color:rgba(51,51,51,1);
-    }
-    .pinpai-cent{
-        display:flex;
-        align-items: center;
-        border-bottom: 1px solid #F1F1F1;
-        padding-bottom: .9375rem /* 15/16 */;
-    }
-    .gon-yuan{
-        font-size:.6875rem /* 11/16 */;
-        font-family:PingFang-SC-Regular;
-        font-weight:400;
-        color:rgba(153,153,153,1);
-    }
-    .gongsi{
-        font-size:1.0625rem /* 17/16 */;
-        font-family:PingFang-SC-Bold;
-        font-weight:bold;
-        color:rgba(51,51,51,1);
-    }
-    .fang-icon{
-        width:3.375rem /* 54/16 */;
-        height: 3.375rem /* 54/16 */;
-        margin-right: 3%;
+.fang-icon img {
+  width: 3.375rem /* 54/16 */;
+  height: 3.375rem /* 54/16 */;
+  border-radius: 100%;
+}
+.pinp-cent-bot img {
+  width: 8.75rem /* 140/16 */;
+  height: 6.5rem /* 104/16 */;
+  background-color: aqua;
+}
+.kip {
+  font-size: 1rem /* 16/16 */;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: rgba(235, 94, 94, 1);
+}
+.pinp-cent-top {
+  font-size: 0.75rem /* 12/16 */;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: rgba(51, 51, 51, 1);
+}
+.pinpai-cent {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f1f1f1;
+  padding-bottom: 0.9375rem /* 15/16 */;
+  padding: 0 0.1rem;
+}
+.gon-yuan {
+  font-size: 0.6875rem /* 11/16 */;
+  font-family: PingFang-SC-Regular;
+  font-weight: 400;
+  color: rgba(153, 153, 153, 1);
+}
+.gongsi {
+  font-size: 1.0625rem /* 17/16 */;
+  font-family: PingFang-SC-Bold;
+  font-weight: bold;
+  color: rgba(51, 51, 51, 1);
+}
+.fang-icon {
+  width: 3.375rem /* 54/16 */;
+  height: 3.375rem /* 54/16 */;
+  margin-right: 3%;
+}
+.pinpai-head {
+  position: relative;
+}
 
-    }
-    .pinpai-head{
-        position: relative;
-    }
-
-    .pinpai-cent-bot{
-      display:flex;
-      justify-content: space-between;
-
-    }
+.pinpai-cent-bot {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0.3rem;
+}
 </style>

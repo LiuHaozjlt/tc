@@ -12,7 +12,7 @@
              <div class="wode-head" @click="tobianji">
                     <div class="wode-head-in-warp">
                         <div class="wode-head-in">
-                        <img :src="userInfo.headimgurl" alt="">
+                        <img :src="'http://info.00856.la'+userInfo.headimgurl" alt="">
                         <div>{{userInfo.nickname}}</div>
                         </div>
                     </div>
