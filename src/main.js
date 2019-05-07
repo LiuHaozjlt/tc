@@ -15,7 +15,7 @@ import Vuex from 'vuex'
 import App from './App'
 import router from './router'
 // import uploader from 'vue-easy-uploader'
-import store from './store'
+import store, {wls} from './store'
 import publi_css from './css/dlu.css'
 import VueI18n from 'vue-i18n'
 import i18nZh from '@/i18n/zh'
@@ -30,6 +30,8 @@ import eleuiconp from '../node_modules/element-ui/lib/index.js'
 import {api} from '../src/api/api'
 // 公共方法
 import uploadFileFn from '../src/js/icon-file'
+
+// axius.defaults.baseURL = 'http://info.00856.la:8081'
 
 // for (const key in VueI18n) {
 //   console.log(VueI18n[key])
@@ -61,13 +63,13 @@ Vue.use(eleui)
 Vue.use(mint)
 Vue.use(VueI18n)
 const i18n = new VueI18n({
-  locale: localStorage.getItem('locale') || 'zh', // set locale
+  locale: wls.get('locale') || 'zh', // set locale
   messages: {
     zh: i18nZh,
     laos: i18nLaos
   } // set locale messages
 })
-// console.log(i18n.messages.zh)
+
 Vue.prototype.Vue = Vue
 Vue.prototype.mint = mint
 Vue.prototype.axius = axius
@@ -124,8 +126,9 @@ new Vue({
   store,
   i18n,
   created () {
+    // debugger
     let userInfo = store.state.userInfo
-    console.log(userInfo, 'SSSSSSSSSSS')
+    // console.log(userInfo, 'SSSSSSSSSSS')
     if ((!userInfo || !userInfo.access_token) && this.$route.path === '/index') {
       this.$router.replace('/dlu')
     } else {

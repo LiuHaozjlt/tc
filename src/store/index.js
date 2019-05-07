@@ -29,8 +29,8 @@ if (wls.get('isPersonal')) {
   wls.set('isPersonal', true)
 }
 // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
-// let token = wls.get('userInfo').access_token || 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
-let $http = updateRequst(this.access_token)
+let token = wls.get('userInfo').access_token
+let $http = updateRequst(token)
 
 let queryParamDefault = {
   release_type_id: undefined,
@@ -64,7 +64,7 @@ export default new Vuex.Store({
     publishReleaseValue: {},
     userAddressList: [],
     activeAddress: null,
-    isLaos: wls.get('isLaos') || false,
+    isLaos: wls.get('locale') === 'laos',
     logisticOrder: {},
     logisticGoodsType: [],
     queryParam: {...queryParamDefault},
@@ -87,13 +87,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    getlianjie (state) {
-      // router.beforeEach(){
-      //   this.routers =
 
-      // }
-    },
     logout (state) {
+      debugger
       state.userInfo = {}
       window.localStorage.removeItem('userInfo')
       state.isPersonal = true
@@ -113,7 +109,7 @@ export default new Vuex.Store({
     saveUserInfo (state, data) {
       state.userInfo = data
       wls.set('userInfo', data)
-      updateRequst(data.access_token)
+      $http.headers.common['Authorization'] = 'Bearer ' + data.access_token
     },
     saveIndexsou (state, data) {
       wls.set('menuData', data)
@@ -138,7 +134,6 @@ export default new Vuex.Store({
         state.publish = {...state.publish, ...data}
       }
     },
-
     savePublishReleaseValue (state, data = {}) {
       state.publishReleaseValue = data
     },
@@ -150,14 +145,13 @@ export default new Vuex.Store({
     },
     setIsLaos (state, isLaos) {
       state.isLaos = !!isLaos
-      wls.set('isLaos', state.isLaos)
+      let locale = isLaos ? 'laos' : 'zh'
+      wls.set('locale', locale)
     },
-
     updateUserInfo (state, data = {}) {
       state.userInfo = {...state.userInfo, ...data}
       wls.set('userInfo', state.userInfo)
     },
-
     updateLogisticOrder (state, data) {
       if (data._cover) {
         delete data._cover
@@ -166,11 +160,9 @@ export default new Vuex.Store({
         state.logisticOrder = { ...state.logisticOrder, ...data }
       }
     },
-
     saveLogisticGoodsType (state, data = []) {
       state.logisticGoodsType = data
     },
-
     updateQueryParam (state, data) {
       state.queryParam = {...state.queryParam, ...data}
     },
@@ -189,11 +181,11 @@ export default new Vuex.Store({
           state.queryHistory.pop()
         }
       }
-
       wls.set('queryHistory', state.queryHistory)
     },
     setQueryType (state, data) {
       state.queryType = data
+      // console.log(state.queryType)
       state.queryParam.release_type_id = data ? data.module_id : undefined
     },
     addQueryList (state, data) {
@@ -212,12 +204,17 @@ export default new Vuex.Store({
   },
   actions: {
     indexmenu ({ commit }) {
-      $http({
-        methods: 'get',
-        url: 'apis/v1/tool/module',
-        data: {
-        }
-      }).then(p => {
+      // $http({
+      //   methods: 'get',
+      //   url: 'apis/v1/tool/module',
+      //   data: {
+      //   }
+      // }).then(p => {
+      //   let data = p.data.data
+      //   commit('saveIndexsou', data)
+      // })
+
+      $http.get(`apis/v1/tool/module`, {}).then(p => {
         let data = p.data.data
         commit('saveIndexsou', data)
       })
@@ -251,6 +248,7 @@ export default new Vuex.Store({
     },
     updateUserAddress ({commit}, data) {
       let id = data.user_address_id
+     
       if (id) {
         return $http.put('/apis/v1/user-address/' + id, data)
       } else {

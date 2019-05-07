@@ -4,7 +4,8 @@
             <div class="shouYe-cent" :key="index" v-if="showNum == 0  || (showNum > index)" @click="goshouyexiangq">
                 <div class="shouYe-cent-left">
                     <div>
-                        <img :src="'http://info.00856.la'+item.img">
+
+                        <img :src="item.img.indexOf('http')>-1?item.img: 'http://info.00856.la'+item.img">
                     </div>
                 </div>
                 <div class="shouYe-cent-rigt">

@@ -3,7 +3,7 @@
     <!--这个箭头-->
     <template v-if="!isForget">
       <img class="close" src="../image/gb@2x.png" @click="back('login')">
-      <a href class="denlu" @click.prevent="change">{{ isLogin ? $t('register') : $t('login') }}</a>
+      <a href class="denlu" @click.prevent="change">{{ isLogin ?  '注册' : '登录' }}</a>
     </template>
       <template   v-if="isForget">
       <img class="mima-img" src="../image/zuojiantou.png" alt="" @click="back('forget')" >

@@ -1,74 +1,78 @@
 <template>
   <div>
     <div class="wode-yuyan">
-      <img src="../../image/zuojiantou.png" alt @click="wodeyuyanqian">
+      <img src="../../image/zuojiantou.png" alt @click="back">
       选择语言
       <div></div>
     </div>
     <div class="wodeyuyancent-warp">
       <div class="wodeyuyancent">
         <div class="yuyanqiehuan">
-          <div class="yuyan-cent-top" @click="geticonshang">
+          <div class="yuyan-cent-top" @click="lang = 'zh'">
             <div class="yuyan-zh">
               <img src="../../image/zgg.png" alt>
-              <div>中文</div>
+              <div>{{$t('中文')}}</div>
             </div>
-            <img src="../../image/duide.png" alt v-if="duishang">
+            <img src="../../image/duide.png" alt v-if="lang === 'zh'">
           </div>
-          <div class="yuyan-cent-cent" @click="geticon">
+          <div class="yuyan-cent-cent" @click="lang = 'laos'">
             <div class="yuyan-lao">
               <img src="../../image/lww.png" alt>
-              <div>老挝文</div>
+              <div>{{$t('老挝文')}}</div>
             </div>
-            <img src="../../image/duide.png" alt v-if="dui">
+            <img src="../../image/duide.png" alt v-if="lang === 'laos'">
           </div>
         </div>
       </div>
-      <div class="yuyan-qued" @click="quedingyuyan">确定</div>
+      <div class="yuyan-qued" @click="quedingyuyan">{{$t('确定')}}</div>
     </div>
   </div>
 </template>
 
 <script>
-
+import {mapMutations} from 'vuex'
 export default {
   data () {
     return {
-      duishang: true,
-      dui: false
+      lang: ''
     }
   },
+  computed: {
+    isLaos () {
+      return this.$store.state.isLaos
+    }
+  },
+  mounted () {
+    this.lang = this.isLaos ? 'laos' : 'zh'
+  },
   methods: {
-    wodeyuyanqian () {
+    ...mapMutations(['setIsLaos']),
+    back () {
       this.$router.back(-1)
     },
     // 选择老挝文
     geticon () {
       this.dui = true
       this.duishang = false
-      this.xuanzelaowo()
+      this.lang = 'laos'
     },
     // 选择中文
     geticonshang () {
       this.dui = false
       this.duishang = true
-      this.xuanzezhonwen()
+      this.lang = 'zh'
     },
-    xuanzelaowo () {
-      // if (lang == 'zh') {
-      //   localStorage.setItem('locale', 'zh')
-      //   this.$i18n.locale = localStorage.getItem('locale')
-      // } else if (lang == 'laos') {
-      //   localStorage.setItem('locale', 'laos')
-      //   this.$i18n.locale = localStorage.getItem('locale')
-      // }
+    xuanzelaowo (lang) {
+
     },
     xuanzezhonwen () {
 
     },
 
     quedingyuyan () {
-
+      this.$i18n.locale = this.lang
+      this.setIsLaos(this.lang === 'laos')
+      this.back()
     }
   }
 }

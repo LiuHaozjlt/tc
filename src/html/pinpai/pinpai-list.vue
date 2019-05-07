@@ -8,7 +8,7 @@
                 </div>
                 <div>
                     <div class="gongsi ershouchetop">{{item.name}}</div>
-                    <div class="gon-yuan">共有{{item.SellerReleaseInfo.length}}{{units[releaseTypeId]}}</div>
+                    <div class="gon-yuan">共有{{(item.SellerReleaseInfo || []).length}}{{units[releaseTypeId]}}</div>
                 </div>
                 <div>
                     <div class="vqiye">v企业</div>
@@ -16,8 +16,9 @@
                 </div>
             </div>
             <!--跳转到产品详情-->
-            <div class="pinpai-cent-bot" v-if="item.SellerReleaseInfo.length > 0" @click="gochanpxiangq">
-                <div v-for="release in item.SellerReleaseInfo" :key="release.seller_release_id">
+            <div class="pinpai-cent-bot" v-if="(item.SellerReleaseInfo || []).length > 0">
+                <div v-for="release in item.SellerReleaseInfo" :key="release.seller_release_id"
+                    @click="gochanpxiangq(release)">
                     <div class="pinp-cent-top">{{release.title}}</div>
                     <div class="kip">
                       <template v-if="release.prices !== undefined">{{release.prices}}</template>
@@ -151,10 +152,7 @@ background-color:#FFC74D;
     .pinpai-head{
         position: relative;
     }
-    .pinpai-head img{
-        width:100%;
-        height: 7.75rem /* 124/16 */;
-    }
+
     .pinpai-cent-bot{
       display:flex;
       justify-content: space-between;

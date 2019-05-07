@@ -1,6 +1,7 @@
 <template>
   <div>
       <div class="fabuyuand">
+
       <router-link tag='div' :to="'/fabuuser?releaseTypeId=' + item.module_id" v-for="(item,index) in menuData" :key="index" class="routerItem">
         <!-- 跳到个人发布的页面 /fabupeop相应调整 -->
          <div class="fabu-cent">

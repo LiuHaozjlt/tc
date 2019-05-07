@@ -62,7 +62,7 @@ export default {
       }
     }).then(p => {
       // debugger
-      console.log('图片上传', p.data.data)
+      // console.log('图片上传', p.data.data)
     })
   }
 }

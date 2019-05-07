@@ -23,7 +23,7 @@
 export default {
   data () {
     return {
-      four: [{text: '账号信息', url: 'wodezhanghao'}, {text: '切换语言', url: 'wodeyuyan'}, {text: '意见反馈', url: 'wodeyijian'}, {text: '关于我们', url: 'wodeguanyu'}]
+      four: [{text: this.$t('账号信息'), url: 'wodezhanghao'}, {text: '切换语言', url: 'wodeyuyan'}, {text: '意见反馈', url: 'wodeyijian'}, {text: '关于我们', url: 'wodeguanyu'}]
     }
   },
   methods: {

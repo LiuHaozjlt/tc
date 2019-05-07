@@ -16,6 +16,7 @@ import denluhead from '@/components/denlu-head'
 import denlulogo from '@/components/denlu-logo'
 import denlufrm from '@/components/denlu-from'
 import denluxuanxiang from '@/components/denlu-xuanxiang'
+import { mapState, mapMutations } from 'vuex'
 export default {
   data () {
     return {
@@ -29,7 +30,11 @@ export default {
     denluxuanxiang,
     denlufrm
   },
+  computed: {
+    ...mapState(['isLaos'])
+  },
   methods: {
+    ...mapMutations(['setIsLaos']),
     changeLogin (val) {
       this.isLogin = val
     },
@@ -44,7 +49,9 @@ export default {
 
     },
     changeLang () {
-      this.$i18n.locale = this.$i18n.locale === 'zh' ? 'laos' : 'zh'
+      this.$i18n.locale = !this.isLaos ? 'zh' : 'laos'
+      this.setIsLaos(!this.isLaos)
+      // this.$i18n.locale = this.$i18n.locale === 'zh' ? 'laos' : 'zh'
     }
   },
   mounted () {

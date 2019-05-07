@@ -55,6 +55,13 @@ module.exports = {
           '/apis/**'
         ]
       },
+      '/index/apis': {
+        target: 'http://info.00856.la:8081', // 目标接口域名
+        changeOrigin: true, // 是否跨域
+        pathRewrite: {
+          '^/index/apis': '/apis' // 重写接口
+        }
+      },
       '/upload': {
         secure: false,
         target: 'http://info.00856.la:8081',

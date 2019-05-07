@@ -403,7 +403,7 @@ export default {
       this.popupVisible = false
     },
     onRead (file) {
-      debugger
+      // debugger
       let me = this
       this.notimg = true
       //   this.$refs.goodImg.src = file.content
@@ -420,7 +420,7 @@ export default {
         url: 'apis/v1/upload/image',
         data: data,
         headers: {
-          Authorization: 'Bearer ' + this.token,
+          Authorization: 'Bearer ' + me.userInfo.access_token,
           'Content-Type': 'multipart/form-data'
         }
       }).then(p => {
@@ -456,7 +456,7 @@ export default {
         url: 'apis/v1/user/seller-status',
         data: {},
         headers: {
-          Authorization: 'Bearer ' + me.token
+          Authorization: 'Bearer ' + me.userInfo.access_token
         }
       }).then(p => {
         // debugger

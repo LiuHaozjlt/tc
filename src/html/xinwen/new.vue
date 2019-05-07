@@ -40,6 +40,8 @@ export default {
     }
   },
   created () {
+    let self = this
+
     // let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
     this.axius({
       methods: 'get',
@@ -48,7 +50,7 @@ export default {
         // is_recommend: 0
       },
       headers: {
-        'Authorization': 'Bearer ' + this.userInfo.access_token
+        'Authorization': 'Bearer ' + self.userInfo.access_token
       }
     }).then(p => {
     //   debugger

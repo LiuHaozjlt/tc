@@ -40,6 +40,7 @@ export default {
       this.$store.commit('updateSellerInfo', {
         release_type_id: this.sellerTypes[this.active].release_type_id
       })
+      // console.log(this.release_type_id)
       this.$router.push({path: '/wodeshangjia'})
     }
   },
