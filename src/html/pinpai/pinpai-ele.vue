@@ -52,7 +52,7 @@ export default {
   height: 1.25rem /* 20/16 */;
   border-radius: 100%;
   position: absolute;
-  top: 24%;
+  top: 15%;
   right:5%;
 }
 .fangdajin img {

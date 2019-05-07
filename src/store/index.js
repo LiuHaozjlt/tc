@@ -248,7 +248,7 @@ export default new Vuex.Store({
     },
     updateUserAddress ({commit}, data) {
       let id = data.user_address_id
-     
+
       if (id) {
         return $http.put('/apis/v1/user-address/' + id, data)
       } else {

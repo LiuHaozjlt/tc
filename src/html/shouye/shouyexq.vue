@@ -6,7 +6,7 @@
         <div class="shouyexiangq-head">
           <div class="shouyexiangq-head-left">
             <div @click="goshouye">
-              <img src="../../image/baijiantou.png" alt>
+              <img :src="imgUrl" alt>
             </div>
           </div>
           <div class="shouyexiangq-head-right">
@@ -124,7 +124,8 @@ export default {
     return {
       popupVisible5: false,
       popupVisible4: false,
-      list: []
+      list: [],
+      imgUrl: require('../../image/baijiantou.png')
     }
   },
   created () {
