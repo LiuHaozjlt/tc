@@ -2,6 +2,7 @@
     <div>
         <div class="wode-head-contn">
             <div class="wode-head-contn-lef">
+                   <!-- <img src="../../image/图层 1.png" alt=""> -->
                    <img :src="imgele" alt="">
             </div>
             <div class="wode-head-in-rit"  @click="shezhi">
@@ -79,7 +80,7 @@ import { Toast } from 'vant'
 export default {
   data () {
     return {
-      imgele: '../../image/图层 1.png'
+      imgele: require('../../image/图层 1.png')
     }
   },
   computed: {

@@ -258,11 +258,13 @@ export default {
   font-family: PingFang-SC-Heavy;
   font-weight: 800;
   color: rgba(51, 51, 51, 1);
+  padding: 0 1rem;
 }
 .tong-new-warp {
   display: flex;
   align-items: center;
    background-color: #ffeec9;
+   padding: 0 1rem;
 }
 .tong-new-warp img {
   width: 0.375rem /* 6/16 */;
@@ -371,7 +373,7 @@ export default {
   display: flex;
   border-bottom: 1px solid #ededed;
   /* border: 1px solid red; */
-  padding: 1.25rem 0;
+  padding: 1.25rem 1rem;
 }
 .shouYe-cent-left {
 

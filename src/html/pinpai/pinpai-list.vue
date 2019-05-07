@@ -4,7 +4,7 @@
           <!--跳转到logo详情-->
             <div class="pinpai-cent" @click="gopinpaishangjiaxq">
                 <div class="fang-icon">
-                      <img :src="item.img">
+                      <img :src="'http://info.00856.la'+item.img">
                 </div>
                 <div>
                     <div class="gongsi ershouchetop">{{item.name}}</div>

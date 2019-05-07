@@ -63,8 +63,8 @@ export default {
       this.$router.push({
         path: '/shouyexq',
         query: {
-          user_release_id: item.user_release_id,
-          title: item.title
+          user_release_id: user_release_id,
+          title: title
         }
       })
     }
