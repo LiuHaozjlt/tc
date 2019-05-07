@@ -1,6 +1,6 @@
 <template>
   <div class="frame">
-    <router-view></router-view>
+    <keep-alive><router-view ></router-view></keep-alive>
      <div class="circle"></div>
     <div class="shouYe-nav-warp">
       <div class='shouYe-nav' v-for="(item, index) in tabs" :key="index">

@@ -125,7 +125,7 @@ export default {
       popupVisible5: false,
       popupVisible4: false,
       list: [],
-      imgUrl: require('../../image/baijiantou.png')
+      imgUrl: '../../image/baijiantou.png'
     }
   },
   created () {

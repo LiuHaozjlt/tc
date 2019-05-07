@@ -2,7 +2,7 @@
     <div>
         <div class="wode-head-contn">
             <div class="wode-head-contn-lef">
-                   <img src="../../image/图层 1.png" alt="">
+                   <img :src="imgele" alt="">
             </div>
             <div class="wode-head-in-rit"  @click="shezhi">
                         <img src="../../image/shezhi.png" alt="">
@@ -78,7 +78,9 @@ import { Toast } from 'vant'
 
 export default {
   data () {
-    return {}
+    return {
+      imgele: '../../image/图层 1.png'
+    }
   },
   computed: {
     isPersonal () {
@@ -249,7 +251,7 @@ export default {
    .wode-head-contn-lef img{
         width:100%;
         height: 8.25rem /* 132/16 */;
-        border:1px solid red;
+        /* border:1px solid red; */
     }
     .wode-head-in{
         display:flex;
