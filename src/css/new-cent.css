@@ -9,8 +9,7 @@
     width:.625rem /* 10/16 */;
     height:.625rem /* 10/16 */;
     display:inline-block;
-    border:.0625rem /* 1/16 */ solid red;
-    background-color: red;
+  
 }
 .new-cent-lef-rit{
     font-size:.625rem /* 10/16 */;

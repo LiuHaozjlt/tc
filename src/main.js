@@ -37,6 +37,7 @@ import uploadFileFn from '../src/js/icon-file'
 //   console.log(VueI18n[key])
 // }
 Vue.prototype.$uploadFileFn = uploadFileFn
+
 // console.log(Vuex)
 // console.log(api)
 
@@ -120,6 +121,7 @@ VueAMap.initAMapApiLoader({
 // Vue.use(Toast, duration)
 Vue.config.productionTip = false
 
+// eslint-disable-next-line no-new
 new Vue({
   el: '#app',
   router,
@@ -129,10 +131,10 @@ new Vue({
     // debugger
     let userInfo = store.state.userInfo
     // console.log(userInfo, 'SSSSSSSSSSS')
-    if ((!userInfo || !userInfo.access_token) && this.$route.path === '/index') {
-      this.$router.replace('/dlu')
-    } else {
-      this.$store.dispatch('indexmenu')
-    }
+    // if ((!userInfo || !userInfo.access_token) && this.$route.path === '/index') {
+    //   this.$router.replace('/dlu')
+    // } else {
+    this.$store.dispatch('indexmenu')
+    // }
   }
 })

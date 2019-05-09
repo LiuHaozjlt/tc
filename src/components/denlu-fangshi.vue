@@ -2,7 +2,7 @@
 <div>
 <div class="wx-fb">
   <div class="wx-fb-box">
-    <div class="wx-fangshi">
+    <div class="wx-fangshi" @click="wxbind">
       <img src="../src/../image/weixin@2x.png" alt="">
       <div>微信</div>
     </div>
@@ -16,13 +16,33 @@
 </div>
 </template>
 
+<script>
+export default {
+  methods: {
+    wxbind () {
+      this.$store.dispatch('isbind', {
+        third_type: '1',
+        wx_openid: '',
+        facebook_id: ''
+      }).then(res => {
+        if (res.status === 200) {
+          if (res.data.error_code === 400) {
+            alert(res.data.message)
+          }
+        }
+        console.log(res)
+      })
+    }
+  }
+}
+</script>
 
 <style>
 .wx-fb {
   width: 100%;
   display: flex;
   justify-content: center;
- 
+
 }
 .wx-fb-box{
   display: flex;
@@ -59,4 +79,3 @@
   color: rgba(153, 153, 153, 1);
 }
 </style>
-

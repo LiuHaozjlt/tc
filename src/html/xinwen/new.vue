@@ -1,26 +1,26 @@
 <template>
-    <div>
+    <div style="" class="new-cont">
         <slide :list="slideList"></slide>
         <!-- {{article}} -->
-        <div style="background-color:#F5F5F5;" v-for="(item,index) in article" :key="index">
-            <div style="background-color:white;margin-bottom:7px" @click="xinxiangqin(item.id)">
+        <div  v-for="(item,index) in article" :key="index">
+            <div  class="new-list" style="background-color:white;margin-bottom:7px" @click="xinxiangqin(item.id)">
                 <div>
                     <div class="new-cent" :class="{'new-cent-cent':index!= 0}">
                         {{item.title}}
                     </div>
                     <div class="new-cent-botm">
                             <div class="new-cent-lef new-cent-lef-rit">
-                                <img src="" alt="">
-                                <div style="display:inline-block">{{item.comment_count}}万</div>
+                                <img src="../../image/liuyan.png" alt="">
+                                <div class="wang" style="">{{item.comment_count}}万</div>
                             </div>
                         <div class="new-cent-rit">
                             官方
                         </div>
                     </div>
                     <div class="new-bot-head" v-if="index > 0">
-                        <img :src="item.front_img" alt="">
-                        <img :src="item.front_img" alt="">
-                        <img :src="item.front_img" alt="">
+                        <img :src="'http://info.00856.la'+item.front_img" alt="">
+                        <img :src="'http://info.00856.la'+item.front_img" alt="">
+                        <img :src="'http://info.00856.la'+item.front_img" alt="">
                     </div>
                 </div>
             </div>
@@ -40,23 +40,9 @@ export default {
     }
   },
   created () {
-    let self = this
-
-    // let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
-    this.axius({
-      methods: 'get',
-      url: '/apis/v1/article',
-      params: {
-        // is_recommend: 0
-      },
-      headers: {
-        'Authorization': 'Bearer ' + self.userInfo.access_token
-      }
-    }).then(p => {
-    //   debugger
+    this.$store.dispatch('getNews').then(p => {
       this.article = p.data.data
       this.slideList = this.article.filter(item => item.is_recommend == 1).map(item => item.front_img)
-      // console.log('new', p.data.data)
     })
   },
   components: {
@@ -71,15 +57,22 @@ export default {
     swipervalue () {
       this.$emit('swiperList')
     }
-
-  },
-  mounted () {
-    // this.swiperList()
   }
 }
 </script>
 
 <style>
+  .new-list{
+    padding:0 1rem;
+  }
+  .new-cont{
+    background-color:#F5F5F5;
+  }
+  .wang{
+    display:inline-block;
+    padding-left: 2%;
+
+  }
   .mint-swipe-indicators{
     display:none;
   }
@@ -118,6 +111,7 @@ export default {
         padding-top:.8125rem /* 13/16 */
         display: flex;
         align-items: center;
+        width:100%;
     }
      .new-bot-head{
         display: -webkit-box;

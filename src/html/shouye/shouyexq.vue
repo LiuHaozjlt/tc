@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="shouyexq-cont">
+
     <div>
       <div>
         <!-- <div>首页详情</div> -->
@@ -10,13 +11,13 @@
             </div>
           </div>
           <div class="shouyexiangq-head-right">
-            <div>
+            <div class="shouyexiangq-head-right-icon">
               <img src="../../image/sc.png" alt>
             </div>
             <!-- <div>
               <img src="../../image/fx.png" alt>
             </div>-->
-            <div>
+            <div class="shouyexiangq-head-right-icon">
               <img src="../../image/jubao (2).png" alt>
             </div>
           </div>
@@ -130,11 +131,17 @@ export default {
   },
   created () {
     let tit = this.$route.params.title
+    console.log(this.$router.user_release_id)
   },
-  mounted () {},
+  mounted () {
+    // console.log(this.lang)
+  },
   computed: {
     img () {
       return this.$store.state.imgCache
+    },
+    lang () {
+      return this.$store.state.lang
     }
   },
   components: {
@@ -164,6 +171,14 @@ export default {
 </script>
 
 <style scoped>
+.shouyexq-cont{
+  padding:0 1.25rem;
+}
+.shouyexiangq-head-right-icon{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
 .liulankanguo {
   padding: 12% 0;
   font-size: 0.8125rem /* 13/16 */;
@@ -280,7 +295,7 @@ export default {
   width: 100%;
 }
 .lianxifangs {
-  width: 100%;
+  width: 66%;
   height: 2.25rem /* 36/16 */;
   border-radius: 1.125rem /* 18/16 */;
   background-color: #ffb31e;
@@ -310,7 +325,7 @@ export default {
   height: 1.875rem /* 30/16 */;
   background-color: #9a9b9a;
   border-radius: 100%;
-  text-align: center;
+
 }
 
 .shouyexiangq-head-right {

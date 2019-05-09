@@ -8,7 +8,7 @@ import router from '@/router'
 Vue.use(Vuex)
 
 function updateRequst (token) {
-  return !token ? axios : axios.create({
+  return axios.create({
     headers: {
       'Authorization': 'Bearer ' + token
     }
@@ -17,20 +17,31 @@ function updateRequst (token) {
 export const wls = {
   get (key, defaultValue) {
     let value = window.localStorage.getItem(key)
-    if (value === null) return defaultValue
+    if (value === null || value === undefined) return defaultValue
     else return JSON.parse(value)
   },
   set (key, value) {
     window.localStorage.setItem(key, JSON.stringify(value))
+    console.log(window.localStorage.getItem('locale'), 456)
   }
 }
 
 if (wls.get('isPersonal')) {
   wls.set('isPersonal', true)
 }
-// let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
-let token = wls.get('userInfo').access_token
+
+let accessUserInfo = wls.get('userInfo')
+// 设置token
+let token = accessUserInfo ? accessUserInfo.access_token : ''
+
 let $http = updateRequst(token)
+// let token = 'jZvklXi8H9t('userInfo')
+// let token = ''bs2bK9tBYYAoI19bjzAwU3_1556267215'
+// let userInfos = wls.ge
+// if (userInfos) {
+//   token = userInfos.access_token
+// }
+// let $http = axios.create({headers: {}})
 
 let queryParamDefault = {
   release_type_id: undefined,
@@ -46,9 +57,6 @@ export default new Vuex.Store({
     indexData: [],
     userInfo: wls.get('userInfo', {}),
     menuData: [],
-    // menuData: [{icon: '../image/wuliu.png'}, {icon: '../image/huodong.png'},
-    //   {icon: '../image/shangping.png'}, {icon: '../image/e.png'},
-    //   {icon: '../image/i.png'}, {icon: '../image/r.png'}, {icon: '../image/t.png'}, {icon: '../image/q.png'}],
     iptqingcheng: '',
     isPersonal: !!wls.get('isPersonal'),
     imgCache: '',
@@ -64,7 +72,7 @@ export default new Vuex.Store({
     publishReleaseValue: {},
     userAddressList: [],
     activeAddress: null,
-    isLaos: wls.get('locale') === 'laos',
+    lang: wls.get('locale'),
     logisticOrder: {},
     logisticGoodsType: [],
     queryParam: {...queryParamDefault},
@@ -87,9 +95,7 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-
     logout (state) {
-      debugger
       state.userInfo = {}
       window.localStorage.removeItem('userInfo')
       state.isPersonal = true
@@ -109,7 +115,9 @@ export default new Vuex.Store({
     saveUserInfo (state, data) {
       state.userInfo = data
       wls.set('userInfo', data)
-      $http.headers.common['Authorization'] = 'Bearer ' + data.access_token
+      // console.log($http.defaults.headers)
+      updateRequst(data.access_token)
+      // $http.defaults.headers.common['Authorization'] = 'Bearer ' + data.access_token
     },
     saveIndexsou (state, data) {
       wls.set('menuData', data)
@@ -143,9 +151,9 @@ export default new Vuex.Store({
     setActiveAddress (state, data) {
       state.activeAddress = data
     },
-    setIsLaos (state, isLaos) {
-      state.isLaos = !!isLaos
-      let locale = isLaos ? 'laos' : 'zh'
+    setIsLaos (state, lang) {
+      let locale = lang
+      if (lang === undefined)lang = null
       wls.set('locale', locale)
     },
     updateUserInfo (state, data = {}) {
@@ -348,6 +356,16 @@ export default new Vuex.Store({
     },
     getSellers ({commit}, params) {
       return $http.get('/apis/v1/user/seller', {params})
+    },
+    getNews (ctx, params = {}) {
+      return $http.get('/apis/v1/article', {params})
+    },
+    isbind ({commit}, params) {
+      return $http.post('/apis/v1/user/third-isbind', {
+        third_type: params.third_type,
+        wx_openid: params.wx_openid,
+        facebook_id: params.facebook_id
+      })
     }
   }
 

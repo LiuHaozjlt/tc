@@ -8,19 +8,19 @@
     <div class="wodeyuyancent-warp">
       <div class="wodeyuyancent">
         <div class="yuyanqiehuan">
-          <div class="yuyan-cent-top" @click="lang = 'zh'">
+          <div class="yuyan-cent-top" @click="setLang('zh')">
             <div class="yuyan-zh">
               <img src="../../image/zgg.png" alt>
               <div>{{$t('中文')}}</div>
             </div>
-            <img src="../../image/duide.png" alt v-if="lang === 'zh'">
+            <img src="../../image/duide.png" alt v-if="tolang === 'zh'">
           </div>
-          <div class="yuyan-cent-cent" @click="lang = 'laos'">
+          <div class="yuyan-cent-cent" @click="setLang('laos')">
             <div class="yuyan-lao">
               <img src="../../image/lww.png" alt>
               <div>{{$t('老挝文')}}</div>
             </div>
-            <img src="../../image/duide.png" alt v-if="lang === 'laos'">
+            <img src="../../image/duide.png" alt v-if="tolang === 'laos'">
           </div>
         </div>
       </div>
@@ -34,16 +34,17 @@ import {mapMutations} from 'vuex'
 export default {
   data () {
     return {
-      lang: ''
+      tolang: ''
     }
   },
   computed: {
-    isLaos () {
-      return this.$store.state.isLaos
+    lang () {
+      return this.$store.state.lang
     }
   },
   mounted () {
-    this.lang = this.isLaos ? 'laos' : 'zh'
+    // console.log(this.lang)
+    this.tolang = this.lang
   },
   methods: {
     ...mapMutations(['setIsLaos']),
@@ -54,7 +55,7 @@ export default {
     geticon () {
       this.dui = true
       this.duishang = false
-      this.lang = 'laos'
+      // this.lang = 'laos'
     },
     // 选择中文
     geticonshang () {
@@ -70,9 +71,13 @@ export default {
     },
 
     quedingyuyan () {
-      this.$i18n.locale = this.lang
-      this.setIsLaos(this.lang === 'laos')
+      this.$i18n.locale = this.tolang
+      // console.log(this.tolang, 234)
+      this.setIsLaos(this.tolang)
       this.back()
+    },
+    setLang (lang) {
+      this.tolang = lang
     }
   }
 }

@@ -5,7 +5,7 @@
         class="shouYe-cent"
         :key="index"
         v-if="showNum == 0  || (showNum > index)"
-        @click="goshouyexiangq"
+        @click="goshouyexiangq(item)"
       >
         <div class="shouYe-cent-left">
           <div>
@@ -59,12 +59,13 @@ export default {
     ...mapState(['indexData'])
   },
   methods: {
-    goshouyexiangq (title, user_release_id) {
+    goshouyexiangq ({user_release_id, lang}) {
       this.$router.push({
         path: '/shouyexq',
         query: {
           user_release_id: user_release_id,
-          title: title
+          lang: 'zh'
+          // title: title
         }
       })
     }

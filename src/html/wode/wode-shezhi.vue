@@ -5,10 +5,13 @@
             设置
             <div></div>
         </div>
-        <div  v-for="(item,index) in four" :key="index">
-            <div  class="shezhi-cent" @click="gopage(item.url)">
-                <div>{{item.text}}</div>
-                <img src="../../image/jiantoutou.png" alt="">
+        <div  v-for="(item,index) in four" :key="index"  class="shezhi-cent-cont">
+            <div  :class="['shezhi-cent',index ==3?'shezhi-cent-botm':'', index ==0 ?'shezhi-cent-zuoyou':'']" @click="gopage(item.url)" >
+                <div class="shezhi-list"   :class="{'shezhi-line' : index == 0 || index == 1 || index == 2 }">
+                    <div>{{item.text}}</div>
+                    <img src="../../image/jiantoutou.png" alt="">
+                </div>
+              
             </div>
         </div>
 
@@ -42,6 +45,26 @@ export default {
 </script>
 
 <style>
+    .shezhi-line{
+      border-bottom: 1px solid #E7E7E7;
+    }
+    .shezhi-list{
+      display:flex;
+      justify-content: space-between;
+      width:100%;
+      padding:1.25rem 0;
+    }
+    .shezhi-cent-zuoyou{
+      border-top-left-radius: .875rem /* 14/16 */;
+      border-top-right-radius: .875rem /* 14/16 */;
+    }
+      .shezhi-cent-botm{
+      border-bottom-left-radius: .875rem /* 14/16 */;
+      border-bottom-right-radius: .875rem /* 14/16 */;
+    }
+    .shezhi-cent-cont{
+      padding:0 1rem;
+    }
     .wode-shezhi-head{
         height: 2.75rem /* 44/16 */;
         display:flex;
@@ -51,12 +74,8 @@ export default {
     .wode-shezhi-head img{
         width:.625rem /* 10/16 */;
         height: 1.0625rem /* 17/16 */;
-
     }
-    .wode-shezhi div:nth-child(2){
-        border-top-left-radius: 1.125rem /* 18/16 */;
-        border-top-right-radius: 1.125rem /* 18/16 */;
-    }
+    
     .tuichudl{
         height: 2.25rem /* 36/16 */;
         border-radius: 1.125rem /* 18/16 */;
@@ -79,10 +98,8 @@ export default {
         background-color: white;
         display:flex;
         justify-content: space-between;
-        padding:1.25rem /* 20/16 */ 0 1.25rem /* 20/16 */ 0;
-        /* border:1px solid red; */
+        padding:0 1.25rem;
         align-items: center;
-
     }
     .shezhi-cent img{
         width:.5625rem /* 9/16 */;
@@ -94,7 +111,7 @@ export default {
         font-family:PingFang-SC-Medium;
         font-weight:500;
         color:rgba(33,33,33,1);
-
+        padding:0 1rem;
         background-color: #FFCF61;
         margin-bottom:.9375rem /* 15/16 */;
     }

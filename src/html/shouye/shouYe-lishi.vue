@@ -269,7 +269,7 @@ export default {
   display: flex;
   border-bottom: 1px solid #ededed;
   /* border: 1px solid red; */
-  padding: 1.25rem 0;
+  padding: 1.25rem 1.25rem;
 }
 .shouYe-cent-left {
 

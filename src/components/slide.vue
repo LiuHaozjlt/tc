@@ -1,9 +1,10 @@
 <template>
     <div>
+
         <div style="position: relative;">
             <mt-swipe :auto="4000" @change="handleChange">
                 <mt-swipe-item v-for="item in list" :key="item">
-                  <img :src="item" alt="">
+                  <img :src="'http://info.00856.la'+item" alt="">
                 </mt-swipe-item>
             </mt-swipe>
             <div v-show="list.length > 0" class="slidejishu">
@@ -33,10 +34,6 @@ export default {
       if (this.curSwiper > this.list.length) this.curSwiper = 1
     }
   }
-  // created () {
-  //   console.log('slide', this.list)
-  // }
-
 }
 </script>
 

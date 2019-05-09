@@ -1,7 +1,7 @@
 <template>
   <div class="frame">
     <keep-alive><router-view ></router-view></keep-alive>
-     <div class="circle"></div>
+     <!-- <div class="circle"></div> -->
     <div class="shouYe-nav-warp">
       <div class='shouYe-nav' v-for="(item, index) in tabs" :key="index">
         <router-link  :to="item.to">
@@ -27,7 +27,7 @@ export default {
     },
     tabs () {
       const navPersoanl = [
-        {name: 'home', label: '首页', icon: require('../../image/shouye_s.png'), to: '/index/'},
+        {name: 'home', label: '首页', icon: require('../../image/shouye_s.png'), to: '/index'},
         {name: 'news', label: '新闻', icon: require('../../image/xinwen_s.png'), to: '/index/xinwen'},
         {name: 'putout', label: '发布', icon: require('../../image/fabu_s.png'), to: '/index/fabuele'},
         {name: 'brand', label: '品牌', icon: require('../../image/pingpai _s.png'), to: '/index/pinpai'},
@@ -56,17 +56,6 @@ export default {
 }
 </script>
 <style scoped>
-.circle{
-    width: 3rem;
-    height: 3rem;
-    border: 1px solid #ddd;
-    border-radius: 50%;
-    position: fixed;
-    bottom: 0.4rem;
-    left: 50%;
-    margin-left: -1.5rem;
-    z-index: 0;
-}
 .checkRoute{
   font-size:.625rem /* 10/16 */;
   font-family:PingFang-SC-Medium;
@@ -191,8 +180,9 @@ export default {
   bottom:0;
   display: flex;
   justify-content: space-between;
-  text-align: center;
+  /* text-align: center; */
   background-color: #F8F8F8;
+  padding:0 1.25rem;
 }
 .checkRoute{
   color:#333333 !important

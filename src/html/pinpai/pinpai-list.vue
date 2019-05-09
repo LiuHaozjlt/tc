@@ -107,10 +107,12 @@ export default {
   background-color: #ffc74d;
 }
 .pinpaishop {
-  margin-bottom: 5%;
+
   /* border: 2px solid red; */
     border-radius:.875rem /* 14/16 */;
     background:rgba(255,255,255,1);
+    box-shadow: darkgrey 0px 0px 12px 0px;
+     margin:0 5% 5% 5%;
 }
 .fang-icon img {
   width: 3.375rem /* 54/16 */;

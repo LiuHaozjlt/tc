@@ -25,7 +25,9 @@ export default {
 </script>
 
 <style>
-
+.tab{
+  padding:0 1rem;
+}
 .tab-head{
   margin-bottom: 15%;
   font-size:.8125rem /* 13/16 */;
