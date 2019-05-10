@@ -1,6 +1,6 @@
 
 <template>
-<!-- 个人发布 -->
+  <!-- 个人发布 -->
   <div>
     <div>
       <div class="fabu-head">
@@ -11,7 +11,9 @@
       <!--发布中间内容-->
       <div class="fabu-peop-cent">
         <div class="biaoti-cent">
-          <div class="shiwu-bl"><div class="biaox">*</div>标题</div>
+          <div class="shiwu-bl biaotizuo">
+            <div class="biaox">*</div>标题
+          </div>
           <div class="biaoti-ipt">
             <textarea
               type="textarea"
@@ -73,7 +75,7 @@
           <div class="xuanze-di">
             <div class="shiwu">{{activeAddress ? activeAddress.address : "选择地址"}}</div>
             <div>
-              <img src="../../image/jiantoutou.png" alt="">
+              <img src="../../image/jiantoutou.png" alt>
             </div>
           </div>
         </div>
@@ -113,7 +115,7 @@
               </div>
             </div>
           </div>
-          <mt-switch class="mtsw"  v-model="publish.is_trans" :active-value="2" :inactive-value="0"></mt-switch>
+          <mt-switch class="mtsw" v-model="publish.is_trans" :active-value="2" :inactive-value="0"></mt-switch>
         </div>
         <div class="shisan weixiang">*为必填项</div>
 
@@ -146,7 +148,7 @@ import jinhe from '../../components/jin-he'
 import gangzhi from '../../components/gang-zhi'
 import qiyehangye from '../../components/qiyehangye'
 import gongsjianjie from '../../components/gonsjianjie'
-import {mapState} from 'vuex'
+import { mapState } from 'vuex'
 Vue.use(Uploader)
 Vue.component(Switch.name, Switch)
 Vue.component(Popup.name, Popup)
@@ -275,18 +277,20 @@ export default {
       })
     },
     submit () {
-      this.$store.dispatch('publishUser', {
-        release_type_id: this.releaseTypeId,
-        ...this.publish
-      }).then(({data}) => {
-        if (data.error_code === 0) {
-          Toast(this.releaseId ? '修改发布成功' : '发布成功')
-          this.$store.commit('updatePublish', {_cover: true})
-          this.$router.replace('/') // 发布成功后跳到的地址
-        } else {
-          Toast(data.message)
-        }
-      })
+      this.$store
+        .dispatch('publishUser', {
+          release_type_id: this.releaseTypeId,
+          ...this.publish
+        })
+        .then(({ data }) => {
+          if (data.error_code === 0) {
+            Toast(this.releaseId ? '修改发布成功' : '发布成功')
+            this.$store.commit('updatePublish', { _cover: true })
+            this.$router.replace('/') // 发布成功后跳到的地址
+          } else {
+            Toast(data.message)
+          }
+        })
     },
 
     // 修改发布时参数调整
@@ -316,47 +320,50 @@ export default {
 </script>
 
 <style>
-.van-switch--on{
-  background-color: #FFE9BF!important;
+.biaotizuo{
+  padding:0 1rem;
 }
-.van-switch__node{
-  width:1.625rem /* 26/16 */;
+.van-switch--on {
+  background-color: #ffe9bf !important;
+}
+.van-switch__node {
+  width: 1.625rem /* 26/16 */;
   height: 1.625rem /* 26/16 */;
 }
-.vantsw{
-  width:2.8125rem /* 45/16 */;
+.vantsw {
+  width: 2.8125rem /* 45/16 */;
   height: 1.5625rem /* 25/16 */;
 }
-.mint-switch-core::before{
-  background-color: #E7E7E7;
+.mint-switch-core::before {
+  background-color: #e7e7e7;
 }
-.biaox{
-    color:red;
+.biaox {
+  color: red;
 }
-.weixiang{
-    padding-top: 2%;
+.weixiang {
+  padding-top: 2%;
 }
-.fanyijif{
-    height: 10%;
-    display: flex;
-    align-items: center;
+.fanyijif {
+  height: 10%;
+  display: flex;
+  align-items: center;
 }
-.biaoti-ipt input{
-    margin-bottom: 0!important;
-    border:0!important;
+.biaoti-ipt input {
+  margin-bottom: 0 !important;
+  border: 0 !important;
 }
-.shuma-xiang{
-    height: 10%;
-    background-color:white;
-    display:flex;
-    align-items: center;
+.shuma-xiang {
+  height: 10%;
+  background-color: white;
+  display: flex;
+  align-items: center;
 }
-.deerse{
-    background-color: #FFFFFF;
+.deerse {
+  background-color: #ffffff;
 }
 .fabu-peop-cent {
   background-color: #f5f5f5;
-      padding-top: 4%;
+  padding-top: 4%;
 }
 .fabu-head {
   display: flex;
@@ -462,7 +469,6 @@ export default {
   width: 4.0625rem /* 65/16 */;
   height: 4.0625rem /* 65/16 */;
   border-radius: 0.5rem /* 8/16 */;
-
 }
 .qued-fab {
   margin-top: 2.8125rem /* 45/16 */;
@@ -505,7 +511,7 @@ export default {
   align-items: center;
   /* justify-content: flex-start; */
   justify-content: space-between;
-  height:10%;
+  height: 10%;
   background-color: white;
   /* 具体自5己定 */
 }
@@ -545,7 +551,7 @@ export default {
   padding-bottom: 2.3125rem /* 37/16 */;
   word-break: break-all;
   width: 100%;
-  color:#C3C3C3;
+  color: #c3c3c3;
 }
 .fabu-head {
   height: 2.75rem /* 44/16 */;
@@ -555,6 +561,7 @@ export default {
   font-family: PingFang-SC-Medium;
   font-weight: 500;
   color: rgba(51, 51, 51, 1);
+  padding:0 1rem;
 }
 .shiwu {
   font-size: 0.9375rem /* 15/16 */;
@@ -563,12 +570,12 @@ export default {
   color: rgba(195, 195, 195, 1);
 }
 .shiwu-bl {
-    background-color: white;
+  background-color: white;
   font-size: 0.9375rem /* 15/16 */;
   font-family: PingFang-SC-Medium;
   font-weight: 500;
   color: #333333;
-  display:flex;
+  display: flex;
 }
 .mint-switch-input:checked + .mint-switch-core {
   border: 0 !important;

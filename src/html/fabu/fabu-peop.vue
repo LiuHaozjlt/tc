@@ -9,10 +9,10 @@
       <!--发布中间内容-->
       <div class="fabu-peop-cent">
         <div class="biaoti-cent">
-          <div class="shiwu-bl">
+          <div class="shiwu-bl biaotizuo">
             <div class="biaox">*</div>标题
           </div>
-          <div class="biaoti-ipt">
+          <div class="biaoti-ipt biaotizuo">
             <textarea
               type="textarea"
               maxlength="40"
@@ -65,7 +65,7 @@
             </div>
           </div>
           <div class="yue">
-            <div class="yue-left">
+            <div class="yue-left biaotizuo">
               <div>*</div>
               <div>装修</div>
             </div>
@@ -153,7 +153,7 @@
           <!-- </div> -->
         </div>
         <div class="di-xuan" @click="$router.push('/address/list?from=publish&title=选择地址')">
-          <div class="shiwu-bl">*地址</div>
+          <div class="shiwu-bl biaotizuo">*地址</div>
           <div class="xuanze-di">
             <div class="shiwu">{{activeAddress ? activeAddress.address : "选择地址"}}</div>
             <div>
@@ -161,21 +161,21 @@
             </div>
           </div>
         </div>
-        <div class="shou-ma shuma-xiang">
+        <div class="shou-ma shuma-xiang biaotizuo">
           <div class="shou-ma-xing">*</div>
           <div class="shou-ma-shou">手机</div>
           <div class="biaoti-ipt">
             <input v-model="publish.mobile" type="text" placeholder="输入" class="shiwu">
           </div>
         </div>
-        <div class="weixin shuma-xiang">
+        <div class="weixin shuma-xiang biaotizuo">
           <div class="shiwu-bl">微信：</div>
           <div class="biaoti-ipt">
             <input v-model="publish.weixin" type="text" placeholder="输入你的微信好" class="shiwu">
           </div>
         </div>
 
-        <div class="youxiang shuma-xiang">
+        <div class="youxiang shuma-xiang biaotizuo">
           <div class="shiwu-bl">邮箱：</div>
           <div class="biaoti-ipt">
             <input v-model="publish.email" type="text" placeholder="输入你的邮箱" class="shiwu">
@@ -190,7 +190,7 @@
 
         <div class="youxiang wo-fen deerse fanyijif">
           <div>
-            <div class="wo-swc">
+            <div class="wo-swc biaotizuo">
               <div class="shiwu-bl xufanyi">我需要翻译</div>
               <div class="biaoti-ipt">
                 <div class="shiwu">翻译将消耗你5积分</div>
@@ -202,8 +202,8 @@
             v-model="publish.is_trans"
             :active-value="2"
             :inactive-value="0"
-          ></van-switch> -->
-          <mt-switch class="mitsw" v-model="publish.is_trans"    :active-value="2"  :inactive-value="0"></mt-switch>
+          ></van-switch>-->
+          <mt-switch class="mitsw" v-model="publish.is_trans" :active-value="2" :inactive-value="0"></mt-switch>
         </div>
         <div class="shisan weixiang">*为必填项</div>
 
@@ -226,7 +226,7 @@
         class="mtpop-box"
         position="bottom"
       >
-      <van-picker :columns="priceUnits" @change="onPriceUnitChange"/>
+        <van-picker :columns="priceUnits" @change="onPriceUnitChange"/>
       </mt-popup>
       <mt-popup
         v-model="isRentDecorationShow"
@@ -234,7 +234,12 @@
         class="mtpop-box"
         position="bottom"
       >
-        <van-picker class="test" :columns="rentDecorations" value-key="name" @change="onRentDecorationChange"/>
+        <van-picker
+          class="test"
+          :columns="rentDecorations"
+          value-key="name"
+          @change="onRentDecorationChange"
+        />
       </mt-popup>
       <mt-popup
         v-model="isRentHallShow"
@@ -249,18 +254,18 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import { Uploader } from 'vant'
-import { Switch, Toast } from 'mint-ui'
-import { Popup } from 'mint-ui'
-import jiaoyujiage from '../../components/jiaoyujiage'
-import yueting from '../../components/yue-ting'
-import shoushang from '../../components/shou-shang'
-import jinhe from '../../components/jin-he'
-import gangzhi from '../../components/gang-zhi'
-import qiyehangye from '../../components/qiyehangye'
-import gongsjianjie from '../../components/gonsjianjie'
-import { mapState } from 'vuex'
+import Vue from 'vue';
+import { Uploader } from 'vant';
+import { Switch, Toast } from 'mint-ui';
+import { Popup } from 'mint-ui';
+import jiaoyujiage from '../../components/jiaoyujiage';
+import yueting from '../../components/yue-ting';
+import shoushang from '../../components/shou-shang';
+import jinhe from '../../components/jin-he';
+import gangzhi from '../../components/gang-zhi';
+import qiyehangye from '../../components/qiyehangye';
+import gongsjianjie from '../../components/gonsjianjie';
+import { mapState } from 'vuex';
 Vue.use(Uploader)
 Vue.component(Switch.name, Switch)
 Vue.component(Popup.name, Popup)
@@ -440,7 +445,7 @@ export default {
       this.$store.dispatch('publishSeller', this.publish).then(({ data }) => {
         if (data.error_code === 0) {
           Toast('发布成功')
-          this.$store.commit('updatePublish', {_cover: true})
+          this.$store.commit('updatePublish', { _cover: true })
           this.$router.replace('/') // 发布成功后跳到的地址
         } else {
           Toast(data.message)
@@ -508,11 +513,14 @@ export default {
 </script>
 
 <style>
-.test  .van-picker__columns>.van-picker-column {
-        margin-top: -70px;
+.biaotizuo {
+  padding: 0 1rem;
 }
-.mint-toast-text{
-  width:100%!important;
+.test .van-picker__columns > .van-picker-column {
+  margin-top: -70px;
+}
+.mint-toast-text {
+  width: 100% !important;
 }
 
 /*   */

@@ -3,6 +3,7 @@
 
     <div>
       <div>
+
         <!-- <div>首页详情</div> -->
         <div class="shouyexiangq-head">
           <div class="shouyexiangq-head-left">
@@ -28,8 +29,8 @@
         <div class="shouyexiangq-content">
           <div class="shouyexq-cont-top">
             <div class="shouyexq-cont-top-lef">
-              <img src alt>
-              <div class="shouyexq-top-lef">伊人</div>
+              <img :src="$route.query.imgUrl" alt>
+              <div class="shouyexq-top-lef">{{$route.query.title}}</div>
             </div>
             <div class="shouyexq-cont-top-rit">
               <div></div>
@@ -126,15 +127,15 @@ export default {
       popupVisible5: false,
       popupVisible4: false,
       list: [],
-      imgUrl: '../../image/baijiantou.png'
+      imgUrl: require('../../image/baijiantou.png')
     }
   },
   created () {
-    let tit = this.$route.params.title
-    console.log(this.$router.user_release_id)
+    this.lianggezhi()
+
+    // console.log(this.$router.user_release_id)
   },
   mounted () {
-    // console.log(this.lang)
   },
   computed: {
     img () {
@@ -149,6 +150,9 @@ export default {
     lunbo
   },
   methods: {
+    lianggezhi () {
+      let user_release_id = this.$route.query.user_release_id
+    },
     goshouye () {
       this.$router.back(-1)
     },

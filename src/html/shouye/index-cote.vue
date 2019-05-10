@@ -34,10 +34,12 @@
             <van-swipe-item>
               <div>
                 <p
+                  @click="goDetails(2)"
                   style="height:25px;margin-bottom:0"
                   v-if="newList[0]"
                 >{{newList[0].title|| ''}}</p>
                 <p
+                  @click="goDetails(2)"
                   style="height:25px;margin-bottom:0"
                   v-if="newList[1]"
                 >{{newList[1].title || ''}}</p>
@@ -46,10 +48,12 @@
             <van-swipe-item>
               <div>
                 <p
+                  @click="goDetails(2)"
                   style="height:25px;margin-bottom:0"
                   v-if="newList[2]"
                 >{{newList[2].title|| ''}}</p>
                 <p
+                  @click="goDetails(2)"
                   style="height:25px;margin-bottom:0"
                   v-if="newList[3]"
                 >{{newList[3].title || ''}}</p>
@@ -94,6 +98,14 @@ export default {
     tuijiancont
   },
   methods: {
+    goDetails (id) {
+      this.$router.push({
+        path: '/newxiangqin',
+        query: {
+          id: id
+        }
+      })
+    },
     tapAction (item, i) {
       let path = ''
       let query = {}

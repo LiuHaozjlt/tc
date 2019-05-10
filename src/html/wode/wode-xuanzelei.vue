@@ -53,7 +53,8 @@ export default {
     }
   },
   created () {
-    if (this.sellerTypes.length === 0) this.$store.dispatch('getSellerTypes')
+    if (this.sellerTypes.length === 0) { this.$store.dispatch('getSellerTypes') }
+    console.log(this.$store.state.sellerTypes)
   }
 }
 </script>
