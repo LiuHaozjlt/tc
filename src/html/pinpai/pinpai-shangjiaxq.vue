@@ -2,7 +2,7 @@
   <div>
     <div>
       <!--房源分享-->
-      <div class="pinpaishangjia-head">
+      <div class="pinpaishangjia-head" :style="{backgroundImage: `url(${sellerInfo.img})`}">
         <div>
           <div class="shangjiafanhui">
             <img
@@ -18,12 +18,12 @@
       </div>
       <div class="dianpu-logo-cont">
         <div class="dianpu-logo">
-          <img src alt>
+          <img :src="sellerInfo.logo" alt>
         </div>
-        <div class="gsmchen">公司名字</div>
+        <div class="gsmchen">{{sellerInfo.name}}</div>
       </div>
 
-      <gsjianjie></gsjianjie>
+      <gsjianjie>{{sellerInfo.info}}</gsjianjie>
     </div>
 
     <div class="tao-wu">
@@ -53,12 +53,16 @@
             </div>
             <div>
               <div class="changxqcent">
-                <div class="changxq-bot-lef">
+                <div class="changxq-bot-lef" v-if="item.rent_hall">
                   <div class="changxq-bot-rit-cent">{{item.rent_hall.name}}</div>
                   <div class="changxq-bot-rit-cent"></div>
                   <div class="changxq-bot-rit-cented">{{item.rent_decoration.name}}</div>
                 </div>
-                <div class="shier">{{item.prices}}KIP</div>
+                <div class="shier" v-if="item.prices">{{item.prices}}KIP</div>
+                <div v-if="item.recruit_prices_start">{{item.recruit_prices_start}}
+                  -
+                  {{item.recruit_prices_end}}
+                  {{item.prices_unit}}/月</div>
               </div>
             </div>
           </div>
@@ -134,6 +138,11 @@ export default {
       priceUnit: []
     }
   },
+  computed: {
+    sellerId () {
+      return this.$route.query.seller_id
+    }
+  },
   components: {
     dianne,
     gsjianjie,
@@ -167,16 +176,7 @@ export default {
       })
     },
     getSellInfo (filters = {}) {
-      let userinfo = wls.get('userInfo', {})
-      let token = userinfo.access_token
-      this.axius({
-        methods: 'get',
-        url: 'apis/v1/seller/my-release',
-        params: filters,
-        headers: {
-          Authorization: 'Bearer ' + token
-        }
-      }).then(({ data }) => {
+      this.$store.dispatch('getSellerDetail', {seller_id: this.sellerId, ...filters}).then(({ data }) => {
         if (data.error_code !== 0) {
           Toast(data.message)
           return
@@ -212,8 +212,6 @@ export default {
     }
   },
   created () {
-    // this.getData();
-    // this.getdianpu()
     this.getSellInfo()
   }
 }
@@ -224,6 +222,8 @@ export default {
 
 }
 .pinpaishangjia-head {
+  background-size: cover;
+  background-position: center;
   background-color: #b2bbcf;
   height: 30%;
 }

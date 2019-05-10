@@ -64,10 +64,14 @@ import wodefabu from '../html/wode/wode-fabu'
 import apitest from './../../demo/api-test'
 import wodetongzhi from '../html/wode/wode-tongzhi'
 import pinlunxiangq from '../html/xinwen/pinlunxiangq'
+import store from '../store'
 
+const meta = {
+  authentication: true
+}
 // import map_text from "AmapText"
 Vue.use(Router)
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -226,22 +230,26 @@ export default new Router({
     {
       path: '/jubao',
       name: 'jubao',
-      component: jubao
+      component: jubao,
+      meta
     },
     {
       path: '/shoucang',
       name: 'shoucang',
-      component: shoucang
+      component: shoucang,
+      meta
     },
     {
       path: '/nicheng',
       name: 'nicheng',
-      component: nicheng
+      component: nicheng,
+      meta
     },
     {
       path: '/bianji',
       name: 'bianji',
-      component: bianji
+      component: bianji,
+      meta
     },
     {
       path: '/',
@@ -428,3 +436,14 @@ export default new Router({
     // }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.authentication) {
+    if (!store.state.userInfo.user_id) {
+      next('/dlu?redirect=' + from.fullPath)
+    }
+  }
+  next()
+})
+
+export default router

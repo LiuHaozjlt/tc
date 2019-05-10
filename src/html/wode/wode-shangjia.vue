@@ -150,7 +150,7 @@ export default {
         if (p.data.error_code !== 0) {
           Toast(p.data.message)
           this.$store.commit('setPersonal', true)
-          this.$router.replace('/index/wodeele')
+          // this.$router.replace('/index/wodeele')
         } else {
           Toast('商家申请成功')
           // this.$router.replace('/index/wodeele')

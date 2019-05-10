@@ -13,7 +13,7 @@
                     <div class="wode-head-in-warp">
                         <div class="wode-head-in">
                         <img :src="'http://info.00856.la'+userInfo.headimgurl || imgtuxiang" alt="">
-                        <div>{{userInfo.nickname}}</div>
+                        <div>{{userInfo.nickname || '请登录'}}</div>
                         </div>
                     </div>
                     <div class="wode-head-rit">

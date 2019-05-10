@@ -244,6 +244,9 @@ export default new Vuex.Store({
         commit('updateSellerInfo', p.data.data)
       })
     },
+    getSellerDetail ({commit}, params) {
+      return $http.get('/apis/v1/user/seller-detail', {params})
+    },
     getPublishReleaseValue ({commit}) {
       $http.get('/apis/v1/seller/get-publish-release-value').then(p => {
         commit('savePublishReleaseValue', p.data.data)
@@ -363,7 +366,6 @@ export default new Vuex.Store({
       })
     },
     getSellers ({commit}, params) {
-      debugger
       return $http.get('/apis/v1/user/seller', {params})
     },
     getNews (ctx, params = {}) {

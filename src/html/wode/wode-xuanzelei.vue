@@ -52,7 +52,7 @@ export default {
       // if (this.$store.state.userInfo === '') {
       //   this.$router.push({path: '/dlu'})
       // }
-      this.$store.commit({
+      this.$store.commit('updateSellerInfo', {
         release_type_id: this.sellerTypes[this.active].release_type_id
       })
       // console.log(this.release_type_id)

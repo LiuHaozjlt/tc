@@ -255,7 +255,8 @@ export default {
     callAfterLogin (userInfo) {
       Toast('登录成功')
       this.$store.commit('saveUserInfo', userInfo)
-      this.$router.replace('/')
+      let redirect = this.$route.query.redirect
+      this.$router.replace(redirect || '/')
     }
   }
 }

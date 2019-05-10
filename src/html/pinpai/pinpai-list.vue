@@ -2,7 +2,7 @@
   <div>
     <div v-for="(item,index) in list " :key="index" class="pinpaishop">
       <!--跳转到logo详情-->
-      <div class="pinpai-cent" @click="gopinpaishangjiaxq">
+      <div class="pinpai-cent" @click="gopinpaishangjiaxq(item)">
         <div class="fang-icon">
           <img :src="'http://info.00856.la'+item.img">
         </div>
@@ -64,15 +64,15 @@ export default {
   },
   watch: {
     releaseTypeId: {
-      handler () {
-        this.getList()
+      handler (id) {
+        id && this.getList()
       },
       immediate: true
     }
   },
   methods: {
-    gopinpaishangjiaxq () {
-      this.$router.push({ path: '/pinpaishangjiaxq'})
+    gopinpaishangjiaxq ({seller_id}) {
+      this.$router.push({ path: '/pinpaishangjiaxq', query: {seller_id} })
     },
     gochanpxiangq () {
       this.$router.push({ path: '/pinpaichanpxq'})
