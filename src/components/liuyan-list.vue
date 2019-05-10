@@ -185,13 +185,7 @@ export default {
   height: 12rem /* 192/16 */;
   background-color: brown;
 }
-.xiangqi-cont {
-  font-size: 1.0625rem /* 17/16 */;
-  font-family: PingFang-SC-Medium;
-  font-weight: 500;
-  color: rgba(51, 51, 51, 1);
-  line-height: 1.875rem /* 30/16 */;
-}
+
 .xiao-guan {
   display: flex;
   align-items: center;
