@@ -117,10 +117,7 @@ export default {
 .new-xiangqin {
   padding-bottom: 100%;
 }
-.xiangqi-cont p:nth-child(2) img {
-  width: 12.5rem /* 200/16 */;
-  height: 12.5rem /* 200/16 */;
-}
+
 .meiyou {
   font-size: 0.9375rem /* 15/16 */;
   font-family: PingFang-SC-Regular;
