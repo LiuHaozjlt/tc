@@ -91,7 +91,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style>
 .new-xiangqinhead {
   height: 2.75rem /* 44/16 */;
   line-height: 2.75rem /* 44/16 */;
