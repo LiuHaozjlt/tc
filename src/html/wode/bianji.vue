@@ -183,9 +183,5 @@ color:rgba(33,33,33,1);
     background-color: #fff;
     text-align: center;
 }
-p{
-    height: 40px;
-    line-height: 40px;
-}
 
 </style>
