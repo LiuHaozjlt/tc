@@ -102,48 +102,7 @@ export default {
   width: 0.6875rem /* 11/16 */;
   height: 1.25rem /* 20/16 */;
 }
-.xiangqi-cont h1 img {
-  width: 100%;
-  height: 12rem /* 192/16 */;
-  margin-bottom: 5%;
-}
-.xiangqi-cont h1 {
-  border-bottom: none !important;
-}
-.xiangqi-cont ul {
-  display: none !important;
-}
-.xiangqi-cont p:nth-child(2) {
-  display: none !important;
-}
-.xiangqi-cont p:nth-child(3) {
-  display: none !important;
-}
-.xiangqi-cont p:nth-child(5) {
-  display: none !important;
-}
-.xiangqi-cont p:nth-child(7) {
-  display: none !important;
-}
-.xiangqi-cont p:nth-child(9) {
-  display: none !important;
-}
-.xiangqi-cont p:nth-child(10) {
-  display: none !important;
-}
-.xiangqi-cont p span {
-  display: none;
-}
-.xiangqi-cont p img {
-  width: 100%;
-  height: 12rem /* 192/16 */;
-}
-.xiangqi-cont h1 {
-  font-size: 1.0625rem /* 17/16 */ !important;
-  font-family: PingFang-SC-Medium;
-  font-weight: 500;
-  color: rgba(51, 51, 51, 1);
-}
+
 .pinlun-cent-cent {
   margin-left: 2%;
 }
