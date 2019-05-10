@@ -27,8 +27,8 @@
         <div class="shouyexiangq-content">
           <div class="shouyexq-cont-top">
             <div class="shouyexq-cont-top-lef">
-              <img :src="$route.query.imgSrc" alt>
-              <div class="shouyexq-top-lef">{{$route.query.title}}</div>
+              <img :src="release.imgSrc" alt>
+              <div class="shouyexq-top-lef">{{release.title}}</div>
             </div>
             <div class="shouyexq-cont-top-rit">
               <div></div>
@@ -41,7 +41,7 @@
           </div>
           <div class="shouyexq-cont-cent-btm">
             <div class="shouyexq-btmjianjie">
-              {{$route.query.describe}}
+              {{release.describe}}
               <!-- 本人是一位职业插画师，常年在国外发展，
               办过自己的画展开过课，这套插画是纪念站酷10周年的时候原创的耗时半年
               ，灵感来源于80年代森女系风格，目前已商用并反响很好，
@@ -53,7 +53,7 @@
           <div class="shouyexq-dingwei">
             <div class="shouyexq-dingwei-icon">
               <img src="../../image/dizhi.png" alt>
-              <div class="dingwei-text">{{$route.query.address}}</div>
+              <div class="dingwei-text">{{release.address}}</div>
             </div>
           </div>
         </div>
@@ -119,7 +119,7 @@
 <script>
 import liuyanlist from '../../components/liuyan-list'
 import lunbo from '../../components/slide'
-import { mapState } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
   name: 'Picker',
   data () {
@@ -127,31 +127,42 @@ export default {
       popupVisible5: false,
       popupVisible4: false,
       list: [],
+      release: {},
       imgUrl: require('../../image/baijiantou.png')
     }
   },
   created () {
     this.lianggezhi()
-
+    this.release_id = this.$route.query.user_release_id
+    let self = this
+    this.getReleases({id: this.release_id}).then((data) => {
+      // console.log(data)
+      let res = data.data
+      if (res.error_code === 0) {
+        self.release = res.data
+        console.log(self.release)
+      }
+    })
     // console.log(this.$router.user_release_id)
   },
-  mounted () {},
+  mounted () {
+  },
   computed: {
     img () {
       return this.$store.state.imgCache
-    },
-    lang () {
-      debugger
-      return this.$store.state.lang
-    },
+    }
+    // lang () {
+    //   return this.$store.state.lang
+    // }
 
-    ...mapState(['indexData'])
+    // ...mapState(['indexData'])
   },
   components: {
     liuyanlist,
     lunbo
   },
   methods: {
+    ...mapActions(['getReleases']),
     lianggezhi () {
       // let user_release_id = this.$route.query.user_release_id
     },
@@ -171,6 +182,9 @@ export default {
     },
     popup5 () {
       this.popupVisible5 = true
+    },
+    getRelease () {
+
     }
   }
 }

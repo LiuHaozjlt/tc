@@ -7,7 +7,6 @@
                 <div class="wode-tongzhi-head">通知</div>
                 <div class="wode-tongzhi-head"></div>
             </div>
-
             <div>
                 <div class="ning-ba">
                     <div>
@@ -24,6 +23,7 @@
 </template>
 
 <script>
+import {wls} from '../../store/index'
 export default {
   data () {
     return {
@@ -43,6 +43,8 @@ export default {
       this.$router.back(-1)
     },
     gettongzhi () {
+      let userinfo = wls.get('userInfo', {})
+      let token = userinfo.access_token
       let me = this
       // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
       me.axius({
@@ -51,11 +53,11 @@ export default {
         data: {
         },
         headers: {
-          'Authorization': 'Bearer ' + me.userInfo.access_token
+          'Authorization': 'Bearer ' + token
         }
       }).then(p => {
         this.tongzhi = p.data.data
-        // console.log(this.tongzhi)
+        console.log(this.tongzhi)
       })
     }
   }

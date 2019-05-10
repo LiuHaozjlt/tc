@@ -2,9 +2,7 @@
   <div>
     <div class="pinpai-head">
       <img class="pinpaiheadicon" src="../../image/shangdian.png" alt>
-
       <img class="fangdajin" src="../../image/chzhaom.png" alt>
-
       <pinpaitab :tabs="types" :active="type"></pinpaitab>
     </div>
     <pin-pai-list :release-type-id="active.release_type_id"></pin-pai-list>

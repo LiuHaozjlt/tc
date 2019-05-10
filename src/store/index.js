@@ -14,10 +14,17 @@ function updateRequst (token) {
     }
   })
 }
+function getToken () {
+  let accessUserInfo = wls.get('userInfo')
+  // 设置token
+  let token = accessUserInfo ? 'Bearer ' + accessUserInfo.access_token : ''
+  return token
+}
 export const wls = {
   get (key, defaultValue) {
     let value = window.localStorage.getItem(key)
-    if (value === null || value === undefined) return defaultValue
+    // console.log(value, 'token值')
+    if (value === null || value === 'undefined') return defaultValue
     else return JSON.parse(value)
   },
   set (key, value) {
@@ -344,17 +351,19 @@ export default new Vuex.Store({
     },
 
     getReleases ({commit}, params) {
-      return $http.get('/apis/v1/user/releases', {params})
+      return $http.get('/apis/v1/user/releases/' + params.id, {params})
     },
 
     getSellerTypes ({commit}) {
-      return $http.get('/apis/v1/seller/get-seller-type').then(({data}) => {
+      console.log(getToken(), 123123)
+      return $http.get('/apis/v1/seller/get-seller-type', {headers: {'Authorization': getToken()}}).then(({data}) => {
         if (data.error_code === 0) {
           commit('saveSellerTypes', data.data || [])
         }
       })
     },
     getSellers ({commit}, params) {
+      debugger
       return $http.get('/apis/v1/user/seller', {params})
     },
     getNews (ctx, params = {}) {

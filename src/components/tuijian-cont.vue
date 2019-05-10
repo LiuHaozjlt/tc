@@ -60,16 +60,16 @@ export default {
   },
   methods: {
     goshouyexiangq (item) {
-      console.log(item)
+      // console.log(item)
       this.$router.push({
         path: '/shouyexq',
         query: {
-          // user_release_id: item.user_release_id,
+          user_release_id: item.user_release_id
           // lang: 'zh',
-          title: item.title,
-          imgSrc: item.img,
-          describe: item.describe,
-          address: item.address
+          // title: item.title,
+          // imgSrc: item.img,
+          // describe: item.describe,
+          // address: item.address
         }
       })
     }

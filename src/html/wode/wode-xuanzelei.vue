@@ -16,7 +16,7 @@
           :class="{selected: index === active}"
           @click="active = index"
         >
-          <div class>
+          <div>
             <img class="shangjiaIcon" :src="'http://info.00856.la'+item.icon" alt>
           </div>
           <div>{{item.name}}</div>
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+// import {wls} from '../../store/index'
 export default {
   data () {
     return {
@@ -36,7 +37,9 @@ export default {
     }
   },
   computed: {
+
     sellerTypes () {
+      // debugger
       return this.$store.state.sellerTypes
     }
   },
@@ -45,7 +48,11 @@ export default {
       this.$router.back(-1)
     },
     xiayibu () {
-      this.$store.commit('updateSellerInfo', {
+      // // debugger
+      // if (this.$store.state.userInfo === '') {
+      //   this.$router.push({path: '/dlu'})
+      // }
+      this.$store.commit({
         release_type_id: this.sellerTypes[this.active].release_type_id
       })
       // console.log(this.release_type_id)
@@ -53,8 +60,9 @@ export default {
     }
   },
   created () {
+    // debugger
     if (this.sellerTypes.length === 0) { this.$store.dispatch('getSellerTypes') }
-    console.log(this.$store.state.sellerTypes)
+    // console.log(this.$store.state.sellerTypes)
   }
 }
 </script>

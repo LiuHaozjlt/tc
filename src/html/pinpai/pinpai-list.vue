@@ -20,7 +20,7 @@
         <div
           v-for="release in item.SellerReleaseInfo"
           :key="release.seller_release_id"
-          @click="gochanpxiangq(release)"
+          @click="gochanpxiangq(item.SellerReleaseInfo.seller_release_id)"
         >
           <div class="pinp-cent-top">{{release.title}}</div>
           <div class="kip">
@@ -72,10 +72,10 @@ export default {
   },
   methods: {
     gopinpaishangjiaxq () {
-      this.$router.push({ path: '/pinpaishangjiaxq' })
+      this.$router.push({ path: '/pinpaishangjiaxq'})
     },
     gochanpxiangq () {
-      this.$router.push({ path: '/pinpaichanpxq' })
+      this.$router.push({ path: '/pinpaichanpxq'})
     },
     getList () {
       if (this.cache[this.releaseTypeId]) return

@@ -104,6 +104,7 @@
 </template>
 
 <script>
+import {wls} from '../../store/index'
 import dianne from '../../components/dianjiatishi'
 import pinpaifenxiang from '../../components/pinpaifenxiang'
 // import pinpaifenxiang from '../../components/pinpaifenxiang'
@@ -166,13 +167,14 @@ export default {
       })
     },
     getSellInfo (filters = {}) {
-      // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
+      let userinfo = wls.get('userInfo', {})
+      let token = userinfo.access_token
       this.axius({
         methods: 'get',
         url: 'apis/v1/seller/my-release',
         params: filters,
         headers: {
-          Authorization: 'Bearer ' + this.userInfo.access_token
+          Authorization: 'Bearer ' + token
         }
       }).then(({ data }) => {
         if (data.error_code !== 0) {

@@ -12,7 +12,7 @@
              <div class="wode-head" @click="tobianji">
                     <div class="wode-head-in-warp">
                         <div class="wode-head-in">
-                        <img :src="'http://info.00856.la'+userInfo.headimgurl" alt="">
+                        <img :src="'http://info.00856.la'+userInfo.headimgurl || imgtuxiang" alt="">
                         <div>{{userInfo.nickname}}</div>
                         </div>
                     </div>
@@ -80,7 +80,8 @@ import { Toast } from 'vant'
 export default {
   data () {
     return {
-      imgele: require('../../image/图层 1.png')
+      imgele: require('../../image/图层 1.png'),
+      imgtuxiang: require('../../image/Facebook@2x.png')
     }
   },
   computed: {
@@ -92,9 +93,16 @@ export default {
     }
   },
   created () {
-
+    this.weidenglu()
   },
   methods: {
+    weidenglu () {
+      console.log('510')
+      // debugger
+      // if (this.userInfo === '') {
+      //   this.$router.push('/dlu')
+      // }
+    },
     gettongzhi () {
       this.$router.push({path: '/wodetongzhi'})
     },

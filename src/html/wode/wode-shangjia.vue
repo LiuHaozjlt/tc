@@ -73,6 +73,7 @@ import { Uploader } from 'vant'
 import Vue from 'vue'
 import shopImagePlaceholder from '../../image/xjh.png'
 import shopImageadd from '../../image/tj.png'
+import {wls} from '../../store/index'
 Vue.use(Uploader)
 export default {
   data () {
@@ -136,13 +137,14 @@ export default {
     },
     getruzhushengq () {
       let me = this
-      // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
+      let userinfo = wls.get('userInfo', {})
+      let token = userinfo.access_token
       me.axius({
         method: 'post',
         url: 'apis/v1/seller',
         data: this.sellerInfo,
         headers: {
-          Authorization: 'Bearer ' + me.userInfo.access_token
+          Authorization: 'Bearer ' + token
         }
       }).then(p => {
         if (p.data.error_code !== 0) {
@@ -151,7 +153,7 @@ export default {
           this.$router.replace('/index/wodeele')
         } else {
           Toast('商家申请成功')
-          this.$router.replace('/index/wodeele')
+          // this.$router.replace('/index/wodeele')
         }
       })
     },
@@ -211,6 +213,7 @@ export default {
 .dianpushangchuan {
 }
 .dianpushangchuan img {
+  width:100%;
 }
 .logo-icon {
   margin-bottom: 5%;
