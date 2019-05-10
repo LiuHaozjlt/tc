@@ -1,9 +1,7 @@
 <template>
   <div class="shouyexq-cont">
-
     <div>
       <div>
-
         <!-- <div>首页详情</div> -->
         <div class="shouyexiangq-head">
           <div class="shouyexiangq-head-left">
@@ -29,7 +27,7 @@
         <div class="shouyexiangq-content">
           <div class="shouyexq-cont-top">
             <div class="shouyexq-cont-top-lef">
-              <img :src="$route.query.imgUrl" alt>
+              <img :src="$route.query.imgSrc" alt>
               <div class="shouyexq-top-lef">{{$route.query.title}}</div>
             </div>
             <div class="shouyexq-cont-top-rit">
@@ -43,10 +41,11 @@
           </div>
           <div class="shouyexq-cont-cent-btm">
             <div class="shouyexq-btmjianjie">
-              本人是一位职业插画师，常年在国外发展，
+              {{$route.query.describe}}
+              <!-- 本人是一位职业插画师，常年在国外发展，
               办过自己的画展开过课，这套插画是纪念站酷10周年的时候原创的耗时半年
               ，灵感来源于80年代森女系风格，目前已商用并反响很好，
-              因为留学需要经费只能忍痛割爱出售这套得意之作的版权，留给有缘人
+              因为留学需要经费只能忍痛割爱出售这套得意之作的版权，留给有缘人 -->
             </div>
           </div>
 
@@ -54,7 +53,7 @@
           <div class="shouyexq-dingwei">
             <div class="shouyexq-dingwei-icon">
               <img src="../../image/dizhi.png" alt>
-              <div class="dingwei-text">湖南长沙雨花区金鸿宇大厦14楼</div>
+              <div class="dingwei-text">{{$route.query.address}}</div>
             </div>
           </div>
         </div>
@@ -120,6 +119,7 @@
 <script>
 import liuyanlist from '../../components/liuyan-list'
 import lunbo from '../../components/slide'
+import { mapState } from 'vuex'
 export default {
   name: 'Picker',
   data () {
@@ -135,15 +135,17 @@ export default {
 
     // console.log(this.$router.user_release_id)
   },
-  mounted () {
-  },
+  mounted () {},
   computed: {
     img () {
       return this.$store.state.imgCache
     },
     lang () {
+      debugger
       return this.$store.state.lang
-    }
+    },
+
+    ...mapState(['indexData'])
   },
   components: {
     liuyanlist,
@@ -151,7 +153,7 @@ export default {
   },
   methods: {
     lianggezhi () {
-      let user_release_id = this.$route.query.user_release_id
+      // let user_release_id = this.$route.query.user_release_id
     },
     goshouye () {
       this.$router.back(-1)
@@ -175,11 +177,11 @@ export default {
 </script>
 
 <style scoped>
-.shouyexq-cont{
-  padding:0 1.25rem;
+.shouyexq-cont {
+  padding: 0 1.25rem;
 }
-.shouyexiangq-head-right-icon{
-  display:flex;
+.shouyexiangq-head-right-icon {
+  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -237,13 +239,14 @@ export default {
 .shouyexq-cont-top-lef {
   display: flex;
   align-items: center;
-  width: 30%;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  width:89%;
 }
 .shouyexq-cont-top-lef img {
   width: 2.6875rem /* 43/16 */;
   height: 2.6875rem /* 43/16 */;
   border-radius: 100%;
+  margin-right: 4%;
 }
 .shouyexq-btmjianjie {
   font-size: 0.875rem /* 14/16 */;
@@ -323,13 +326,15 @@ export default {
   height: 1.875rem /* 30/16 */;
   background-color: #9a9b9a;
   border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .shouyexiangq-head-right div {
   width: 1.875rem /* 30/16 */;
   height: 1.875rem /* 30/16 */;
   background-color: #9a9b9a;
   border-radius: 100%;
-
 }
 
 .shouyexiangq-head-right {

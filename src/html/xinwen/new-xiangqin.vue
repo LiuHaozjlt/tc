@@ -38,7 +38,9 @@
 </template>
 
 <script>
+
 import liuyanlist from '../../components/liuyan-list'
+import {wls} from '../../store/index'
 export default {
   data () {
     return {
@@ -63,6 +65,8 @@ export default {
       this.$router.push({ path: '/pinlunxiangq' })
     },
     getDetail () {
+      let userinfo = wls.get('userInfo', {})
+      let token = userinfo.access_token
       // console.log(this.id)
       // let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
       this.axius({
@@ -76,7 +80,7 @@ export default {
           // receive_time: 4
         },
         headers: {
-          Authorization: 'Bearer ' + this.userInfo.access_token
+          Authorization: 'Bearer ' + token
         }
       }).then(p => {
         // console.log(p.data.data)

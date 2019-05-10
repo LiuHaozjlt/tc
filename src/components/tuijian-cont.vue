@@ -64,10 +64,12 @@ export default {
       this.$router.push({
         path: '/shouyexq',
         query: {
-          user_release_id: item.user_release_id,
+          // user_release_id: item.user_release_id,
           // lang: 'zh',
           title: item.title,
-          imgSrc: item.img
+          imgSrc: item.img,
+          describe: item.describe,
+          address: item.address
         }
       })
     }
