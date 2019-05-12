@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='pinpai-content'>
     <div v-for="(item,index) in list " :key="index" class="pinpaishop">
       <!--跳转到logo详情-->
       <div class="pinpai-cent" @click="gopinpaishangjiaxq(item)">
@@ -168,5 +168,10 @@ export default {
   display: flex;
   justify-content: space-between;
   padding: 0 0.3rem;
+}
+.pinpai-content{
+    margin-top: -28px;
+    position: relative;
+    z-index: 1;
 }
 </style>

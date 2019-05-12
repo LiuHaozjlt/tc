@@ -79,7 +79,7 @@ export default new Vuex.Store({
     publishReleaseValue: {},
     userAddressList: [],
     activeAddress: null,
-    lang: wls.get('locale'),
+    lang: wls.get('locale') ? wls.get('locale') : 'zh',
     logisticOrder: {},
     logisticGoodsType: [],
     queryParam: {...queryParamDefault},
@@ -377,6 +377,20 @@ export default new Vuex.Store({
         wx_openid: params.wx_openid,
         facebook_id: params.facebook_id
       })
+    },
+    sellerReleaseCollect ({commit}, params) {
+      return $http.post('/apis/v1/user/seller-release-collect', {
+        user_release_id: params.user_release_id
+      })
+    },
+    getCollect ({commit}) {
+      return $http.get('/apis/v1/user/collect')
+    },
+    getReport ({commit}) {
+      return $http.get('/apis/v1/user/report')
+    },
+    feedback ({commit}, params) {
+      return $http.post('/apis/v1/user/feedback', params)
     }
   }
 

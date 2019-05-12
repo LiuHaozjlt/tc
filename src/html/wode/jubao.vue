@@ -14,18 +14,27 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {}
   },
   methods: {
+    ...mapActions(['getReport']),
+    getReportList () {
+      this.getReport().then(res => {
+        console.log('举报列表', res)
+      })
+    },
     towodejubxq () {
       this.$router.push({path: '/wodejubxq'})
     },
     towodeele () {
       this.$router.back(-1)
     }
-
+  },
+  mounted () {
+    this.getReportList()
   }
 }
 </script>

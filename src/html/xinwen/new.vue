@@ -18,9 +18,7 @@
                         </div>
                     </div>
                     <div class="new-bot-head" v-if="index > 0">
-                        <img :src="'http://info.00856.la'+item.front_img" alt="">
-                        <img :src="'http://info.00856.la'+item.front_img" alt="">
-                        <img :src="'http://info.00856.la'+item.front_img" alt="">
+                      <img :src="'http://info.00856.la'+src" alt="" v-for="src in item.front_img.split(',')">
                     </div>
                 </div>
             </div>
@@ -71,6 +69,7 @@ export default {
   .wang{
     display:inline-block;
     padding-left: 2%;
+    width:100%;
 
   }
   .mint-swipe-indicators{

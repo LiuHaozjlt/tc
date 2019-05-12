@@ -10,13 +10,14 @@
             </div>
           </div>
           <div class="shouyexiangq-head-right">
-            <div class="shouyexiangq-head-right-icon">
+            <div class="shouyexiangq-head-right-icon" @click="collection(release.user_release_id)">
               <img src="../../image/sc.png" alt>
             </div>
             <!-- <div>
               <img src="../../image/fx.png" alt>
             </div>-->
-            <div class="shouyexiangq-head-right-icon">
+            <!--我的举报-->
+            <div class="shouyexiangq-head-right-icon" @click="report()">
               <img src="../../image/jubao (2).png" alt>
             </div>
           </div>
@@ -60,6 +61,9 @@
         <!--浏览过改信息的人-->
         <div class="liulanguoderen">
           <div class="liulankanguo">浏览过该信息的人还看过</div>
+          <div>
+            {{indexData}}
+          </div>
         </div>
       </div>
     </div>
@@ -75,15 +79,17 @@
          <br>
          <img src="" alt="">
       </div>-->
+
       <div class="liuyan-item">
+        <!--留言列表-->
         <liuyanlist :list="list"></liuyanlist>
       </div>
-      <mt-button class="bottom" @click="sendEvent" size="large" type="primary">
+      <!-- <mt-button class="bottom" @click="sendEvent" size="large" type="primary">
         <div class="kan-liu">
-          <!-- <input type="text" placeholder="看对眼就留言，问问更多细节~"> -->
+          <input type="text" placeholder="看对眼就留言，问问更多细节~">
           <div style="color:black;">发送</div>
         </div>
-      </mt-button>
+      </mt-button>-->
     </mt-popup>
 
     <!--联系电话弹窗-->
@@ -92,7 +98,7 @@
         <div class="lianxidianhua-bot">
           <img src="../../image/dianhua (1).png" alt>
           <div class="callfangshi">15074826496</div>
-          <div class="call">拨打电话</div>
+          <div class="call" @click="bodaiphone">拨打电话</div>
         </div>
         <div class="lianxidianhua-bot">
           <img src="../../image/weixin.png" alt>
@@ -146,23 +152,40 @@ export default {
     // console.log(this.$router.user_release_id)
   },
   mounted () {
+    this.sendEvent()
+    console.log(this.list)
   },
   computed: {
     img () {
       return this.$store.state.imgCache
-    }
+    },
     // lang () {
     //   return this.$store.state.lang
     // }
 
-    // ...mapState(['indexData'])
+    ...mapState(['indexData'])
   },
   components: {
     liuyanlist,
     lunbo
   },
   methods: {
-    ...mapActions(['getReleases']),
+    bodaiphone () {
+      window.location.href = 'tel:+10086'
+    },
+    ...mapActions(['getReleases', 'sellerReleaseCollect']),
+    report () {
+      this.$router.push('/wodeyijian')
+    },
+    collection (id) {
+      this.sellerReleaseCollect({
+        user_release_id: id
+      }).then(res => {
+        if (res.data.error_code === 0) {
+          this.$router.push({path: '/shoucang'})
+        }
+      })
+    },
     lianggezhi () {
       // let user_release_id = this.$route.query.user_release_id
     },

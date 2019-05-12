@@ -3,7 +3,7 @@
     <div class="pinpai-head">
       <img class="pinpaiheadicon" src="../../image/shangdian.png" alt>
       <img class="fangdajin" src="../../image/chzhaom.png" alt>
-      <pinpaitab :tabs="types" :active="type"></pinpaitab>
+      <pinpaitab :tabs="types" :active="type" class='pinpai-list-tab'></pinpaitab>
     </div>
     <pin-pai-list :release-type-id="active.release_type_id"></pin-pai-list>
   </div>
@@ -99,5 +99,11 @@ export default {
   position: relative;
 }
 .pinpai-head img {
+}
+.pinpai-list-tab .tab{
+  display: flex;
+}
+.pinpai-list-tab .tab-head{
+  white-space: nowrap;
 }
 </style>

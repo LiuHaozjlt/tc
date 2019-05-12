@@ -9,19 +9,29 @@
     </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {}
   },
   methods: {
+    ...mapActions(['getCollect']),
     goshoucangqian () {
       this.$router.back(-1)
+    },
+    getCollectList () {
+      this.getCollect().then(res => {
+        console.log(res)
+      })
     }
     // goJuBao () {
     //   this.$router.push({
     //     path: '/jubao'
     //   })
     // }
+  },
+  mounted () {
+    this.getCollectList()
   }
 }
 </script>

@@ -6,14 +6,14 @@
             <div></div>
         </div>
         <div class="fankuicont">
-            <textarea type="textarea"  row="5" cols="5" placeholder="请在吃输入你要反馈的内容" ref="fankuitext" @input="getfanhuiLeft">
+            <textarea type="textarea" v-model="feedbackData.content" row="5" cols="5" placeholder="请在吃输入你要反馈的内容" ref="fankuitext" @input="getfanhuiLeft">
             </textarea>
             <div class="lin-four">
                 <div class="fanhuiWenzileft">{{fankuiwenzi}}</div>/<div>200</div>
             </div>
         </div>
         <div class="yijian-emai">
-            <input type="text" placeholder="请输入您的手机好">
+            <input type="text" placeholder="请输入您的手机好" v-model="feedbackData.contact">
         </div>
 
         <!--上传图片-->
@@ -21,7 +21,7 @@
             <div class="shang-tu">上传截图</div>
         </div>
 
-        <div class="yijian-tij">
+        <div class="yijian-tij" @click="submit">
             提交
         </div>
     </div>
@@ -29,15 +29,32 @@
 <script>
 import { Switch, Toast } from 'mint-ui'
 import { Popup } from 'mint-ui'
+import { mapActions } from 'vuex'
 
 export default {
   data () {
     return {
-      fankuiwenzi: 0
-
+      fankuiwenzi: 0,
+      feedbackData: {
+        content: '',
+        contact: '',
+        feed_type: '',
+        img: ''
+      }
     }
   },
   methods: {
+    ...mapActions(['feedback']),
+    submit () {
+      this.feedback({
+        content: this.feedbackData.content,
+        contact: this.feedbackData.contact,
+        feed_type: this.feedbackData.feed_type,
+        img: this.feedbackData
+      }).then(res => {
+        console.log(res)
+      })
+    },
     goyijianqian () {
       this.$router.back(-1)
     },

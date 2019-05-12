@@ -239,14 +239,17 @@ export default {
     .wode-head{
         justify-content: space-between;
         background-color: #FFFFFF;
-        width: 100%;
+        /* width: 100%; */
         /* border:1px solid black; */
         position:absolute;
         top:3.9375rem /* 63/16 */;
+        left: 0;
+        right: 0;
         height: 6.1875rem /* 99/16 */;
         border-radius: .625rem /* 10/16 */;
         display:flex;
         align-items: center;
+        margin: 0 15px;
     }
     .wode-head div{
         display: inline-flex;

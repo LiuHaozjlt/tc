@@ -43,8 +43,8 @@ export default {
     }
   },
   mounted () {
-    // console.log(this.lang)
     this.tolang = this.lang
+    console.log(this.$i18n)
   },
   methods: {
     ...mapMutations(['setIsLaos']),
