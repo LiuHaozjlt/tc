@@ -170,6 +170,18 @@ export default {
     tuijiancont
   },
   methods: {
+    getData () {
+      console.log(12313)
+      let self = this
+      this.release_id = this.$route.query.user_release_id
+      this.getReleases({id: this.release_id}).then((data) => {
+        // console.log(data)
+        let res = data.data
+        if (res.error_code === 0) {
+          self.release = res.data
+        }
+      })
+    },
     bodaiphone () {
       window.location.href = 'tel:+10086'
     },
@@ -209,6 +221,10 @@ export default {
     getRelease () {
 
     }
+  },
+  watch: {
+    // 如果路由发生变化，再次执行该方法
+    '$route': 'getData'
   }
 }
 </script>
