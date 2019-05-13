@@ -238,6 +238,7 @@
 
 <script>
 import Vue from 'vue'
+import {wls} from '../../store/index'
 import {Switch, Toast} from 'mint-ui'
 // import yinyeimgs from '../../image/scsc'
 import { Popup } from 'mint-ui'
@@ -319,13 +320,15 @@ export default {
     },
 
     getguimo (a) {
+      let userinfo = wls.get('userInfo', {})
+      let token = userinfo.access_token
       // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
       this.axius({
         methods: 'post',
         url: '/apis/v1/seller/auth-info',
         data: {},
         headers: {
-          Authorization: 'Bearer ' + this.userInfo.access_token
+          Authorization: 'Bearer ' + token
         }
       }).then(p => {
         // debugger
@@ -335,13 +338,15 @@ export default {
       })
     },
     getxingzhi (b) {
+      let userinfo = wls.get('userInfo', {})
+      let token = userinfo.access_token
       // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
       this.axius({
         methods: 'post',
         url: 'apis/v1/seller/auth-info',
         data: {},
         headers: {
-          Authorization: 'Bearer ' + this.userInfo.access_token
+          Authorization: 'Bearer ' + token
         }
       }).then(p => {
         // debugger
@@ -354,13 +359,15 @@ export default {
       })
     },
     getindustry (c) {
+      let userinfo = wls.get('userInfo', {})
+      let token = userinfo.access_token
       // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
       this.axius({
         methods: 'post',
         url: 'apis/v1/seller/auth-info',
         data: {},
         headers: {
-          Authorization: 'Bearer ' + this.userInfo.access_token
+          Authorization: 'Bearer ' + token
         }
       }).then(p => {
         // debugger

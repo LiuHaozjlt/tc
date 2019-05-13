@@ -7,7 +7,7 @@
                 <!-- <div class="bianji-top"> -->
                 <div class="bianji-top-rit">
                     <div class="bianji-cet">
-                        <img :src="userInfo.headimgurl" alt="">
+                        <img :src="'http://info.00856.la'+userInfo.headimgurl" alt="">
                     </div>
                     <div class="bianji-you">
                          <img src="../../image/jiantoutou.png" alt="">
