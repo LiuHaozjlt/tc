@@ -38,6 +38,9 @@ export default {
 </script>
 
 <style>
+.mint-swipe{
+  height: 50%!important;
+}
 .slidejishu{
   font-size: .625rem /* 10/16 */;
   color:white;
