@@ -6,6 +6,7 @@
       <div></div>
     </div>
     <!-- <template> -->
+      <div class="wode-zhanghao-cont">
     <div class="wode-zhanghao" v-for="(item,index) in four" :key="index">
       <div class="zhanghao">
         <div class="zhanghao-shouji">{{item.text}}</div>
@@ -18,6 +19,7 @@
         {{huanbang}}
         <img src='../../image/jiantoutou.png'>
       </div>
+    </div>
     </div>
     <!-- </template> -->
   </div>
@@ -49,6 +51,9 @@ export default {
 </script>
 
 <style>
+.wode-zhanghao-cont{
+  padding:0 5%;
+}
 .wode-zhanghao-head{
 
 }
@@ -76,14 +81,6 @@ export default {
   background-color: #f5f5f5;
   height: 100%;
 }
-.wode-zhanghao-warp div:nth-child(2){
-  border-top-left-radius: 1.125rem /* 18/16 */;
-  border-top-right-radius: 1.125rem /* 18/16 */;
-}
-.wode-zhanghao-warp div:nth-child(5){
-  border-bottom-left-radius: 1.125rem /* 18/16 */;
-  border-bottom-right-radius: 1.125rem /* 18/16 */;
-}
 .huanb img {
   width: 0.5625rem /* 9/16 */;
   height: 1rem /* 16/16 */;
@@ -94,7 +91,7 @@ export default {
   background-color: white;
   display: flex;
   justify-content: space-between;
-  padding: 1.25rem /* 20/16 */ 0 1.25rem /* 20/16 */ 0;
+  padding:5%;
   border-bottom: 1px solid #E7E7E7;
 }
 .huanb {
@@ -117,5 +114,8 @@ export default {
   font-family: PingFang-SC-Bold;
   font-weight: bold;
   color: rgba(51, 51, 51, 1);
+  background-color: white;
+  margin-bottom: 5%;
+      padding: 0 4%;
 }
 </style>

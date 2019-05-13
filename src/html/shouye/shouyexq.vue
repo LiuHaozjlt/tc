@@ -33,7 +33,7 @@
             </div>
             <div class="shouyexq-cont-top-rit">
               <div></div>
-              <div class="shouyexq-cont-top-rit-time">时间</div>
+              <div class="shouyexq-cont-top-rit-time">{{release.created_time}}</div>
             </div>
           </div>
           <div class="shouyexq-cont-cent">
@@ -136,6 +136,7 @@ export default {
       list: [],
       release: {},
       imgUrl: require('../../image/baijiantou.png')
+
     }
   },
   created () {
@@ -202,7 +203,8 @@ export default {
       // let user_release_id = this.$route.query.user_release_id
     },
     goshouye () {
-      this.$router.back(-1)
+      // this.$router.back(-1)
+      this.$router.push({path: '/index'})
     },
     sendEvent () {
       // this.popupVisible4 = false
@@ -227,11 +229,12 @@ export default {
     '$route': 'getData'
   }
 }
+
 </script>
 
 <style scoped>
 .shouyexq-cont {
-  padding: 0 1.25rem;
+  padding: 0 4%;
 }
 .shouyexiangq-head-right-icon {
   display: flex;
@@ -315,6 +318,7 @@ export default {
 }
 .lianxidianhuawarp {
   padding-top: 10%;
+  padding-left: 5%;
 }
 .callfangshi {
   font-size: 1.0625rem /* 17/16 */;
@@ -325,7 +329,7 @@ export default {
 }
 .call {
   position: absolute;
-  right: 0;
+  right: 5%;
   width: 30%;
   border-radius: 0.875rem /* 14/16 */;
   background-color: #ffb31e;
@@ -351,8 +355,9 @@ export default {
   display: flex;
   align-items: center;
   position: fixed;
-  bottom: 2%;
+  bottom: 0%;
   width: 100%;
+  background-color: white;
 }
 .lianxifangs {
   width: 66%;
@@ -398,6 +403,7 @@ export default {
 .shouyexiangq-head-right img {
 }
 .shouyexiangq-head {
+  padding-top:5%;
   display: flex;
   justify-content: space-between;
 }

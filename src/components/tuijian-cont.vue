@@ -28,7 +28,8 @@
               class="rigt-wenzi"
               style="display:inline"
               :class="[typeId==1?'red':'']"
-            >{{item.created_time}}</div>
+
+            >{{item.created_time  | formatDate}}</div>
           </div>
         </div>
       </div>
@@ -38,6 +39,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import {formatDate} from '../js/date'
 
 export default {
   props: {
@@ -50,9 +52,10 @@ export default {
       default: 0
     }
   },
+
   data () {
     return {
-
+      // shijian: new Date()
     }
   },
   computed: {
@@ -75,6 +78,12 @@ export default {
   },
   created () {
     this.$store.dispatch('getRecommendList')
+  },
+  filters: {
+    formatDate (time) {
+      var date = new Date(time * 1000)
+      return formatDate(date, 'yyyy-MM-dd hh:mm')
+    }
   }
 }
 </script>

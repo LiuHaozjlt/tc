@@ -148,6 +148,7 @@ export default {
 <style>
     .wode-cent-bot-cont{
         height: 3.75rem /* 60/16 */;
+        padding: 0 5%;
     }
     .wode-ct-ic-left{
         display:flex;
@@ -250,6 +251,7 @@ export default {
         display:flex;
         align-items: center;
         margin: 0 15px;
+        padding:0 5%;
     }
     .wode-head div{
         display: inline-flex;
@@ -280,6 +282,7 @@ export default {
     .wode-cent{
         border-top: 1px solid #E1E1E1;
         border-bottom:1px solid #E1E1E1;
+        padding: 0 5%;
     }
     .wode-head-rit img{
         width:.5625rem /* 9/16 */;

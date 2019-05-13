@@ -41,6 +41,7 @@ export default {
     this.$store.dispatch('getNews').then(p => {
       this.article = p.data.data
       this.slideList = this.article.filter(item => item.is_recommend == 1).map(item => item.front_img)
+      this.slideList = this.slideList[0].split(',')
     })
   },
   components: {

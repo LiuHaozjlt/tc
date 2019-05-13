@@ -11,7 +11,7 @@
                     <div>{{item.text}}</div>
                     <img src="../../image/jiantoutou.png" alt="">
                 </div>
-              
+
             </div>
         </div>
 
@@ -35,7 +35,7 @@ export default {
     },
     tuichudl () {
       this.$store.commit('logout')
-      this.$router.push({path: '/dlu'})
+      this.$router.push({path: '/index'})
     },
     gopage (url) {
       this.$router.push({path: url})
@@ -75,7 +75,7 @@ export default {
         width:.625rem /* 10/16 */;
         height: 1.0625rem /* 17/16 */;
     }
-    
+
     .tuichudl{
         height: 2.25rem /* 36/16 */;
         border-radius: 1.125rem /* 18/16 */;

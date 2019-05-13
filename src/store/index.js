@@ -358,7 +358,7 @@ export default new Vuex.Store({
     },
 
     getSellerTypes ({commit}) {
-      console.log(getToken(), 123123)
+      // console.log(getToken(), 123123)
       return $http.get('/apis/v1/seller/get-seller-type', {headers: {'Authorization': getToken()}}).then(({data}) => {
         if (data.error_code === 0) {
           commit('saveSellerTypes', data.data || [])

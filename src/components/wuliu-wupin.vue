@@ -77,8 +77,7 @@ export default {
       this.wupindata = p.data.list
     //   console.log(this.wupindata);
     })
-
-    }
+  }
 }
 </script>
 

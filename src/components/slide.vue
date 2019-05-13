@@ -26,6 +26,7 @@ export default {
   data () {
     return {
       curSwiper: 1
+
     }
   },
   methods: {

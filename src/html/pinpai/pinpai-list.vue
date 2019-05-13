@@ -141,7 +141,9 @@ export default {
   align-items: center;
   border-bottom: 1px solid #f1f1f1;
   padding-bottom: 0.9375rem /* 15/16 */;
-  padding: 0 0.1rem;
+  padding-top:10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .gon-yuan {
   font-size: 0.6875rem /* 11/16 */;
@@ -167,7 +169,7 @@ export default {
 .pinpai-cent-bot {
   display: flex;
   justify-content: space-between;
-  padding: 0 0.3rem;
+ padding: 10px 10px;
 }
 .pinpai-content{
     margin-top: -28px;
