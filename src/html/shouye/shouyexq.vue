@@ -251,6 +251,9 @@ export default {
 </script>
 
 <style scoped>
+.mint-swipe{
+  height: 50%!important;
+}
 .shouyexiangq-content{
   padding: 0 14px;
 }
