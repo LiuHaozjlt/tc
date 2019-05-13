@@ -31,7 +31,7 @@
         <div class="shouyexiangq-content">
           <div class="shouyexq-cont-top">
             <div class="shouyexq-cont-top-lef">
-              <img :src="release.user.headimgurl" alt>
+              <img :src="release.user.headimgurl" alt :onerror="imgUrl">
               <div class="shouyexq-top-lef">{{release.user.nickname}}</div>
             </div>
             <div class="shouyexq-cont-top-rit">
