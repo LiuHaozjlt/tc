@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <div style="position: relative;">
             <mt-swipe :auto="4000" @change="handleChange">
                 <mt-swipe-item v-for="item in list" :key="item">

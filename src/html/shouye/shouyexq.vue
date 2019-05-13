@@ -23,17 +23,20 @@
           </div>
         </div>
         <!--轮播内容-->
-        <!-- <lunbo></lunbo> -->
+        <div class="slide-cont" style=" ">
+            <slide :list="slideList"></slide>
+        </div>
+
         <!--首页详情内容-->
         <div class="shouyexiangq-content">
           <div class="shouyexq-cont-top">
             <div class="shouyexq-cont-top-lef">
-              <img :src="'http://info.00856.la'+release.img" alt>
-              <div class="shouyexq-top-lef">{{release.title}}</div>
+              <img :src="release.user.headimgurl" alt>
+              <div class="shouyexq-top-lef">{{release.user.nickname}}</div>
             </div>
             <div class="shouyexq-cont-top-rit">
               <div></div>
-              <div class="shouyexq-cont-top-rit-time">{{release.created_time}}</div>
+              <div class="shouyexq-cont-top-rit-time">{{release.created_time | formatDate}}</div>
             </div>
           </div>
           <div class="shouyexq-cont-cent">
@@ -41,6 +44,7 @@
             <div class="shouyexq-cont-cent-miaoxu"></div>
           </div>
           <div class="shouyexq-cont-cent-btm">
+            <div class="shouyexq-top-lef">{{release.title}}</div>
             <div class="shouyexq-btmjianjie">
               {{release.describe}}
               <!-- 本人是一位职业插画师，常年在国外发展，
@@ -124,9 +128,12 @@
 </template>
 <script>
 import liuyanlist from '../../components/liuyan-list'
-import lunbo from '../../components/slide'
+
 import { mapState, mapMutations, mapActions } from 'vuex'
 import tuijiancont from '../../components/tuijian-cont'
+import slide from '../../components/slide'
+import {formatDate} from '../../js/date'
+
 export default {
   name: 'Picker',
   data () {
@@ -135,10 +142,12 @@ export default {
       popupVisible4: false,
       list: [],
       release: {},
-      imgUrl: require('../../image/baijiantou.png')
+      imgUrl: require('../../image/baijiantou.png'),
+      slideList: []
 
     }
   },
+
   created () {
     this.lianggezhi()
     this.release_id = this.$route.query.user_release_id
@@ -148,9 +157,18 @@ export default {
       let res = data.data
       if (res.error_code === 0) {
         self.release = res.data
+        self.release.pics.forEach((e) => {
+          self.slideList.push(e.img)
+        })
       }
     })
     // console.log(this.$router.user_release_id)
+  },
+  filters: {
+    formatDate (time) {
+      var date = new Date(time * 1000)
+      return formatDate(date, 'yyyy-MM-dd hh:mm')
+    }
   },
   mounted () {
     this.sendEvent()
@@ -167,12 +185,12 @@ export default {
   },
   components: {
     liuyanlist,
-    lunbo,
-    tuijiancont
+
+    tuijiancont,
+    slide
   },
   methods: {
     getData () {
-      console.log(12313)
       let self = this
       this.release_id = this.$route.query.user_release_id
       this.getReleases({id: this.release_id}).then((data) => {
@@ -233,8 +251,11 @@ export default {
 </script>
 
 <style scoped>
+.shouyexiangq-content{
+  padding: 0 14px;
+}
 .shouyexq-cont {
-  padding: 0 4%;
+  /* padding: 0 4%; */
 }
 .shouyexiangq-head-right-icon {
   display: flex;
@@ -242,11 +263,12 @@ export default {
   justify-content: center;
 }
 .liulankanguo {
-  padding: 12% 0;
+  padding: 3% 0;
   font-size: 0.8125rem /* 13/16 */;
   font-family: PingFang-SC-Regular;
   font-weight: 400;
   color: rgba(153, 153, 153, 1);
+      margin-left: 10px;
 }
 .shouyexq-dingwei-icon {
   display: flex;
@@ -358,6 +380,7 @@ export default {
   bottom: 0%;
   width: 100%;
   background-color: white;
+  margin-left: 14px;
 }
 .lianxifangs {
   width: 66%;
@@ -403,9 +426,14 @@ export default {
 .shouyexiangq-head-right img {
 }
 .shouyexiangq-head {
-  padding-top:5%;
+
   display: flex;
   justify-content: space-between;
+  position: absolute;
+  top: 2%;
+  z-index: 99999;
+  width: 100%;
+  padding: 0 10px;
 }
 .shouyexiangq-head-left,
 .shouyexiangq-head-right {

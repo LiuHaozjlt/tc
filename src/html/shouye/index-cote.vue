@@ -75,6 +75,7 @@ import tuijiancont from '../../components/tuijian-cont'
 import Vue from 'vue'
 import { Swipe, SwipeItem } from 'vant'
 import { mapState, mapGetters } from 'vuex'
+
 // import api from '../../api/api'
 Vue.use(Swipe).use(SwipeItem)
 export default {
