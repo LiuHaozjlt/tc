@@ -28,7 +28,7 @@
         <div class="shouyexiangq-content">
           <div class="shouyexq-cont-top">
             <div class="shouyexq-cont-top-lef">
-              <img :src="release.imgSrc" alt>
+              <img :src="'http://info.00856.la'+release.img" alt>
               <div class="shouyexq-top-lef">{{release.title}}</div>
             </div>
             <div class="shouyexq-cont-top-rit">
@@ -61,8 +61,8 @@
         <!--浏览过改信息的人-->
         <div class="liulanguoderen">
           <div class="liulankanguo">浏览过该信息的人还看过</div>
-          <div>
-            {{indexData}}
+          <div class="liulan-list">
+              <tuijiancont></tuijiancont>
           </div>
         </div>
       </div>
@@ -97,17 +97,17 @@
       <div class="lianxidianhuawarp">
         <div class="lianxidianhua-bot">
           <img src="../../image/dianhua (1).png" alt>
-          <div class="callfangshi">15074826496</div>
+          <div class="callfangshi">{{release.mobile}}</div>
           <div class="call" @click="bodaiphone">拨打电话</div>
         </div>
         <div class="lianxidianhua-bot">
           <img src="../../image/weixin.png" alt>
-          <div class="callfangshi">15074826496</div>
+          <div class="callfangshi">{{release.weixin_id}}</div>
           <div class="call">复制</div>
         </div>
         <div class="lianxidianhua-bot">
           <img src="../../image/youjian.png" alt>
-          <div class="callfangshi">1275031970@qq.com</div>
+          <div class="callfangshi">{{release.email}}</div>
           <div class="call">复制</div>
         </div>
       </div>
@@ -126,6 +126,7 @@
 import liuyanlist from '../../components/liuyan-list'
 import lunbo from '../../components/slide'
 import { mapState, mapMutations, mapActions } from 'vuex'
+import tuijiancont from '../../components/tuijian-cont'
 export default {
   name: 'Picker',
   data () {
@@ -146,14 +147,12 @@ export default {
       let res = data.data
       if (res.error_code === 0) {
         self.release = res.data
-        console.log(self.release)
       }
     })
     // console.log(this.$router.user_release_id)
   },
   mounted () {
     this.sendEvent()
-    console.log(this.list)
   },
   computed: {
     img () {
@@ -167,7 +166,8 @@ export default {
   },
   components: {
     liuyanlist,
-    lunbo
+    lunbo,
+    tuijiancont
   },
   methods: {
     bodaiphone () {

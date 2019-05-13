@@ -79,10 +79,12 @@ export default {
   }
 }
 </script>
-<style scope>
+
+<style>
+/*
 .dianzan img {
   width: 10%;
-  height: 0.75rem /* 12/16 */;
+  height: 0.75rem ;
   border: 1px solid red;
 }
 .rigt-wenzi {
@@ -92,12 +94,12 @@ export default {
   color: red;
 }
 .rigt-ft {
-  font-size: 0.6875rem /* 11/16 */;
+  font-size: 0.6875rem ;
   color: #b16800;
 }
 .shouYe-cent-left div img {
   display: inline-block;
   width: 100%;
-  height: 4.625rem /* 58/16 */;
-}
+  height: 4.625rem ;
+}*/
 </style>

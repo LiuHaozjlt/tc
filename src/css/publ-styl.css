@@ -8,3 +8,75 @@ body{
     font-weight: 200;
     color: rgba(51, 51, 51, 1);
 }
+/*推荐下面的产品列表样式*/
+.dianzan img {
+  width: 10%;
+  height: 0.75rem ;
+  border: 1px solid red;
+}
+.rigt-wenzi {
+  color: #333333;
+}
+.red {
+  color: red;
+}
+.rigt-ft {
+  font-size: 0.6875rem ;
+  color: #b16800;
+}
+.shouYe-cent {
+  display: flex;
+  border-bottom: 1px solid #ededed;
+  /* border: 1px solid red; */
+  padding: 1.25rem 1rem;
+}
+.shouYe-rigt-top {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  height: 1.8125rem /* 29/16 */;
+}
+.shouYe-cent-rigt {
+  margin-left: 3%;
+  width: 70%;
+  line-height: 0.875rem /* 14/16 */;
+}
+.shouYe-cent-rigt > span {
+  display: inline-block;
+}
+
+.shouYe-cent-rigt > span:nth-child(2) {
+  width: 100%;
+  text-align: right;
+}
+.shouYe-rigt-bot {
+  display: flex;
+  justify-content: space-between;
+}
+.rigt-wenzi {
+  font-size: 0.8125rem /* 13/16 */ /* 13/16 */;
+  font-family: PingFang-SC-Regular;
+  font-weight: 400;
+  color: rgba(153, 153, 153, 1);
+}
+.rigt-wenzi img {
+  margin-right: 0.1875rem /* 3/16 */;
+}
+.shouYe-nav-warp {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  background-color: #f8f8f8;
+}
+.checkRoute {
+  color: red !important;
+}
+.shouYe-cent-left div img {
+  display: inline-block;
+  width: 100%;
+  height: 4.625rem ;
+}
