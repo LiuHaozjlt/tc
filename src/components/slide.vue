@@ -2,8 +2,8 @@
     <div>
         <div style="position: relative;">
             <mt-swipe :auto="4000" @change="handleChange">
-                <mt-swipe-item v-for="item in list" :key="item">
-                  <img :src="'http://info.00856.la'+item" alt="">
+                <mt-swipe-item v-for="item in slideList" :key="item">
+                  <img :src="item" alt="">
                 </mt-swipe-item>
             </mt-swipe>
             <div v-show="list.length > 0" class="slidejishu">
@@ -25,7 +25,13 @@ export default {
   data () {
     return {
       curSwiper: 1
-
+    }
+  },
+  computed: {
+    slideList () {
+      return this.list.map((e) => {
+        return e.indexOf('http') < 0 ? 'http://info.00856.la' + e : e
+      })
     }
   },
   methods: {

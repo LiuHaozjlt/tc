@@ -82,7 +82,7 @@ export default {
   filters: {
     formatDate (time) {
       var date = new Date(time * 1000)
-      return formatDate(date, 'yyyy-MM-dd hh:mm')
+      return formatDate(date, 'yyyy-MM-dd')
     }
   }
 }

@@ -118,10 +118,10 @@
     </mt-popup>
 
     <div class="liuyang">
-      <div class="liuyan-icon">
+      <!-- <div class="liuyan-icon">
         <img src="../../image/liuyan.png" alt>
         <div class="ly" @click="popup4">留言</div>
-      </div>
+      </div> -->
       <div class="lianxifangs" @click="popup5">联系方式</div>
     </div>
   </div>
@@ -167,7 +167,7 @@ export default {
   filters: {
     formatDate (time) {
       var date = new Date(time * 1000)
-      return formatDate(date, 'yyyy-MM-dd hh:mm')
+      return formatDate(date, 'yyyy-MM-dd')
     }
   },
   mounted () {
@@ -251,6 +251,9 @@ export default {
 </script>
 
 <style scoped>
+.shouyexq-cont-top-rit{
+  width:30%;
+}
 
 .shouyexiangq-content{
   padding: 0 14px;
@@ -382,6 +385,7 @@ export default {
   width: 100%;
   background-color: white;
   margin-left: 14px;
+  justify-content: space-evenly;
 }
 .lianxifangs {
   width: 66%;
