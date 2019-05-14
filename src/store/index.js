@@ -5,13 +5,27 @@ import axios from 'axios'
 import { api } from '@/api/api'
 // eslint-disable-next-line no-unused-vars
 import router from '@/router'
+// import {Toast} from 'vant'
 Vue.use(Vuex)
 
+let $http = null
+
 function updateRequst (token) {
-  return axios.create({
+  $http = axios.create({
     headers: {
       'Authorization': 'Bearer ' + token
     }
+  })
+  $http.interceptors.response.use(function (response) {
+    if (response.data && response.data.error_code === 401) {
+      router.push('/dlu?redirect=' + router.currentRoute.fullpath)
+      // Toast('请登录')
+      return response
+    }
+    return response
+  }, function (error) {
+    // Do something with response error
+    return Promise.reject(error)
   })
 }
 function getToken () {
@@ -41,7 +55,7 @@ let accessUserInfo = wls.get('userInfo')
 // 设置token
 let token = accessUserInfo ? accessUserInfo.access_token : ''
 
-let $http = updateRequst(token)
+updateRequst(token)
 // let token = 'jZvklXi8H9t('userInfo')
 // let token = ''bs2bK9tBYYAoI19bjzAwU3_1556267215'
 // let userInfos = wls.ge
@@ -99,6 +113,9 @@ export default new Vuex.Store({
     indexData (state) {
       let data = wls.get('indexData') || []
       return state.indexData.length === 0 ? data : state.indexData
+    },
+    isLogin (state) {
+      return !!state.userInfo.access_token
     }
   },
   mutations: {

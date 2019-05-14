@@ -2,7 +2,7 @@
   <div>
       <div class="fabuyuand">
 
-      <router-link tag='div' :to="'/fabuuser?releaseTypeId=' + item.module_id" v-for="(item,index) in menuData" :key="index" class="routerItem">
+      <router-link tag='div' :to="'/fabuuser?releaseTypeId=' + item.module_id" v-for="(item,index) in publishTypes" :key="index" class="routerItem">
         <!-- 跳到个人发布的页面 /fabupeop相应调整 -->
          <div class="fabu-cent">
            <img  :src="'http://info.00856.la'+item.icon" style="width:65px;height:50px">
@@ -14,13 +14,17 @@
   </div>
 </template>
 <script>
-import {mapState} from 'vuex'
+import {mapState, mapGetters} from 'vuex'
 export default {
   computed: {
-    ...mapState(['menuData', 'isPersonal'])
+    ...mapState(['menuData', 'isPersonal']),
+    ...mapGetters(['isLogin']),
+    publishTypes () {
+      return this.isPersonal ? this.menuData.filter(item => item.module_id !== 8) : this.menuData
+    }
   },
   created () {
-    if (!this.isPersonal) {
+    if (!this.isPersonal || !this.isLogin) {
       this.$router.replace('/fabupeop') // 商家发布直接跳过去发布页
     }
   }

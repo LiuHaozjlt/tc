@@ -144,12 +144,14 @@ const router = new Router({
     {
       path: '/wodejifmix',
       name: 'wodejifmix',
-      component: wodejifmix
+      component: wodejifmix,
+      meta
     },
     {
       path: '/wodejubxq',
       name: 'wodejubxq',
-      component: wodejubxq
+      component: wodejubxq,
+      meta
     },
     {
       path: '/wodeyijian',
@@ -164,12 +166,14 @@ const router = new Router({
     {
       path: '/wodexiugai',
       name: 'wodexiugai',
-      component: wodexiugai
+      component: wodexiugai,
+      meta
     },
     {
       path: '/wodezhanghao',
       name: 'wodezhanghao',
-      component: wodezhanghao
+      component: wodezhanghao,
+      meta
     },
     {
       path: '/wodeshezhi',
@@ -179,7 +183,8 @@ const router = new Router({
     {
       path: '/wodexuanzelei',
       name: 'wodexuanzelei',
-      component: wodexuanzelei
+      component: wodexuanzelei,
+      meta
     },
     // {
     //   path: '/wodeguanyu',
@@ -189,22 +194,26 @@ const router = new Router({
     {
       path: '/wodeguanyu',
       name: 'wodeguanyu',
-      component: wodeguanyu
+      component: wodeguanyu,
+      meta
     },
     {
       path: '/wodezhid',
       name: 'wodezhid',
-      component: wodezhid
+      component: wodezhid,
+      meta
     },
     {
       path: '/fabupeop',
       name: 'fabupeop',
-      component: fabupeop
+      component: fabupeop,
+      meta
     },
     {
       path: '/fabuuser',
       name: 'fabuuser',
-      component: fabuuser
+      component: fabuuser,
+      meta
     },
     {
       path: '/newxiangqin',
@@ -285,7 +294,8 @@ const router = new Router({
         {
           path: 'wodeele',
           name: 'wodeele',
-          component: wodeele
+          component: wodeele,
+          meta
         },
 
         {
