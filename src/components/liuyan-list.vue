@@ -2,7 +2,7 @@
     <div>
         <div class="pinglun" v-for="item in list" :key="item.id" >
             <div class="pinlun-lf">
-            <img src alt>
+            <img :src="item.headimg">
             </div>
             <div class="pinlun-cent-warp">
             <div class="pinlun-cent-cont">

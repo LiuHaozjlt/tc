@@ -48,10 +48,6 @@
             <div class="shouyexq-top-lef">{{release.title}}</div>
             <div class="shouyexq-btmjianjie">
               {{release.describe}}
-              <!-- 本人是一位职业插画师，常年在国外发展，
-              办过自己的画展开过课，这套插画是纪念站酷10周年的时候原创的耗时半年
-              ，灵感来源于80年代森女系风格，目前已商用并反响很好，
-              因为留学需要经费只能忍痛割爱出售这套得意之作的版权，留给有缘人 -->
             </div>
           </div>
 
@@ -73,10 +69,10 @@
       </div>
     </div>
     <!-- <mt-button size="large" >下侧弹出Popup</mt-button> -->
-    <mt-popup v-model="popupVisible4" position="bottom" class="mint-popup-4">
-      <div class="header" @click="popupVisible4=false">
+    <!-- <mt-popup v-model="popupVisible4" position="bottom" class="mint-popup-4"  > -->
+      <!-- <div class="header" @click="popupVisible4=false">
         <img src alt>
-      </div>
+      </div> -->
       <!-- <div class="liangju">说两局在走</div>
        <div class="body liuyan-cent">
          <br>
@@ -85,20 +81,20 @@
          <img src="" alt="">
       </div>-->
 
-      <div class="liuyan-item">
+      <!-- <div class="liuyan-item"> -->
         <!--留言列表-->
-        <liuyanlist :list="list"></liuyanlist>
-      </div>
+        <!-- <liuyanlist :list="list"></liuyanlist>
+      </div> -->
       <!-- <mt-button class="bottom" @click="sendEvent" size="large" type="primary">
         <div class="kan-liu">
           <input type="text" placeholder="看对眼就留言，问问更多细节~">
           <div style="color:black;">发送</div>
         </div>
-      </mt-button>-->
-    </mt-popup>
+      </mt-button> -->
+    <!-- </mt-popup> -->
 
     <!--联系电话弹窗-->
-    <mt-popup v-model="popupVisible5" position="bottom" class="mint-popup-5">
+    <van-popup v-model="show"  position="bottom" :overlay="true" class="mint-popup-5">
       <div class="lianxidianhuawarp">
         <div class="lianxidianhua-bot">
           <img src="../../image/dianhua (1).png" alt>
@@ -116,35 +112,39 @@
           <div class="call">复制</div>
         </div>
       </div>
-    </mt-popup>
-
+    </van-popup>
     <div class="liuyang">
       <!-- <div class="liuyan-icon">
         <img src="../../image/liuyan.png" alt>
         <div class="ly" @click="popup4">留言</div>
       </div> -->
       <div class="lianxifangs" @click="popup5">联系方式</div>
+
     </div>
   </div>
 </template>
 <script>
+import Vue from 'vue'
 import liuyanlist from '../../components/liuyan-list'
-
 import { mapState, mapMutations, mapActions } from 'vuex'
 import tuijiancont from '../../components/tuijian-cont'
 import slide from '../../components/slide'
 import {formatDate} from '../../js/date'
+import { Popup } from 'vant'
+
+Vue.use(Popup)
 
 export default {
   name: 'Picker',
   data () {
     return {
       popupVisible5: false,
-      popupVisible4: false,
+      // popupVisible4: false,
       list: [],
       release: {},
       imgUrl: require('../../image/baijiantou.png'),
-      slideList: []
+      slideList: [],
+      show: false
 
     }
   },
@@ -172,7 +172,7 @@ export default {
     }
   },
   mounted () {
-    this.sendEvent()
+    // this.sendEvent()
   },
   computed: {
     img () {
@@ -190,6 +190,7 @@ export default {
     slide
   },
   methods: {
+
     getData () {
       let self = this
       this.release_id = this.$route.query.user_release_id
@@ -224,19 +225,21 @@ export default {
       // this.$router.back(-1)
       this.$router.push({path: '/index'})
     },
-    sendEvent () {
-      // this.popupVisible4 = false
-      this.false = true
-      this.list.push({
-        id: this.list.length + 1,
-        content: new Date().toLocaleString()
-      })
-    },
-    popup4 () {
-      this.popupVisible4 = true
-    },
+    // sendEvent () {
+    //   this.popupVisible4 = false
+    //   this.false = true
+    //   this.list.push({
+    //     id: this.list.length + 1,
+    //     content: new Date().toLocaleString()
+    //   })
+    // },
+    // popup4 () {
+    //   // this.popupVisible4 = false
+    //   this.true = false
+    // },
     popup5 () {
-      this.popupVisible5 = true
+      // debugger
+      this.show = true
     },
     getRelease () {
 
@@ -251,6 +254,7 @@ export default {
 </script>
 
 <style scoped>
+
 .shouyexq-cont-top-rit{
   width:30%;
 }
