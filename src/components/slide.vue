@@ -44,6 +44,10 @@ export default {
 </script>
 
 <style>
+.mint-swipe-item  img{
+  width:100%;
+  height: 100%;
+}
 .mint-swipe{
   height: 50%!important;
 }
