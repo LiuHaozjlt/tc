@@ -31,7 +31,8 @@
         <div class="shouyexiangq-content">
           <div class="shouyexq-cont-top">
             <div class="shouyexq-cont-top-lef">
-              <img :src="release.user.headimgurl ? release.user.headimgurl : 'imgUrl' " alt  >
+             <!-- release.user.headimgurl.indexOf('http')>-1?release.user.headimgurl: 'http://info.00856.la'+release.user.headimgurl -->
+              <img :src="release.user.headimgurl.indexOf('http')>-1?release.user.headimgurl: 'http://info.00856.la'+release.user.headimgurl " alt  >
               <div class="shouyexq-top-lef">{{release.user.nickname}}</div>
             </div>
             <div class="shouyexq-cont-top-rit">
@@ -185,7 +186,6 @@ export default {
   },
   components: {
     liuyanlist,
-
     tuijiancont,
     slide
   },
@@ -201,9 +201,9 @@ export default {
         }
       })
     },
-    bodaiphone () {
-      window.location.href = 'tel:+10086'
-    },
+    // bodaiphone () {
+    //   window.location.href = 'tel:+10086'
+    // },
     ...mapActions(['getReleases', 'sellerReleaseCollect']),
     report () {
       this.$router.push('/wodeyijian')
