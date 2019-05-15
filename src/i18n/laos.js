@@ -5,6 +5,9 @@ export default {
   // },
 
   // 老挝翻译
+  'prices': '价格',
+  'rent_decoration_id': '装修',
+  'rent_hall_id': '户型',
   '首页': 'ໜ້າທຳອິດ',
   '新闻': 'ຂ່າວ',
   '发布': 'ໂພຣດ',

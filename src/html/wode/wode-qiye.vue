@@ -321,13 +321,11 @@ export default {
       this.zhizhaodivs = true
       this.zhizhao = false
       this.yingyezz = this.shenghez
-      // this.$router.push({path: '/index/wodeele'})
     },
 
     getguimo (a) {
       let userinfo = wls.get('userInfo', {})
       let token = userinfo.access_token
-      // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
       this.axius({
         methods: 'post',
         url: '/apis/v1/seller/auth-info',
@@ -336,7 +334,6 @@ export default {
           Authorization: 'Bearer ' + token
         }
       }).then(p => {
-        // debugger
         this.popupVisible = true
         this.guimo = p.data.data.size
         this.nowIndex = 0
@@ -345,7 +342,7 @@ export default {
     getxingzhi (b) {
       let userinfo = wls.get('userInfo', {})
       let token = userinfo.access_token
-      // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
+
       this.axius({
         methods: 'post',
         url: 'apis/v1/seller/auth-info',

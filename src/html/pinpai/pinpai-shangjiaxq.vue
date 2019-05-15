@@ -198,6 +198,7 @@ export default {
         }
 
         let { SellerReleaseInfo, SellerInfo, SellerSearchInfo } = data.data
+        console.log(data.data)
 
         this.releaseList = SellerReleaseInfo
 

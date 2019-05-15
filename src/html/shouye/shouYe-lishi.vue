@@ -15,6 +15,7 @@
       </div>
       <div class="lishi-sou" v-if="queryHistory.length > 0">
         <p>历史搜索</p>
+        ssssssssssssssssssssss{{index}}
         <div>
           <p
             class="lishi"

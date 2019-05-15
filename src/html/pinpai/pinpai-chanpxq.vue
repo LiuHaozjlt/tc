@@ -28,7 +28,7 @@
           <div class="di-z">
             <img src="../../image/dizhi.png" alt>
           </div>
-          <div class="hu-lou">湖南长沙雨花区金鸿宇大厦14楼</div>
+          <div class="hu-lou">{{data.address}}</div>
         </div>
         <div class="kip-yue">{{data.prices}}KIP/月</div>
         <div class="fang-xiu">

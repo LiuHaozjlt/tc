@@ -1,6 +1,9 @@
 export default {
 
   // 默认中文
+  'prices': '价格',
+  'rent_decoration_id': '装修',
+  'rent_hall_id': '户型',
   '首页': '首页',
   '新闻': '新闻',
   '发布': '发布',

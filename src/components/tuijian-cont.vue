@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <template v-for="(item, index) in indexData">
         <!--有图片显示的div-->
       <div

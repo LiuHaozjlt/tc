@@ -105,6 +105,8 @@ export default {
   font-weight: 400;
   color: rgba(177, 104, 0, 1);
   background-color: #ffc74d;
+  height: 1rem /* 16/16 */;
+  line-height: 1rem /* 16/16 */
 }
 .pinpaishop {
 
