@@ -60,7 +60,7 @@
       <mt-popup v-model="popupVisible" position="bottom" class="guimo" :class="[nowIndex == 1 ? 'hangyegaodu' :'']">
         <div>
           <div class="qiyequque">
-            <div>取消</div>
+            <div @click="qinxiao">取消</div>
             <div @click="qinxuanze">确定</div>
           </div>
         </div>
@@ -290,6 +290,11 @@ export default {
         }
       })
     },
+    /* 取消 */
+    qinxiao () {
+      this.popupVisible = false
+    },
+    /* 确定 */
     qinxuanze () {
       this.twre[this.nowIndex].val = this.guimo[this.checkid].name
       this.popupVisible = false

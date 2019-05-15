@@ -8,13 +8,15 @@
                 <div class="wode-tongzhi-head"></div>
             </div>
             <div>
-                <div class="ning-ba">
+                <div class="ning-ba" v-for="(item,index) in tongzhi" :key="index">
+                  <!-- {{item}} -->
                     <div>
-                        <div class="ning-la">您的评论被赞啦！</div>
+                        <div class="ning-la">{{item.title}}</div>
                         <div><img src="" alt=""></div>
                     </div>
                     <div class="shi-ba">
-                        [<div>4</div>个新的赞]有人觉得您的评论非常精彩！快去看看吧！
+                        <!-- [<div>4</div>个新的赞]有人觉得您的评论非常精彩！快去看看吧！ -->
+                        {{item.content}}
                     </div>
                 </div>
             </div>
@@ -35,7 +37,7 @@ export default {
     this.$store
       .dispatch('getNotice')
       .then(({ data }) => {
-        console.log('通知', data)
+
       })
   },
   methods: {
@@ -45,8 +47,9 @@ export default {
     gettongzhi () {
       let userinfo = wls.get('userInfo', {})
       let token = userinfo.access_token
+
       let me = this
-      // let token = 'jZvklXi8H9bs2bK9tBYYAoI19bjzAwU3_1556267215'
+
       me.axius({
         methods: 'get',
         url: 'apis/v1/user/notice',
@@ -56,8 +59,7 @@ export default {
           'Authorization': 'Bearer ' + token
         }
       }).then(p => {
-        this.tongzhi = p.data.data
-        console.log(this.tongzhi)
+        me.tongzhi = p.data.data
       })
     }
   }

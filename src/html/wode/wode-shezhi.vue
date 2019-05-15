@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <div class="tuichudl" @click="tuichudl" v-if="isLogin">
+        <div class="tuichudl" @click="tuichudl"  >
             退出登录
         </div>
     </div>

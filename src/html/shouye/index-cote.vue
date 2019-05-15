@@ -332,6 +332,7 @@ export default {
 .shouYe-rigt-bot {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .rigt-wenzi {
   font-size: 0.8125rem /* 13/16 */ /* 13/16 */;

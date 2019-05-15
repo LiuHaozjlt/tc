@@ -17,15 +17,15 @@
               <div class="chanpinlist-rit">
                   <div class="chanpinlisttitle">{{isLaos ? item.title_la : item.title}}</div>
                   <div class="fabu-rit-cent">
-                    <img src="../../image/zuojiantou.png" alt="">
+                    <img src="../../image/sc-s.png" alt="">
                     <div class="shishan">123</div>
                   </div>
                   <div class="fabu-rit-bot">
                     <div class="fabu-rit-cent">
-                      <img src="../../image/zuojiantou.png" alt="">
+                      <img src="../../image/liu.png" alt="">
                       <div class="shishan">123</div>
                     </div>
-                    <div class="fabuyu">发布于：{{item.created_time}}</div>
+                    <div class="fabuyu">发布于：{{item.created_time | formatDate}}</div>
                   </div>
               </div>
 
@@ -63,6 +63,7 @@
 <script>
 import {mapState} from 'vuex'
 import {Toast} from 'vant'
+import {formatDate} from '../../js/date'
 export default {
   data () {
     return {
@@ -152,6 +153,12 @@ export default {
   },
   created () {
     this.getReleases()
+  },
+  filters: {
+    formatDate (time) {
+      var date = new Date(time * 1000)
+      return formatDate(date, 'yyyy-MM-dd')
+    }
   }
 }
 </script>
@@ -197,7 +204,7 @@ export default {
 font-family:PingFang-SC-Regular;
 font-weight:400;
 color:rgba(153,153,153,1);
-margin-left: 5%;
+
 }
 .fabu-rit-bot{
   display: flex;
@@ -210,7 +217,7 @@ margin-left: 5%;
 }
 .fabu-rit-cent img{
   width:.8125rem /* 13/16 */;
-  height: .875rem /* 14/16 */;
+
 }
 .xin-yan{
   display:flex;

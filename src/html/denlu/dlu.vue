@@ -42,7 +42,7 @@ export default {
       if (type === 'forget') {
         this.isForget = false
       } else if (type === 'login') {
-        this.$router.back()
+        this.$router.push('/')
       }
     },
     login () {

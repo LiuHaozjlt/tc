@@ -1,15 +1,15 @@
 <template>
-    <div>
-        <div class="pinglun" v-for="item in list" :key="item.id" >
+    <div class="pinlun-cont">
+        <div class="pinglun" v-for="item in list" :key="item.id">
             <div class="pinlun-lf">
             <img :src="item.headimg">
             </div>
             <div class="pinlun-cent-warp">
             <div class="pinlun-cent-cont">
-                <div class="pinlun-cent-top">燃烧的信息</div>
+                <div class="pinlun-cent-top">{{item.user_nickname}}</div>
                 <div class="pinlun-cent-cent">{{ item.content }}</div>
                 <div class="fenz-hui">
-                <div>1分钟</div>
+                <div>{{item.create_time}}</div>
                 <div @click="$router.push('/pinlunxiangq?count=' + item.reply_counts)">回复</div>
                 </div>
             </div>
@@ -48,6 +48,13 @@ export default {
 </script>
 
 <style>
+.xiao-guan{
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.pinlun-cont{
+  padding:0 1rem;
+}
 .liuyan-list{
   padding-bottom: 100%;
 }
@@ -119,6 +126,7 @@ export default {
 .pinlun-lf img {
   width: 2.25rem /* 36/16 */;
   height: 2.25rem /* 36/16 */;
+  border-radius: 100%;
   /* border: 1px solid red; */
 }
 .wu-henxian {

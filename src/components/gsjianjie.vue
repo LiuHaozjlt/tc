@@ -46,7 +46,7 @@ export default {
 }
 .gsjianjie{
     padding-top:5%;
-    height: 21%;
+    /* height: 21%; */
     overflow: hidden;
 }
 .cha-bu{

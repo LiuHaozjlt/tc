@@ -17,7 +17,7 @@
               <img src="../../image/fx.png" alt>
             </div>-->
             <!--我的举报-->
-            <div class="shouyexiangq-head-right-icon" @click="report()">
+            <div class="shouyexiangq-head-right-icon" @click="report">
               <img src="../../image/jubao (2).png" alt>
             </div>
           </div>
@@ -99,7 +99,7 @@
         <div class="lianxidianhua-bot">
           <img src="../../image/dianhua (1).png" alt>
           <div class="callfangshi">{{release.mobile}}</div>
-          <div class="call" @click="bodaiphone">拨打电话</div>
+          <div class="call">拨打电话</div>
         </div>
         <div class="lianxidianhua-bot">
           <img src="../../image/weixin.png" alt>

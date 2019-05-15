@@ -321,7 +321,7 @@ export default {
 
 <style>
 .biaotizuo{
-  padding:0 1rem;
+  /* padding:0 1rem; */
 }
 .van-switch--on {
   background-color: #ffe9bf !important;

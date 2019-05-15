@@ -20,7 +20,7 @@
         <div
           v-for="release in item.SellerReleaseInfo"
           :key="release.seller_release_id"
-          @click="gochanpxiangq(item.SellerReleaseInfo.seller_release_id)"
+          @click="gochanpxiangq(release.seller_release_id)"
         >
           <div class="pinp-cent-top">{{release.title}}</div>
           <div class="kip">
@@ -45,15 +45,15 @@ export default {
     releaseTypeId: [String, Number]
   },
   data () {
+    this.units = {
+      1: '个热招职位',
+      2: '套房源',
+      3: '辆车',
+      4: '门热门课程',
+      5: '块地皮'
+    }
     return {
-      cache: {},
-      units: {
-        1: '个热招职位',
-        2: '套房源',
-        3: '辆车',
-        4: '门热门课程',
-        5: '块地皮'
-      }
+      cache: {}
     }
   },
   computed: {
@@ -74,8 +74,8 @@ export default {
     gopinpaishangjiaxq ({seller_id}) {
       this.$router.push({ path: '/pinpaishangjiaxq', query: {seller_id} })
     },
-    gochanpxiangq () {
-      this.$router.push({ path: '/pinpaichanpxq'})
+    gochanpxiangq (seller_release_id) {
+      this.$router.push({ path: '/pinpaichanpxq', query: {seller_release_id}})
     },
     getList () {
       if (this.cache[this.releaseTypeId]) return

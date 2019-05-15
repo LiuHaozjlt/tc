@@ -5,13 +5,18 @@
       <div class="pinpaishangjia-head" :style="{backgroundImage: `url(${sellerInfo.img})`}">
         <div>
           <div class="shangjiafanhui">
-            <img
-              src="../../image/zuojiantou.png"
+            <div class="shangjiazuo-left">
+                    <img
+              :src="imgUrl"
               alt
               class="shangjiafanghui-zuo shangjiazuo"
               @click="gowodeele"
             >
-            <img src="../../image/fx.png" alt class="shangjiafengx shangjiayou">
+            </div>
+            <div class="shangjiazuo-rit">
+               <img :src="fengxiangIcon" alt class="shangjiafengx shangjiayou">
+            </div>
+
           </div>
         </div>
 
@@ -27,7 +32,7 @@
     </div>
 
     <div class="tao-wu">
-      <div>{{releaseList.length || 0}}</div>套房屋
+      <div v-show="sellerInfo.release_type_id">{{releaseList.length || 0}}{{units[sellerInfo.release_type_id]}}</div>
     </div>
 
     <!--三个二级联动-->
@@ -119,7 +124,17 @@ import { Toast } from 'vant'
 
 export default {
   data () {
+    this.units = {
+      1: '个热招职位',
+      2: '套房源',
+      3: '辆车',
+      4: '门热门课程',
+      5: '块地皮'
+    }
     return {
+
+      fengxiangIcon: require('../../image/fenxiang.png'),
+      imgUrl: require('../../image/baijiantou.png'),
       fangyuantishi: false,
       jiaoyu: '',
       taoshu: '',
@@ -130,7 +145,7 @@ export default {
         region_lv3: '',
         page: 1
       },
-      xiazai: true,
+      xiazai: false,
       searchOptions: [],
       sellerType: '',
       releaseList: [],
@@ -218,6 +233,24 @@ export default {
 </script>
 
 <style>
+.shangjiazuo-rit{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:1.875rem /* 30/16 */;
+  height: 1.875rem /* 30/16 */;
+  background-color: #686b69;
+  border-radius: 100%;
+}
+.shangjiazuo-left{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:1.875rem /* 30/16 */;
+  height: 1.875rem /* 30/16 */;
+  border-radius: 100%;
+  background-color: #686b69;
+}
 .dianpu-logo img{
 
 }
@@ -228,8 +261,7 @@ export default {
   height: 30%;
 }
 .shangjiazuo {
-  width: 0.5625rem /* 9/16 */;
-  height: 0.9375rem /* 15/16 */;
+  width:1.0625rem /* 17/16 */;
 }
 .shangjiayou {
   width: 0.9375rem !important/* 15/16 */;
@@ -268,6 +300,7 @@ export default {
   justify-content: space-between;
   height: 2.75rem /* 44/16 */;
   align-items: center;
+  padding:0 1rem;
 }
 
 .shangjiafengx {
@@ -283,6 +316,7 @@ export default {
   width: 100%;
   height: 2.1875rem /* 35/16 */;
   /* border: 1px solid red; */
+  border-radius: 100%;
 }
 .sangeliand {
   background-color: #ffb31e;
@@ -319,7 +353,7 @@ export default {
   width:2.1875rem /* 35/16 */;
   height: 2.1875rem /* 35/16 */;
   border-radius: 100%;
-  border: 2px solid rebeccapurple;
+
   margin-right: 3%;
 }
 .nian-rang {

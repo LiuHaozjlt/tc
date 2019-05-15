@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div class="pinlunxiangq-cont">
         <div class="pinlunxiangq-head">
             <img src="../../image/zuojiantou.png" alt="" @click="gohuifuqian">
             <div class="huifu">
                 <div>{{count}}</div>条回复
             </div>
-         
+
             <div></div>
         </div>
         <div class="pinlunxiangq-cent">
@@ -25,18 +25,21 @@ export default {
       count: this.$route.query.count
     }
   },
-  methods:{
-     gohuifuqian(){
-         this.$router.back(-1)
-     }
+  methods: {
+    gohuifuqian () {
+      this.$router.back(-1)
+    }
   }
 }
 </script>
 
 <style>
+.pinlunxiangq-cont{
+  padding:0 1rem;
+}
 .huifu{
     display:flex;
-    
+
 }
 .pinlunxiangq-head img{
     width:5%;
@@ -48,7 +51,7 @@ export default {
     align-items: center;
 }
 .pinlunxiangq-botm input{
-    width:100%;
+    width:90%;
     height: 1.875rem /* 30/16 */;
     /* border:1px solid red; */
     position: fixed;

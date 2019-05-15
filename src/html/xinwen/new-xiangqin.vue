@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="new-xiangqin-cont">
     <div class="new-xiangqinhead" @click="goNew">
       <img src="../../image/zuojiantou.png" alt>
     </div>
@@ -92,11 +92,18 @@ export default {
 </script>
 
 <style>
+.new-xiangqin-cont{
+
+}
+.yinni{
+  padding:0 1rem;
+}
 .new-xiangqinhead {
   height: 2.75rem /* 44/16 */;
   line-height: 2.75rem /* 44/16 */;
   display: flex;
   align-items: center;
+  padding:0 1rem;
 }
 .new-xiangqinhead img {
   width: 0.6875rem /* 11/16 */;

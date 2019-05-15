@@ -59,7 +59,7 @@
             <div class="wode-ct-ic" @click="changeVersion">
                 <div class="wode-ct-ic-left">
                     <img src="../../image/qiehuan.png" alt=""  class="wode-cent-bot-ic">
-                    <span >切换成 {{isPersonal ? "商家" : "个人"}}</span>
+                    <span >切换成 {{isPersonal ? "商家" : "入驻品牌商家"}}</span>
                 </div>
                 <img src="../../image/jiantoutou.png" alt="" class="ruzhuimg">
             </div>
@@ -155,6 +155,9 @@ export default {
         justify-content: space-between;
         align-items: center;
         height: 24px;
+    }
+    .wode-ct-ic-left>.wode-cent-bot-ic{
+      margin-right: 4px;
     }
     .ruzhuimg{
         width:.5625rem /* 9/16 */;

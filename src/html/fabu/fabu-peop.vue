@@ -254,18 +254,19 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import { Uploader } from 'vant';
-import { Switch, Toast } from 'mint-ui';
-import { Popup } from 'mint-ui';
-import jiaoyujiage from '../../components/jiaoyujiage';
-import yueting from '../../components/yue-ting';
-import shoushang from '../../components/shou-shang';
-import jinhe from '../../components/jin-he';
-import gangzhi from '../../components/gang-zhi';
-import qiyehangye from '../../components/qiyehangye';
-import gongsjianjie from '../../components/gonsjianjie';
-import { mapState } from 'vuex';
+import Vue from 'vue'
+import { Uploader } from 'vant'
+import { Switch, Toast } from 'mint-ui'
+import { Popup } from 'mint-ui'
+import jiaoyujiage from '../../components/jiaoyujiage'
+import yueting from '../../components/yue-ting'
+import shoushang from '../../components/shou-shang'
+import jinhe from '../../components/jin-he'
+import gangzhi from '../../components/gang-zhi'
+import qiyehangye from '../../components/qiyehangye'
+import gongsjianjie from '../../components/gonsjianjie'
+import { mapState } from 'vuex'
+
 Vue.use(Uploader)
 Vue.component(Switch.name, Switch)
 Vue.component(Popup.name, Popup)
@@ -371,6 +372,7 @@ export default {
       }
     }
   },
+
   mounted () {
     if (Object.keys(this.publish).length === 0) {
       this.$store.commit('updatePublish', this.publishInitial)
@@ -514,7 +516,7 @@ export default {
 
 <style>
 .biaotizuo {
-  padding: 0 1rem;
+  /* padding: 0 1rem; */
 }
 .test .van-picker__columns > .van-picker-column {
   margin-top: -70px;

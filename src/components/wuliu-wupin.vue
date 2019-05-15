@@ -1,9 +1,7 @@
 <template>
     <div>
-
         <button @click="openPicker" >底部弹框</button>
         <!-- <div>{{wupindata}}</div> -->
-
         <mt-popup  v-model="popupVisible"  position="bottom" class="popup">
             <div class="list">
                 <div v-for="(item,index) in wupindata" :key="index" class="list-item">

@@ -5,7 +5,7 @@
     <div class="shouYe-nav-warp">
       <div class='shouYe-nav' v-for="(item, index) in tabs" :key="index">
         <router-link  :to="item.to">
-          <img :src="item.icon" alt="" style="width:25px;height:25px;">
+          <img :src="item.icon" alt="" style="width:25px;height:25px;" :class="{'shouYe-nav-item':index === 2}">
           <div :class="[pathName==item.to?'checkRoute':'nav-ft']" >{{item.label}}</div>
         </router-link>
       </div>
@@ -187,5 +187,8 @@ export default {
 .checkRoute{
   color:#333333 !important
 }
-
+.shouYe-nav-item{
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
 </style>
