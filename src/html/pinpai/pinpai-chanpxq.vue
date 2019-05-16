@@ -332,10 +332,10 @@ export default {
 .liu-guo-cent {
   display: flex;
 }
-.liu-guo-cent img {
+/* .liu-guo-cent img {
   width: 100%;
   height: 15%;
-}
+} */
 .changxqcent {
   display: flex;
   align-items: center;

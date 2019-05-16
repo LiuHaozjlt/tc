@@ -318,7 +318,7 @@ export default {
 }
 .shouYe-cent-rigt {
   margin-left: 3%;
-  width: 70%;
+  width: 100%;
   line-height: 0.875rem /* 14/16 */;
 }
 .shouYe-cent-rigt > span {

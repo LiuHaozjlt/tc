@@ -19,7 +19,7 @@
         <div class="shouYe-cent-rigt">
           <div class="rigt-wenzi shouYe-rigt-top">{{item.title}}</div>
           <!-- <slot name="addresscont"> -->
-            <div class="rigt-wenzi wanxiang" style="text-align:right"  v-if="item.img == '' ? false : true">{{item.address}}</div>
+            <div class="rigt-wenzi wanxiang" style="text-align:right">{{item.address}}</div>
           <!-- <slot> -->
           <div class="shouYe-rigt-bot">
             <div
@@ -27,7 +27,7 @@
               style="display:inline;background-color:#FFC74D;text-align:center"
             >{{item.type.name}}</div>
             <!-- <slot name="addressel"> -->
-              <div class="rigt-wenzi wanxiang" style="text-align:right" v-if="item.img == '' ? true : false">{{item.address}}</div>
+              <!-- <div class="rigt-wenzi wanxiang" style="text-align:right" v-if="item.img == '' ? true : false">{{item.address}}</div> -->
             <!-- <slot> -->
             <div class="rigt-wenzi dianzan" style="display:inline">
               <img src="../image/liu.png" alt>

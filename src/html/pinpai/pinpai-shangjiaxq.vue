@@ -27,7 +27,6 @@
         </div>
         <div class="gsmchen">{{sellerInfo.name}}</div>
       </div>
-
       <gsjianjie>{{sellerInfo.info}}</gsjianjie>
     </div>
 
@@ -40,7 +39,6 @@
       <sgeerjiliandong :search-options="searchOptions" @update="getSellInfo"></sgeerjiliandong>
     </div>
 
-    <!--房源-->
     <div>
       <div
         class="fangyuan-warp"
@@ -50,7 +48,7 @@
       >
         <div class="liu-guo-cent">
           <div class="changxqleft">
-            <img :src="item.img" alt>
+            <img :src="'http://info.00856.la'+item.img" alt>
           </div>
           <div class="changxqrit">
             <div>
@@ -493,8 +491,12 @@ export default {
   color: rgba(51, 51, 51, 1);
 }
 .changxqleft {
-
+  margin-right: 5%;
   width:30%;
+}
+.changxqleft img{
+  width:100%;
+  height: 4.5rem /* 72/16 */;
 }
 .changxqrit{
   width:70%;
@@ -502,14 +504,12 @@ export default {
 .liu-guo-cent {
   display: flex;
   justify-content: space-between;
+
 }
 .changxq-bot-rigt-top{
   width:100%;
 }
-.liu-guo-cent img {
 
-  height:15%;
-}
 .changxqcent {
   display: flex;
   align-items: center;

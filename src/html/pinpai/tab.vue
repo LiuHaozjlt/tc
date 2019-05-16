@@ -83,6 +83,7 @@ export default {
 @media screen and (max-width: 700px) {
   .tab_nav {
     /* border: 2px solid black; */
+    height: 1.9375rem /* 31/16 */;
   }
 }
 .active{

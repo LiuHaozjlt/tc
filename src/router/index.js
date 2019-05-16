@@ -65,7 +65,6 @@ import apitest from './../../demo/api-test'
 import wodetongzhi from '../html/wode/wode-tongzhi'
 import pinlunxiangq from '../html/xinwen/pinlunxiangq'
 import store from '../store'
-
 const meta = {
   authentication: true
 }
