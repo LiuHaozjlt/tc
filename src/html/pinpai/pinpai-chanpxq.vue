@@ -20,7 +20,7 @@
       </div> -->
       <!--房源产品信息-->
       <div class="pinpaichanp-head-img" @click="goshangjiacp">
-        <img src="../../image/zuojiantou.png" alt="">
+        <img :src="imgUrl" alt="">
       </div>
       <div class="shangjiafangyuan">
         <div class="yuan-zhang">{{data.title}}</div>
@@ -38,11 +38,8 @@
       </div>
 
       <div class="miao-shu">
-        <div class="miao-shu-lef">房屋描述:</div>本人是一位职业插画师,常年在国外发展,
-        办过自己的画展开过课,这套插画是纪念站酷10周年的时候原创的耗时半年,
-        灵感来源于80年代森女系风格,
-        目前已商用并反响很好,
-        因为留学需要经费只能忍痛割爱出售这套得意之作的版权,留给有缘人
+        <div class="miao-shu-lef">房屋描述:</div>
+        {{data.info}}
       </div>
 
       <!--职位招聘-->
@@ -149,7 +146,9 @@
 <script>
 export default {
   data () {
-    return {}
+    return {
+      imgUrl: require('../../image/baijiantou.png')
+    }
   },
   computed: {
     data () {
@@ -165,8 +164,17 @@ export default {
 </script>
 
 <style>
+.pinpaichanp-head-img{
+  width:1.875rem /* 30/16 */;
+  height: 1.875rem /* 30/16 */;
+  border-radius: 100%;
+  background-color: #676968;
+  display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .pinpaichanp-head-img img{
-  width:.5rem /* 8/16 */;
+
   height: .9375rem /* 15/16 */;
 }
 .pinpaixq-head-left {

@@ -1,7 +1,6 @@
 <template>
   <div>
     <div>
-      <!--房源分享-->
       <div class="pinpaishangjia-head" :style="{backgroundImage: `url(${sellerInfo.img})`}">
         <div>
           <div class="shangjiafanhui">
@@ -187,6 +186,7 @@ export default {
           data: JSON.stringify(this.releaseList[index])
         }
       })
+      console.log(this.releaseList)
     },
     getSellInfo (filters = {}) {
       this.$store.dispatch('getSellerDetail', {seller_id: this.sellerId, ...filters}).then(({ data }) => {
