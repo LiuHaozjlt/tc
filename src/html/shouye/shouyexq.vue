@@ -22,8 +22,9 @@
             </div>
           </div>
         </div>
+        <div class="slide-none"></div>
         <!--轮播内容-->
-        <div class="slide-cont" style=" ">
+        <div class="slide-cont " style=" " v-if="false">
             <slide :list="slideList"></slide>
         </div>
 
@@ -254,6 +255,9 @@ export default {
 </script>
 
 <style scoped>
+.slide-none{
+  height: 8%;
+}
 
 .shouyexq-cont-top-rit{
   width:30%;

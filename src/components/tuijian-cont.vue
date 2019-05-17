@@ -31,7 +31,7 @@
             <!-- <slot> -->
             <div class="rigt-wenzi dianzan" style="display:inline">
               <img src="../image/liu.png" alt>
-              {{item.num}}
+              {{item.visit_count}}
             </div>
             <div
               class="rigt-wenzi"
@@ -49,7 +49,6 @@
 <script>
 import { mapState } from 'vuex'
 import {formatDate} from '../js/date'
-
 export default {
   props: {
     typeId: {
@@ -61,10 +60,8 @@ export default {
       default: 0
     }
   },
-
   data () {
     return {
-
     }
   },
   computed: {
@@ -88,7 +85,6 @@ export default {
   created () {
     this.$store.dispatch('getRecommendList')
     /* 没图片更换地址div */
-    console.log(this.$store)
   },
   filters: {
     formatDate (time) {
@@ -98,27 +94,3 @@ export default {
   }
 }
 </script>
-
-<style>
-/*
-.dianzan img {
-  width: 10%;
-  height: 0.75rem ;
-  border: 1px solid red;
-}
-.rigt-wenzi {
-  color: #333333;
-}
-.red {
-  color: red;
-}
-.rigt-ft {
-  font-size: 0.6875rem ;
-  color: #b16800;
-}
-.shouYe-cent-left div img {
-  display: inline-block;
-  width: 100%;
-  height: 4.625rem ;
-}*/
-</style>

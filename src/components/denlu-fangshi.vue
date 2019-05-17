@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { Toast } from 'vant'
 export default {
   methods: {
     wxbind () {
@@ -27,7 +28,7 @@ export default {
       }).then(res => {
         if (res.status === 200) {
           if (res.data.error_code === 400) {
-            alert(res.data.message)
+            Toast(res.data.message)
           }
         }
         console.log(res)
@@ -38,6 +39,9 @@ export default {
 </script>
 
 <style>
+.van-toast{
+  border-radius: .875rem /* 14/16 */;
+}
 .wx-fb {
   width: 100%;
   display: flex;

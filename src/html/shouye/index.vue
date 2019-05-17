@@ -16,11 +16,15 @@
 <script>
 
 export default {
+
   data () {
     return {
       pathName: ''
     }
   },
+  // created () {
+  //   console.log(JSON.parse(JSON.stringify(this.$store.state.isPersonal)), '没用户信息')
+  // },
   computed: {
     isPersonal () {
       return this.$store.state.isPersonal
@@ -34,12 +38,12 @@ export default {
         {name: 'mine', label: '我的', icon: require('../../image/wode_s.png'), to: '/index/wodeele'}
       ]
       const navCorp = [
-        {name: 'home', label: '首页', icon: require('../../image/shouye_s.png'), to: '/index/'},
+        {name: 'home', label: '我的店铺', icon: require('../../image/shouye_s.png'), to: '/index/'},
         {name: 'putout', label: '发布', icon: require('../../image/fabu_s.png'), to: '/index/fabuele'},
-        {name: 'mine', label: '我的', icon: require('../../image/wode_s.png'), to: '/index/wodeele'}
+        {name: 'mine', label: '我的', icon: require('../../image/wode.png'), to: '/index/wodeele'}
       ]
-
-      return this.isPersonal ? navPersoanl : navCorp
+      return this.isPersonal ? navCorp : navPersoanl
+      // return this.isPersonal
     }
   },
   watch: {
@@ -48,7 +52,6 @@ export default {
 
   methods: {
     checkRouter (val) {
-      // debugger
       this.pathName = val.path
     }
   }
@@ -188,7 +191,7 @@ export default {
   color:#333333 !important
 }
 .shouYe-nav-item{
-  margin-top: -10px;
-  margin-bottom: 10px;
+  /* margin-top: -10px;
+  margin-bottom: 10px; */
 }
 </style>

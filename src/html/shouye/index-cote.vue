@@ -120,15 +120,14 @@ export default {
           break
         case 2:
           path = searchPath
-          query = { keyword: '' }
+          query = { keyword: item.name }
           break
       }
-
       if (i > 2) {
         path = searchPath
         query = {
           releaseTypeId: item.module_id,
-          keyword: ''
+          keyword: item.name
         }
       }
 
@@ -137,12 +136,10 @@ export default {
     getxinwen () {
       this.$router.push({ path: '/xinwen' })
     },
-
     inipt () {
       this.$router.push('/search')
     }
   }
-
 }
 </script>
 

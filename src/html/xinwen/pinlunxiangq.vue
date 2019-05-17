@@ -13,21 +13,29 @@
         </div>
 
         <div class="pinlunxiangq-botm">
-            <input type="text" placeholder="请输入你的想法">
+            <input type="text" placeholder="请输入你的想法" v-model="commentValue">
+            <button @click="submit()" type="button">回复</button>
         </div>
     </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {
-      count: this.$route.query.count
+      count: this.$route.query.count,
+      commentValue: ''
     }
   },
   methods: {
+    ...mapActions(['comments']),
     gohuifuqian () {
       this.$router.back(-1)
+    },
+    submit (id) {
+      this.comments(1, {content: this.commentValue})
+      console.log(1)
     }
   }
 }

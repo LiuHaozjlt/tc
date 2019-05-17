@@ -1,11 +1,12 @@
 <template>
   <el-dropdown trigger="click" style="position:relative" placement="bottom-start">
     <span class="el-dropdown-link">
-       <img :src="selected.icon" alt="">
-      <!-- <el-icon-picture></el-icon-picture> -->
-      <!-- {{text}} -->
-        +
-      <div class="shuzi">
+      <img :src="selected.icon" alt="" v-if="dropdownType !== 'list'">
+      <div style="display:inline" v-if="dropdownType !== 'list'">+</div>
+      <div class="shuzi" v-if="dropdownType === 'list'">
+        {{selected.name}}
+      </div>
+      <div class="shuzi" v-else>
         {{selected.text}}
       </div>
       <i class="el-icon--right" v-if="tr">
@@ -13,9 +14,21 @@
       </i>
       <i class="el-icon--right" v-if="fl"></i>
     </span>
-    <el-dropdown-menu class="juz" slot="dropdown"  >
-      <!-- <el-dropdown-item v-for="item in list" :key="item.text"  class="" command="a" @click.native="select(item)" style="position:absolute:left:0"> -->
-      <el-dropdown-item v-for="item in list" :key="item.text"  class="" command="a" @click.native="select(item)"  >
+    <el-dropdown-menu class="juz" slot="dropdown"  v-if="dropdownType === 'list'">
+      <!-- <el-dropdown-item v-for="item in list" :key="item.text"  class="" command="a" @click.native="select(item)">
+        <img :src="item.icon" alt="">
+        <span>+{{ item.text }}</span>
+      </el-dropdown-item> -->
+      <el-dropdown-item v-for="item in data" :key="item.name"  class="" command="a" @click.native="select(item)">
+        <span>{{ item.name }}</span>
+      </el-dropdown-item>
+    </el-dropdown-menu>
+     <el-dropdown-menu class="juz" slot="dropdown"  v-if="dropdownType === 'default'">
+      <!-- <el-dropdown-item v-for="item in list" :key="item.text"  class="" command="a" @click.native="select(item)">
+        <img :src="item.icon" alt="">
+        <span>+{{ item.text }}</span>
+      </el-dropdown-item> -->
+      <el-dropdown-item v-for="item in data" :key="item.text"  class="" command="a" @click.native="select(item)">
         <img :src="item.icon" alt="">
         <span>+{{ item.text }}</span>
       </el-dropdown-item>
@@ -23,11 +36,6 @@
   </el-dropdown>
 </template>
 <style>
-.juz{
-  /* position:static;
-  left:static;
-  top:static; */
-}
 .el-dropdown {
   width: 54%;
   left: .9375rem;
@@ -90,6 +98,15 @@ import IMG86 from '../image/zgg.png'
 import IMG020 from '../image/lww.png'
 
 export default {
+  props: {
+    data: {
+      type: Array
+    },
+    dropdownType: {
+      type: String,
+      default: 'default'
+    }
+  },
   data () {
     return {
       fl: false,
@@ -98,21 +115,31 @@ export default {
         { icon: IMG86, text: 86 },
         { icon: IMG020, text: 856 }
       ],
+      xialaMenu: [],
+      quanBu: '全部',
       selected: null
     }
   },
+  // created () {
+  //   console.log(this.$store)
+  // },
   methods: {
     // arrowup() {
     //   // this.fl = true;
     //   // this.tr = false;
     // },
+    qieHanmenu () {
+      this.quanbutext = this.quanBu
+    },
     select (item) {
       this.selected = item
       this.$emit('change', item.text)
     }
   },
   created () {
-    this.selected = this.list[0]
+    this.qieHanmenu()
+    this.selected = this.data[0]
+    console.log(this.selected)
     this.$emit('change', this.selected.text)
   }
 }

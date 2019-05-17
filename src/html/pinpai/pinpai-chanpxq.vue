@@ -33,7 +33,7 @@
         <div class="kip-yue">{{data.prices}}KIP/月</div>
         <div class="fang-xiu">
           <div>房屋：{{data.rent_hall.name}}</div>
-          <div>装修：{{data.rent_decotion}}</div>
+          <div>装修： </div>
         </div>
       </div>
 
@@ -139,7 +139,7 @@
 
                 <div class="lian-shi">联系方式</div>
       </div>-->
-      <div class="fengxiang">分享</div>
+      <!-- <div class="fengxiang">分享</div> -->
     </div>
   </div>
 </template>
@@ -152,6 +152,7 @@ export default {
   },
   computed: {
     data () {
+      debugger
       return JSON.parse(this.$route.query.data) || {}
     }
   },

@@ -48,7 +48,7 @@ export const wls = {
 }
 
 if (wls.get('isPersonal')) {
-  wls.set('isPersonal', true)
+  wls.set('isPersonal', false)
 }
 
 let accessUserInfo = wls.get('userInfo')
@@ -122,7 +122,7 @@ export default new Vuex.Store({
     logout (state) {
       state.userInfo = {}
       window.localStorage.removeItem('userInfo')
-      state.isPersonal = true
+      state.isPersonal = false
       wls.set('isPersonal', state.isPersonal)
     },
     showLoading (state) {
@@ -149,6 +149,7 @@ export default new Vuex.Store({
     },
     setPersonal (state, data) {
       state.isPersonal = !!data
+
       wls.set('isPersonal', state.isPersonal)
     },
     cacheImage (state, data) {
@@ -408,6 +409,9 @@ export default new Vuex.Store({
     },
     feedback ({commit}, params) {
       return $http.post('/apis/v1/user/feedback', params)
+    },
+    comments ({commit}, id, params) {
+      return $http.post('/apis/v1/article/comments/' + id, params)
     }
   }
 

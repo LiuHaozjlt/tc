@@ -81,7 +81,8 @@ export default {
     ]),
     ...mapActions(['getReleases']),
     search () {
-      this.getReleases(this.queryParam).then(({ data }) => {
+      this.getReleases(this.queryParam).then(data => {
+        console.log(data)
         if (data.error_code === 0) {
           this.addQueryList(data.data || [])
           this.setQueryTotal(data.total || this.queryList.length)

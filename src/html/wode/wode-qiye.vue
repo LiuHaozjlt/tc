@@ -260,7 +260,7 @@ export default {
       shenghecolor: '',
       zhizhao: 'true',
       yingyezz: '点击上传营业执照',
-      shenghez: '审核中',
+      // shenghez: '审核中',
       renzhencg: '认证成功',
       weitonguo: '未通过',
       twre: [{ text: '公司规模' }, { text: '企业性质' }, { text: '所在行业' }],
@@ -320,7 +320,6 @@ export default {
       this.zhizhaodiv = false
       this.zhizhaodivs = true
       this.zhizhao = false
-      this.yingyezz = this.shenghez
     },
 
     getguimo (a) {
@@ -342,7 +341,6 @@ export default {
     getxingzhi (b) {
       let userinfo = wls.get('userInfo', {})
       let token = userinfo.access_token
-
       this.axius({
         methods: 'post',
         url: 'apis/v1/seller/auth-info',

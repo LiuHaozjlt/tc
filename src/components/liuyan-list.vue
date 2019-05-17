@@ -9,7 +9,7 @@
                 <div class="pinlun-cent-top">{{item.user_nickname}}</div>
                 <div class="pinlun-cent-cent">{{ item.content }}</div>
                 <div class="fenz-hui">
-                <div>{{item.create_time}}</div>
+                <div>{{item.create_time  | formatDate}}</div>
                 <div @click="$router.push('/pinlunxiangq?count=' + item.reply_counts)">回复</div>
                 </div>
             </div>
@@ -37,11 +37,18 @@
     </div>-->
 
 <script>
+import {formatDate} from '../js/date'
 export default {
   props: {
     list: {
       type: Array,
       default: () => []
+    }
+  },
+  filters: {
+    formatDate (time) {
+      var date = new Date(time * 1000)
+      return formatDate(date, 'yyyy-MM-dd')
     }
   }
 }
@@ -151,6 +158,7 @@ export default {
   position: absolute;
   top: 0.6875rem /* 11/16 */ /* 5/16 */;
   left: 0.625rem /* 10/16 */;
+  font-size: .5rem /* 8/16 */;
 }
 .xiangqin-bot {
   position: fixed;

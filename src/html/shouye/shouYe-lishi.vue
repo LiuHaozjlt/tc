@@ -1,6 +1,9 @@
 <template>
   <div>
     <div class="lishi-head-warp">
+      <div class="xiala-menu">
+        <xialaMenu :data="menuData" :dropdownType="'list'"/>
+      </div>
       <input type="text" v-model="keyword" @keyup.enter="search" placeholder="请输入关键字">
       <div class="lishi-qux" @click="cancel">取消</div>
     </div>
@@ -15,7 +18,6 @@
       </div>
       <div class="lishi-sou" v-if="queryHistory.length > 0">
         <p>历史搜索</p>
-        ssssssssssssssssssssss{{index}}
         <div>
           <p
             class="lishi"
@@ -31,15 +33,22 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+import xialaMenu from '../../components/dropdown-menu'
 
 export default {
   data () {
     return {
-      keyword: ''
+      keyword: '',
+      dropdownText: '全部'
     }
   },
   computed: {
-    ...mapState(['queryParam', 'queryHistory', 'queryType', 'isLaos'])
+    ...mapState(['queryParam', 'queryHistory', 'queryType', 'isLaos', 'menuData'])
+  },
+  mounted () {
+    this.menuData.push({
+      text: '全部'
+    })
   },
   methods: {
     ...mapMutations(['setQueryType', 'resetQueryParam', 'addQueryHistory']),
@@ -63,6 +72,9 @@ export default {
       })
       this.addQueryHistory(query)
     }
+  },
+  components: {
+    xialaMenu
   }
 }
 </script>

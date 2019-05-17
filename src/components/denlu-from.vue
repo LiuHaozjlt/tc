@@ -4,7 +4,7 @@
       <div class="mui-input-warp">
           <div class="mui-input-row">
             <img src="../image/wo@2x.png" alt="">
-            <dropdown @change="xh = $event"></dropdown>
+            <dropdown @change="xh = $event" :data="dropdownData"></dropdown>
             <input type="text" class="mui-input-clear denlu" v-model='mobile' placeholder="手机号">
           </div>
       </div>
@@ -46,6 +46,8 @@ import dropdown from '@/components/dropdown-menu'
 import denlubtn from '@/components/denlu-btn'
 import { setInterval, clearInterval } from 'timers'
 import { Toast } from 'mint-ui'
+import IMG86 from '../image/zgg.png'
+import IMG020 from '../image/lww.png'
 export default {
   props: {
     isLogin: {
@@ -65,7 +67,11 @@ export default {
       mobile: '',
       code: '',
       password: '',
-      xh: 86
+      xh: 86,
+      dropdownData: [
+        { icon: IMG86, text: 86 },
+        { icon: IMG020, text: 856 }
+      ]
     }
   },
   components: {
@@ -160,7 +166,6 @@ export default {
         password: this.password,
         mobile: this.mobile
       }).then(({ data }) => {
-        console.log(data)
         if (data.error_code === 0) {
           Toast('注册成功')
           this.$emit('change', true)
@@ -255,6 +260,7 @@ export default {
       Toast('登录成功')
       this.$store.commit('saveUserInfo', userInfo)
       let redirect = this.$route.query.redirect
+      console.log(redirect)
       this.$router.replace(redirect || '/')
     }
   }

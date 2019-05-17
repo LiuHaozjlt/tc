@@ -6,7 +6,7 @@
     <div class="new-xiangqin">
       <div class="yinni">{{articlenew.title}}</div>
       <div class="xiao-guan">
-        <div class="xiaoshi">{{articlenew.create_time}}</div>
+        <div class="xiaoshi">{{articlenew.create_time | formatDate}}</div>
         <div class="guangf">官方</div>
       </div>
       <div class="xiangqi-cont" v-html="articlenew.content"></div>
@@ -20,14 +20,14 @@
       <liuyanlist :list="articlenew.comment"></liuyanlist>
       <div class="meiyou">没有更多评论！</div>
     </div>
-    <div class="xiangqin-bot" @click="toplxq">
+    <div class="xiangqin-bot">
       <div>
         <input type="text">
       </div>
       <div class="xiangqin-bot-img">
-        <div>
+        <div  @click="toplxq">
           <img src="../../image/ly.png" alt>
-          <div class="xiangqin-topico">ssss万</div>
+          <div class="xiangqin-topico">{{articlenew.comment_count}}万</div>
         </div>
         <img src="../../image/sc.png" alt>
         <img src="../../image/fx.png" alt>
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-
+import {formatDate} from '../../js/date'
 import liuyanlist from '../../components/liuyan-list'
 import {wls} from '../../store/index'
 export default {
@@ -50,6 +50,12 @@ export default {
   },
   components: {
     liuyanlist
+  },
+  filters: {
+    formatDate (time) {
+      var date = new Date(time * 1000)
+      return formatDate(date, 'yyyy-MM-dd')
+    }
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
@@ -67,8 +73,7 @@ export default {
     getDetail () {
       let userinfo = wls.get('userInfo', {})
       let token = userinfo.access_token
-      // console.log(this.id)
-      // let token = 'TvLz8IoaEw_jI5hAbnJ2aJBFwGo9WiIN_1552026113'
+
       this.axius({
         methods: 'get',
         url: '/apis/v1/article/' + this.id,
